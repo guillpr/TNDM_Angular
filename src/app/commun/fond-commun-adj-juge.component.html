@@ -1,0 +1,209 @@
+<form [formGroup]="formulaire">
+    <div class="container1">
+        <div class="divUpLeft">
+            <div *ngIf="!indicateurJuge">  
+            <img class="imageAdj" src="../../assets/images/ImageAdj.jpg" />
+                </div>
+                <div *ngIf="indicateurJuge">  
+                    <img class="imageAdj" src="../../assets/images/ImageJuge.jpg" />
+                        </div>
+            <div *ngIf="!indicateurJuge" class="nomAdj">
+                Mélanie Tremblay
+             </div>
+             <div *ngIf="indicateurJuge" class="nomAdj">
+                Jean-Marie Albert
+             </div>
+            <div class="imgUtlCenter">
+                <img  src="../../assets/images/Image3.png" />
+                <app-texte  cle="commun.ProUtil"></app-texte>
+            </div>
+                
+        </div>
+            <span class="spanSpace"></span>
+         <div class="divDownLeft">
+             <div class="texteBlue">
+                 <app-texte cle="commun.GestDec"></app-texte>
+                 </div>
+        </div>
+            </div>
+            <div class="container2">
+                <div class="divRight">
+                    <div class="rechDec">
+                         <app-texte cle="commun.RechercheDecision"></app-texte>
+                    </div>
+                    <hr/>
+                
+                    <div>
+                    <div>
+                        <app-texte class="texteRecherche" cle="commun.RechercheNumDec"></app-texte>
+                        <input type="text"     [dropSpecialCharacters]="false" mask="0000-00-000" type="text" [(ngModel)]="searchValue" class="tbNormal"  formControlName="rechercheNumDec" id="TextBoxRechNumDec" aria-describedby="TextBoxRechNumDec" >
+                    </div>
+                     <div >
+                         <app-texte class="texteRecherche" cle="commun.RechercheNumDoss"></app-texte>
+                         <input (input)="correctionMasque()" (change)="searchValue2.toUpperCase()" [dropSpecialCharacters]="false" [mask]="maskValue" [(ngModel)]="searchValue2" type="text" class="tbNormal" id="TextBoxRechNumDoss"  formControlName="rechercheNumDossier" aria-describedby="TextBoxRechNumDoss" >
+                    </div>
+                     <div class="flex" >
+                         <app-texte cle="commun.RechercheStatut" class="texteRecherche"></app-texte>
+                         <div class="padDD">
+                            <select   class="dlNormal" id="inputGroupSelect04" formControlName="rechercheStatut">
+                              <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
+                              <option value="1"><app-texte cle="commun.ddNonSigne"></app-texte></option>
+                              <option value="2"><app-texte cle="commun.ddEnCours"></app-texte></option>
+                              <option value="3"><app-texte cle="commun.ddSigne"></app-texte></option>
+                            </select>
+                          </div>
+                    </div>
+                      <div class="flex" *ngIf="!indicateurJuge">
+                          <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
+                          <div class="padDD">
+                            <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
+                              <option selected value=""  ><app-texte cle="commun.ddSelectionner"></app-texte></option>
+                              <option  *ngFor="let j of facadeService.listJuge"  >{{j.nomJuge}} , {{j.prenomJuge}}</option>
+                            </select>
+                          </div>
+                    </div>
+                     <div >
+                        <app-texte cle="commun.RecherchePrio" class="texteRecherche"></app-texte>
+                        <input type="text" class="tbNormal" id="TextBoxRechPrio" aria-describedby="TextBoxRechPrio" >
+                    </div>
+                     <div >
+                         <app-texte cle="commun.RechercheType"  class="texteRecherche"></app-texte>
+                         <input type="text" class="tbNormal" id="TextBoxType" aria-describedby="TextBoxType" >
+                    </div>
+                     <div >
+                         <app-texte cle="commun.DateImp" class="texteRecherche" ></app-texte>
+                         <input type="date" class="tbNormal" id="TextBoxDateImpDu" aria-describedby="TextBoxDateImpDu" formControlName="rechercheDateDu"  placeholder="--Sélectionner--">
+                         <span class="spanAu">au</span>
+                         <input type="date" class="tbNormal" id="TextBoxDateImpAu" aria-describedby="TextBoxDateImpAu"  formControlName="rechercheDateAu"  placeholder="--Sélectionner--">
+                    </div>
+                    <div *ngIf="!indicateurJuge">
+                        <label  class="texteRecherche">Portée de la recherche </label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" checked="checked" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" for="inlineRadio1">Mes décisions</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">Toutes les décisions mon/mes groupes</label>
+                          </div>
+                    </div>
+
+                        <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
+                            <app-texte cle="commun.boutonRechercher"></app-texte>
+                        </button> 
+                        <button 
+                        ID="Button1"
+                         class="btn btn-primary buttonReini"
+                        (click)="Renitialise()">
+                        <app-texte cle="commun.boutonReni"></app-texte>
+                        </button>
+                        <br />
+                        <!-- <label ID="LabelMessageErreur" class="errorRed" runat="server" >
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Ceci est un message d'erreur
+                        </label> -->
+                        </div> 
+                </div>
+                    </div>
+                    <!--Tableau-->
+                    <div *ngIf="!(this.listeDecisions
+                    | searchfilter3: searchValue: 'rechercheNumDec' 
+                    | searchfilter3: searchValue2 : 'rechercheNumDossier' 
+                    | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut' 
+                    | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge' 
+                    | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value).length">
+                    Aucun résultats
+                    </div>
+                    <div class="tableauDec" *ngIf="affTableau && (this.listeDecisions 
+                    | searchfilter3: searchValue: 'rechercheNumDec' 
+                    | searchfilter3: searchValue2 : 'rechercheNumDossier' 
+                    | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut' 
+                    | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge' 
+                    | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value).length">
+                        <table id="table" class="table"
+                        data-pagination="true"
+                        data-id-field="name"
+                        data-page-list="[5, 10, 25, 50, 100, ALL]"
+                        data-page-size="1">
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                         <app-texte cle="commun.numero"  ></app-texte>
+                          <!-- <img runat="server" id="imgTrieNumero" class="hauteurImageTrie" src="../../assets/images/down.png"/> -->
+                      </th>
+                      <th scope="col"  ><app-texte cle="commun.dossier" ></app-texte></th>
+                      <th scope="col"><app-texte cle="commun.nbDossier"></app-texte></th>
+                      <th scope="col" [appSort]="this.listeDecisions" data-order="desc" data-name="dateImportation" >
+                          <app-texte cle="commun.dateImp"></app-texte>
+                          <span class="spanAu">
+                          </span><i class="fa fa-sort"></i>
+                        </th>
+                      <th scope="col"  [appSort]="this.listeDecisions" data-order="desc" data-name="dateFinDelibere">
+                          <app-texte cle="commun.dateDeli"></app-texte>
+                          <span class="spanAu">
+                          </span><i class="fa fa-sort"></i>
+                        </th>
+                      <th scope="col"><app-texte cle="commun.description"></app-texte></th>
+                      <th scope="col" *ngIf="!indicateurJuge">
+                          <app-texte cle="commun.RechercheJuge"></app-texte>
+                      </th>
+                        
+                      <th scope="col" [appSort]="this.listeDecisions" data-order="desc" data-name="durRestante">
+                          <app-texte cle="commun.durRestante"></app-texte>
+                           <span class="spanAu">
+                           </span><i class="fa fa-sort"></i>
+                         </th> 
+                      <th scope="col"  [appSort]="this.listeDecisions" data-order="desc" data-name="priorite"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
+                      <th scope="col"><app-texte cle="commun.RechercheStatut"></app-texte></th>
+                
+                    </tr>
+                  </thead>
+                  <tbody>
+                      
+                     <tr *ngFor="let pd of this.listeDecisions
+                     | orderBy: key : reverse
+                     | searchfilter3: searchValue: 'rechercheNumDec' 
+                     | searchfilter3: searchValue2 : 'rechercheNumDossier' 
+                     | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut' 
+                     | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge' 
+                     | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value
+                     | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                        <td>{{pd.numeroDecision}}</td>
+                         <td>{{pd.numeroDossier}}</td>
+                         <td>{{pd.nbDossier}}</td>
+                         <td>{{pd.dateImportation | date: 'yyyy-LL-d'}} </td>
+                         <td>{{pd.dateFinDelibere | date: 'yyyy-LL-d'}}</td>
+                         <td>{{pd.description}}</td>
+                         <td *ngIf="!indicateurJuge">{{pd.juge}}
+                            <img *ngIf="pd.indSignature" class="imgSign" mat-raised-button
+                            matTooltip="Décision signé le  {{pd.dateImportation | date: 'd-LL-yyyy'}}"
+                            aria-label="L'image affiche la date de signature de la décision"
+                            matTooltipPosition="above" src="../../assets/images/imageSignature.png"
+                            matTooltipClass="my-class"
+                            />
+                         </td>
+                         <td>{{pd.durRestante}}</td>
+                         <td>{{pd.priorite}}</td>
+                         <td>{{pd.statut}}</td>
+                     </tr>
+                  </tbody>
+                  
+                </table>
+
+                <div class="paginationCtl">
+                    <pagination-controls 
+                    (pageChange)="p = $event" previousLabel="Précédent"
+                     nextLabel="Suivant">
+                    </pagination-controls>
+                  </div>  
+                </div>
+                <div><button ID="ButtonImporter" class="btn btn-primary buttonImpor" routerLink="/importDecision" >
+                    <app-texte cle="commun.boutonImporterNouvDec"></app-texte>
+                </button> 
+            </div>
+
+                 
+
+
+                 
+

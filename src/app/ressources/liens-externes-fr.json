@@ -1,0 +1,10 @@
+{
+    "liens": [
+        { "cle": "independantNeutre", "valeur": "https://www.taq.gouv.qc.ca/fr/a-propos-du-tribunal/le-tribunal/mission-vision-valeurs" },
+        { "cle": "delaisARespecter", "valeur": "https://www.taq.gouv.qc.ca/fr/deposer-un-recours/comment-deposer-un-recours/delais-a-respecter" },
+        { "cle": "circonstances", "valeur": "https://www.taq.gouv.qc.ca/fr/a-propos-du-tribunal/le-tribunal/mission-vision-valeurs" },
+        { "cle": "contact", "valeur": "https://www.taq.gouv.qc.ca/fr/nous-joindre" },
+        { "cle": "aideNumerisation", "valeur": "/taq.riil.presentation/assets/aide/aidenumerisation.html" },
+        { "cle": "sections", "valeur": "https://www.taq.gouv.qc.ca/fr/deposer-un-recours/suis-je-au-bon-endroit" }
+    ]
+}

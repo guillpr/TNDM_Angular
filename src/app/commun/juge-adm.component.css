@@ -1,0 +1,47 @@
+
+
+.inputReg{
+    background-color:#ecebeb;
+    border-radius:10px;
+    border: solid #ecebeb ; 
+    height: 40px;
+    /* margin-left:44px; */
+    width: 190px;
+    position: relative;
+    top:3px;
+    
+ }
+ .dlNormal {
+    width: 100%;
+    padding-left:10px;
+    padding-right:10px;
+    background-color: #ecebeb;
+    border-radius: 5px;
+    border: solid 1px #ecebeb;
+    /* text-indent: 25%;  */
+    color:gray;
+    height: 40px;
+    outline: none;
+}
+.fondGris{
+    background-color:#ecebeb;
+    border:solid white;
+    border-radius:10px;
+    
+}
+.marginR{
+    margin-right: 8px;
+}
+.cbStyle{
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top:8px;
+
+}
+.flex{
+    display:flex;
+    
+}
+
+

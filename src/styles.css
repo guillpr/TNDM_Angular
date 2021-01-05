@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+.cont100{
+    max-width: 100%;
+}
+.cont90{
+    max-width: 70%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spanAu{
+    margin-left:5px;
+    margin-right: 5px;
+}

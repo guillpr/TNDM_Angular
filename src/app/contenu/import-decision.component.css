@@ -1,0 +1,101 @@
+.divFond {
+    width: 100%;
+    background-color:  #93daea26;
+    display: block;
+    height: 1000px;
+}
+.divCentre{
+    width: 90%;
+    background-color: white;
+    display: block;
+    margin: auto;
+    height: auto;
+    padding-bottom: 40px;
+}
+.titreImport{
+    margin: 0;
+    padding-left:10px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+.espFichier{
+    width: 100%;
+    background-color: white;
+    display: flex;
+    margin-top: 5%;
+    height: 40px;
+}
+.espDesc{
+    width: 100%;
+    background-color: white;
+    display: flex;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.espJugeAdm{
+    width: 100%;
+    background-color: white;
+    display: flex;
+    margin-top: 3.7%;
+
+}
+.nomFichier{
+    font-weight: bold;
+    position: relative;
+    top:10px;
+    margin-left: 5%;
+    margin-right: 4%;
+}
+.nomDescription{
+    font-weight: bold;
+    position: relative;
+    top:10px;
+    margin-left: 6.9%;
+    margin-right: 4%;
+}
+.nomJuge{
+    font-weight: bold;
+    position: relative;
+    top:40px;
+    left: 30px;
+    margin-right: 70px;
+}
+
+.inputReg{
+   background-color:#ecebeb;
+   border-radius:10px;
+   border: solid #ecebeb ; 
+   height: 40px;
+   margin-left:45px;
+   width: 600px;
+}
+.wRow{
+    width: 100%;
+}
+.spaceUp{
+    margin-top: 10px;
+}
+.boutonPlus{
+   
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    color:#8a8787;
+    border: none;
+}
+.boutonMoins{
+   
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    color:#8a8787;
+    border:none;
+    
+}
+.aJuge{
+    position: relative;
+    top:12px;
+    font-size: 16px;
+    font-weight:600;
+    color:#8a8787;
+}

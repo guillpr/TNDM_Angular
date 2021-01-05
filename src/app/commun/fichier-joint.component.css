@@ -1,0 +1,32 @@
+.containerFichierJoint{
+    width: 600px;
+	height: 100%;
+	text-align: center;
+    border: solid  #ecebeb;
+    background-color:#ecebeb ;
+    border-radius: 10px;
+	/* position: absolute; */
+	/* margin: 0 auto; */
+	/* display: block; */
+    flex-wrap: nowrap;
+    /* overflow-x: auto; */
+}
+.glisDep{
+    font-weight: bold;
+    color:#8a8787;
+    /* float: left; */
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-left: 0;
+    margin-right: 20px;
+}
+.boutonParcourir{
+    background-color: #ecebeb;
+    border: none;
+    text-decoration:underline;
+    color: #2257a7;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-right: 30px;
+   outline: none;
+}

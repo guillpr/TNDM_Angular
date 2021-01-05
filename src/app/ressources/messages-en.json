@@ -1,0 +1,21 @@
+{
+    "textes": [
+        { "cle": "0001S", "valeur": "The field {0} must be completed." },
+        { "cle": "0002S", "valeur": "The format of the field '{0}' must be '{1}'" },
+        { "cle": "0003S", "valeur": "Please make a selection" },
+        { "cle": "0101S", "valeur": "The format of the file ({0}) you have selected is not accepted. Only \".pdf\" and \".jpg\" files are allowed." },
+        { "cle": "0102S", "valeur": "The selected file exceeds the allowed limit of {0} MB." },
+        { "cle": "0103S", "valeur": "The total size of the files exceeds the allowed limit of {0} MB." },
+        { "cle": "0106S", "valeur": "The payment service is not available at the moment. Please try again or contact the Tribunal." },
+        { "cle": "0107S", "valeur": "The format of the file ({0}) you have selected is not accepted. Only \".pdf\" files are allowed." },
+        { "cle": "0108A", "valeur": "No address was found for the civic number and postal code entered. Please try again or enter your full address by clicking on the \"Enter Address Manually\" link." },
+        { "cle": "0109S", "valeur": "Please provide at least one phone number." },
+        { "cle": "0110S", "valeur": "Please enter either your first and last name or the name of your lawyer's office" },
+        { "cle": "0111S", "valeur": "Please enter either the first and last name of the lawyer or the name of the lawyer's office" },
+        { "cle": "0120S", "valeur": "Please enter a valid e-mail address." },
+        { "cle": "0121S", "valeur": "The confirmation must be the same as the email." },
+        { "cle": "0122S", "valeur": "You must enter an address." },
+        { "cle": "0124S", "valeur": "The date of birth must preceed the current date." },
+        { "cle": "0127S", "valeur": "Apartment warning not entered, fields not mandatory."}
+    ]
+}

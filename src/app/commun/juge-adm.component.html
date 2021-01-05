@@ -1,0 +1,42 @@
+
+<div class="row">
+    
+    <div class="col-2 marginR"></div>
+<div class="col-3 fondGris">
+        <div class="flex" >
+            <div class="padDD">
+               <select   class="dlNormal" id="inputGroupSelect04"  (change)="valeurJuge()">
+                 
+                 <option  *ngFor="let j of listeJuge">{{j.nomJuge}} , {{j.prenomJuge}}</option>
+               
+               </select>
+             </div>
+       </div>
+    </div>
+    <div class="col-2 fondGris">
+        <div class="flex" >
+            <div class="padDD">
+               <select   class="dlNormal" id="inputGroupSelect05" >
+                 <option  selected value="1">Signataire 1</option>
+                 <option value="2">Signataire 2</option>
+                 <option value="3">Signataire 3</option>
+                 <option value="4">Signataire 4</option>
+               </select>
+             </div>
+       </div>
+    </div>
+    <div class="col-2">
+      <input class="inputReg" type="text" >
+    </div>
+    <div class="col-2">
+        
+        <input class="cbStyle" type="checkbox">
+   
+    </div>
+</div>
+
+        <!-- <input class="inputReg"> -->
+
+  
+    
+

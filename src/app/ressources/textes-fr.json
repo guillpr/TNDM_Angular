@@ -1,0 +1,55 @@
+{
+    "textes": [
+        { "cle": "banniere.Titre", "valeur": "Traitement numérique des décisions et des motifs TNDM" },
+        { "cle": "banniere.Connexion", "valeur": "Déconnexion" },
+        { "cle": "commun.ProUtil", "valeur": "Profil utilisateur" },
+        { "cle": "commun.GestDec", "valeur": "Gestion des décisions" },
+        { "cle": "commun.RechercheDecision", "valeur": "Recherche décision" },
+        { "cle": "commun.RechercheNumDec", "valeur": "Numéro" },
+        { "cle": "commun.RechercheNumDoss", "valeur": "Numéro dossier" },
+        { "cle": "commun.RechercheStatut", "valeur": "Statut" },
+        { "cle": "commun.ddSelectionner", "valeur": "--Sélectionner--" },
+        { "cle": "commun.ddNonSigne", "valeur": "Non signé" },
+        { "cle": "commun.ddEnCours", "valeur": "En cours de signature" },
+        { "cle": "commun.ddSigne", "valeur": "Signé" },
+        { "cle": "commun.RechercheJuge", "valeur": "Juge" },
+        { "cle": "commun.RecherchePrio", "valeur": "Priorité" },
+        { "cle": "commun.RechercheType", "valeur": "Type" },
+        { "cle": "commun.DateImp", "valeur": "Date importation" },
+        { "cle": "commun.boutonRechercher", "valeur": "Rechercher" },
+        { "cle": "commun.boutonImporterNouvDec", "valeur": "Importer nouvelle décision" },
+        { "cle": "commun.boutonReni", "valeur": "Réinitialiser" } ,
+        { "cle": "commun.dossier", "valeur": "Dossier" } ,
+        { "cle": "commun.numero", "valeur": "Numéro" } ,
+        { "cle": "commun.nbDossier", "valeur": "Nombre de dossier" } ,
+        { "cle": "commun.dateImp", "valeur": "Date importation" } ,
+        { "cle": "commun.dateDeli", "valeur": "Date fin délibéré" } ,
+        { "cle": "commun.description", "valeur": "Description" },
+        {"cle": "commun.durRestante" , "valeur": "Durée restante"},
+        {"cle": "import.Titre" , "valeur": "Importer une décison"},
+        {"cle": "import.NomFichier" , "valeur": "Nom du fichier"},
+        {"cle": "import.Description" , "valeur": "Description"},
+        {"cle": "import.JugeAdm" , "valeur": "Juges administratifs"},
+        {"cle": "fj.GlisserDeposer" , "valeur": "Glisser-déposer"},
+        {"cle": "fj.Ou" , "valeur": "Ou"},
+        {"cle": "fj.Parcourir" , "valeur": "Parcourir"}
+
+
+
+        
+        
+
+
+        
+
+        
+    
+
+        
+
+        
+        
+
+        
+    ]
+}

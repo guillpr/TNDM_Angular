@@ -1,0 +1,21 @@
+{
+    "textes": [
+        { "cle": "0001S", "valeur": "Le champ '{0}' est obligatoire." },
+        { "cle": "0002S", "valeur": "Le format du champ '{0}' doit être '{1}'" },
+        { "cle": "0003S", "valeur": "Veuillez faire une sélection" },
+        { "cle": "0101S", "valeur": "Le format du fichier ({0}) que vous avez sélectionné n’est pas accepté. Seuls les fichiers en format « .pdf » et « .jpg » sont permis." },
+        { "cle": "0102S", "valeur": "Le fichier dépasse la taille maximale permise de {0} Mo." },
+        { "cle": "0103S", "valeur": "La taille totale des fichiers dépasse la limite permise de {0} Mo." },
+        { "cle": "0106S", "valeur": "Impossible d’initialiser le paiement pour le moment. Veuillez communiquer avec [A COMPLÉTER]" },
+        { "cle": "0107S", "valeur": "Le format du fichier ({0}) que vous avez sélectionné n’est pas accepté. Seuls les fichiers en format « .pdf » sont permis." },
+        { "cle": "0108A", "valeur": "Aucune adresse n’a été trouvée pour le numéro et le code postal saisis. Veuillez réessayer ou saisir l’adresse manuellement en cliquant sur le lien « Saisir l’adresse manuellement »." },
+        { "cle": "0109S", "valeur": "Veuillez saisir au moins un numéro de téléphone." },
+        { "cle": "0110S", "valeur": "Veuillez saisir soit votre nom et votre prénom ou le nom de votre bureau d'avocats." },
+        { "cle": "0111S", "valeur": "Veuillez saisir soit le nom et le prénom de l'avocat ou le nom du bureau d'avocats." },
+        { "cle": "0120S", "valeur": "Veuillez saisir une adresse électronique valide." },
+        { "cle": "0121S", "valeur": "La confirmation de l'adresse électronique doit être la même que l'adresse électronique." },
+        { "cle": "0122S", "valeur": "Vous devez saisir une adresse." },
+        { "cle": "0124S", "valeur": "La date de naissance doit précéder la date du jour." },
+        { "cle": "0127S", "valeur": "Avertissement - appartement non-saisie , champs non obligatoire."}
+    ]
+}

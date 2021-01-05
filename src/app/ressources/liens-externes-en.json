@@ -1,0 +1,10 @@
+{
+    "liens": [
+        { "cle": "independantNeutre", "valeur": "https://www.taq.gouv.qc.ca/en/about/the-tribunal/mission-vision-and-values" },
+        { "cle": "delaisARespecter", "valeur": "https://www.taq.gouv.qc.ca/en/filing-a-proceeding/how-to-file-a-proceeding/time-limits" },
+        { "cle": "circonstances", "valeur": "https://www.taq.gouv.qc.ca/fr/a-propos-du-tribunal/le-tribunal/mission-vision-valeurs" },
+        { "cle": "contact", "valeur": "https://www.taq.gouv.qc.ca/en/contact-us" },
+        { "cle": "aideNumerisation", "valeur": "/taq.riil.presentation/assets/aide/aidenumerisation-en.html" },
+        { "cle": "sections", "valeur": "https://www.taq.gouv.qc.ca/en/filing-a-proceeding/am-i-at-the-right-place" }
+    ]
+}
