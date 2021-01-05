@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { Decision } from '../entitees/decision';
 import { FacadeService } from '../services/facade.service';
 import { ViewEncapsulation } from '@angular/core';
+import { Juge } from '../entitees/juge';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class FondCommunAdjJugeComponent implements OnInit {
+
+  public listeJuge: Juge[] = [];
 
   // TODO
   displayedColumns: string[] = [
@@ -59,7 +62,10 @@ maskValue: string;
      .subscribe( res => {
         this.listeDecisions = res;
      });
-     this.facadeService.obtenirJuges();
+     this.facadeService.obtenirJuges()
+     .subscribe(res => {
+       this.listeJuge = res;
+     });
   }
   // public RechercherDecisionBD(){
   //   this.affTableau = false;

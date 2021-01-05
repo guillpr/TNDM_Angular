@@ -58,7 +58,7 @@
                           <div class="padDD">
                             <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
                               <option selected value=""  ><app-texte cle="commun.ddSelectionner"></app-texte></option>
-                              <option  *ngFor="let j of facadeService.listJuge"  >{{j.nomJuge}} , {{j.prenomJuge}}</option>
+                              <option  *ngFor="let j of listeJuge"  >{{j.nomJuge}} , {{j.prenomJuge}}</option>
                             </select>
                           </div>
                     </div>
