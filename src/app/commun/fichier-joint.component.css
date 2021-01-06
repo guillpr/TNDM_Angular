@@ -30,3 +30,39 @@
     margin-right: 30px;
    outline: none;
 }
+.inputReg{
+    background-color:#ecebeb;
+    border-radius:10px;
+    border: solid #ecebeb ; 
+    height: 40px;
+    /* margin-left:44px; */
+    min-width: 190px;
+    width: auto;
+    position: relative;
+    top:3px;
+    text-align: center;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+ }
+ .labelNomFichier{
+    font-size: 16px;
+    font-weight: 600;
+    color: #8a8787;
+   
+ }
+ .spaceLeft{
+     margin-left: 10px;;
+ }
+ .noBorder{
+     border:none;
+ }
+ .red{
+     font-size: 13px;
+     font-weight: bold;
+     color:red;
+ }
+ .ErrorBorder{
+     border:solid red 1px;
+ }

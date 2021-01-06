@@ -4,7 +4,7 @@
     <div class="col-2 marginR"></div>
 <div class="col-3 fondGris">
         <div class="flex" >
-            <div class="padDD">
+            <div >
                <select   class="dlNormal" id="inputGroupSelect04"  (change)="valeurJuge()">
                  
                  <option  *ngFor="let j of listeJuge">{{j.nomJuge}} , {{j.prenomJuge}}</option>
@@ -15,7 +15,7 @@
     </div>
     <div class="col-2 fondGris">
         <div class="flex" >
-            <div class="padDD">
+            <div>
                <select   class="dlNormal" id="inputGroupSelect05" >
                  <option  selected value="1">Signataire 1</option>
                  <option value="2">Signataire 2</option>
@@ -26,7 +26,7 @@
        </div>
     </div>
     <div class="col-2">
-      <input class="inputReg" type="text" >
+      <input class="inputReg" type="text" value="Rédacteur" disabled >
     </div>
     <div class="col-2">
         
