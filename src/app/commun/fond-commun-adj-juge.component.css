@@ -72,19 +72,30 @@
 .tbNormal {
     
     text-align: center;
-    width: 20%;
+    width: 250px;
     background-color: #f3f5fb;
     border-radius: 5px;
     border: solid 1px #d0c9c9;
     
 }
 .dlNormal {
-    width: 100%;
+    width: 250px;
     background-color: #f3f5fb;
     border-radius: 5px;
     border: solid 1px #d0c9c9;
     /* text-indent: 25%;  */
     color:gray;
+    height: 25px;
+}
+.dlNormalStatut {
+    width: 250px;
+    background-color: #f3f5fb;
+    border-radius: 5px;
+    border: solid 1px #d0c9c9;
+    /* text-indent: 25%;  */
+    color:gray;
+    margin-top:15px;
+    height: 25px;
 }
 
 .flex{
