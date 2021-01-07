@@ -168,7 +168,7 @@
                      | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge' 
                      | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value
                      | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-                        <td>{{pd.numeroDecision}}</td>
+                        <td class="numeroDec" (click)="SelectionDecision(pd.numeroDecision)">{{pd.numeroDecision}}</td>
                          <td>{{pd.numeroDossier}}</td>
                          <td>{{pd.nbDossier}}</td>
                          <td>{{pd.dateImportation | date: 'yyyy-LL-d'}} </td>

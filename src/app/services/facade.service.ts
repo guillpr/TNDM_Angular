@@ -19,6 +19,8 @@ export class FacadeService {
     public router: Router
   ) { }
 
+  numDecisionTemp: string;
+
   private DecisionURL = environment.apiBaseUrl + 'DecisionDetail';
   private DecisionRecherche = environment.apiBaseUrl + 'DecisionDetail/Requete/';
   private JugeUrl = environment.apiBaseUrl + 'JugeDetail';

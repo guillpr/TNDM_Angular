@@ -36,7 +36,23 @@
         { "cle": "commun.descriptionPerteDonnees", "valeur": "Des modifications ont été apportées sur cette page. Si vous quittez, les modifications seront perdues. Voulez-vous quand même continuer ?" },
         { "cle": "commun.titrePerteDonnees", "valeur": "Modifications en cours" },
         { "cle": "commun.oui", "valeur": "Oui" },
-        { "cle": "commun.non", "valeur": "Non" }
+        { "cle": "commun.non", "valeur": "Non" },
+        {"cle": "commun.decision" , "valeur" : "Décision"},
+        {"cle": "commun.dossierAsso" , "valeur": "Dossier(s) associé(s)"},
+        {"cle": "commun.signature" , "valeur": "Signatures"},
+        {"cle": "commun.histDecision" , "valeur": "Historique de la décision"},
+        {"cle": "commun.numUnique" , "valeur": "Numéro unique"},
+        {"cle": "commun.utilisateur" , "valeur": "Utilisateur"},
+        {"cle": "commun.requerant" , "valeur": "Requérant(s)"}
+
+
+        
+
+        
+        
+        
+
+        
 
 
 

@@ -6,6 +6,7 @@ import { Decision } from '../entitees/decision';
 import { FacadeService } from '../services/facade.service';
 import { ViewEncapsulation } from '@angular/core';
 import { Juge } from '../entitees/juge';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -56,7 +57,8 @@ searchValue: string;
 searchValue2: string;
 maskValue: string;
 
-  constructor(public facadeService: FacadeService) { }
+  constructor(public facadeService: FacadeService,
+              public router: Router) { }
   ngOnInit() {
      this.facadeService.obtenirDecisionList()
      .subscribe( res => {
@@ -138,5 +140,11 @@ maskValue: string;
  }
  public doFilter = (value: string) => {
   this.MyDataSource.filter = value.trim().toLocaleLowerCase();
+}
+public SelectionDecision(numDec: string){
+  console.log('Le numéro de décision: ' , numDec);
+  this.facadeService.numDecisionTemp = numDec;
+  this.router.navigateByUrl('/infoAdjointe');
+
 }
 }

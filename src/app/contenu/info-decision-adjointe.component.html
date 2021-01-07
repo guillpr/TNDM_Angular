@@ -1,6 +1,161 @@
 <app-banniere></app-banniere>
 <div class="divFond">
     <div class="divCentre">
+        <!--Début zone décision-->
+        <div class="enteteBleu">
+            <app-texte class="titreEntete" cle="commun.decision"></app-texte>
+            <span id="boiteDecisionOuverte" *ngIf="!boiteDecisionOuverte" class="arrowDown" (click)="ouvertureBoiteDecision()">
+                <i class="fas fa-angle-down fa-3x"></i>
+            </span>
+            <span id="boiteDecisionFerme" *ngIf="boiteDecisionOuverte" class="arrowDown" (click)="fermetureBoiteDecision()">
+                <i class="fas fa-angle-up fa-3x"></i>
+            </span>
+        </div>
+        <!--Début row décision-->
+        <div class="row bold">
+            <div class="col numUniCol"><app-texte cle="commun.numUnique"></app-texte></div>
+            <div class="col"><app-texte cle="commun.dateImp"></app-texte></div>
+            <div class="col numUtiCol"><app-texte cle="commun.utilisateur"></app-texte></div>
+            <div class="col"><app-texte cle="commun.requerant"></app-texte></div>
+            <div class="col"><app-texte cle="commun.description"></app-texte>  <i class="fas fa-edit ml-1"></i></div>
+            <div class="col-2 dateDeliCol"><app-texte cle="commun.dateDeli"></app-texte> <i class="fas fa-edit ml-1"></i></div>
+            <div class="col numUniCol">Durée restante</div>
+            <div class="col numUtiCol">Priorité</div>
+            <div class="col">Statut</div>
+        </div>
+          <!--Fin row décision-->
 
+        <div [className]="!boiteDecisionOuverte ? 'testDecision' : 'testDecisionExpand' " class="testDecision">
+            <div class="row">
+                <div class="col numUniCol">2020-01-123</div>
+                <div class="col">2020-02-01</div>
+                <div class="col numUtiCol">smithka004</div>
+                <div class="col">Entreprise ABC</div>
+                <div class="col">numéro dossier -requérant</div>
+                <div class="col-2 dateDeliCol">2020-02-01</div>
+                <div class="col numUniCol">15 jours</div>
+                <div class="col numUtiCol">
+                       <select  (change)="getColor($event)" [className]="couleurPrio ? 'dlNormalYellow' : 'dlNormalGreen'"  id="inputGroupSelectPrio" >
+                         <option  selected value="1">Urgente</option>
+                         <option  value="2">Normale</option>
+                         
+                       </select>
+                     
+                          
+                     </div>
+                <div class="col">Prête pour traitement</div>
+            </div>
+        </div>
+        <!--Fin zone décision-->
+
+         <!--Début zone dossiers associés-->
+         <div class="enteteBleu">
+            <app-texte class="titreEntete" cle="commun.dossierAsso"></app-texte>
+            <span id="boiteDossAssoOuverte" *ngIf="!boiteDossAss" class="arrowDown" (click)="ouvertureBoiteDossAss()">
+                <i class="fas fa-angle-down fa-3x"></i>
+            </span>
+            <span id="boiteDossAssoFerme" *ngIf="boiteDossAss" class="arrowDown" (click)="fermetureBoiteDossAss()">
+                <i class="fas fa-angle-up fa-3x"></i>
+            </span>
+        </div>
+
+        <div [className]="!boiteDossAss ? 'testDossAsso' : 'testDossAssoExpand' " class="testDossAsso">
+            <div class="row">
+                <div class="col-2 bold">
+                    Numéro de dossier(s)
+                </div>
+                <div class="col-2 bold">
+                    Requérant(s)
+                </div>
+            </div>
+            <div class="row">
+                <div class=col-2>
+                    STE-Q-114265-1506
+                </div>
+                <div class=col-2>
+                    Entreprise ABC
+                </div>
+            </div>
+            <div class="row">
+                <div class=col-2>
+                    STE-Q-114265-1513
+                </div>
+                <div class=col-2>
+                    Entreprise ABC
+                </div>
+            </div>
+            <div class="row">
+                <div class=col-2>
+                    STE-Q-114287-1401 
+                </div>
+                <div class=col-2>
+                    Entreprise ABC
+                </div>
+            </div>
+            <div class="row">
+                <div class=col-2>
+                    STE-Q-114287-1401 
+                </div>
+                <div class=col-2>
+                    Entreprise ABC
+                </div>
+            </div>
+        </div>
+       <!--Fin zone dossiers associés-->
+
+         <!--Début zone signature-->
+         <div class="enteteBleu">
+            <app-texte class="titreEntete" cle="commun.signature"></app-texte>
+            <span id="boiteDossAssoOuverte" *ngIf="!boiteSignature" class="arrowDown" (click)="ouvertureBoiteSignature()">
+                <i class="fas fa-angle-down fa-3x"></i>
+            </span>
+            <span id="boiteDossAssoFerme" *ngIf="boiteSignature" class="arrowDown" (click)="fermetureBoiteSignature()">
+                <i class="fas fa-angle-up fa-3x"></i>
+            </span>
+        </div>
+
+        <div [className]="!boiteSignature ? 'testDecision' : 'testDecisionExpand' " class="testDecision">
+            <div class="row">
+                <div class="col-2">
+                    Juge(s) administratif(s)
+                </div>
+                <div class="col-2">
+                    Rédacteur
+                </div>
+                <div class="col-2">
+                    Ordre de signature
+                </div>
+                <div class="col-2">
+                    Date de signature
+                </div>
+            </div>
+        </div>
+       <!--Fin zone signature-->
+
+         <!--Début zone historique de décision-->
+         <div class="enteteBleu">
+            <app-texte class="titreEntete" cle="commun.histDecision"></app-texte>
+            <span id="boiteDossAssoOuverte" *ngIf="!boiteHistorique" class="arrowDown" (click)="ouvertureBoiteHistorique()">
+                <i class="fas fa-angle-down fa-3x"></i>
+            </span>
+            <span id="boiteDossAssoFerme" *ngIf="boiteHistorique" class="arrowDown" (click)="fermetureBoiteHistorique()">
+                <i class="fas fa-angle-up fa-3x"></i>
+            </span>
+        </div>
+
+        <div [className]="!boiteHistorique ? 'testDecision' : 'testDecisionExpand' " class="testDecision">
+            <div class="row">
+                <div class="col-2">
+                   Statut
+                </div>
+                <div class="col-2">
+                    Date
+                </div>
+                <div class="col-2">
+                    Utilisateur
+                </div>
+            </div>
+        </div>
+       <!--Fin zone historique de décision-->
     </div>
 </div>
