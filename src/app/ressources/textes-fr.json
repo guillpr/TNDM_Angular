@@ -32,7 +32,11 @@
         {"cle": "import.JugeAdm" , "valeur": "Juges administratifs"},
         {"cle": "fj.GlisserDeposer" , "valeur": "Glisser-déposer"},
         {"cle": "fj.Ou" , "valeur": "Ou"},
-        {"cle": "fj.Parcourir" , "valeur": "Parcourir"}
+        {"cle": "fj.Parcourir" , "valeur": "Parcourir"},
+        { "cle": "commun.descriptionPerteDonnees", "valeur": "Des modifications ont été apportées sur cette page. Si vous quittez, les modifications seront perdues. Voulez-vous quand même continuer ?" },
+        { "cle": "commun.titrePerteDonnees", "valeur": "Modifications en cours" },
+        { "cle": "commun.oui", "valeur": "Oui" },
+        { "cle": "commun.non", "valeur": "Non" }
 
 
 

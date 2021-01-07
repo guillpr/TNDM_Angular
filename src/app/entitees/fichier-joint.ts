@@ -2,15 +2,15 @@ import { Guid } from "guid-typescript";
 
 export class FichierJoint {
 
-    //contenu: string;
-    id: Guid;
+    contenu: string;
+    id: string;
     nom: string;
    // nbPages: number;
    // type: string;
    // typeErreur: string;
    // message: string;
   //  messageErreur: string;
-    taille:number;
+    taille: number;
 
     constructor() {}
     }

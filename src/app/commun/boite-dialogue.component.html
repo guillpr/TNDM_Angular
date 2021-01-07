@@ -1,0 +1,12 @@
+<h2 mat-dialog-title id="titre-dialogue">{{data.titre}}</h2>
+<div mat-dialog-content id="contenu-dialogue">
+  <p>{{data.texte}}</p>
+ <!--  <mat-form-field>
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field> -->
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-link" mat-button (click)="onNoClick()" cdkFocusInitial>{{data.texteBoutonNon}}</button>
+  <button *ngIf="data.afficherBoutonOui === true" class="btn btn-primary" mat-button (click)="onYesClick()" >{{data.texteBoutonOui}}</button>
+</div>

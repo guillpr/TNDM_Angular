@@ -39,6 +39,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FichierJointComponent } from './commun/fichier-joint.component';
 import { DndDirective } from './commun/dnd.directive';
 import { JugeAdmComponent } from './commun/juge-adm.component';
+import { BoiteDialogueComponent } from './commun/boite-dialogue.component';
+import { CanDeactivateGuard } from './commun/can-deactivate.guard';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -62,6 +65,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     FichierJointComponent,
     DndDirective,
     JugeAdmComponent,
+    BoiteDialogueComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
       {path: 'adjointe', component: AdjointeComponent },
       {path: 'juge', component: JugeComponent },
       {path: 'infoAdjointe', component: InfoDecisionAdjointeComponent },
-      {path: 'importDecision', component: ImportDecisionComponent },
+      {path: 'importDecision', component: ImportDecisionComponent , canDeactivate: [CanDeactivateGuard] },
       {path: 'gestionPreferences', component: GestionPreferencesComponent }
     ]),
     HttpClientModule,
@@ -84,6 +88,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatTableModule,
     MatSortModule,
     MatTooltipModule,
+    MatDialogModule,
     DragDropModule
   ],
   providers: [

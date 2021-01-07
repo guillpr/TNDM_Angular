@@ -1,8 +1,11 @@
+import { utf8Encode } from '@angular/compiler/src/util';
 import { SecurityContext, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Guid } from 'guid-typescript';
+import { encode } from 'querystring';
 import { FichierJoint } from '../entitees/fichier-joint';
+import { FacadeService } from '../services/facade.service';
 
 @Component({
   selector: 'app-fichier-joint',
@@ -21,11 +24,12 @@ export class FichierJointComponent implements OnInit {
 
   fichiers: FichierJoint[] = [];
 
-  constructor(public domSanitizer: DomSanitizer) {
+  constructor(public domSanitizer: DomSanitizer , public facadeService: FacadeService) {
     this.id = Guid.create();
   }
 
   ngOnInit(): void {
+    
 
 
   }
@@ -36,13 +40,14 @@ export class FichierJointComponent implements OnInit {
   }
 
   onFileDropped($event: any){
-     const f: FichierJoint =
-     {
-       id: this.id,
-       nom: $event.name,
-       taille: $event.size
-     };
-     console.log($event);
+    //  const f: FichierJoint =
+    //  {
+    //    id: this.id,
+    //    contenu: $event.name,
+    //    nom: $event.name,
+    //    taille: $event.size
+    //  };
+    //  console.log($event);
 
 
      console.log(this.fichiers);
@@ -52,6 +57,7 @@ export class FichierJointComponent implements OnInit {
 
   }
   fileBrowseHandler(files: any){
+   
     this.gererFichiers(files);
     // this.fileInput.nativeElement.value = '';
 
@@ -63,21 +69,24 @@ export class FichierJointComponent implements OnInit {
     console.log('Extension:');
     console.log(ext);
 
-    if (ext === 'doc' || ext === 'docx')
-   {
+   // if (ext === 'doc' || ext === 'docx')
+  // {
 
     const g = Guid.create();
 
     const reader = new FileReader();
     let f: FichierJoint;
 
+
+
+
     reader.readAsDataURL(file);
     reader.onload = (e) => {
 
       f =
       {
-        // contenu: reader.result.toString(),
-        id: this.id,
+        contenu: reader.result.toString(),
+        id: 'idBidon',
         nom: file.name,
        // nbPages: 0,
         taille: file.size,
@@ -87,12 +96,25 @@ export class FichierJointComponent implements OnInit {
        // messageErreur: ''
       };
       this.fichiers.push(f);
+
+     // this.lireFichier(file);
+
+
+
+      this.facadeService.TeleverserDocument(f)
+       .subscribe((s) => {
+         f.contenu = 'data:image/gif/base64,' + s.contenu;
+         f.id =  s.id;
+         f.nom = s.nom;
+         f.taille = s.taille;
+       });
       this.messageErreurExtension = false;
+      // console.log('Contenu du fichier' , this.fichiers[0].contenu);
     };
-  }
-  else{
+ // }
+ // else{
     this.messageErreurExtension = true;
-  }
+ // }
 
     console.log(this.fichiers);
 }
@@ -101,6 +123,17 @@ export class FichierJointComponent implements OnInit {
     fichiers.forEach(element => {
       this.gererFichier(element);
     });
+  }
+
+  lireFichier(file: File){
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+
+      const text = fileReader.result.toString();
+      console.log(text);
+    };
+    fileReader.readAsText(file);
+   
   }
 
 

@@ -107,10 +107,11 @@
     background-color: #2257a7 !important;
     color: white;
     border: #2257a7 !important;
-    margin-left: 283px;
+    margin-left: 350px;
     margin-top:10px;
     width:100px;
     height:35px;
+    border-radius: 10px;
 }
 .buttonImpor{
     background-color: #2257a7 !important;
@@ -120,6 +121,7 @@
     margin-top:10px;
     width:250px;
     height:35px;
+    border-radius: 10px;
 }
 .buttonReini {
     background-color: #2257a7 !important;
@@ -129,6 +131,7 @@
     margin-top: 10px;
     width: 100px;
     height: 35px;
+    border-radius: 10px;
 }
 .tableauDec {
     background-color:white;

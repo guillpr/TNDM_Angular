@@ -1,6 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
+import { CanComponentDeactivate } from '../commun/can-deactivate.guard';
 import { FacadeService } from '../services/facade.service';
+import { TextesService } from '../services/textes.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-import-decision',
@@ -13,13 +20,40 @@ export class ImportDecisionComponent implements OnInit {
   myComponents: any[] = [];
   compteur = 0;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              public textesService: TextesService,
+              public dialog: MatDialog,
+              public router: Router) { }
 
-  ngOnInit(): void {
-    
+
+  canDeactivate(
+    component: CanComponentDeactivate,
+    currentRoute: ActivatedRouteSnapshot,
+    currentState: RouterStateSnapshot,
+    nextState: RouterStateSnapshot
+  ): Observable<boolean> {
+    if (nextState.url !== '/juge') {
+      const donnees = {
+        texte: this.textesService.obtenirTexte('commun.descriptionPerteDonnees'),
+        titre: this.textesService.obtenirTexte('commun.titrePerteDonnees'),
+        texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+        texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+        afficherBoutonOui: true,
+        reponse: ''
+      };
+      return this.dialog.open(BoiteDialogueComponent, {
+        width: '450px',
+        data: donnees,
+        ariaLabelledBy: 'titre-dialog',
+        ariaDescribedBy: 'contenu-dialogue'
+      }).afterClosed().pipe(
+        map(() => donnees.reponse === 'O')
+      );
+    }
+    return of(true);
   }
+  ngOnInit(): void { }
 
-  
 
   public ajouterJuge(){
     console.log('adding');
@@ -33,6 +67,12 @@ export class ImportDecisionComponent implements OnInit {
   public supprimerJuge(){
     this.compteur--;
     this.myComponents.splice(-1);
+  }
+  public importerDecision(){
+    this.router.navigateByUrl('/juge');
+  }
+  public quitterDecision(){
+    this.router.navigateByUrl('/');
   }
 
 }
