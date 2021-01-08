@@ -7,6 +7,7 @@ import { FacadeService } from '../services/facade.service';
 import { ViewEncapsulation } from '@angular/core';
 import { Juge } from '../entitees/juge';
 import { Router } from '@angular/router';
+import { EPriorite } from '../entitees/enums/priorite';
 
 
 @Component({
@@ -18,25 +19,7 @@ import { Router } from '@angular/router';
 export class FondCommunAdjJugeComponent implements OnInit {
 
   public listeJuge: Juge[] = [];
-
-  // TODO
-  displayedColumns: string[] = [
-    'numeroDecision', 'numeroDossier',
-    'nbDossier', 'dateImportation' ,
-    'dateFinDelibere' , 'juge' , 'description' ,
-    'durRestante' , 'priorite', 'statut'];
-
-    MyDataSource: any;
-
-  @ViewChild(MatSort) sort: MatSort;
-
-   // TODO
-    key = 'id';
-    reverse = false;
-    asc = false;
-    desc = false;
-
-    indicateurJuge = false;
+  @ViewChild(MatSort) sort: MatSort; 
     p = 1;
     affTableau = false;
     public listeDecisions: Decision[] = [];
@@ -52,7 +35,6 @@ export class FondCommunAdjJugeComponent implements OnInit {
 
   });
 
-
 searchValue: string;
 searchValue2: string;
 maskValue: string;
@@ -60,11 +42,13 @@ maskValue: string;
   constructor(public facadeService: FacadeService,
               public router: Router) { }
   ngOnInit() {
-     this.facadeService.obtenirDecisionList()
+    // TODO indicateur Juge codé dur
+    this.facadeService.indicateurJuge = true;
+    this.facadeService.obtenirDecisionList()
      .subscribe( res => {
         this.listeDecisions = res;
      });
-     this.facadeService.obtenirJuges()
+    this.facadeService.obtenirJuges()
      .subscribe(res => {
        this.listeJuge = res;
      });
@@ -138,13 +122,9 @@ maskValue: string;
     elementAria.setAttribute('dropSpecialCharacters' , 'false');
   }
  }
- public doFilter = (value: string) => {
-  this.MyDataSource.filter = value.trim().toLocaleLowerCase();
-}
 public SelectionDecision(numDec: string){
   console.log('Le numéro de décision: ' , numDec);
   this.facadeService.numDecisionTemp = numDec;
   this.router.navigateByUrl('/infoAdjointe');
-
 }
 }

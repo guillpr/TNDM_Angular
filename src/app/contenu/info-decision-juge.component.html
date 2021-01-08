@@ -14,10 +14,10 @@
         <!--Début row décision-->
         <div class="row bold">
             <div class="col numUniCol"><app-texte cle="commun.numUnique"></app-texte></div>
-            <div class="col dateImpCol"><app-texte cle="commun.dateImp"></app-texte></div>
+            <div class="col"><app-texte cle="commun.dateImp"></app-texte></div>
             <div class="col numUtiCol"><app-texte cle="commun.utilisateur"></app-texte></div>
-            <div class="col dateDeliCol"><app-texte cle="commun.requerant"></app-texte></div>
-            <div class="col dateDeliCol"><app-texte cle="commun.description"></app-texte>  <i class="fas fa-edit ml-1"></i></div>
+            <div class="col"><app-texte cle="commun.requerant"></app-texte></div>
+            <div class="col"><app-texte cle="commun.description"></app-texte>  <i class="fas fa-edit ml-1"></i></div>
             <div class="col-2 dateDeliCol"><app-texte cle="commun.dateDeli"></app-texte> <i class="fas fa-edit ml-1"></i></div>
             <div class="col numUniCol">Durée restante</div>
             <div class="col numUtiCol">Priorité</div>
@@ -28,10 +28,10 @@
         <div [className]="!boiteDecisionOuverte ? 'testDecision' : 'testDecisionExpand' " class="testDecision">
             <div class="row">
                 <div class="col numUniCol">2020-01-123</div>
-                <div class="col dateImpCol">2020-02-01</div>
-                <div class="col numUtiCol">prouguil001</div>
-                <div class="col dateDeliCol">Entreprise Les solutions vertes du québec</div>
-                <div class="col dateDeliCol">numéro dossier -requérant</div>
+                <div class="col">2020-02-01</div>
+                <div class="col numUtiCol">smithka004</div>
+                <div class="col">Entreprise ABC</div>
+                <div class="col">numéro dossier -requérant</div>
                 <div class="col-2 dateDeliCol">2020-02-01</div>
                 <div class="col numUniCol">15 jours</div>
                 <div class="col numUtiCol">
@@ -171,8 +171,7 @@
         </div>
        <!--Fin zone historique de décision-->
     </div>
-      <!--Début zone bouton adjointe-->
-      <div *ngIf="!this.facadeService.indicateurJuge">
+      <!--Début zone bouton-->
     <div class="row">
         <div class="col"></div>
         <div class="col">
@@ -192,26 +191,10 @@
         </div>
         <div class="col"></div>
     </div>
-</div>
-      <!--Fin zone bouton-->
-
-      <!--Début zone bouton juge-->
-
-      <div *ngIf="this.facadeService.indicateurJuge">
-        <div class="row">
-            <div class="col-2">
-                <button class="buttonDocument">Voir documents</button>
-            </div>
     
-            <div class="col-2">
-                <button (click)="signalerRejetDecision()" class="buttonSignRejet">Signaler rejet décision</button>
-            </div>
-            <div class="col-2">
-                <button class="buttonFermer">Fermer</button>
-            </div>
-            
-        </div>
-    </div>
-
-       <!--Fin zone bouton juge-->
+     
+      
+     
+      <!--Fin zone bouton-->
 </div>
+

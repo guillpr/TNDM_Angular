@@ -1,4 +1,7 @@
+import { Injectable } from '@angular/core';
+import { EPriorite } from './enums/priorite';
 
+@Injectable()
 export class Decision{
     public decisionId!: number;
     public numeroDecision!: string;
@@ -8,7 +11,7 @@ export class Decision{
     public dateFinDelibere!: string;
     public description!: string;
     public juge!: string;
-    public priorite!: number;
+    public priorite!: EPriorite;
     public statut!: number;
     public indSignature!: number;
     public durRestante!: string;

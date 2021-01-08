@@ -69,8 +69,8 @@ export class FichierJointComponent implements OnInit {
     console.log('Extension:');
     console.log(ext);
 
-   // if (ext === 'doc' || ext === 'docx')
-  // {
+    if (ext === 'doc' || ext === 'docx')
+   {
 
     const g = Guid.create();
 
@@ -111,10 +111,10 @@ export class FichierJointComponent implements OnInit {
       this.messageErreurExtension = false;
       // console.log('Contenu du fichier' , this.fichiers[0].contenu);
     };
- // }
- // else{
+  }
+  else{
     this.messageErreurExtension = true;
- // }
+  }
 
     console.log(this.fichiers);
 }

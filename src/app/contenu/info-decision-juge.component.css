@@ -66,29 +66,12 @@
 }
 .dateDeliCol{
     max-width: 12%;
-    padding-right: 5px;
-    padding-left: 5px;
 }
 .numUniCol{
     max-width: 10%;
-    padding-right: 5px;
-    padding-left: 15px;
 }
 .numUtiCol{
     max-width: 8%;
-    padding-right: 5px;
-    padding-left: 5px;
-    white-space: normal;
-}
-.dateImpCol{
-    max-width: 11%;
-    padding-right: 5px;
-    padding-left: 5px;
-}
-
-.pCol{
-    padding-right: 5px;
-    padding-left: 5px;
 }
 .yellow{
     background-color: yellow;
@@ -120,16 +103,6 @@
     border-radius: 10px;
     margin:0 20px 0 20px
 }
-.buttonSignRejet{
-    background-color: #ff6004 !important;
-    color: white;
-    border:#ff6004 !important;
-   /* margin-left: 283px;*/
-    width:160px;
-    height:35px;
-    border-radius: 10px;
-    
-}
 .buttonDemarrer{
     background-color: #2257a7 !important;
     color: white;
@@ -151,5 +124,3 @@
     height:35px;
     border-radius: 10px;
 }
-
-

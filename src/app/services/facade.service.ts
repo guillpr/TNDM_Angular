@@ -20,6 +20,7 @@ export class FacadeService {
   ) { }
 
   numDecisionTemp: string;
+  indicateurJuge: boolean;
 
   private DecisionURL = environment.apiBaseUrl + 'DecisionDetail';
   private DecisionRecherche = environment.apiBaseUrl + 'DecisionDetail/Requete/';

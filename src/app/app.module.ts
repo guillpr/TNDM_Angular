@@ -3,6 +3,7 @@
 import { AppComponent } from './app.component';
 import { JugeComponent } from './contenu/juge.component';
 import { InfoDecisionAdjointeComponent } from './contenu/info-decision-adjointe.component';
+import { InfoDecisionJugeComponent } from './contenu/info-decision-juge.component';
 import { ImportDecisionComponent } from './contenu/import-decision.component';
 import { GestionPreferencesComponent } from './contenu/gestion-preferences.component';
 import { FondCommunAdjJugeComponent } from './commun/fond-commun-adj-juge.component';
@@ -11,6 +12,13 @@ import { BanniereComponent } from './commun/banniere.component';
 import { TexteComponent } from './commun/texte.component';
 import { TextePilotableComponent } from './commun/texte-pilotable.component';
 import { AdjointeComponent } from './contenu/adjointe.component';
+import { JugeAdmComponent } from './commun/juge-adm.component';
+import { FichierJointComponent } from './commun/fichier-joint.component';
+
+// Dialog
+import { BoiteDialogueComponent } from './commun/boite-dialogue.component';
+// Guard
+import { CanDeactivateGuard } from './commun/can-deactivate.guard';
 
 // Importation Material
 import { MatSliderModule } from '@angular/material/slider';
@@ -19,11 +27,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { TestMatTableComponent } from './commun/test-mat-table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
 // Importation pipe
 import { Searchfilter3Pipe } from './commun/searchfilter3.pipe';
 import { DateFiltrePipe } from './commun/date-filtre.pipe';
 // Importation Directive
 import { SortDirective } from './directive/sort.directive';
+import { DndDirective } from './commun/dnd.directive';
 
 // Autres importations
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,13 +46,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FichierJointComponent } from './commun/fichier-joint.component';
-import { DndDirective } from './commun/dnd.directive';
-import { JugeAdmComponent } from './commun/juge-adm.component';
-import { BoiteDialogueComponent } from './commun/boite-dialogue.component';
-import { CanDeactivateGuard } from './commun/can-deactivate.guard';
-import { MatDialogModule } from '@angular/material/dialog';
-
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -55,6 +58,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     AdjointeComponent,
     JugeComponent,
     InfoDecisionAdjointeComponent,
+    InfoDecisionJugeComponent,
     ImportDecisionComponent,
     FondCommunAdjJugeComponent,
     InsertDecisionComponent,
@@ -65,7 +69,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     FichierJointComponent,
     DndDirective,
     JugeAdmComponent,
-    BoiteDialogueComponent,
+    BoiteDialogueComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
       {path: 'adjointe', component: AdjointeComponent },
       {path: 'juge', component: JugeComponent },
       {path: 'infoAdjointe', component: InfoDecisionAdjointeComponent },
+      {path: 'infoJuge', component: InfoDecisionJugeComponent },
       {path: 'importDecision', component: ImportDecisionComponent , canDeactivate: [CanDeactivateGuard] },
       {path: 'gestionPreferences', component: GestionPreferencesComponent }
     ]),

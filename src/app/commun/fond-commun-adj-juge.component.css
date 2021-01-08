@@ -191,4 +191,13 @@ input[type=radio]:checked:before {
      text-decoration: underline;
      cursor:pointer;
  }
+ .yellowClass{
+     background-color: yellow;
+     text-align: center; 
+     padding:5px;
+ }
+ .bgWhite{
+     background-color: white;
+    
+ }
  

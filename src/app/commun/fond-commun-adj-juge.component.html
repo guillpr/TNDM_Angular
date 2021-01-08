@@ -1,16 +1,16 @@
 <form [formGroup]="formulaire">
     <div class="container1">
         <div class="divUpLeft">
-            <div *ngIf="!indicateurJuge">  
+            <div *ngIf="!this.facadeService.indicateurJuge">  
             <img class="imageAdj" src="../../assets/images/ImageAdj.jpg" />
                 </div>
-                <div *ngIf="indicateurJuge">  
+                <div *ngIf="this.facadeService.indicateurJuge">  
                     <img class="imageAdj" src="../../assets/images/ImageJuge.jpg" />
                         </div>
-            <div *ngIf="!indicateurJuge" class="nomAdj">
+            <div *ngIf="!this.facadeService.indicateurJuge" class="nomAdj">
                 Mélanie Tremblay
              </div>
-             <div *ngIf="indicateurJuge" class="nomAdj">
+             <div *ngIf="this.facadeService.indicateurJuge" class="nomAdj">
                 Jean-Marie Albert
              </div>
             <div class="imgUtlCenter">
@@ -53,7 +53,7 @@
                             </select>
                           </div>
                     </div>
-                      <div class="flex" *ngIf="!indicateurJuge">
+                      <div class="flex" *ngIf="!this.facadeService.indicateurJuge">
                           <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
                           <div class="padDD">
                             <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
@@ -76,7 +76,7 @@
                          <span class="spanAu">au</span>
                          <input type="date" class="tbNormal" id="TextBoxDateImpAu" aria-describedby="TextBoxDateImpAu"  formControlName="rechercheDateAu"  placeholder="--Sélectionner--">
                     </div>
-                    <div *ngIf="!indicateurJuge">
+                    <div *ngIf="!this.facadeService.indicateurJuge">
                         <label  class="texteRecherche">Portée de la recherche </label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" checked="checked" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
@@ -144,7 +144,7 @@
                           </span><i class="fa fa-sort"></i>
                         </th>
                       <th scope="col"><app-texte cle="commun.description"></app-texte></th>
-                      <th scope="col" *ngIf="!indicateurJuge">
+                      <th scope="col" *ngIf="!this.facadeService.indicateurJuge">
                           <app-texte cle="commun.RechercheJuge"></app-texte>
                       </th>
                         
@@ -161,7 +161,6 @@
                   <tbody>
                       
                      <tr *ngFor="let pd of this.listeDecisions
-                     | orderBy: key : reverse
                      | searchfilter3: searchValue: 'rechercheNumDec' 
                      | searchfilter3: searchValue2 : 'rechercheNumDossier' 
                      | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut' 
@@ -174,7 +173,7 @@
                          <td>{{pd.dateImportation | date: 'yyyy-LL-d'}} </td>
                          <td>{{pd.dateFinDelibere | date: 'yyyy-LL-d'}}</td>
                          <td>{{pd.description}}</td>
-                         <td *ngIf="!indicateurJuge">{{pd.juge}}
+                         <td *ngIf="!this.facadeService.indicateurJuge">{{pd.juge}}
                             <img *ngIf="pd.indSignature" class="imgSign" mat-raised-button
                             matTooltip="Décision signé le  {{pd.dateImportation | date: 'd-LL-yyyy'}}"
                             aria-label="L'image affiche la date de signature de la décision"
@@ -183,7 +182,13 @@
                             />
                          </td>
                          <td>{{pd.durRestante}}</td>
-                         <td>{{pd.priorite}}</td>
+                         <td class="bgWhite" >
+                           <span [className]="pd.priorite=='1' ? 'yellowClass' : ''">
+                            <span *ngIf="pd.priorite== '1'">Urgente</span> 
+                            <span *ngIf="pd.priorite== '2'">Normale</span> 
+                           </span>
+                         
+                         </td>
                          <td>{{pd.statut}}</td>
                      </tr>
                   </tbody>

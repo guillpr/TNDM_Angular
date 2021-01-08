@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AnyARecord } from 'dns';
 import { map } from 'rxjs/operators';
 import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
 import { FacadeService } from '../services/facade.service';
 import { TextesService } from '../services/textes.service';
 
 @Component({
-  selector: 'app-info-decision-adjointe',
-  templateUrl: './info-decision-adjointe.component.html',
-  styleUrls: ['./info-decision-adjointe.component.css']
+  selector: 'app-info-decision-juge',
+  templateUrl: './info-decision-juge.component.html',
+  styleUrls: ['./info-decision-juge.component.css']
 })
-export class InfoDecisionAdjointeComponent implements OnInit {
+export class InfoDecisionJugeComponent implements OnInit {
+
   numDecSelectionner: string;
 
-  boiteDecisionOuverte = true;
-  boiteDossAss = true;
-  boiteSignature = true;
-  boiteHistorique = true;
+  boiteDecisionOuverte = false;
+  boiteDossAss = false;
+  boiteSignature = false;
+  boiteHistorique = false;
   prioSelected = '';
   couleurPrio = false;
 
@@ -26,9 +26,6 @@ export class InfoDecisionAdjointeComponent implements OnInit {
               public textesService: TextesService) { }
 
   ngOnInit(): void {
-
-    // TODO statut juge codé dur
-    this.facadeService.indicateurJuge = true;
     this.couleurPrio = true;
     this.numDecSelectionner = this.facadeService.numDecisionTemp;
     
@@ -87,9 +84,6 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         }).afterClosed().pipe(
           map(() => donnees.reponse === 'O')
         );
-  }
-  signalerRejetDecision(){
-
   }
 
 }
