@@ -16,8 +16,7 @@
             <div class="imgUtlCenter">
                 <img  src="../../assets/images/Image3.png" />
                 <app-texte  cle="commun.ProUtil"></app-texte>
-            </div>
-                
+            </div>     
         </div>
             <span class="spanSpace"></span>
          <div class="divDownLeft">
@@ -32,7 +31,6 @@
                          <app-texte cle="commun.RechercheDecision"></app-texte>
                     </div>
                     <hr/>
-                
                     <div>
                     <div>
                         <app-texte class="texteRecherche" cle="commun.RechercheNumDec"></app-texte>
@@ -47,9 +45,10 @@
                          <div class="padD">
                             <select   class="dlNormalStatut" id="inputGroupSelect04" formControlName="rechercheStatut">
                               <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
-                              <option value="1"><app-texte cle="commun.ddNonSigne"></app-texte></option>
-                              <option value="2"><app-texte cle="commun.ddEnCours"></app-texte></option>
-                              <option value="3"><app-texte cle="commun.ddSigne"></app-texte></option>
+                              <option value="1"><app-texte cle="commun.statutDecPreSign"></app-texte></option>
+                              <option value="2"><app-texte cle="commun.statutDecEnCoursSign"></app-texte></option>
+                              <option value="3"><app-texte cle="commun.statutDecSign"></app-texte></option>
+                              <option value="4"><app-texte cle="commun.statutDecDep"></app-texte></option>
                             </select>
                           </div>
                     </div>
@@ -62,13 +61,27 @@
                             </select>
                           </div>
                     </div>
-                     <div >
+                     <div class="flex">
                         <app-texte cle="commun.RecherchePrio" class="texteRecherche"></app-texte>
-                        <input type="text" class="tbNormal" id="TextBoxRechPrio" aria-describedby="TextBoxRechPrio" >
+                        <div class="padD">
+                          <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
+                            <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
+                            <option value="1"><app-texte cle="commun.prioNorm"></app-texte></option>
+                            <option value="2"><app-texte cle="commun.prioUrg"></app-texte></option>
+                          </select>
+                        </div>
                     </div>
-                     <div >
+                     <div class="flex">
                          <app-texte cle="commun.RechercheType"  class="texteRecherche"></app-texte>
-                         <input type="text" class="tbNormal" id="TextBoxType" aria-describedby="TextBoxType" >
+                         <div class="padD">
+                          <select   class="dlNormalStatut" id="inputGroupSelectType" formControlName="rechercheType">
+                            <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
+                            <option value="1"><app-texte cle="commun.typeDecision"></app-texte></option>
+                            <option value="2"><app-texte cle="commun.typeDecisionRect"></app-texte></option>
+                            <option value="3"><app-texte cle="commun.typeDecisionIn"></app-texte></option>
+                            <option value="4"><app-texte cle="commun.typeDecisionMotifs"></app-texte></option>
+                          </select>
+                        </div>
                     </div>
                      <div >
                          <app-texte cle="commun.DateImp" class="texteRecherche" ></app-texte>
@@ -87,7 +100,6 @@
                             <label class="form-check-label" for="inlineRadio2">Toutes les décisions mon/mes groupes</label>
                           </div>
                     </div>
-
                         <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button> 
@@ -129,7 +141,6 @@
                     <tr>
                       <th scope="col">
                          <app-texte cle="commun.numero"  ></app-texte>
-                          <!-- <img runat="server" id="imgTrieNumero" class="hauteurImageTrie" src="../../assets/images/down.png"/> -->
                       </th>
                       <th scope="col"  ><app-texte cle="commun.dossier" ></app-texte></th>
                       <th scope="col"><app-texte cle="commun.nbDossier"></app-texte></th>
@@ -147,7 +158,6 @@
                       <th scope="col" *ngIf="!this.facadeService.indicateurJuge">
                           <app-texte cle="commun.RechercheJuge"></app-texte>
                       </th>
-                        
                       <th scope="col" [appSort]="this.listeDecisions" data-order="desc" data-name="durRestante">
                           <app-texte cle="commun.durRestante"></app-texte>
                            <span class="spanAu">
@@ -155,11 +165,9 @@
                          </th> 
                       <th scope="col"  [appSort]="this.listeDecisions" data-order="desc" data-name="priorite"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
                       <th scope="col"><app-texte cle="commun.RechercheStatut"></app-texte></th>
-                
                     </tr>
                   </thead>
                   <tbody>
-                      
                      <tr *ngFor="let pd of this.listeDecisions
                      | searchfilter3: searchValue: 'rechercheNumDec' 
                      | searchfilter3: searchValue2 : 'rechercheNumDossier' 
@@ -183,18 +191,15 @@
                          </td>
                          <td>{{pd.durRestante}}</td>
                          <td class="bgWhite" >
-                           <span [className]="pd.priorite=='1' ? 'yellowClass' : ''">
-                            <span *ngIf="pd.priorite== '1'">Urgente</span> 
-                            <span *ngIf="pd.priorite== '2'">Normale</span> 
+                           <span [className]="pd.priorite==1 ? 'yellowClass' : ''">
+                            <span *ngIf="pd.priorite== 1">Urgente</span> 
+                            <span *ngIf="pd.priorite== 2">Normale</span> 
                            </span>
-                         
                          </td>
                          <td>{{pd.statut}}</td>
                      </tr>
                   </tbody>
-                  
                 </table>
-
                 <div class="paginationCtl">
                     <pagination-controls 
                     (pageChange)="p = $event" previousLabel="Précédent"

@@ -11,7 +11,7 @@ export class Decision{
     public dateFinDelibere!: string;
     public description!: string;
     public juge!: string;
-    public priorite!: EPriorite;
+    public priorite!: number;
     public statut!: number;
     public indSignature!: number;
     public durRestante!: string;

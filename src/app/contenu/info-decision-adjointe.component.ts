@@ -21,18 +21,24 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   prioSelected = '';
   couleurPrio = false;
 
+  isEnabled = true;
+
+  // Mail
+  email: string;
+  emailSubject: string;
+
   constructor(public facadeService: FacadeService,
               public dialog: MatDialog,
               public textesService: TextesService) { }
 
   ngOnInit(): void {
-
+ // TODO mail
+  this.email = 'proulxguill@gmail.com';
+  this.emailSubject = 'TNDM - rejet de décision';
     // TODO statut juge codé dur
-    this.facadeService.indicateurJuge = true;
-    this.couleurPrio = true;
-    this.numDecSelectionner = this.facadeService.numDecisionTemp;
-    
-
+  this.facadeService.indicateurJuge = true;
+  this.couleurPrio = true;
+  this.numDecSelectionner = this.facadeService.numDecisionTemp;
   }
 
   ouvertureBoiteDecision(){
@@ -88,8 +94,19 @@ export class InfoDecisionAdjointeComponent implements OnInit {
           map(() => donnees.reponse === 'O')
         );
   }
-  signalerRejetDecision(){
+  editionDescription(){
+    console.log('dans édition description');
 
+    const inputDesc: HTMLElement = document.querySelector(
+      '#inputDescription'
+  );
+    if (this.isEnabled === false)
+  {
+    this.isEnabled = true;
+  }
+  else{
+    this.isEnabled = false;
+  }
   }
 
 }

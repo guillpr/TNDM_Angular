@@ -29,6 +29,8 @@ export class FondCommunAdjJugeComponent implements OnInit {
     rechercheNumDossier: new FormControl(''),
     rechercheStatut: new FormControl(''),
     rechercheJuge: new FormControl(''),
+    recherchePriorite: new FormControl(''),
+    rechercheType: new FormControl(''),
     rechercheDateDu: new FormControl(''),
     rechercheDateAu: new FormControl(''),
     NomJuge: new FormControl('')

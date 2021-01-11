@@ -151,5 +151,8 @@
     height:35px;
     border-radius: 10px;
 }
-
+.inputDesc{
+    border:none;
+    resize: none;
+}
 

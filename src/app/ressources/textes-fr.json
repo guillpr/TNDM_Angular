@@ -43,7 +43,22 @@
         {"cle": "commun.histDecision" , "valeur": "Historique de la décision"},
         {"cle": "commun.numUnique" , "valeur": "Numéro unique"},
         {"cle": "commun.utilisateur" , "valeur": "Utilisateur"},
-        {"cle": "commun.requerant" , "valeur": "Requérant(s)"}
+        {"cle": "commun.requerant" , "valeur": "Requérant(s)"},
+        {"cle": "commun.prioNorm" , "valeur": "Normale"},
+        {"cle": "commun.prioUrg" , "valeur": "Urgente"},
+        {"cle": "commun.statutDecImp" , "valeur": "Décision importée"},
+        {"cle": "commun.statutDecPreSign" , "valeur": "Décision prête pour signature"},
+        {"cle": "commun.statutDecEnCoursSign" , "valeur": "Décision en cours de signature"},
+        {"cle": "commun.statutDecSign" , "valeur": "Signée"},
+        {"cle": "commun.statutDecDep" , "valeur": "Décision déposée"},
+        {"cle": "commun.typeDecision" , "valeur": "Décision"},
+        {"cle": "commun.typeDecisionRect" , "valeur": "Décision rectifiée"},
+        {"cle": "commun.typeDecisionIn" , "valeur": "Décision incidente"},
+        {"cle": "commun.typeDecisionMotifs" , "valeur": "Motifs"}
+
+
+
+
 
 
         
