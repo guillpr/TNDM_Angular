@@ -1,6 +1,8 @@
 <app-banniere></app-banniere>
+<form [formGroup]="formulaire" (ngSubmit)="onSubmit()">
 <div class="divFond">
     <div class="divCentre">
+        
         <div class="titreImport">
             <app-texte cle="import.Titre"></app-texte>   
         </div>
@@ -9,12 +11,12 @@
             <div class="nomFichier">
                 <app-texte cle="import.NomFichier"></app-texte>
             </div>
-            <div><app-fichier-joint></app-fichier-joint></div>
+            <div><app-fichier-joint [formulaire]="formulaire.get('fichier')"></app-fichier-joint></div>
          </div>
          <div class="espDesc">
             <div class="nomDescription">
                 <app-texte cle="import.Description"></app-texte>
-                <input class="inputReg" >
+                <input class="inputReg" formControlName="description" >
             </div>
          </div>
         
@@ -22,10 +24,10 @@
             <div class="nomJuge">
                 <app-texte cle="import.JugeAdm"></app-texte>
             </div>
-            <app-juge-adm></app-juge-adm>
+            <app-juge-adm [formulaire]="formulaire.get('juge')"></app-juge-adm>
             <div *ngFor="let i of myComponents">
            
-            <app-juge-adm></app-juge-adm>
+            <app-juge-adm ></app-juge-adm>
         </div>
 
         <div class="spaceUp">
@@ -60,14 +62,15 @@
                     <label class="">Date fin délibéré</label>
                 </div>
                 <div class="col-2">
-                   <input class="dateInput" type="date">
+                   <input class="dateInput" type="date" formControlName="dateDelibere">
                 </div>
             </div>
         </div>
     </div>
     <div class="sectionButton">
             <button (click)="quitterDecision()" class="buttonQuitter">Quitter</button>
-            <button (click)="importerDecision()" class="buttonImporter">Importer</button>
+            <button class="buttonImporter">Importer</button>
     </div>
 </div>
+</form>
 

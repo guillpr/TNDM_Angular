@@ -1,10 +1,13 @@
 import { utf8Encode } from '@angular/compiler/src/util';
-import { SecurityContext, ViewChild } from '@angular/core';
+import { Input, SecurityContext, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { O_RDONLY } from 'constants';
 import { Guid } from 'guid-typescript';
 import { encode } from 'querystring';
 import { FichierJoint } from '../entitees/fichier-joint';
+import { RetourDecision } from '../entitees/RetourDecision';
 import { FacadeService } from '../services/facade.service';
 
 @Component({
@@ -13,6 +16,8 @@ import { FacadeService } from '../services/facade.service';
   styleUrls: ['./fichier-joint.component.css']
 })
 export class FichierJointComponent implements OnInit {
+
+  @Input() public formulaire: FormGroup;
 
   @ViewChild('fileDropRef') fileInput: any;
 
@@ -24,13 +29,17 @@ export class FichierJointComponent implements OnInit {
 
   fichiers: FichierJoint[] = [];
 
+  retourDec: RetourDecision [] = [];
+
   constructor(public domSanitizer: DomSanitizer , public facadeService: FacadeService) {
     this.id = Guid.create();
   }
 
-  ngOnInit(): void {
-    
+  public f(item: string): FormControl {
+    return this.formulaire.get(`${item}`) as FormControl;
+  }
 
+  ngOnInit(): void {
 
   }
   suppressionFichier(){
@@ -86,31 +95,22 @@ export class FichierJointComponent implements OnInit {
       f =
       {
         contenu: reader.result.toString(),
-        id: 'idBidon',
+        id: g.toString(),
         nom: file.name,
-       // nbPages: 0,
-        taille: file.size,
-        // type: '',
-       // typeErreur: '',
-       // message: '',
-       // messageErreur: ''
       };
+
+      console.log(this.formulaire.get('nomFichier'));
+      console.log('formulaire: ' ,  this.formulaire);
       this.fichiers.push(f);
-
-     // this.lireFichier(file);
-
-
 
       this.facadeService.TeleverserDocument(f)
        .subscribe((s) => {
-         f.contenu = 'data:image/gif/base64,' + s.contenu;
-         f.id =  s.id;
-         f.nom = s.nom;
-         f.taille = s.taille;
+         console.log(s);
        });
       this.messageErreurExtension = false;
       // console.log('Contenu du fichier' , this.fichiers[0].contenu);
     };
+    console.log(f);
   }
   else{
     this.messageErreurExtension = true;

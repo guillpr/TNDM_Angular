@@ -11,6 +11,7 @@ import { FacadeService } from '../services/facade.service';
 })
 export class JugeAdmComponent implements OnInit {
   public listeJuge: Juge[] = [];
+  @Input() public formulaire: FormGroup;
 
 
   constructor(public facadeService: FacadeService) { }
@@ -24,6 +25,9 @@ export class JugeAdmComponent implements OnInit {
      .subscribe( res => {
         this.listeJuge = res;
      });
+  }
+  public f(item: string): FormControl {
+    return this.formulaire.get(`${item}`) as FormControl;
   }
 
   public valeurJuge(){

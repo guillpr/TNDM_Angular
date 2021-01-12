@@ -1,7 +1,8 @@
+<div [formGroup]="formulaire">
 <div *ngIf="fichiers.length<1" class="containerFichierJoint" [class.ErrorBorder]="messageErreurExtension" appDnd (fileDropped)="onFileDropped($event)">
     <app-texte class="glisDep" cle="fj.GlisserDeposer"></app-texte>
     <app-texte class="glisDep" cle="fj.Ou"></app-texte>
-    <input type="file" #fileDropRef (change)="fileBrowseHandler($event.target.files)" hidden >
+    <input type="file" #fileDropRef (change)="fileBrowseHandler($event.target.files)" hidden  formControlName="nomFichier">
     <button class="boutonParcourir" (click)='fileDropRef.click()'>
     <app-texte cle="fj.Parcourir"></app-texte>
    </button>  
@@ -15,4 +16,4 @@
 </div>
 
 <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
-  
+</div>

@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Decision } from '../entitees/decision';
 import { FichierJoint } from '../entitees/fichier-joint';
 import { Juge } from '../entitees/juge';
+import { RetourDecision } from '../entitees/RetourDecision';
 import { ReponseBase } from './reponseBase';
 
 @Injectable({
@@ -44,9 +45,9 @@ export class FacadeService {
     return this.http.get<Juge[]>(this.JugeUrl);
   }
 
- public TeleverserDocument(fichier: FichierJoint): Observable<FichierJoint>{
+ public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision>{
    console.log (fichier);
-   return this.http.post<FichierJoint>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
+   return this.http.post<RetourDecision>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
  }
   // public obtenirDecisionListRecherche(requete: string){
   //   return this.http.get(this.DecisionRecherche + requete)

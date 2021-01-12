@@ -16,6 +16,8 @@ import { map } from 'rxjs/operators';
 })
 export class ImportDecisionComponent implements OnInit {
 
+  public formulaire: FormGroup;
+
 
   myComponents: any[] = [];
   compteur = 0;
@@ -52,7 +54,30 @@ export class ImportDecisionComponent implements OnInit {
     }
     return of(true);
   }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.initialiserFormulaire();
+   }
+
+   initialiserFormulaire(){
+    this.formulaire = new FormGroup({
+      description: new FormControl(''),
+      dateDelibere: new FormControl(''),
+      juge: this.fb.group({
+        nomJuge: new FormControl(''),
+        ordreSignataire: new FormControl(''),
+        redacteur: new FormControl('')
+      }),
+      fichier: this.fb.group({
+        nomFichier: new FormControl('')
+      })
+
+    });
+   }
+
+
+  get f() {
+    return this.formulaire.controls;
+  }
 
 
   public ajouterJuge(){
@@ -73,6 +98,9 @@ export class ImportDecisionComponent implements OnInit {
   }
   public quitterDecision(){
     this.router.navigateByUrl('/');
+  }
+  onSubmit(){
+    console.log(this.formulaire);
   }
 
 }
