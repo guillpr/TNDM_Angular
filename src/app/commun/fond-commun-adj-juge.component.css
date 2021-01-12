@@ -6,7 +6,7 @@
 }
 .container2 {
     background-color: #93daea26 ;
-    width: 75%;
+    width: 100%;
     float: right;
     padding: 20px;
 }
@@ -70,13 +70,13 @@
     display: inline-block;
 }
 .tbNormal {
-    
+
     text-align: center;
     width: 250px;
     background-color: #f3f5fb;
     border-radius: 5px;
     border: solid 1px #d0c9c9;
-    
+
 }
 .dlNormal {
     width: 250px;
@@ -100,7 +100,7 @@
 
 .flex{
     display:flex;
-    
+
 }
 
 .buttonRechercher {
@@ -193,11 +193,10 @@ input[type=radio]:checked:before {
  }
  .yellowClass{
      background-color: yellow;
-     text-align: center; 
+     text-align: center;
      padding:5px;
  }
  .bgWhite{
      background-color: white;
-    
+
  }
- 

@@ -19,7 +19,7 @@ import { EPriorite } from '../entitees/enums/priorite';
 export class FondCommunAdjJugeComponent implements OnInit {
 
   public listeJuge: Juge[] = [];
-  @ViewChild(MatSort) sort: MatSort; 
+  @ViewChild(MatSort) sort: MatSort;
     p = 1;
     affTableau = false;
     public listeDecisions: Decision[] = [];
@@ -45,7 +45,7 @@ maskValue: string;
               public router: Router) { }
   ngOnInit() {
     // TODO indicateur Juge codé dur
-    this.facadeService.indicateurJuge = true;
+    this.facadeService.indicateurJuge = false;
     this.facadeService.obtenirDecisionList()
      .subscribe( res => {
         this.listeDecisions = res;

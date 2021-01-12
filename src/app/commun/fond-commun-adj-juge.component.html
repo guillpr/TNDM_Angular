@@ -1,10 +1,10 @@
 <form [formGroup]="formulaire">
-    <div class="container1">
-        <div class="divUpLeft">
-            <div *ngIf="!this.facadeService.indicateurJuge">  
+  <!--  <div class="container1">
+         <div class="divUpLeft">
+            <div *ngIf="!this.facadeService.indicateurJuge">
             <img class="imageAdj" src="../../assets/images/ImageAdj.jpg" />
                 </div>
-                <div *ngIf="this.facadeService.indicateurJuge">  
+                <div *ngIf="this.facadeService.indicateurJuge">
                     <img class="imageAdj" src="../../assets/images/ImageJuge.jpg" />
                         </div>
             <div *ngIf="!this.facadeService.indicateurJuge" class="nomAdj">
@@ -16,15 +16,15 @@
             <div class="imgUtlCenter">
                 <img  src="../../assets/images/Image3.png" />
                 <app-texte  cle="commun.ProUtil"></app-texte>
-            </div>     
-        </div>
-            <span class="spanSpace"></span>
+            </div>
+        </div> -->
+            <!-- <span class="spanSpace"></span>
          <div class="divDownLeft">
              <div class="texteBlue">
                  <app-texte cle="commun.GestDec"></app-texte>
                  </div>
         </div>
-            </div>
+            </div> -->
             <div class="container2">
                 <div class="divRight">
                     <div class="rechDec">
@@ -102,8 +102,8 @@
                     </div>
                         <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
-                        </button> 
-                        <button 
+                        </button>
+                        <button
                         ID="Button1"
                          class="btn btn-primary buttonReini"
                         (click)="Renitialise()">
@@ -114,23 +114,23 @@
                             <i class="fas fa-exclamation-triangle"></i>
                             Ceci est un message d'erreur
                         </label> -->
-                        </div> 
+                        </div>
                 </div>
                     </div>
                     <!--Tableau-->
                     <div *ngIf="!(this.listeDecisions
-                    | searchfilter3: searchValue: 'rechercheNumDec' 
-                    | searchfilter3: searchValue2 : 'rechercheNumDossier' 
-                    | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut' 
-                    | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge' 
+                    | searchfilter3: searchValue: 'rechercheNumDec'
+                    | searchfilter3: searchValue2 : 'rechercheNumDossier'
+                    | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
+                    | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
                     | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value).length">
                     Aucun résultats
                     </div>
-                    <div class="tableauDec" *ngIf="affTableau && (this.listeDecisions 
-                    | searchfilter3: searchValue: 'rechercheNumDec' 
-                    | searchfilter3: searchValue2 : 'rechercheNumDossier' 
-                    | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut' 
-                    | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge' 
+                    <div class="tableauDec" *ngIf="affTableau && (this.listeDecisions
+                    | searchfilter3: searchValue: 'rechercheNumDec'
+                    | searchfilter3: searchValue2 : 'rechercheNumDossier'
+                    | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
+                    | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
                     | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value).length">
                         <table id="table" class="table"
                         data-pagination="true"
@@ -162,17 +162,17 @@
                           <app-texte cle="commun.durRestante"></app-texte>
                            <span class="spanAu">
                            </span><i class="fa fa-sort"></i>
-                         </th> 
+                         </th>
                       <th scope="col"  [appSort]="this.listeDecisions" data-order="desc" data-name="priorite"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
                       <th scope="col"><app-texte cle="commun.RechercheStatut"></app-texte></th>
                     </tr>
                   </thead>
                   <tbody>
                      <tr *ngFor="let pd of this.listeDecisions
-                     | searchfilter3: searchValue: 'rechercheNumDec' 
-                     | searchfilter3: searchValue2 : 'rechercheNumDossier' 
-                     | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut' 
-                     | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge' 
+                     | searchfilter3: searchValue: 'rechercheNumDec'
+                     | searchfilter3: searchValue2 : 'rechercheNumDossier'
+                     | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
+                     | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
                      | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value
                      | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
                         <td class="numeroDec" (click)="SelectionDecision(pd.numeroDecision)">{{pd.numeroDecision}}</td>
@@ -192,8 +192,8 @@
                          <td>{{pd.durRestante}}</td>
                          <td class="bgWhite" >
                            <span [className]="pd.priorite==1 ? 'yellowClass' : ''">
-                            <span *ngIf="pd.priorite== 1">Urgente</span> 
-                            <span *ngIf="pd.priorite== 2">Normale</span> 
+                            <span *ngIf="pd.priorite== 1">Urgente</span>
+                            <span *ngIf="pd.priorite== 2">Normale</span>
                            </span>
                          </td>
                          <td>{{pd.statut}}</td>
@@ -201,19 +201,19 @@
                   </tbody>
                 </table>
                 <div class="paginationCtl">
-                    <pagination-controls 
+                    <pagination-controls
                     (pageChange)="p = $event" previousLabel="Précédent"
                      nextLabel="Suivant">
                     </pagination-controls>
-                  </div>  
+                  </div>
                 </div>
                 <div><button ID="ButtonImporter" class="btn btn-primary buttonImpor" routerLink="/importDecision" >
                     <app-texte cle="commun.boutonImporterNouvDec"></app-texte>
-                </button> 
+                </button>
             </div>
 
-                 
 
 
-                 
+
+
 
