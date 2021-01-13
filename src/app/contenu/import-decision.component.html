@@ -11,7 +11,7 @@
             <div class="nomFichier">
                 <app-texte cle="import.NomFichier"></app-texte>
             </div>
-            <div><app-fichier-joint [formulaire]="formulaire.get('fichier')"></app-fichier-joint></div>
+            <div><app-fichier-joint [formulaire]="formulaire"></app-fichier-joint></div>
          </div>
          <div class="espDesc">
             <div class="nomDescription">
@@ -24,7 +24,7 @@
             <div class="nomJuge">
                 <app-texte cle="import.JugeAdm"></app-texte>
             </div>
-            <app-juge-adm [formulaire]="formulaire.get('juge')"></app-juge-adm>
+            <app-juge-adm [formulaire]="formulaire"></app-juge-adm>
             <div *ngFor="let i of myComponents">
            
             <app-juge-adm ></app-juge-adm>

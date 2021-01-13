@@ -59,18 +59,13 @@ export class ImportDecisionComponent implements OnInit {
    }
 
    initialiserFormulaire(){
-    this.formulaire = new FormGroup({
+    this.formulaire = this.fb.group({
       description: new FormControl(''),
       dateDelibere: new FormControl(''),
-      juge: this.fb.group({
-        nomJuge: new FormControl(''),
-        ordreSignataire: new FormControl(''),
-        redacteur: new FormControl('')
-      }),
-      fichier: this.fb.group({
-        nomFichier: new FormControl('')
-      })
-
+      nomJuge: new FormControl(''),
+      ordreSignataire: new FormControl(''),
+      redacteur: new FormControl(''),
+      nomFichier: new FormControl('')
     });
    }
 

@@ -3,9 +3,7 @@ import { Input, SecurityContext, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { O_RDONLY } from 'constants';
 import { Guid } from 'guid-typescript';
-import { encode } from 'querystring';
 import { FichierJoint } from '../entitees/fichier-joint';
 import { RetourDecision } from '../entitees/RetourDecision';
 import { FacadeService } from '../services/facade.service';
@@ -44,6 +42,7 @@ export class FichierJointComponent implements OnInit {
   }
   suppressionFichier(){
     console.log('Avant suppression' , this.fichiers);
+    this.formulaire.get('nomFichier').setValue('');
     this.fichiers.shift();
     console.log('Apres suppression' , this.fichiers);
   }
