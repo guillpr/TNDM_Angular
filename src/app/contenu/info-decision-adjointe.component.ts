@@ -14,10 +14,10 @@ import { TextesService } from '../services/textes.service';
 export class InfoDecisionAdjointeComponent implements OnInit {
   numDecSelectionner: string;
 
-  boiteDecisionOuverte = true;
-  boiteDossAss = true;
-  boiteSignature = true;
-  boiteHistorique = true;
+  boiteDecisionOuverte = false;
+  boiteDossAss = false;
+  boiteSignature = false;
+  boiteHistorique = false;
   prioSelected = '';
   couleurPrio = false;
 
@@ -36,7 +36,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   this.email = 'proulxguill@gmail.com';
   this.emailSubject = 'TNDM - rejet de décision';
     // TODO statut juge codé dur
-  this.facadeService.indicateurJuge = true;
+  this.facadeService.indicateurJuge = false;
   this.couleurPrio = true;
   this.numDecSelectionner = this.facadeService.numDecisionTemp;
   }

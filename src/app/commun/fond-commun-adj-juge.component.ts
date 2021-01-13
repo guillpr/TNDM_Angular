@@ -16,6 +16,10 @@ import { EPriorite } from '../entitees/enums/priorite';
   styleUrls: ['./fond-commun-adj-juge.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+
+
+
+
 export class FondCommunAdjJugeComponent implements OnInit {
 
   public listeJuge: Juge[] = [];
@@ -23,6 +27,12 @@ export class FondCommunAdjJugeComponent implements OnInit {
     p = 1;
     affTableau = false;
     public listeDecisions: Decision[] = [];
+   
+    public listeDureeRestante: DurRest [] = [];
+
+
+    currentDate: Date;
+    dateRouge = false;
 
     formulaire = new FormGroup({
     rechercheNumDec: new FormControl(''),
@@ -44,6 +54,7 @@ maskValue: string;
   constructor(public facadeService: FacadeService,
               public router: Router) { }
   ngOnInit() {
+    
     // TODO indicateur Juge codé dur
     this.facadeService.indicateurJuge = false;
     this.facadeService.obtenirDecisionList()
@@ -129,4 +140,54 @@ public SelectionDecision(numDec: string){
   this.facadeService.numDecisionTemp = numDec;
   this.router.navigateByUrl('/infoAdjointe');
 }
+dateDiffInDays(dd: string) {
+  this.currentDate = new Date();
+  // round to the nearest whole number
+  const newDate = new Date(dd);
+ 
+ // return Math.round(( Number(this.currentDate) - Number(dd)) / (1000 * 60 * 60 * 24));
+ 
+  if (newDate > this.currentDate)
+ {
+   this.dateRouge = true;
+ }
+ else{
+   this.dateRouge = false;
+ }
+
+  const nombreAjouter = { durRestante: Math.floor((Date.UTC( newDate.getFullYear(),
+ newDate.getMonth(),  newDate.getDate()) -
+  Date.UTC(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate()) )
+ / (1000 * 60 * 60 * 24))};
+
+  this.listeDureeRestante.push(nombreAjouter);
+
+  console.log('DureeRestante' , this.listeDureeRestante);
+
+  return  Math.floor((Date.UTC( newDate.getFullYear(),
+  newDate.getMonth(),  newDate.getDate()) -
+   Date.UTC(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate()) )
+  / (1000 * 60 * 60 * 24)).toString();
+ 
+}
+verifierDate(dd: string){
+  this.currentDate = new Date();
+  // round to the nearest whole number
+  const newDate = new Date(dd);
+ 
+ // return Math.round(( Number(this.currentDate) - Number(dd)) / (1000 * 60 * 60 * 24));
+ 
+  if (newDate > this.currentDate)
+ {
+   return false;
+ }
+ else{
+  return true;
+ }
+
+}
+}
+
+interface DurRest {
+  durRestante: number;
 }

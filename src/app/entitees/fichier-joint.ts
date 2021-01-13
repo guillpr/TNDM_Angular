@@ -10,7 +10,7 @@ export class FichierJoint {
    // typeErreur: string;
    // message: string;
   //  messageErreur: string;
-    taille: number;
+   // taille: number;
 
     constructor() {}
     }

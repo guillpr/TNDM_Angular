@@ -198,5 +198,15 @@ input[type=radio]:checked:before {
  }
  .bgWhite{
      background-color: white;
+     text-align: center;
 
+ }
+ .rougeClass{
+     /* background-color: #ff8080; */
+     color:red;
+     text-align: center;
+     padding:5px;
+ }
+ .whiteClass{
+     background-color: white;
  }
