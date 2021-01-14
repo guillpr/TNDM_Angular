@@ -27,7 +27,7 @@ export class FondCommunAdjJugeComponent implements OnInit {
     p = 1;
     affTableau = false;
     public listeDecisions: Decision[] = [];
-   
+
     public listeDureeRestante: DurRest [] = [];
 
 
@@ -54,7 +54,7 @@ maskValue: string;
   constructor(public facadeService: FacadeService,
               public router: Router) { }
   ngOnInit() {
-    
+
     // TODO indicateur Juge codé dur
     this.facadeService.indicateurJuge = false;
     this.facadeService.obtenirDecisionList()
@@ -144,9 +144,9 @@ dateDiffInDays(dd: string) {
   this.currentDate = new Date();
   // round to the nearest whole number
   const newDate = new Date(dd);
- 
+
  // return Math.round(( Number(this.currentDate) - Number(dd)) / (1000 * 60 * 60 * 24));
- 
+
   if (newDate > this.currentDate)
  {
    this.dateRouge = true;
@@ -168,15 +168,15 @@ dateDiffInDays(dd: string) {
   newDate.getMonth(),  newDate.getDate()) -
    Date.UTC(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate()) )
   / (1000 * 60 * 60 * 24)).toString();
- 
+
 }
 verifierDate(dd: string){
   this.currentDate = new Date();
   // round to the nearest whole number
   const newDate = new Date(dd);
- 
+
  // return Math.round(( Number(this.currentDate) - Number(dd)) / (1000 * 60 * 60 * 24));
- 
+
   if (newDate > this.currentDate)
  {
    return false;

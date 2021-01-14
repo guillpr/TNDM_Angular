@@ -1,14 +1,16 @@
 <div [formGroup]="formulaire">
 <div class="row">
-    
+
     <div class="col-2 marginR"></div>
 <div class="col-3 fondGris">
         <div class="flex" >
             <div >
                <select   class="dlNormal" id="inputGroupSelect04"  (change)="valeurJuge()" formControlName="nomJuge">
-                 
+
                  <option   *ngFor="let j of listeJuge">{{j.nomJuge}} , {{j.prenomJuge}}</option>
-               
+
+               <div *ngIf="this.facadeService.retourDecision">{{this.facadeService.retourDecision.juges[1]}}</div>
+
                </select>
              </div>
        </div>
@@ -30,15 +32,15 @@
       <input class="inputReg" type="text" value="Rédacteur" disabled >
     </div>
     <div class="col-2">
-        
+
         <input class="cbStyle" type="checkbox" formControlName="redacteur">
-   
+
     </div>
 </div>
 </div>
 
         <!-- <input class="inputReg"> -->
 
-  
-    
+
+
 

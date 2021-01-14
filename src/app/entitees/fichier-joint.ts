@@ -2,9 +2,9 @@ import { Guid } from "guid-typescript";
 
 export class FichierJoint {
 
-    contenu: string;
-    id: string;
-    nom: string;
+    decisionWord: string;
+    codeReseauDepot: string;
+    nomDocumentDecision: string;
    // nbPages: number;
    // type: string;
    // typeErreur: string;

@@ -23,11 +23,19 @@ export class FacadeService {
   numDecisionTemp: string;
   indicateurJuge: boolean;
 
+  // Liste ou object
+  public listJuge: Juge[];
+  public retourDecision: RetourDecision;
+
+
+
+  // Url controller
   private DecisionURL = environment.apiBaseUrl + 'DecisionDetail';
   private DecisionRecherche = environment.apiBaseUrl + 'DecisionDetail/Requete/';
   private JugeUrl = environment.apiBaseUrl + 'JugeDetail';
   private NoDecisionUrl = environment.apiBaseUrl + 'DecisionDetail/NoDecision';
-  public listJuge: Juge[];
+  private obtenirInfoDocumentUrl = environment.apiBaseUrlSignature + 'v1/Decision/Info';
+
   private URL = 'http://localhost:57759/api/DecisionDetail';
   formData: Decision = new Decision();
   public httpOptions = {
@@ -37,6 +45,10 @@ export class FacadeService {
   // // public ObtenirDecision():Observable<ReponseBase<Decision>>{
   // //   return this.http.get<ReponseBase<Decision>>(this.obtenirDecision);
   // // }
+  public ObtenirInfoDocument(fichier: FichierJoint): Observable<RetourDecision>{
+    return this.http.post<RetourDecision>(this.obtenirInfoDocumentUrl, JSON.stringify(fichier), this.httpOptions);
+
+  }
 
   public obtenirDecisionList(): Observable<Decision[]>{
    return this.http.get<Decision[]>(this.DecisionURL);
@@ -45,9 +57,9 @@ export class FacadeService {
     return this.http.get<Juge[]>(this.JugeUrl);
   }
 
- public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision>{
+ public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision[]>{
    console.log (fichier);
-   return this.http.post<RetourDecision>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
+   return this.http.post<RetourDecision[]>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
  }
   // public obtenirDecisionListRecherche(requete: string){
   //   return this.http.get(this.DecisionRecherche + requete)

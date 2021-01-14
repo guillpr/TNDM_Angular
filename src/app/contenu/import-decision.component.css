@@ -22,7 +22,7 @@
     width: 100%;
     background-color: white;
     display: flex;
-    margin-top: 5%;
+    margin-top: 2%;
     height: 40px;
 }
 .espDesc{
@@ -52,18 +52,23 @@
     margin-left: 6.9%;
     margin-right: 4%;
 }
-.nomJuge{
+.nomSignature{
     font-weight: bold;
     position: relative;
-    top:40px;
+   /* top:40px;*/
     left: 30px;
-    margin-right: 80px;
+    text-align: center;
+    /*margin-right: 80px;*/
+}
+.nomJuge{
+  font-weight: bold;
+  text-align: left;
 }
 .nomDateDelibere{
     font-weight: bold;
     text-align: right;
     position: relative;
-    right: 10px;  
+    right: 10px;
     top:10px;
 }
 .sectionDate{
@@ -72,7 +77,7 @@
 .inputReg{
    background-color:#ecebeb;
    border-radius:10px;
-   border: solid #ecebeb ; 
+   border: solid #ecebeb ;
    height: 40px;
    margin-left:45px;
    width: 600px;
@@ -80,10 +85,9 @@
 .dateInput{
     background-color:#ecebeb;
     border-radius:10px;
-    border: solid #ecebeb ; 
+    border: solid #ecebeb ;
     height: 40px;
-    width: 200px;   
-    padding:10px;
+    width: 200px;
 }
 .wRow{
     width: 100%;
@@ -91,7 +95,7 @@
 .spaceUp{
     margin-top: 10px;
 }
-.boutonPlus{  
+.boutonPlus{
     width: 50px;
     height: 50px;
     font-size: 40px;
@@ -103,7 +107,7 @@
     height: 50px;
     font-size: 40px;
     color:#8a8787;
-    border:none;  
+    border:none;
 }
 .aJuge{
     position: relative;
@@ -132,9 +136,207 @@
     height:35px;
     border-radius: 10px;
 }
+.buttonImporterDis {
+  background-color: grey;
+  color: white;
+  border: grey;
+  margin-left: 20px;
+  margin-top:10px;
+  width:100px;
+  height:35px;
+  border-radius: 10px;
+}
 .sectionButton{
     display: block;
     text-align: right;
     margin-right: 65px;
     margin-top: 15px;
 }
+
+
+/*Css fichiers*/
+
+.containerFichierJoint{
+  width: 600px;
+height: 100%;
+text-align: center;
+  border: solid  #ecebeb;
+  background-color:#ecebeb ;
+  border-radius: 10px;
+/* position: absolute; */
+/* margin: 0 auto; */
+/* display: block; */
+  flex-wrap: nowrap;
+  /* overflow-x: auto; */
+}
+.glisDep{
+  font-weight: bold;
+  color:#8a8787;
+  /* float: left; */
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-left: 0;
+  margin-right: 20px;
+}
+.boutonParcourir{
+  background-color: #ecebeb;
+  border: none;
+  text-decoration:underline;
+  color: #2257a7;
+  font-weight: bold;
+  margin-top: 8px;
+  margin-right: 30px;
+ outline: none;
+}
+ .inputRegFichier{
+  background-color:#ecebeb;
+  border-radius:10px;
+  border: solid #ecebeb ;
+  height: 40px;
+  min-width: 190px;
+  width: auto;
+  position: relative;
+  top:3px;
+  text-align: center;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+}
+.labelNomFichier{
+  font-size: 16px;
+  font-weight: 600;
+  color: #8a8787;
+
+}
+.spaceLeft{
+   margin-left: 10px;;
+}
+.noBorder{
+   border:none;
+}
+.red{
+   font-size: 13px;
+   font-weight: bold;
+   color:red;
+}
+.ErrorBorder{
+   border:solid red 1px;
+}
+
+/*Fin Css fichiers*/
+
+/*Début css Juge*/
+
+
+.inputRegJuge{
+  background-color:#ecebeb;
+  border-radius:10px;
+  border: solid #ecebeb ;
+  height: 40px;
+  /* margin-left:44px; */
+  width: 190px;
+  position: relative;
+  top:3px;
+  text-align: center;
+  color:gray;
+
+}
+.dlNormalJuge {
+  padding-left:10px;
+  padding-right:10px;
+  background-color: #ecebeb;
+  border-radius: 10px;
+  border: solid 1px #ecebeb;
+  /* text-indent: 25%;  */
+  color:gray;
+  height: 40px;
+  outline: none;
+  width: 180px;
+}
+.dlNormalPrio{
+  padding-left:10px;
+  padding-right:10px;
+  background-color: #ecebeb;
+  border-radius: 10px;
+  border: solid 1px #ecebeb;
+  color:gray;
+  height: 40px;
+  outline: none;
+  width: 200px;
+
+}
+.fondGris{
+  background-color:#ecebeb;
+  border:solid white;
+  border-radius:10px;
+  font-size: 16px;
+  font-weight: 600;
+   color: #8a8787;
+   position: relative;
+   left: 8px;
+
+}
+
+
+.marginR{
+  margin-right: 8px;
+}
+.cbStyle{
+  height: 30px;
+  width: 30px;
+  position: relative;
+  top:8px;
+}
+.cbCentre{
+  text-align: center;
+}
+.flex{
+  display:flex;
+
+}
+
+/*Fin css Juge*/
+
+/*Css table*/
+.tableCss{
+  margin-left: 200px;
+ /* border-collapse:separate;
+    border-spacing:0 5px;*/
+}
+.sectionTableNomJuge{
+  width: 260px;
+  background-color: #ecebeb;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  color:#8a8787;
+}
+.signWith{
+  width: 200px;
+}
+.positionNomJuge{
+  position: relative;
+  top:10px;
+}
+.nomCetm{
+    font-weight: bold;
+    position: relative;
+    top:10px;
+    right: 20px;
+    text-align: right;
+}
+.nomPriorite{
+  font-weight: bold;
+    position: relative;
+    top:18px;
+    right: 20px;
+    text-align: right;
+}
+.cbCetm{
+  text-align: left;
+}
+.prio{
+  margin-top:10px;
+}
+

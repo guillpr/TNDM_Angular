@@ -27,7 +27,7 @@ export class FichierJointComponent implements OnInit {
 
   fichiers: FichierJoint[] = [];
 
-  retourDec: RetourDecision [] = [];
+
 
   constructor(public domSanitizer: DomSanitizer , public facadeService: FacadeService) {
     this.id = Guid.create();
@@ -41,10 +41,13 @@ export class FichierJointComponent implements OnInit {
 
   }
   suppressionFichier(){
+
     console.log('Avant suppression' , this.fichiers);
     this.formulaire.get('nomFichier').setValue('');
     this.fichiers.shift();
+    this.facadeService.retourDecision = undefined;
     console.log('Apres suppression' , this.fichiers);
+    console.log('Retour décision: ' , this.facadeService.retourDecision);
   }
 
   onFileDropped($event: any){
@@ -65,9 +68,11 @@ export class FichierJointComponent implements OnInit {
 
   }
   fileBrowseHandler(files: any){
-   
+
     this.gererFichiers(files);
     // this.fileInput.nativeElement.value = '';
+
+
 
   }
 
@@ -86,26 +91,43 @@ export class FichierJointComponent implements OnInit {
     let f: FichierJoint;
 
 
-
+    // this.getBase64(file).then(
+    //   data => console.log(data)
+    // );
 
     reader.readAsDataURL(file);
     reader.onload = (e) => {
 
       f =
       {
-        contenu: reader.result.toString(),
-        id: g.toString(),
-        nom: file.name,
+        decisionWord:  reader.result.toString().replace('data:application/msword;base64,' , ''),
+        codeReseauDepot: 'PROUGUIL0001',
+        nomDocumentDecision: file.name,
       };
+
+      console.log('reader' ,f);
 
       console.log(this.formulaire.get('nomFichier'));
       console.log('formulaire: ' ,  this.formulaire);
       this.fichiers.push(f);
+      console.log('Retour décision avant: ' , this.facadeService.retourDecision);
+      this.facadeService.ObtenirInfoDocument(f)
+      .subscribe((s) => {
+        if(s != null){
+          console.log(s);
+          this.facadeService.retourDecision = s;
 
-      this.facadeService.TeleverserDocument(f)
-       .subscribe((s) => {
-         console.log(s);
-       });
+
+
+        }
+
+      });
+
+
+      // this.facadeService.TeleverserDocument(f)
+      //  .subscribe((s) => {
+      //    console.log(s);
+      //  });
       this.messageErreurExtension = false;
       // console.log('Contenu du fichier' , this.fichiers[0].contenu);
     };
@@ -132,7 +154,15 @@ export class FichierJointComponent implements OnInit {
       console.log(text);
     };
     fileReader.readAsText(file);
-   
+
+  }
+   getBase64(file: any) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
   }
 
 

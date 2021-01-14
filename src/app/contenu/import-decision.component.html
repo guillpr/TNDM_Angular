@@ -2,75 +2,121 @@
 <form [formGroup]="formulaire" (ngSubmit)="onSubmit()">
 <div class="divFond">
     <div class="divCentre">
-        
         <div class="titreImport">
-            <app-texte cle="import.Titre"></app-texte>   
+            <app-texte cle="import.Titre"></app-texte>
         </div>
          <hr/>
+         <div class="espCetm" *ngIf="this.facadeService.retourDecision">
+           <div class="row">
+             <div class="col-2 nomCetm">
+               Motifs CETM
+             </div>
+             <div class="col-2 cbCetm">
+                <input class="cbStyle" type="checkbox" >
+             </div>
+           </div>
+         </div>
          <div class="espFichier">
             <div class="nomFichier">
                 <app-texte cle="import.NomFichier"></app-texte>
             </div>
-            <div><app-fichier-joint [formulaire]="formulaire"></app-fichier-joint></div>
+            <div *ngIf="!this.facadeService.retourDecision" class="containerFichierJoint" [class.ErrorBorder]="messageErreurExtension" appDnd (fileDropped)="onFileDropped($event)">
+                <app-texte class="glisDep" cle="fj.GlisserDeposer"></app-texte>
+                <app-texte class="glisDep" cle="fj.Ou"></app-texte>
+                <input type="file" #fileDropRef (change)="fileBrowseHandler($event.target.files)" hidden  formControlName="nomFichier">
+                <button class="boutonParcourir" (click)='fileDropRef.click()'>
+                <app-texte cle="fj.Parcourir"></app-texte>
+               </button>
+            </div>
+            <div *ngIf="fichiers.length>0 && this.facadeService.retourDecision">
+                <div *ngFor="let f of fichiers" class="inputRegFichier" >
+                 <label class="labelNomFichier"  >{{f.nomDocumentDecision}}</label>
+                 <span class="spaceLeft"></span>
+                 <button class="noBorder" type="button" (click)="suppressionFichier()"> <i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+            <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
+            <!--Fin Section dépot de fichier-->
          </div>
-         <div class="espDesc">
+         <div class="espDesc" *ngIf="this.facadeService.retourDecision">
             <div class="nomDescription">
                 <app-texte cle="import.Description"></app-texte>
                 <input class="inputReg" formControlName="description" >
             </div>
          </div>
-        
-            
-            <div class="nomJuge">
-                <app-texte cle="import.JugeAdm"></app-texte>
-            </div>
-            <app-juge-adm [formulaire]="formulaire"></app-juge-adm>
-            <div *ngFor="let i of myComponents">
-           
-            <app-juge-adm ></app-juge-adm>
-        </div>
+<!--Début nouvelle row-->
+<div  *ngIf="this.facadeService.retourDecision">
+   <!--Row titre de section signature-->
+   <div class="row">
+      <div class="col-2 nomSignature">Signature(s)</div>
 
-        <div class="spaceUp">
-            <div class="row">
-                <div class="col-2">
-                   
-                </div>
-                <div class="col-1">
-                    <button class="boutonPlus" (click)="ajouterJuge()">+</button>
-                </div>
-                <div class="col-4 aJuge">
-                    <label>Ajouter un autre juge administratif</label>
-                </div>
-            </div>
-        </div>
-        <div class="spaceUp">
-            <div class="row" *ngIf="myComponents.length>0">
-                <div class="col-2">
-                   
-                </div>
-                <div class="col-1">
-                    <button type="button" class="boutonMoins" (click)="supprimerJuge()">-</button>
-                </div>
-                <div class="col-4 aJuge">
-                    <label>Supprimer un juge administratif</label>
-                </div>
-            </div>
-        </div> 
-        <div class="sectionDate">
+    <div class="col-3 nomJuge">
+      Juges administratif(s)
+    </div>
+    <div class="col-1 nomJuge">
+      Rédacteur
+    </div>
+    <div class="col-4 nomJuge">
+        Ordre de signature
+      </div>
+  </div>
+     <!--Fin Row titre de section signature-->
+<div class="row" *ngFor="let juge of this.facadeService.retourDecision.juges;let i = index" >
+<div class="col-2" >
+</div>
+<div class="col-3 fondGris">
+<div class="positionNomJuge">{{juge}}</div>
+</div>
+<div class="col-1 cbCentre">
+    <input class="cbStyle" type="checkbox" formControlName="redacteur{{i}}">
+  </div>
+  <div class="col-2 fondGris" >
+      <div class="flex" >
+          <div>
+          <select   class="dlNormalJuge" id="inputGroupSelect05" formControlName="ordreSignataire{{i}}" >
+               <option  selected value="1">Signataire 1</option>
+               <option value="2">Signataire 2</option>
+               <option value="3">Signataire 3</option>
+               <option value="4">Signataire 4</option>
+               <option value="4">Signataire 5</option>
+             </select>
+           </div>
+     </div>
+  </div>
+</div>
+</div>
+<!--fin nouvelle row-->
+        <div class="sectionDate" *ngIf="this.facadeService.retourDecision">
             <div class="row">
                 <div class="col-2 nomDateDelibere">
                     <label class="">Date fin délibéré</label>
                 </div>
                 <div class="col-2">
-                   <input class="dateInput" type="date" formControlName="dateDelibere">
+                   <input class="dateInput"  formControlName="dateDelibere">
                 </div>
             </div>
         </div>
+        <div class="row"  *ngIf="this.facadeService.retourDecision">
+          <div class="col-2 nomPriorite">
+            Priorité
+          </div>
+          <div class="col-2 prio" >
+              <div class="flex" >
+                  <div>
+                  <select   class="dlNormalPrio" id="inputGroupSelect05" formControlName="priorite" >
+                       <option  selected value="1">Normale</option>
+                       <option value="2">Urgente</option>
+                     </select>
+                   </div>
+             </div>
+          </div>
+
+        </div>
     </div>
     <div class="sectionButton">
-            <button (click)="quitterDecision()" class="buttonQuitter">Quitter</button>
-            <button class="buttonImporter">Importer</button>
+            <button (click)="quitterDecision()" class="buttonQuitter" >Annuler</button>
+    <button  [className]="buttonDisabled ? 'buttonImporterDis' : 'buttonImporter'" class="buttonImporter" (click)="importerDecision()" [disabled] = "buttonDisabled" >Importer</button>
     </div>
-</div>
+  </div>
 </form>
 

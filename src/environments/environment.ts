@@ -4,6 +4,7 @@
 
 export const environment = {
   apiBaseUrl: 'http://localhost:57759/api/',
+  apiBaseUrlSignature: 'http://localhost:62367/api/',
   production: false
 };
 
