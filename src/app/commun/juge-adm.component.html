@@ -9,7 +9,7 @@
 
                  <option   *ngFor="let j of listeJuge">{{j.nomJuge}} , {{j.prenomJuge}}</option>
 
-               <div *ngIf="this.facadeService.retourDecision">{{this.facadeService.retourDecision.juges[1]}}</div>
+               <div *ngIf="this.facadeService.retourDecision"></div>
 
                </select>
              </div>

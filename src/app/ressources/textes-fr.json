@@ -6,7 +6,7 @@
         { "cle": "commun.GestDec", "valeur": "Gestion des décisions" },
         { "cle": "commun.RechercheDecision", "valeur": "Recherche décision" },
         { "cle": "commun.RechercheNumDec", "valeur": "Numéro" },
-        { "cle": "commun.RechercheNumDoss", "valeur": "Numéro dossier" },
+        { "cle": "commun.RechercheNumDoss", "valeur": "Dossier TAQ" },
         { "cle": "commun.RechercheStatut", "valeur": "Statut" },
         { "cle": "commun.ddSelectionner", "valeur": "--Sélectionner--" },
         { "cle": "commun.ddNonSigne", "valeur": "Non signé" },

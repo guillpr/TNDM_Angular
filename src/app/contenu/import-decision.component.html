@@ -32,7 +32,7 @@
                 <div *ngFor="let f of fichiers" class="inputRegFichier" >
                  <label class="labelNomFichier"  >{{f.nomDocumentDecision}}</label>
                  <span class="spaceLeft"></span>
-                 <button class="noBorder" type="button" (click)="suppressionFichier()"> <i class="fas fa-trash-alt"></i></button>
+                 <button class="noBorder" type="button" (click)="suppressionFichier()"> <img src="../../assets/images/trash.png"></button>
                 </div>
             </div>
             <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
@@ -118,5 +118,7 @@
     <button  [className]="buttonDisabled ? 'buttonImporterDis' : 'buttonImporter'" class="buttonImporter" (click)="importerDecision()" [disabled] = "buttonDisabled" >Importer</button>
     </div>
   </div>
+
+  
 </form>
 

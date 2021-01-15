@@ -76,6 +76,7 @@
     background-color: #f3f5fb;
     border-radius: 5px;
     border: solid 1px #d0c9c9;
+    height: 25px;
 
 }
 .dlNormal {
@@ -210,3 +211,39 @@ input[type=radio]:checked:before {
  .whiteClass{
      background-color: white;
  }
+ .texteTitreNormal{
+     font-size: 16px;
+     color:black;
+     text-align: right;
+ }
+ .texteTitreProJuge{
+    font-size: 16px;
+    color:black;
+    text-align: left;
+    position: relative;
+    right: 12.5px;
+    top:15px;
+    max-width: 9.5%;
+    
+ }
+ .texteTitreDossTaq{
+    font-size: 16px;
+    color:black;
+    text-align: left;
+    position: relative;
+    right: 12.5px;
+    top:2px;
+    max-width: 9.5%;
+
+ }
+ 
+ .spaceUpDownRow{
+     margin-top:10px;
+ }
+ .colMod8{
+     max-width: 6.8%;
+     padding-right: 5px;;
+ }
+ .colMod14{
+    max-width: 14%;
+}

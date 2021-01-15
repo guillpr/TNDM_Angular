@@ -28,6 +28,12 @@ import { TestMatTableComponent } from './commun/test-mat-table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+
+
+
 // Importation pipe
 import { Searchfilter3Pipe } from './commun/searchfilter3.pipe';
 import { DateFiltrePipe } from './commun/date-filtre.pipe';
@@ -94,6 +100,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatSortModule,
     MatTooltipModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRippleModule,
     DragDropModule
   ],
   providers: [

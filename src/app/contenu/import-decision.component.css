@@ -212,6 +212,7 @@ text-align: center;
 .spaceLeft{
    margin-left: 10px;;
 }
+
 .noBorder{
    border:none;
 }
@@ -281,6 +282,9 @@ text-align: center;
 
 .marginR{
   margin-right: 8px;
+}
+.spaceUpDownRow{
+  margin-top: 10px;
 }
 .cbStyle{
   height: 30px;

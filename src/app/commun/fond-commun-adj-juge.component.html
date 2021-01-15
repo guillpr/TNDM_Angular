@@ -1,58 +1,58 @@
 <form [formGroup]="formulaire">
-  <!--  <div class="container1">
-         <div class="divUpLeft">
-            <div *ngIf="!this.facadeService.indicateurJuge">
-            <img class="imageAdj" src="../../assets/images/ImageAdj.jpg" />
-                </div>
-                <div *ngIf="this.facadeService.indicateurJuge">
-                    <img class="imageAdj" src="../../assets/images/ImageJuge.jpg" />
-                        </div>
-            <div *ngIf="!this.facadeService.indicateurJuge" class="nomAdj">
-                Mélanie Tremblay
-             </div>
-             <div *ngIf="this.facadeService.indicateurJuge" class="nomAdj">
-                Jean-Marie Albert
-             </div>
-            <div class="imgUtlCenter">
-                <img  src="../../assets/images/Image3.png" />
-                <app-texte  cle="commun.ProUtil"></app-texte>
-            </div>
-        </div> -->
-            <!-- <span class="spanSpace"></span>
-         <div class="divDownLeft">
-             <div class="texteBlue">
-                 <app-texte cle="commun.GestDec"></app-texte>
-                 </div>
-        </div>
-            </div> -->
             <div class="container2">
                 <div class="divRight">
+                  
                     <div class="rechDec">
                          <app-texte cle="commun.RechercheDecision"></app-texte>
                     </div>
                     <hr/>
                     <div>
-                    <div>
-                        <app-texte class="texteRecherche" cle="commun.RechercheNumDec"></app-texte>
-                        <input type="text"     [dropSpecialCharacters]="false" mask="0000-00-000" type="text" [(ngModel)]="searchValue" class="tbNormal"  formControlName="rechercheNumDec" id="TextBoxRechNumDec" aria-describedby="TextBoxRechNumDec" >
+                      
+                      <div class="row sectStatut">
+                        <div class="col-2"></div>
+                        <div class="col-1 texteTitreNormal">Statut</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Importé</div>
+                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Prêt pour la signature</div>
+                        <div class="col-1"> <input class="cbStyle" type="checkbox" > En cours</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Déposé</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Analysé</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Accepté</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Rejeté</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-2 texteTitreProJuge">Projets/Juge</div>
+                          <div class="flex">
+                            <div class="padD">
+                              <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
+                                <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
+                                <option value="1"><app-texte cle="commun.prioNorm"></app-texte></option>
+                                <option value="2"><app-texte cle="commun.prioUrg"></app-texte></option>
+                              </select>
+                            </div>
+                        </div>
+                      </div>
+                    <div class="row spaceUpDownRow">
+                      <div class="col-2"></div>
+                      <div class="col-1 texteTitreNormal"><app-texte  cle="commun.RechercheNumDec"></app-texte></div>
+                        <div class="col-2">
+                          <input type="text"     [dropSpecialCharacters]="false" mask="0000-00-000" type="text" [(ngModel)]="searchValue" class="tbNormal"  formControlName="rechercheNumDec" id="TextBoxRechNumDec" aria-describedby="TextBoxRechNumDec" >
+                        </div>
+                        
                     </div>
-                     <div >
-                         <app-texte class="texteRecherche" cle="commun.RechercheNumDoss"></app-texte>
+                     <div class="row spaceUpDownRow" >
+                       <div class="col-2"></div>
+                       <div class="col-2 texteTitreDossTaq"><app-texte  cle="commun.RechercheNumDoss"></app-texte></div>
+                         
                          <input (input)="correctionMasque()" (change)="searchValue2.toUpperCase()" [dropSpecialCharacters]="false" [mask]="maskValue" [(ngModel)]="searchValue2" type="text" class="tbNormal" id="TextBoxRechNumDoss"  formControlName="rechercheNumDossier" aria-describedby="TextBoxRechNumDoss" >
                     </div>
-                     <div class="flex" >
-                         <app-texte cle="commun.RechercheStatut" class="texteRecherche"></app-texte>
-                         <div class="padD">
-                            <select   class="dlNormalStatut" id="inputGroupSelect04" formControlName="rechercheStatut">
-                              <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
-                              <option value="1"><app-texte cle="commun.statutDecPreSign"></app-texte></option>
-                              <option value="2"><app-texte cle="commun.statutDecEnCoursSign"></app-texte></option>
-                              <option value="3"><app-texte cle="commun.statutDecSign"></app-texte></option>
-                              <option value="4"><app-texte cle="commun.statutDecDep"></app-texte></option>
-                            </select>
-                          </div>
-                    </div>
-                      <div class="flex" *ngIf="!this.facadeService.indicateurJuge">
+                    <div >
+                      <app-texte cle="commun.DateImp" class="texteRecherche" ></app-texte>
+                      <input type="date" class="tbNormal" id="TextBoxDateImpDu" aria-describedby="TextBoxDateImpDu" formControlName="rechercheDateDu"  placeholder="--Sélectionner--">
+                      <span class="spanAu">au</span>
+                      <input type="date" class="tbNormal" id="TextBoxDateImpAu" aria-describedby="TextBoxDateImpAu"  formControlName="rechercheDateAu"  placeholder="--Sélectionner--">
+                 </div>     
+                      <!-- <div class="flex" *ngIf="!this.facadeService.indicateurJuge">
                           <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
                           <div class="padDD">
                             <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
@@ -60,18 +60,18 @@
                               <option  *ngFor="let j of listeJuge"  >{{j.nomJuge}} , {{j.prenomJuge}}</option>
                             </select>
                           </div>
-                    </div>
+                    </div> -->
                      <div class="flex">
                         <app-texte cle="commun.RecherchePrio" class="texteRecherche"></app-texte>
                         <div class="padD">
                           <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
-                            <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
-                            <option value="1"><app-texte cle="commun.prioNorm"></app-texte></option>
-                            <option value="2"><app-texte cle="commun.prioUrg"></app-texte></option>
+                            <option  selected value="">Toutes</option>
+                            <option value="1">Urgente</option>
+                            <option value="2">Normale</option>
                           </select>
                         </div>
                     </div>
-                     <div class="flex">
+                     <!-- <div class="flex">
                          <app-texte cle="commun.RechercheType"  class="texteRecherche"></app-texte>
                          <div class="padD">
                           <select   class="dlNormalStatut" id="inputGroupSelectType" formControlName="rechercheType">
@@ -82,13 +82,11 @@
                             <option value="4"><app-texte cle="commun.typeDecisionMotifs"></app-texte></option>
                           </select>
                         </div>
-                    </div>
-                     <div >
-                         <app-texte cle="commun.DateImp" class="texteRecherche" ></app-texte>
-                         <input type="date" class="tbNormal" id="TextBoxDateImpDu" aria-describedby="TextBoxDateImpDu" formControlName="rechercheDateDu"  placeholder="--Sélectionner--">
-                         <span class="spanAu">au</span>
-                         <input type="date" class="tbNormal" id="TextBoxDateImpAu" aria-describedby="TextBoxDateImpAu"  formControlName="rechercheDateAu"  placeholder="--Sélectionner--">
-                    </div>
+                    </div> -->
+
+
+                   
+                   
                     <div *ngIf="!this.facadeService.indicateurJuge">
                         <label  class="texteRecherche">Portée de la recherche </label>
                         <div class="form-check form-check-inline">
@@ -185,7 +183,7 @@
                             <img *ngIf="pd.indSignature" class="imgSign" mat-raised-button
                             matTooltip="Décision signé le  {{pd.dateImportation | date: 'd-LL-yyyy'}}"
                             aria-label="L'image affiche la date de signature de la décision"
-                            matTooltipPosition="above" src="../../assets/images/imageSignature.png"
+                            matTooltipPosition="above" src="../../assets/images/crochetVert.png"
                             matTooltipClass="my-class"
                             />
                          </td>
