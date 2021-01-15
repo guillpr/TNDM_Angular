@@ -6,7 +6,7 @@
             <app-texte cle="import.Titre"></app-texte>
         </div>
          <hr/>
-         <div class="espCetm" *ngIf="this.facadeService.retourDecision">
+         <!-- <div class="espCetm" *ngIf="this.facadeService.retourDecision">
            <div class="row">
              <div class="col-2 nomCetm">
                Motifs CETM
@@ -15,12 +15,15 @@
                 <input class="cbStyle" type="checkbox" >
              </div>
            </div>
-         </div>
-         <div class="espFichier">
+         </div> -->
+         <!-- <div class="espFichier">
             <div class="nomFichier">
                 <app-texte cle="import.NomFichier"></app-texte>
             </div>
-            <div *ngIf="!this.facadeService.retourDecision" class="containerFichierJoint" [class.ErrorBorder]="messageErreurExtension" appDnd (fileDropped)="onFileDropped($event)">
+          </div> -->
+          <div class="row"  *ngIf="!this.facadeService.retourDecision">
+            <div class="col-2 nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
+            <div class="col-6 containerFichierJoint" [class.ErrorBorder]="messageErreurExtension" appDnd (fileDropped)="onFileDropped($event)">
                 <app-texte class="glisDep" cle="fj.GlisserDeposer"></app-texte>
                 <app-texte class="glisDep" cle="fj.Ou"></app-texte>
                 <input type="file" #fileDropRef (change)="fileBrowseHandler($event.target.files)" hidden  formControlName="nomFichier">
@@ -28,16 +31,24 @@
                 <app-texte cle="fj.Parcourir"></app-texte>
                </button>
             </div>
-            <div *ngIf="fichiers.length>0 && this.facadeService.retourDecision">
+          </div>
+            <div  class="row" *ngIf="fichiers.length>0 && this.facadeService.retourDecision">
+                <div class="nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
                 <div *ngFor="let f of fichiers" class="inputRegFichier" >
                  <label class="labelNomFichier"  >{{f.nomDocumentDecision}}</label>
                  <span class="spaceLeft"></span>
-                 <button class="noBorder" type="button" (click)="suppressionFichier()"> <img src="../../assets/images/trash.png"></button>
+
                 </div>
+                <div>
+                    <button class="noBorder" type="button" (click)="suppressionFichier()">
+                  <img class="imageTrash" src="../../assets/images/trash.png">
+                </button>
+                </div>
+
             </div>
             <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
             <!--Fin Section dépot de fichier-->
-         </div>
+
          <div class="espDesc" *ngIf="this.facadeService.retourDecision">
             <div class="nomDescription">
                 <app-texte cle="import.Description"></app-texte>
@@ -83,6 +94,7 @@
            </div>
      </div>
   </div>
+  <div class="col-1"> <img class="imageTrashListe" src="../../assets/images/trash.png"></div>
 </div>
 </div>
 <!--fin nouvelle row-->
@@ -119,6 +131,6 @@
     </div>
   </div>
 
-  
+
 </form>
 
