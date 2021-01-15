@@ -67,6 +67,10 @@ export class ImportDecisionComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initialiserFormulaire();
+
+
+
+
    }
 
    initialiserFormulaire(){
@@ -129,6 +133,15 @@ export class ImportDecisionComponent implements OnInit {
     console.log('Apres suppression' , this.fichiers);
     console.log('Retour décision: ' , this.facadeService.retourDecision);
   }
+  suppressionJuge(index: number){
+    console.log(index);
+    this.facadeService.retourDecision.juges.splice(index, 1);
+    this.formulaire.controls['nomJuge' + index].setValue('');
+    if ( this.facadeService.retourDecision.juges.length < 1 ){
+      this.suppressionFichier();
+    }
+    console.log(this.formulaire);
+  }
   onFileDropped($event: any){
     console.log(this.fichiers);
     console.log(this.fichiers.length);
@@ -179,6 +192,8 @@ export class ImportDecisionComponent implements OnInit {
         console.log(s);
         this.facadeService.retourDecision = s;
         this.buttonDisabled = false;
+        this.formulaire.controls.description.setValue(s.description);
+        this.ajoutJuges(s);
       }
     });
     // this.facadeService.TeleverserDocument(f)
@@ -204,6 +219,16 @@ gererFichiers(files: any) {
 }
 
  // Fin de méthode pour fichiers
+
+ ajoutJuges(s: any){
+  for (let i = 0; i < this.facadeService.retourDecision.juges.length; i++) {
+
+
+    this.formulaire.controls['nomJuge' + i].setValue(s.juges[i]);
+    console.log(this.formulaire);
+  }
+
+ }
 
   onSubmit(){
     console.log(this.formulaire);
