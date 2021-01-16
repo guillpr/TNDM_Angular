@@ -19,7 +19,7 @@
                         <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Accepté</div>
                         <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Rejeté</div>
                       </div>
-                      <div class="row">
+                      <div class="row spaceUpDownRow">
                         <div class="col-2"></div>
                         <div class="col-2 texteTitreProJuge">Projets/Juge</div>
                           <div class="flex">
@@ -46,8 +46,12 @@
                          
                          <input (input)="correctionMasque()" (change)="searchValue2.toUpperCase()" [dropSpecialCharacters]="false" [mask]="maskValue" [(ngModel)]="searchValue2" type="text" class="tbNormal" id="TextBoxRechNumDoss"  formControlName="rechercheNumDossier" aria-describedby="TextBoxRechNumDoss" >
                     </div>
-                    <div >
-                      <app-texte cle="commun.DateImp" class="texteRecherche" ></app-texte>
+                    <div class="row spaceUpDownRow" >
+                      <div class="col-2 mod2"></div>
+                      <div class="col-2 texteTitreDateImp">
+                        <app-texte cle="commun.DateImp"  ></app-texte>
+                      </div>
+                     
                       <input type="date" class="tbNormal" id="TextBoxDateImpDu" aria-describedby="TextBoxDateImpDu" formControlName="rechercheDateDu"  placeholder="--Sélectionner--">
                       <span class="spanAu">au</span>
                       <input type="date" class="tbNormal" id="TextBoxDateImpAu" aria-describedby="TextBoxDateImpAu"  formControlName="rechercheDateAu"  placeholder="--Sélectionner--">
@@ -61,9 +65,13 @@
                             </select>
                           </div>
                     </div> -->
-                     <div class="flex">
-                        <app-texte cle="commun.RecherchePrio" class="texteRecherche"></app-texte>
-                        <div class="padD">
+                     <div class="row flex spaceUpDownRow">
+                       <div class="col-2"></div>
+                       <div class="col-1 texteTitreNormal">
+                        <app-texte cle="commun.RecherchePrio"></app-texte>
+                       </div>
+                       
+                        <div class="col-2 padD">
                           <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
                             <option  selected value="">Toutes</option>
                             <option value="1">Urgente</option>

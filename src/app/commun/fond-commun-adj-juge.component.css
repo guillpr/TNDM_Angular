@@ -95,7 +95,6 @@
     border: solid 1px #d0c9c9;
     /* text-indent: 25%;  */
     color:gray;
-    margin-top:15px;
     height: 25px;
 }
 
@@ -222,7 +221,6 @@ input[type=radio]:checked:before {
     text-align: left;
     position: relative;
     right: 12.5px;
-    top:15px;
     max-width: 9.5%;
     
  }
@@ -234,7 +232,15 @@ input[type=radio]:checked:before {
     right: 12.5px;
     top:2px;
     max-width: 9.5%;
-
+ }
+ .texteTitreDateImp{
+    font-size: 16px;
+    color:black;
+    text-align: left;
+    position: relative;
+    right: 16.5px;
+    top:2px;
+    max-width: 11.5%;
  }
  
  .spaceUpDownRow{
@@ -246,4 +252,7 @@ input[type=radio]:checked:before {
  }
  .colMod14{
     max-width: 14%;
+}
+.mod2{
+    max-width: 14.7%;
 }
