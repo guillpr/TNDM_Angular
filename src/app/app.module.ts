@@ -30,13 +30,21 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
-import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatNativeDateModule, MatRippleModule, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
+
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MY_DATE_FORMATS } from './commun/date-formats';
+
 
 
 
 // Importation pipe
 import { Searchfilter3Pipe } from './commun/searchfilter3.pipe';
 import { DateFiltrePipe } from './commun/date-filtre.pipe';
+
+import { DatePipe } from '@angular/common'
+
 // Importation Directive
 import { SortDirective } from './directive/sort.directive';
 import { DndDirective } from './commun/dnd.directive';
@@ -103,10 +111,13 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
-    DragDropModule
+    DragDropModule,
+    MatInputModule,
   ],
   providers: [
-    HttpClientModule
+    HttpClientModule,
+    DatePipe,
+    {provide: MAT_DATE_LOCALE, useValue:  'fr'}
   ],
   bootstrap: [AppComponent]
 })

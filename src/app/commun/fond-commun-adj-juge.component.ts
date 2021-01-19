@@ -28,7 +28,7 @@ export class FondCommunAdjJugeComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
     p = 1;
     affTableau = false;
-    public listeDecisions: Decision[] = [];
+    //public listeDecisions: Decision[] = [];
 
     public listeDureeRestante: DurRest [] = [];
 
@@ -61,7 +61,7 @@ maskValue: string;
     this.facadeService.indicateurJuge = false;
     this.facadeService.obtenirDecisionList()
      .subscribe( res => {
-        this.listeDecisions = res;
+        this.facadeService.listeDecisions = res;
      });
     this.facadeService.obtenirJuges()
      .subscribe(res => {
@@ -129,13 +129,16 @@ maskValue: string;
   const elementAria: HTMLElement = document.querySelector(
      '#TextBoxRechNumDoss'
  );
-  if (Number(parseInt(this.searchValue2.charAt(0)))){
+  if (Number(parseInt(this.formulaire.get('rechercheNumDossier').value.charAt(0)))){
    this.maskValue = '000000';
   }
   else{
     this.maskValue = 'AAA-A-000000-0000';
     elementAria.setAttribute('dropSpecialCharacters' , 'false');
   }
+ }
+ enMajuscule(texte: string){
+  texte.toUpperCase();
  }
 public SelectionDecision(numDec: string){
   console.log('Le numéro de décision: ' , numDec);

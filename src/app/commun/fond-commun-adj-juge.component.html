@@ -19,9 +19,21 @@
                         <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Accepté</div>
                         <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Rejeté</div>
                       </div>
+                      <!--Section première proposition Myriam-->
+
                       <div class="row spaceUpDownRow">
                         <div class="col-2"></div>
-                        <div class="col-2 texteTitreProJuge">Projets/Juge</div>
+                        <div class="col-1 texteTitreNormal">Adjointes</div>
+                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Toutes mes décisions</div>
+                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Tous mes groupes</div>
+                      </div>
+
+                       <!--Fin  Section première proposition Myriam-->
+
+                      <!--Section 2e proposition MA-->
+                      <!-- <div class="row spaceUpDownRow">
+                        <div class="col-2"></div>
+                        <div class="col-2 texteTitreProJuge">Adjointes/Juge</div>
                           <div class="flex">
                             <div class="padD">
                               <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
@@ -31,12 +43,13 @@
                               </select>
                             </div>
                         </div>
-                      </div>
+                      </div> -->
+                       <!--Fin Section 2e proposition MA-->
                     <div class="row spaceUpDownRow">
                       <div class="col-2"></div>
                       <div class="col-1 texteTitreNormal"><app-texte  cle="commun.RechercheNumDec"></app-texte></div>
                         <div class="col-2">
-                          <input type="text"     [dropSpecialCharacters]="false" mask="0000-00-000" type="text" [(ngModel)]="searchValue" class="tbNormal"  formControlName="rechercheNumDec" id="TextBoxRechNumDec" aria-describedby="TextBoxRechNumDec" >
+                          <input type="text"     [dropSpecialCharacters]="false" mask="0000-00-000" type="text"  class="tbNormal"  formControlName="rechercheNumDec" id="TextBoxRechNumDec" aria-describedby="TextBoxRechNumDec" >
                         </div>
                         
                     </div>
@@ -44,18 +57,56 @@
                        <div class="col-2"></div>
                        <div class="col-2 texteTitreDossTaq"><app-texte  cle="commun.RechercheNumDoss"></app-texte></div>
                          
-                         <input (input)="correctionMasque()" (change)="searchValue2.toUpperCase()" [dropSpecialCharacters]="false" [mask]="maskValue" [(ngModel)]="searchValue2" type="text" class="tbNormal" id="TextBoxRechNumDoss"  formControlName="rechercheNumDossier" aria-describedby="TextBoxRechNumDoss" >
+                         <input #valeurInputDossierTaq (input)="correctionMasque()"  [dropSpecialCharacters]="false" [mask]="maskValue"  type="text" class="tbNormal" id="TextBoxRechNumDoss"  formControlName="rechercheNumDossier" aria-describedby="TextBoxRechNumDoss" >
                     </div>
                     <div class="row spaceUpDownRow" >
                       <div class="col-2 mod2"></div>
                       <div class="col-2 texteTitreDateImp">
                         <app-texte cle="commun.DateImp"  ></app-texte>
                       </div>
-                     
-                      <input type="date" class="tbNormal" id="TextBoxDateImpDu" aria-describedby="TextBoxDateImpDu" formControlName="rechercheDateDu"  placeholder="--Sélectionner--">
-                      <span class="spanAu">au</span>
-                      <input type="date" class="tbNormal" id="TextBoxDateImpAu" aria-describedby="TextBoxDateImpAu"  formControlName="rechercheDateAu"  placeholder="--Sélectionner--">
-                 </div>     
+                         <!--  <div class="col-2">
+                  <input type="date" class="tbNormal" id="TextBoxDateImpDu" aria-describedby="TextBoxDateImpDu" formControlName="rechercheDateDu"  placeholder="--Sélectionner--">  -->
+                      
+                       <!-- <input 
+                       
+                       class="tbNormal" 
+                       id="TextBoxDateImpDu" 
+                       aria-describedby="TextBoxDateImpDu" 
+                       formControlName="rechercheDateDu"  
+                       placeholder="--Sélectionner--">
+                      </div> -->
+                      <div class="col-3 mod3">
+                       <mat-form-field class="matFormFieldCustom" appearance="normal" (click)="picker.open()"  >
+                       <input 
+                        id="inputNormal"
+                        placeholder="jj/mm/aaaa"
+                        matInput
+                        [matDatepicker]="picker"
+                        formControlName="rechercheDateDu"
+                         >
+                       <mat-datepicker #picker></mat-datepicker>
+                     </mat-form-field> 
+                    </div>
+                    <div class="col-1 mod1"><span class="spanAu">au</span></div>
+                    <div class="col-3 mod3">
+                      <mat-form-field class="matFormFieldCustom" appearance="normal" (click)="picker2.open()"  >
+                      <input 
+                       id="inputNormal"
+                       placeholder="jj/mm/aaaa"
+                       matInput
+                       [matDatepicker]="picker2"
+                       formControlName="rechercheDateAu"
+                        >
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field> 
+                   </div>
+                  </div>  
+                
+                      
+                      <!-- <input type="date" class="tbNormal" id="TextBoxDateImpAu" aria-describedby="TextBoxDateImpAu"  formControlName="rechercheDateAu"  placeholder="--Sélectionner--"> -->
+                    
+                   
+                 
                       <!-- <div class="flex" *ngIf="!this.facadeService.indicateurJuge">
                           <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
                           <div class="padDD">
@@ -95,7 +146,7 @@
 
                    
                    
-                    <div *ngIf="!this.facadeService.indicateurJuge">
+                    <!-- <div *ngIf="!this.facadeService.indicateurJuge">
                         <label  class="texteRecherche">Portée de la recherche </label>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" checked="checked" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
@@ -105,7 +156,7 @@
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                             <label class="form-check-label" for="inlineRadio2">Toutes les décisions mon/mes groupes</label>
                           </div>
-                    </div>
+                    </div> -->
                         <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button>
@@ -124,20 +175,21 @@
                 </div>
                     </div>
                     <!--Tableau-->
-                    <div *ngIf="!(this.listeDecisions
-                    | searchfilter3: searchValue: 'rechercheNumDec'
-                    | searchfilter3: searchValue2 : 'rechercheNumDossier'
+                    
+                    <div *ngIf="this.facadeService.listeDecisions&&!(this.facadeService.listeDecisions
+                    | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec' 
+                    | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier' 
                     | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
                     | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
                     | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value).length">
                     Aucun résultats
                     </div>
-                    <div class="tableauDec" *ngIf="affTableau && (this.listeDecisions
-                    | searchfilter3: searchValue: 'rechercheNumDec'
-                    | searchfilter3: searchValue2 : 'rechercheNumDossier'
+                    <div class="tableauDec" *ngIf="affTableau && (this.facadeService.listeDecisions
+                    | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec' 
+                    | searchfilter3:this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
                     | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
                     | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
-                    | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value).length">
+                    | dateFiltre:this.formulaire.get('rechercheDateDu').value  : this.formulaire.get('rechercheDateAu').value).length">
                         <table id="table" class="table"
                         data-pagination="true"
                         data-id-field="name"
@@ -150,12 +202,20 @@
                       </th>
                       <th scope="col"  ><app-texte cle="commun.dossier" ></app-texte></th>
                       <th scope="col"><app-texte cle="commun.nbDossier"></app-texte></th>
-                      <th scope="col" [appSort]="this.listeDecisions" data-order="desc" data-name="dateImportation" >
+                      <th scope="col" [appSort]="this.facadeService.listeDecisions
+                      | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
+                      | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
+                      | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
+                      | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value" data-order="desc" data-name="dateImportation" >
                           <app-texte cle="commun.dateImp"></app-texte>
                           <span class="spanAu">
                           </span><i class="fa fa-sort"></i>
                         </th>
-                      <th scope="col"  [appSort]="this.listeDecisions" data-order="desc" data-name="dateFinDelibere">
+                      <th scope="col"  [appSort]="this.facadeService.listeDecisions
+                      | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
+                      | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
+                      | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
+                      | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value" data-order="desc" data-name="dateFinDelibere">
                           <app-texte cle="commun.dateDeli"></app-texte>
                           <span class="spanAu">
                           </span><i class="fa fa-sort"></i>
@@ -164,19 +224,27 @@
                       <th scope="col" *ngIf="!this.facadeService.indicateurJuge">
                           <app-texte cle="commun.RechercheJuge"></app-texte>
                       </th>
-                      <th scope="col" [appSort]="this.listeDecisions" data-order="desc" data-name="durRestante">
+                      <th scope="col" [appSort]="this.facadeService.listeDecisions
+                      | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
+                      | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
+                      | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
+                      | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value" data-order="desc" data-name="durRestante">
                           <app-texte cle="commun.durRestante"></app-texte>
                            <span class="spanAu">
                            </span><i class="fa fa-sort"></i>
                          </th>
-                      <th scope="col"  [appSort]="this.listeDecisions" data-order="desc" data-name="priorite"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
+                      <th scope="col"  [appSort]="this.facadeService.listeDecisions
+                      | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
+                      | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
+                      | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
+                      | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value" data-order="desc" data-name="priorite"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
                       <th scope="col"><app-texte cle="commun.RechercheStatut"></app-texte></th>
                     </tr>
                   </thead>
                   <tbody>
-                     <tr *ngFor="let pd of this.listeDecisions
-                     | searchfilter3: searchValue: 'rechercheNumDec'
-                     | searchfilter3: searchValue2 : 'rechercheNumDossier'
+                     <tr *ngFor="let pd of this.facadeService.listeDecisions
+                     | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec' 
+                     | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
                      | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
                      | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
                      | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value

@@ -26,6 +26,7 @@ export class FacadeService {
   // Liste ou object
   public listJuge: Juge[];
   public retourDecision: RetourDecision;
+  public listeDecisions: Decision[];
 
 
 

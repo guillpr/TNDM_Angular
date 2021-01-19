@@ -240,19 +240,41 @@ input[type=radio]:checked:before {
     position: relative;
     right: 16.5px;
     top:2px;
-    max-width: 11.5%;
+    max-width: 12%;
  }
  
  .spaceUpDownRow{
      margin-top:10px;
+     height: 25px;
  }
  .colMod8{
      max-width: 6.8%;
      padding-right: 5px;;
  }
  .colMod14{
-    max-width: 14%;
+    max-width: 15%;
 }
 .mod2{
     max-width: 14.7%;
+}
+.mod3{
+    max-width: 20%;
+}
+.mod1{
+    max-width: 6%;
+}
+
+#inputNormal{
+    text-align: center;
+    width: 250px;
+    background-color: #f3f5fb;
+    border-radius: 5px;
+    border: solid 1px #d0c9c9;
+    height: 25px;
+}
+.matFormFieldCustom{
+    width: 250px;
+    display: relative;
+    bottom:18px;
+    right: 22px;
 }

@@ -1,13 +1,23 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Decision } from '../entitees/decision';
+import { FacadeService } from '../services/facade.service';
 
 @Pipe({
   name: 'searchfilter3'
 })
 export class Searchfilter3Pipe implements PipeTransform {
 
+  constructor(public facadeService: FacadeService) { }
+
   transform(list: Decision[], searchValue: string , nomParm: string ): Decision[] {
+
+
+    
+    console.log('Valeur de recherche:' , searchValue);
+    console.log('nomParam:', nomParm);
+    console.log('Valeur de la liste' , list);
     if (!list || !searchValue){
+      console.log('retour list');
       return list;
     }
     if (nomParm === 'rechercheNumDec'){
