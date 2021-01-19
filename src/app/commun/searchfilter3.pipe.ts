@@ -20,19 +20,23 @@ export class Searchfilter3Pipe implements PipeTransform {
       console.log('retour list');
       return list;
     }
-    if (nomParm === 'rechercheNumDec'){
+    if (searchValue && nomParm === 'rechercheNumDec' ){
+      console.log('Dans rechercheNumDec')
       return list.filter(dec =>
         dec.numeroDecision.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
     }
-    if (nomParm === 'rechercheNumDossier'){
+    if (searchValue && nomParm === 'rechercheNumDossier'){
+      console.log('Dans rechercheNumDossier')
       return list.filter(dec =>
         dec.numeroDossier.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
     }
-    if (nomParm === 'rechercheStatut'){
+    if (searchValue && nomParm === 'rechercheStatut'){
+      console.log('Dans recherrechercheStatutcheNumDossier')
       return list.filter(dec =>
         dec.statut.toString().includes(searchValue.toLocaleLowerCase()));
     }
-    if (nomParm === 'rechercheJuge'){
+    if (searchValue && nomParm === 'rechercheJuge'){
+      console.log('Dans rechercheJuge')
       return list.filter(dec =>
         dec.juge.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
     }

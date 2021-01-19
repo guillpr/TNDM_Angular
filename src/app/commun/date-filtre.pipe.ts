@@ -21,10 +21,12 @@ export class DateFiltrePipe implements PipeTransform {
       return list;
     }
     if (valeurDateDu && !valeurDateAu) {
+      console.log('Dans date valeurDateDu et !valeurDateAu');
       return list.filter(dec =>
         dec.dateImportation.toLocaleLowerCase().includes(valeurDateDu.toLocaleLowerCase()));
      }
     if (valeurDateDu && valeurDateAu){
+      console.log('Dans date valeurDateDu et valeurDateAu');
        return list.filter(dec =>
         dec.dateImportation.toString() > valeurDateDu && dec.dateImportation.toString() < valeurDateAu);
      }

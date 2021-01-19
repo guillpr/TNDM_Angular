@@ -49,7 +49,7 @@
                       <div class="col-2"></div>
                       <div class="col-1 texteTitreNormal"><app-texte  cle="commun.RechercheNumDec"></app-texte></div>
                         <div class="col-2">
-                          <input type="text"     [dropSpecialCharacters]="false" mask="0000-00-000" type="text"  class="tbNormal"  formControlName="rechercheNumDec" id="TextBoxRechNumDec" aria-describedby="TextBoxRechNumDec" >
+                          <input type="text"      class="tbNormal"  formControlName="rechercheNumDec"  aria-describedby="TextBoxRechNumDec" >
                         </div>
                         
                     </div>
@@ -57,7 +57,7 @@
                        <div class="col-2"></div>
                        <div class="col-2 texteTitreDossTaq"><app-texte  cle="commun.RechercheNumDoss"></app-texte></div>
                          
-                         <input #valeurInputDossierTaq (input)="correctionMasque()"  [dropSpecialCharacters]="false" [mask]="maskValue"  type="text" class="tbNormal" id="TextBoxRechNumDoss"  formControlName="rechercheNumDossier" aria-describedby="TextBoxRechNumDoss" >
+                         <input     type="text" class="tbNormal"   formControlName="rechercheNumDossier" aria-describedby="TextBoxRechNumDoss" >
                     </div>
                     <div class="row spaceUpDownRow" >
                       <div class="col-2 mod2"></div>
@@ -76,10 +76,10 @@
                        placeholder="--Sélectionner--">
                       </div> -->
                       <div class="col-3 mod3">
-                       <mat-form-field class="matFormFieldCustom" appearance="normal" (click)="picker.open()"  >
+                       <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                        <input 
                         id="inputNormal"
-                        placeholder="jj/mm/aaaa"
+                        
                         matInput
                         [matDatepicker]="picker"
                         formControlName="rechercheDateDu"
@@ -89,10 +89,9 @@
                     </div>
                     <div class="col-1 mod1"><span class="spanAu">au</span></div>
                     <div class="col-3 mod3">
-                      <mat-form-field class="matFormFieldCustom" appearance="normal" (click)="picker2.open()"  >
+                      <mat-form-field class="matFormFieldCustom"   (click)="picker2.open()"  >
                       <input 
                        id="inputNormal"
-                       placeholder="jj/mm/aaaa"
                        matInput
                        [matDatepicker]="picker2"
                        formControlName="rechercheDateAu"
@@ -161,9 +160,10 @@
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button>
                         <button
-                        ID="Button1"
+                        
                          class="btn btn-primary buttonReini"
-                        (click)="Renitialise()">
+                        (click)="Renitialise()"
+                        type="button">
                         <app-texte cle="commun.boutonReni"></app-texte>
                         </button>
                         <br />

@@ -278,3 +278,9 @@ input[type=radio]:checked:before {
     bottom:18px;
     right: 22px;
 }
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+.mat-form-field-underline  {
+    display: none;
+}

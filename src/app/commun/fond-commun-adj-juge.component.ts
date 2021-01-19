@@ -123,7 +123,34 @@ maskValue: string;
     this.affTableau = true;
   }
   public Renitialise(){
-    this.formulaire.reset();
+    
+
+    console.log('Mon formulaire avant' , this.formulaire);
+   this.formulaire.reset();
+
+   
+   //this.formulaire.get('rechercheNumDec').setValue('');
+  // this.formulaire.get('rechercheNumDossier').setValue('');
+   //this.formulaire.get('rechercheDateDu').setValue('');
+   //this.formulaire.get('rechercheDateAu').setValue('');
+
+   //this.formulaire.get('rechercheStatut').setValue('');
+
+
+
+
+   /*formulaire = new FormGroup({
+    rechercheNumDec: new FormControl(''),
+    rechercheNumDossier: new FormControl(''),
+    rechercheStatut: new FormControl(''),
+    rechercheJuge: new FormControl(''),
+    recherchePriorite: new FormControl(''),
+    rechercheType: new FormControl(''),
+    rechercheDateDu: new FormControl(''),
+    rechercheDateAu: new FormControl(''),
+    NomJuge: new FormControl('')*/
+
+    console.log('Mon formulaire' , this.formulaire);
   }
  public correctionMasque(){
   const elementAria: HTMLElement = document.querySelector(
