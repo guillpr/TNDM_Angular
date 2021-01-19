@@ -4,20 +4,16 @@
         <!--Début zone décision-->
         <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.decision"></app-texte>
-            <span id="boiteDecisionOuverte" *ngIf="!boiteDecisionOuverte" class="arrowDown" (click)="ouvertureBoiteDecision()">
-                <i class="fas fa-angle-down fa-3x"></i>
-            </span>
-            <span id="boiteDecisionFerme" *ngIf="boiteDecisionOuverte" class="arrowDown" (click)="fermetureBoiteDecision()">
-                <i class="fas fa-angle-up fa-3x"></i>
-            </span>
+           
         </div>
         <!--Début row décision-->
         <div class="row bold">
             <div class="col numUniCol"><app-texte cle="commun.numUnique"></app-texte></div>
+            <div class="col dateDeliCol"><app-texte cle="commun.description"></app-texte>  <i (click)="editionDescription()" class="fas fa-edit ml-1"></i></div>
             <div class="col dateImpCol"><app-texte cle="commun.dateImp"></app-texte></div>
             <div class="col numUtiCol"><app-texte cle="commun.utilisateur"></app-texte></div>
             <div class="col dateDeliCol"><app-texte cle="commun.requerant"></app-texte></div>
-            <div class="col dateDeliCol"><app-texte cle="commun.description"></app-texte>  <i (click)="editionDescription()" class="fas fa-edit ml-1"></i></div>
+            
             <div class="col-2 dateDeliCol"><app-texte cle="commun.dateDeli"></app-texte> <i class="fas fa-edit ml-1"></i></div>
             <div class="col numUniCol">Durée restante</div>
             <div class="col numUtiCol">Priorité</div>
@@ -25,15 +21,18 @@
         </div>
           <!--Fin row décision-->
 
-        <div [className]="!boiteDecisionOuverte ? 'testDecision' : 'testDecisionExpand' " class="testDecision">
+        <div class="testDecisionExpand">
             <div class="row">
                 <div class="col numUniCol">2020-01-123</div>
-                <div class="col dateImpCol">2020-02-01</div>
-                <div class="col numUtiCol">prouguil001</div>
-                <div class="col dateDeliCol">Entreprise Les solutions vertes du québec</div>
                 <div class="col dateDeliCol">
                     <textarea [disabled]="isEnabled" class="inputDesc" rows="3" cols="18">numéro dossier -requérant</textarea>
                     </div>
+                <div class="col dateImpCol">2020-02-01</div>
+                <div class="col numUtiCol">prouguil001</div>
+                <div class="col dateDeliCol">Entreprise Les solutions vertes du québec
+
+                </div>
+              
                 <div class="col-2 dateDeliCol">2020-02-01</div>
                 <div class="col numUniCol">15 jours</div>
                 <div class="col numUtiCol">

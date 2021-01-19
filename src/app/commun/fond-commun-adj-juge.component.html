@@ -1,11 +1,11 @@
 <form [formGroup]="formulaire">
-            <div class="container2">
+            <div >
                 <div class="divRight">
                   
                     <div class="rechDec">
-                         <app-texte cle="commun.RechercheDecision"></app-texte>
+                         <app-texte cle="commun.Recherche"></app-texte>
                     </div>
-                    <hr/>
+                    <hr class="hrClass" />
                     <div>
                       
                       <div class="row sectStatut">
@@ -19,71 +19,103 @@
                         <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Accepté</div>
                         <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Rejeté</div>
                       </div>
-                      <!--Section première proposition Myriam-->
 
-                      <div class="row spaceUpDownRow">
-                        <div class="col-2"></div>
-                        <div class="col-1 texteTitreNormal">Adjointes</div>
-                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Toutes mes décisions</div>
-                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Tous mes groupes</div>
-                      </div>
-
-                       <!--Fin  Section première proposition Myriam-->
-
-                      <!--Section 2e proposition MA-->
-                      <!-- <div class="row spaceUpDownRow">
+                       <!--Section 2e proposition MA-->
+                       <div class="row spaceUpDownRow">
                         <div class="col-2"></div>
                         <div class="col-2 texteTitreProJuge">Adjointes/Juge</div>
                           <div class="flex">
                             <div class="padD">
                               <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
-                                <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
-                                <option value="1"><app-texte cle="commun.prioNorm"></app-texte></option>
-                                <option value="2"><app-texte cle="commun.prioUrg"></app-texte></option>
+                                <option  selected value="">Toutes mes décisions</option>
+                                <option value="1">Toutes les décisions</option>
                               </select>
                             </div>
                         </div>
-                      </div> -->
+                      </div> 
                        <!--Fin Section 2e proposition MA-->
+
+                      <!--Section Juges-->
+
+                      <!-- <div class="row spaceUpDownRow" *ngIf="!this.facadeService.indicateurJuge">
+                        <div class="col-2"></div>
+                        <div class="col-1 texteTitreNormal">
+                          <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
+                        </div>
+                          
+                          <div class="col-2">
+                            <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
+                              <option selected value=""  ><app-texte cle="commun.Tous"></app-texte></option>
+                              <option  *ngFor="let j of listeJuge"  >{{j.nomJuge}} , {{j.prenomJuge}}</option>
+                            </select>
+                          </div>
+                    </div>  -->
+                    
+                      <!--Fin section Juges-->
+
+                      <!--Début Sections-->
+
+                      <div class="row flex spaceUpDownRow">
+                        <div class="col-2"></div>
+                        <div class="col-1 texteTitreNormal">
+                         <app-texte cle="commun.RechercheSection"></app-texte>
+                        </div>
+                      <div class="col-2 padD">
+                        <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="rechercheSection">
+                          <option  selected value="">Toutes</option>
+                          <option value="1">CETM</option>
+                          <option value="2">SAS</option>
+                          <option value="3">SAI</option>
+                          <option value="4">SAE</option>
+                          <option value="5">STE</option>
+                          <option value="6">AUT</option>
+                        </select>
+                      </div>
+                      </div>
+
+                      <!--Fin Sections-->
+
+                      <!--Section première proposition Myriam-->
+                      <!-- <div class="row spaceUpDownRow">
+                        <div class="col-2"></div>
+                        <div class="col-1 texteTitreNormal">Adjointes</div>
+                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Toutes mes décisions</div>
+                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Tous mes groupes</div>
+                      </div> -->
+                       <!--Fin  Section première proposition Myriam-->
                     <div class="row spaceUpDownRow">
                       <div class="col-2"></div>
-                      <div class="col-1 texteTitreNormal"><app-texte  cle="commun.RechercheNumDec"></app-texte></div>
+                      <div class="col-1 texteTitreNormal">
+                        <app-texte  cle="commun.RechercheNumDec"></app-texte>
+                      </div>
                         <div class="col-2">
-                          <input type="text"      class="tbNormal"  formControlName="rechercheNumDec"  aria-describedby="TextBoxRechNumDec" >
+                          <input type="text"
+                           class="tbNormal" 
+                           formControlName="rechercheNumDec"
+                           aria-describedby="TextBoxRechNumDec">
                         </div>
-                        
                     </div>
                      <div class="row spaceUpDownRow" >
                        <div class="col-2"></div>
-                       <div class="col-2 texteTitreDossTaq"><app-texte  cle="commun.RechercheNumDoss"></app-texte></div>
-                         
-                         <input     type="text" class="tbNormal"   formControlName="rechercheNumDossier" aria-describedby="TextBoxRechNumDoss" >
+                       <div class="col-2 texteTitreDossTaq">
+                         <app-texte  cle="commun.RechercheNumDoss"></app-texte>
+                        </div>
+                         <input type="text" class="tbNormal" 
+                         formControlName="rechercheNumDossier" 
+                         aria-describedby="TextBoxRechNumDoss" >
                     </div>
                     <div class="row spaceUpDownRow" >
                       <div class="col-2 mod2"></div>
                       <div class="col-2 texteTitreDateImp">
                         <app-texte cle="commun.DateImp"  ></app-texte>
                       </div>
-                         <!--  <div class="col-2">
-                  <input type="date" class="tbNormal" id="TextBoxDateImpDu" aria-describedby="TextBoxDateImpDu" formControlName="rechercheDateDu"  placeholder="--Sélectionner--">  -->
-                      
-                       <!-- <input 
-                       
-                       class="tbNormal" 
-                       id="TextBoxDateImpDu" 
-                       aria-describedby="TextBoxDateImpDu" 
-                       formControlName="rechercheDateDu"  
-                       placeholder="--Sélectionner--">
-                      </div> -->
                       <div class="col-3 mod3">
                        <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                        <input 
                         id="inputNormal"
-                        
                         matInput
                         [matDatepicker]="picker"
-                        formControlName="rechercheDateDu"
-                         >
+                        formControlName="rechercheDateDu">
                        <mat-datepicker #picker></mat-datepicker>
                      </mat-form-field> 
                     </div>
@@ -94,27 +126,11 @@
                        id="inputNormal"
                        matInput
                        [matDatepicker]="picker2"
-                       formControlName="rechercheDateAu"
-                        >
+                       formControlName="rechercheDateAu">
                       <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field> 
                    </div>
                   </div>  
-                
-                      
-                      <!-- <input type="date" class="tbNormal" id="TextBoxDateImpAu" aria-describedby="TextBoxDateImpAu"  formControlName="rechercheDateAu"  placeholder="--Sélectionner--"> -->
-                    
-                   
-                 
-                      <!-- <div class="flex" *ngIf="!this.facadeService.indicateurJuge">
-                          <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
-                          <div class="padDD">
-                            <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
-                              <option selected value=""  ><app-texte cle="commun.ddSelectionner"></app-texte></option>
-                              <option  *ngFor="let j of listeJuge"  >{{j.nomJuge}} , {{j.prenomJuge}}</option>
-                            </select>
-                          </div>
-                    </div> -->
                      <div class="row flex spaceUpDownRow">
                        <div class="col-2"></div>
                        <div class="col-1 texteTitreNormal">
@@ -129,38 +145,10 @@
                           </select>
                         </div>
                     </div>
-                     <!-- <div class="flex">
-                         <app-texte cle="commun.RechercheType"  class="texteRecherche"></app-texte>
-                         <div class="padD">
-                          <select   class="dlNormalStatut" id="inputGroupSelectType" formControlName="rechercheType">
-                            <option  selected value=""><app-texte cle="commun.ddSelectionner"></app-texte></option>
-                            <option value="1"><app-texte cle="commun.typeDecision"></app-texte></option>
-                            <option value="2"><app-texte cle="commun.typeDecisionRect"></app-texte></option>
-                            <option value="3"><app-texte cle="commun.typeDecisionIn"></app-texte></option>
-                            <option value="4"><app-texte cle="commun.typeDecisionMotifs"></app-texte></option>
-                          </select>
-                        </div>
-                    </div> -->
-
-
-                   
-                   
-                    <!-- <div *ngIf="!this.facadeService.indicateurJuge">
-                        <label  class="texteRecherche">Portée de la recherche </label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" checked="checked" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                            <label class="form-check-label" for="inlineRadio1">Mes décisions</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                            <label class="form-check-label" for="inlineRadio2">Toutes les décisions mon/mes groupes</label>
-                          </div>
-                    </div> -->
                         <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button>
                         <button
-                        
                          class="btn btn-primary buttonReini"
                         (click)="Renitialise()"
                         type="button">
@@ -175,7 +163,19 @@
                 </div>
                     </div>
                     <!--Tableau-->
-                    
+                    <hr class="hrClass">
+                    <div class="row sectionTableauHeader">
+                     
+                      <div class="col-2">
+                        
+                        Décision et motifs
+                      </div>
+                      <div class="col-6"></div>
+                      <div class="col-4 aligButton"><button ID="ButtonImporter" class="btn btn-primary buttonImpor" routerLink="/importDecision" >
+                        <app-texte cle="commun.boutonImporterNouvDec"></app-texte>
+                    </button>
+                </div>
+                    </div>
                     <div *ngIf="this.facadeService.listeDecisions&&!(this.facadeService.listeDecisions
                     | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec' 
                     | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier' 
@@ -184,17 +184,8 @@
                     | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value).length">
                     Aucun résultats
                     </div>
-                    <div class="tableauDec" *ngIf="affTableau && (this.facadeService.listeDecisions
-                    | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec' 
-                    | searchfilter3:this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
-                    | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
-                    | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
-                    | dateFiltre:this.formulaire.get('rechercheDateDu').value  : this.formulaire.get('rechercheDateAu').value).length">
-                        <table id="table" class="table"
-                        data-pagination="true"
-                        data-id-field="name"
-                        data-page-list="[5, 10, 25, 50, 100, ALL]"
-                        data-page-size="1">
+                    <div class="tableauDec">
+                        <table id="table" class="table">
                   <thead>
                     <tr>
                       <th scope="col">
@@ -220,7 +211,6 @@
                           <span class="spanAu">
                           </span><i class="fa fa-sort"></i>
                         </th>
-                      <th scope="col"><app-texte cle="commun.description"></app-texte></th>
                       <th scope="col" *ngIf="!this.facadeService.indicateurJuge">
                           <app-texte cle="commun.RechercheJuge"></app-texte>
                       </th>
@@ -248,13 +238,12 @@
                      | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
                      | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
                      | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value
-                     | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                    ">
                         <td class="numeroDec" (click)="SelectionDecision(pd.numeroDecision)">{{pd.numeroDecision}}</td>
                          <td>{{pd.numeroDossier}}</td>
                          <td>{{pd.nbDossier}}</td>
                          <td>{{pd.dateImportation | date: 'yyyy-LL-d'}} </td>
                          <td>{{pd.dateFinDelibere | date: 'yyyy-LL-d'}}</td>
-                         <td>{{pd.description}}</td>
                          <td *ngIf="!this.facadeService.indicateurJuge">{{pd.juge}}
                             <img *ngIf="pd.indSignature" class="imgSign" mat-raised-button
                             matTooltip="Décision signé le  {{pd.dateImportation | date: 'd-LL-yyyy'}}"
@@ -263,7 +252,7 @@
                             matTooltipClass="my-class"
                             />
                          </td>
-                         <td>{{pd.durRestante}}</td>
+                         <td [className]="pd.durRestante < 6 ? 'texteDurRestanteRouge' : ''">{{pd.durRestante}}</td>
                          <td class="bgWhite" >
                            <span [className]="pd.priorite==1 ? 'yellowClass' : ''">
                             <span *ngIf="pd.priorite== 1">Urgente</span>
@@ -274,17 +263,8 @@
                      </tr>
                   </tbody>
                 </table>
-                <div class="paginationCtl">
-                    <pagination-controls
-                    (pageChange)="p = $event" previousLabel="Précédent"
-                     nextLabel="Suivant">
-                    </pagination-controls>
-                  </div>
                 </div>
-                <div><button ID="ButtonImporter" class="btn btn-primary buttonImpor" routerLink="/importDecision" >
-                    <app-texte cle="commun.boutonImporterNouvDec"></app-texte>
-                </button>
-            </div>
+              
 
 
 

@@ -1,15 +1,10 @@
 .container1 {
-    background-color: #93daea26;
+    /*background-color: #93daea26;*/
      width:25%;
     float: left;
     padding: 20px;
 }
-.container2 {
-    background-color: #93daea26 ;
-    width: 100%;
-    float: right;
-    padding: 20px;
-}
+
 .divUpLeft {
     background-color: white;
     height:230px;
@@ -25,7 +20,7 @@
 .divRight {
     background-color: white;
     width: 100%;
-    height: 480px;
+    height: auto;
     display: block;
 }
 .nomAdj {
@@ -60,14 +55,14 @@
     font-weight: bold;
     padding-top: 10px;
     padding-left:20px;
+    margin-bottom: -10px;
 }
 .texteRecherche {
     font-size: 16px;
     color: black;
     padding-top: 10px;
-    margin-left: 100px;
     width: 250px;
-    display: inline-block;
+   
 }
 .tbNormal {
 
@@ -107,9 +102,9 @@
     background-color: #2257a7 !important;
     color: white;
     border: #2257a7 !important;
-    margin-left: 350px;
+    margin-left: 335px;
     margin-top:10px;
-    width:100px;
+    width:200px;
     height:35px;
     border-radius: 10px;
 }
@@ -117,11 +112,10 @@
     background-color: #2257a7 !important;
     color: white;
     border: #2257a7 !important;
-     margin-left: 60%;
-    margin-top:10px;
     width:250px;
     height:35px;
     border-radius: 10px;
+    justify-content: end;
 }
 .buttonReini {
     background-color: #2257a7 !important;
@@ -129,7 +123,7 @@
     border: #2257a7 !important;
     margin-left: 10px;
     margin-top: 10px;
-    width: 100px;
+    width: 200px;
     height: 35px;
     border-radius: 10px;
 }
@@ -283,4 +277,27 @@ input[type=radio]:checked:before {
 }
 .mat-form-field-underline  {
     display: none;
+}
+.texteDurRestanteRouge{
+    color:red;
+    font-weight: bold;
+}
+.sectionTableauHeader{
+    font-weight: bold;
+    font-size: 16px;
+   height: 35px;
+}
+.divSolid{
+   width: 100%;
+   height: 10%;
+   background-color: red;
+}
+.aligButton {
+    text-align: right;
+    position: relative;
+    bottom: 10px;
+}
+.hrClass{
+    border: solid 3px #2257a7;
+    opacity: 0.3;
 }
