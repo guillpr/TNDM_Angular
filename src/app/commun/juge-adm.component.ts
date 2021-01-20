@@ -16,7 +16,7 @@ export class JugeAdmComponent implements OnInit {
 
   constructor(public facadeService: FacadeService) { }
 
- 
+
 
   ngOnInit(): void {
     this.facadeService.obtenirJuges();
@@ -31,7 +31,6 @@ export class JugeAdmComponent implements OnInit {
   }
 
   public valeurJuge(){
-    console.log('dans valeur Juge');
   }
 
 }

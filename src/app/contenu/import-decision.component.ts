@@ -27,6 +27,7 @@ export class ImportDecisionComponent implements OnInit {
   compteur = 0;
   messageErreurExtension = false;
   buttonDisabled = true;
+  headers = '';
 
   // Fichiers
   files: any[] = [];
@@ -143,17 +144,18 @@ export class ImportDecisionComponent implements OnInit {
     console.log(this.formulaire);
   }
   onFileDropped($event: any){
-    console.log(this.fichiers);
+    console.log('Le fichier' , this.fichiers);
     console.log(this.fichiers.length);
     this.gererFichiers((event as DragEvent).dataTransfer.files);
  }
  fileBrowseHandler(files: any){
-
+  console.log('Le fichier' , files);
    this.gererFichiers(files);
    // this.fileInput.nativeElement.value = '';
  }
  gererFichier(file: any) {
 
+  this.headers = file.type;
   const ext = file.name.substr(file.name.lastIndexOf('.') + 1).toLowerCase();
   console.log('Extension:');
   console.log(ext);
@@ -175,7 +177,7 @@ export class ImportDecisionComponent implements OnInit {
 
     f =
     {
-      decisionWord:  reader.result.toString().replace('data:application/msword;base64,' , ''),
+      decisionWord:  reader.result.toString().replace(this.headers , '').replace('data:;base64,', ''),
       codeReseauDepot: 'PROUGUIL0001',
       nomDocumentDecision: file.name,
     };
@@ -189,11 +191,14 @@ export class ImportDecisionComponent implements OnInit {
     this.facadeService.ObtenirInfoDocument(f)
     .subscribe((s) => {
       if(s != null){
-        console.log(s);
+        console.log('Valeur du resultat' , s);
         this.facadeService.retourDecision = s;
         this.buttonDisabled = false;
         this.formulaire.controls.description.setValue(s.description);
+        if( s.signataires != null)
+        {
         this.ajoutJuges(s);
+        }
       }
     });
     // this.facadeService.TeleverserDocument(f)
@@ -221,10 +226,10 @@ gererFichiers(files: any) {
  // Fin de méthode pour fichiers
 
  ajoutJuges(s: any){
-  for (let i = 0; i < this.facadeService.retourDecision.juges.length; i++) {
+  for (let i = 0; i < this.facadeService.retourDecision.signataires.length; i++) {
 
 
-    this.formulaire.controls['nomJuge' + i].setValue(s.juges[i]);
+    this.formulaire.controls['nomJuge' + i].setValue( s.signataires[i].juge);
     console.log(this.formulaire);
   }
 

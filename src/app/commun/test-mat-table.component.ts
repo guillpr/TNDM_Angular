@@ -21,8 +21,8 @@ export class TestMatTableComponent implements OnInit {
 
 
 
-  constructor(public facadeService: FacadeService) { 
-  
+  constructor(public facadeService: FacadeService) {
+
   }
 
   ngOnInit() {
@@ -32,13 +32,12 @@ export class TestMatTableComponent implements OnInit {
         this.MyDataSource = new MatTableDataSource();
         this.MyDataSource.data = res;
         this.MyDataSource.sort = this.sort;
-        console.log(this.MyDataSource.data);
       },
       error => {
         console.log('Erreur quand je recois ' + error);
       }
     );
-    
+
   }
 
 }

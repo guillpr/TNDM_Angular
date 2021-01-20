@@ -1,3 +1,4 @@
+import { JugesAdjointes } from './../entitees/jugesAdjointes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { FichierJoint } from '../entitees/fichier-joint';
 import { Juge } from '../entitees/juge';
 import { RetourDecision } from '../entitees/RetourDecision';
 import { ReponseBase } from './reponseBase';
+import { Usager } from '../entitees/usager';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,10 @@ export class FacadeService {
   public listJuge: Juge[];
   public retourDecision: RetourDecision;
   public listeDecisions: Decision[];
+  public listeAd: Usager;
+  public listeJugesAdjointes: JugesAdjointes[];
+
+
 
 
 
@@ -36,6 +42,8 @@ export class FacadeService {
   private JugeUrl = environment.apiBaseUrl + 'JugeDetail';
   private NoDecisionUrl = environment.apiBaseUrl + 'DecisionDetail/NoDecision';
   private obtenirInfoDocumentUrl = environment.apiBaseUrlSignature + 'v1/Decision/Info';
+  private usagerAdURL = environment.apiBaseUrlDossier + 'v1/Ressource/Ad';
+  private jugesAdjointesURL = environment.apiBaseUrlDossier + 'v1/Ressource/JugesAdjointe';
 
   private URL = 'http://localhost:57759/api/DecisionDetail';
   formData: Decision = new Decision();
@@ -46,20 +54,26 @@ export class FacadeService {
   // // public ObtenirDecision():Observable<ReponseBase<Decision>>{
   // //   return this.http.get<ReponseBase<Decision>>(this.obtenirDecision);
   // // }
-  public ObtenirInfoDocument(fichier: FichierJoint): Observable<RetourDecision>{
-    return this.http.post<RetourDecision>(this.obtenirInfoDocumentUrl, JSON.stringify(fichier), this.httpOptions);
-
-  }
-
+  // Méthode GET
   public obtenirDecisionList(): Observable<Decision[]>{
    return this.http.get<Decision[]>(this.DecisionURL);
   }
   public obtenirJuges(): Observable<Juge[]>{
     return this.http.get<Juge[]>(this.JugeUrl);
   }
+  public obtenirCodeUsagerAD(): Observable<Usager>{
+    return this.http.get<Usager>(this.usagerAdURL);
+  }
+  public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
+    return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );
+  }
+  // Méthode POST
+  public ObtenirInfoDocument(fichier: FichierJoint): Observable<RetourDecision>{
+    return this.http.post<RetourDecision>(this.obtenirInfoDocumentUrl, JSON.stringify(fichier), this.httpOptions);
+
+  }
 
  public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision[]>{
-   console.log (fichier);
    return this.http.post<RetourDecision[]>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
  }
   // public obtenirDecisionListRecherche(requete: string){

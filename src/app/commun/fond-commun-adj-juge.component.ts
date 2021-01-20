@@ -57,17 +57,37 @@ maskValue: string;
   constructor(public facadeService: FacadeService,
               public router: Router) { }
   ngOnInit() {
+    // Obtenir le code usager AD
+    this.facadeService.obtenirCodeUsagerAD()
+    .subscribe(res => {
+      console.log('Résultat AD : ' , res);
+      this.facadeService.listeAd = res;
+      console.log('Liste AD service de facade: ' , this.facadeService.listeAd);
+      console.log('le nom utilisateur' , this.facadeService.listeAd.codeUtilisateurAD);
+
+      console.log('Liste AD avant méthode obt Juges et Adjointes' , this.facadeService.listeAd.codeUtilisateurAD);
+      this.facadeService.ObtenirJugesAdjointes(this.facadeService.listeAd.codeUtilisateurAD)
+    .subscribe(resJ => {
+      console.log('Le résultat du AdjointeJuges' ,  resJ);
+      this.facadeService.listeJugesAdjointes = resJ;
+    });
+    });
+
+    // Obtenir la liste des Juges/Adjointes
+
+
+
 
     // TODO indicateur Juge codé dur
     this.facadeService.indicateurJuge = false;
-    this.facadeService.obtenirDecisionList()
-     .subscribe( res => {
-        this.facadeService.listeDecisions = res;
-     });
-    this.facadeService.obtenirJuges()
-     .subscribe(res => {
-       this.listeJuge = res;
-     });
+    // this.facadeService.obtenirDecisionList()
+    //  .subscribe( res => {
+    //     this.facadeService.listeDecisions = res;
+    //  });
+    // this.facadeService.obtenirJuges()
+    //  .subscribe(res => {
+    //    this.listeJuge = res;
+    //  });
   }
   // public RechercherDecisionBD(){
   //   this.affTableau = false;
@@ -124,34 +144,7 @@ maskValue: string;
     this.affTableau = true;
   }
   public Renitialise(){
-    
-
-    console.log('Mon formulaire avant' , this.formulaire);
    this.formulaire.reset();
-
-   
-   //this.formulaire.get('rechercheNumDec').setValue('');
-  // this.formulaire.get('rechercheNumDossier').setValue('');
-   //this.formulaire.get('rechercheDateDu').setValue('');
-   //this.formulaire.get('rechercheDateAu').setValue('');
-
-   //this.formulaire.get('rechercheStatut').setValue('');
-
-
-
-
-   /*formulaire = new FormGroup({
-    rechercheNumDec: new FormControl(''),
-    rechercheNumDossier: new FormControl(''),
-    rechercheStatut: new FormControl(''),
-    rechercheJuge: new FormControl(''),
-    recherchePriorite: new FormControl(''),
-    rechercheType: new FormControl(''),
-    rechercheDateDu: new FormControl(''),
-    rechercheDateAu: new FormControl(''),
-    NomJuge: new FormControl('')*/
-
-    console.log('Mon formulaire' , this.formulaire);
   }
  public correctionMasque(){
   const elementAria: HTMLElement = document.querySelector(
@@ -169,7 +162,6 @@ maskValue: string;
   texte.toUpperCase();
  }
 public SelectionDecision(numDec: string){
-  console.log('Le numéro de décision: ' , numDec);
   this.facadeService.numDecisionTemp = numDec;
   this.router.navigateByUrl('/infoAdjointe');
 }
@@ -195,7 +187,6 @@ dateDiffInDays(dd: string) {
 
   this.listeDureeRestante.push(nombreAjouter);
 
-  console.log('DureeRestante' , this.listeDureeRestante);
 
   return  Math.floor((Date.UTC( newDate.getFullYear(),
   newDate.getMonth(),  newDate.getDate()) -

@@ -5,6 +5,7 @@
 export const environment = {
   apiBaseUrl: 'http://localhost:57759/api/',
   apiBaseUrlSignature: 'http://localhost:62367/api/',
+  apiBaseUrlDossier:  'http://localhost:60684/api/' ,
   production: false
 };
 

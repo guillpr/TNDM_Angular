@@ -28,7 +28,7 @@ export class InfoDecisionJugeComponent implements OnInit {
   ngOnInit(): void {
     this.couleurPrio = true;
     this.numDecSelectionner = this.facadeService.numDecisionTemp;
-    
+
 
   }
 
@@ -65,7 +65,6 @@ export class InfoDecisionJugeComponent implements OnInit {
     else{
       this.couleurPrio = false;
     }
-    console.log(event);
   }
   rejeterDecision(){
         const donnees = {

@@ -73,11 +73,11 @@
       </div>
   </div>
      <!--Fin Row titre de section signature-->
-<div class="row" *ngFor="let juge of this.facadeService.retourDecision.juges;let i = index" >
+<div class="row" *ngFor="let juge of this.facadeService.retourDecision.signataires;let i = index" >
 <div class="col-2" >
 </div>
 <div class="col-3 fondGris">
-<div class="positionNomJuge">{{juge}}
+<div class="positionNomJuge">{{juge.juge}}
 </div>
 </div>
 <div class="col-1 cbCentre">

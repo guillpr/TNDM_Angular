@@ -1,13 +1,30 @@
 <form [formGroup]="formulaire">
+
+
+    <div class="row spaceUpDownRow" *ngIf="!this.facadeService.indicateurJuge">
+                        <div class="col-2"></div>
+                        <div class="col-1 texteTitreNormal">
+                          <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
+                        </div>
+
+                          <div class="col-2">
+                            <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
+                              <option selected value=""  ><app-texte cle="commun.Tous"></app-texte></option>
+
+                            </select>
+                          </div>
+                    </div>
+
+
             <div >
                 <div class="divRight">
-                  
+
                     <div class="rechDec">
                          <app-texte cle="commun.Recherche"></app-texte>
                     </div>
                     <hr class="hrClass" />
                     <div>
-                      
+
                       <div class="row sectStatut">
                         <div class="col-2"></div>
                         <div class="col-1 texteTitreNormal">Statut</div>
@@ -27,12 +44,13 @@
                           <div class="flex">
                             <div class="padD">
                               <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
-                                <option  selected value="">Toutes mes décisions</option>
-                                <option value="1">Toutes les décisions</option>
+                                <option  selected value="" >Toutes mes décisions</option>
+                                <option   value="2">Toutes les décisions</option>
+                              <option *ngFor="let jugAdj of this.facadeService.listeJugesAdjointes;let i= index; "  value="{{jugAdj.nom}},{{jugAdj.prenom}}">{{jugAdj.nom}} {{jugAdj.prenom}}</option>
                               </select>
                             </div>
                         </div>
-                      </div> 
+                      </div>
                        <!--Fin Section 2e proposition MA-->
 
                       <!--Section Juges-->
@@ -42,7 +60,7 @@
                         <div class="col-1 texteTitreNormal">
                           <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
                         </div>
-                          
+
                           <div class="col-2">
                             <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
                               <option selected value=""  ><app-texte cle="commun.Tous"></app-texte></option>
@@ -50,7 +68,7 @@
                             </select>
                           </div>
                     </div>  -->
-                    
+
                       <!--Fin section Juges-->
 
                       <!--Début Sections-->
@@ -90,7 +108,7 @@
                       </div>
                         <div class="col-2">
                           <input type="text"
-                           class="tbNormal" 
+                           class="tbNormal"
                            formControlName="rechercheNumDec"
                            aria-describedby="TextBoxRechNumDec">
                         </div>
@@ -100,8 +118,8 @@
                        <div class="col-2 texteTitreDossTaq">
                          <app-texte  cle="commun.RechercheNumDoss"></app-texte>
                         </div>
-                         <input type="text" class="tbNormal" 
-                         formControlName="rechercheNumDossier" 
+                         <input type="text" class="tbNormal"
+                         formControlName="rechercheNumDossier"
                          aria-describedby="TextBoxRechNumDoss" >
                     </div>
                     <div class="row spaceUpDownRow" >
@@ -111,32 +129,32 @@
                       </div>
                       <div class="col-3 mod3">
                        <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
-                       <input 
+                       <input
                         id="inputNormal"
                         matInput
                         [matDatepicker]="picker"
                         formControlName="rechercheDateDu">
                        <mat-datepicker #picker></mat-datepicker>
-                     </mat-form-field> 
+                     </mat-form-field>
                     </div>
                     <div class="col-1 mod1"><span class="spanAu">au</span></div>
                     <div class="col-3 mod3">
                       <mat-form-field class="matFormFieldCustom"   (click)="picker2.open()"  >
-                      <input 
+                      <input
                        id="inputNormal"
                        matInput
                        [matDatepicker]="picker2"
                        formControlName="rechercheDateAu">
                       <mat-datepicker #picker2></mat-datepicker>
-                    </mat-form-field> 
+                    </mat-form-field>
                    </div>
-                  </div>  
+                  </div>
                      <div class="row flex spaceUpDownRow">
                        <div class="col-2"></div>
                        <div class="col-1 texteTitreNormal">
                         <app-texte cle="commun.RecherchePrio"></app-texte>
                        </div>
-                       
+
                         <div class="col-2 padD">
                           <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
                             <option  selected value="">Toutes</option>
@@ -165,9 +183,9 @@
                     <!--Tableau-->
                     <hr class="hrClass">
                     <div class="row sectionTableauHeader">
-                     
+
                       <div class="col-2">
-                        
+
                         Décision et motifs
                       </div>
                       <div class="col-6"></div>
@@ -177,8 +195,8 @@
                 </div>
                     </div>
                     <div *ngIf="this.facadeService.listeDecisions&&!(this.facadeService.listeDecisions
-                    | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec' 
-                    | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier' 
+                    | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec'
+                    | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
                     | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
                     | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
                     | dateFiltre:this.formulaire.get('rechercheDateDu').value : this.formulaire.get('rechercheDateAu').value).length">
@@ -233,7 +251,7 @@
                   </thead>
                   <tbody>
                      <tr *ngFor="let pd of this.facadeService.listeDecisions
-                     | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec' 
+                     | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec'
                      | searchfilter3: this.formulaire.get('rechercheNumDossier').value : 'rechercheNumDossier'
                      | searchfilter3: this.formulaire.get('rechercheStatut').value : 'rechercheStatut'
                      | searchfilter3: this.formulaire.get('rechercheJuge').value : 'rechercheJuge'
@@ -252,7 +270,7 @@
                             matTooltipClass="my-class"
                             />
                          </td>
-                         <td [className]="pd.durRestante < 6 ? 'texteDurRestanteRouge' : ''">{{pd.durRestante}}</td>
+                         <td [className]="pd.durRestante < '6' ? 'texteDurRestanteRouge' : ''">{{pd.durRestante}}</td>
                          <td class="bgWhite" >
                            <span [className]="pd.priorite==1 ? 'yellowClass' : ''">
                             <span *ngIf="pd.priorite== 1">Urgente</span>
@@ -264,7 +282,7 @@
                   </tbody>
                 </table>
                 </div>
-              
+
 
 
 

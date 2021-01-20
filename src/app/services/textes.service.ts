@@ -38,7 +38,6 @@ export class TextesService {
   }
 
   public obtenirChaineCulture(): string {
-    console.log('Obtenir culture');
     if (this.langueCourante === 'fr'){
       return 'fr-CA';
     }else{

@@ -74,7 +74,6 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     else{
       this.couleurPrio = false;
     }
-    console.log(event);
   }
   rejeterDecision(){
         const donnees = {
@@ -95,7 +94,6 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         );
   }
   editionDescription(){
-    console.log('dans édition description');
 
     const inputDesc: HTMLElement = document.querySelector(
       '#inputDescription'
