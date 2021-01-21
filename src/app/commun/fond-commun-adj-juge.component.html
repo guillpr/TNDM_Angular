@@ -1,21 +1,4 @@
 <form [formGroup]="formulaire">
-
-
-    <div class="row spaceUpDownRow" *ngIf="!this.facadeService.indicateurJuge">
-                        <div class="col-2"></div>
-                        <div class="col-1 texteTitreNormal">
-                          <app-texte cle="commun.RechercheJuge" class="texteRecherche"></app-texte>
-                        </div>
-
-                          <div class="col-2">
-                            <select class="dlNormal" id="inputGroupSelectJuge" formControlName="rechercheJuge"  >
-                              <option selected value=""  ><app-texte cle="commun.Tous"></app-texte></option>
-
-                            </select>
-                          </div>
-                    </div>
-
-
             <div >
                 <div class="divRight">
 

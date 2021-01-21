@@ -113,7 +113,16 @@
                     <label class="">Date fin délibéré</label>
                 </div>
                 <div class="col-2">
-                   <input class="dateInput" formControlName="dateDelibere" >
+                    <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
+                        <input
+                         class="dateInput"
+                         id="inputNormal"
+                         matInput
+                         [matDatepicker]="picker"
+                         formControlName="dateDelibere">
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                   <!-- <input class="dateInput" formControlName="dateDelibere" > -->
                 </div>
             </div>
         </div>

@@ -33,12 +33,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import {MatNativeDateModule, MatRippleModule, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MY_DATE_FORMATS } from './commun/date-formats';
+
+// Moment
+import { MomentDateModule } from '@angular/material-moment-adapter';
 
 
 
@@ -117,7 +121,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatRippleModule,
     DragDropModule,
     MatInputModule,
-    NgxSpinnerModule
+    MomentDateModule,
+    NgxSpinnerModule,
+    MatFormFieldModule
   ],
   providers: [
     HttpClientModule,
