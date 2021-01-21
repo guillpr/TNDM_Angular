@@ -1,3 +1,4 @@
+import { Signataires } from './../entitees/signataires';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,6 +10,7 @@ import { FacadeService } from '../services/facade.service';
 import { TextesService } from '../services/textes.service';
 import { map } from 'rxjs/operators';
 import { FichierJoint } from '../entitees/fichier-joint';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-import-decision',
@@ -28,6 +30,7 @@ export class ImportDecisionComponent implements OnInit {
   messageErreurExtension = false;
   buttonDisabled = true;
   headers = '';
+  messageErreurImport = false;
 
   // Fichiers
   files: any[] = [];
@@ -37,7 +40,8 @@ export class ImportDecisionComponent implements OnInit {
               public textesService: TextesService,
               public facadeService: FacadeService,
               public dialog: MatDialog,
-              public router: Router) { }
+              public router: Router,
+              private spinner: NgxSpinnerService) { }
 
 
   canDeactivate(
@@ -68,31 +72,48 @@ export class ImportDecisionComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initialiserFormulaire();
+    // if(!this.facadeService.listeAd){
+    //   this.facadeService.obtenirCodeUsagerAD()
+    //   .subscribe((s) => {
+    //     this.facadeService.listeAd = s;
+    //   });
+
+
+      // .subscribe((s) => {
+      //   console.log('Valeur du resultat' , s);
+      //   this.fichiers.push(f);
+      //   this.facadeService.retourDecision = s;
+      //   this.buttonDisabled = false;
+      //   this.formulaire.controls.description.setValue(s.description);
+      //   this.messageErreurImport = false;
+      //   this.spinner.hide();
 
 
 
 
-   }
+
+ //  }
+  }
 
    initialiserFormulaire(){
     this.formulaire = this.fb.group({
       description: new FormControl(''),
       dateDelibere: new FormControl(''),
-      nomJuge0: new FormControl(''),
-      nomJuge1: new FormControl(''),
-      nomJuge2: new FormControl(''),
-      nomJuge3: new FormControl(''),
-      nomJuge4: new FormControl(''),
+      nomJuge0: new FormControl({value: '', disabled: true}),
+      nomJuge1: new FormControl({value: '', disabled: true}),
+      nomJuge2: new FormControl({value: '', disabled: true}),
+      nomJuge3: new FormControl({value: '', disabled: true}),
+      nomJuge4: new FormControl({value: '', disabled: true}),
       ordreSignataire0: new FormControl(''),
       ordreSignataire1: new FormControl(''),
       ordreSignataire2: new FormControl(''),
       ordreSignataire3: new FormControl(''),
       ordreSignataire4: new FormControl(''),
-      redacteur0: new FormControl(''),
-      redacteur1: new FormControl(''),
-      redacteur2: new FormControl(''),
-      redacteur3: new FormControl(''),
-      redacteur4: new FormControl(''),
+      redacteur0: new FormControl({value: '', disabled: true}),
+      redacteur1: new FormControl({value: '', disabled: true}),
+      redacteur2: new FormControl({value: '', disabled: true}),
+      redacteur3: new FormControl({value: '', disabled: true}),
+      redacteur4: new FormControl({value: '', disabled: true}),
       nomFichier: new FormControl('')
     });
    }
@@ -135,10 +156,11 @@ export class ImportDecisionComponent implements OnInit {
     console.log('Retour décision: ' , this.facadeService.retourDecision);
   }
   suppressionJuge(index: number){
-    console.log(index);
-    this.facadeService.retourDecision.juges.splice(index, 1);
+    console.log('Index: ' ,index);
+    console.log('Valeur signataire' , this.facadeService.retourDecision.signataires);
+    this.facadeService.retourDecision.signataires.splice(index, 1);
     this.formulaire.controls['nomJuge' + index].setValue('');
-    if ( this.facadeService.retourDecision.juges.length < 1 ){
+    if ( this.facadeService.retourDecision.signataires.length < 1 ){
       this.suppressionFichier();
     }
     console.log(this.formulaire);
@@ -150,8 +172,8 @@ export class ImportDecisionComponent implements OnInit {
  }
  fileBrowseHandler(files: any){
   console.log('Le fichier' , files);
-   this.gererFichiers(files);
-   // this.fileInput.nativeElement.value = '';
+  this.gererFichiers(files);
+  this.fileInput.nativeElement.value = '';
  }
  gererFichier(file: any) {
 
@@ -162,58 +184,49 @@ export class ImportDecisionComponent implements OnInit {
 
   if (ext === 'doc' || ext === 'docx')
  {
-
-
   const reader = new FileReader();
   let f: FichierJoint;
-
-
-  // this.getBase64(file).then(
-  //   data => console.log(data)
-  // );
-
   reader.readAsDataURL(file);
   reader.onload = (e) => {
-
     f =
     {
       decisionWord:  reader.result.toString().replace(this.headers , '').replace('data:;base64,', ''),
-      codeReseauDepot: 'PROUGUIL0001',
+      codeReseauDepot: this.facadeService.listeAd.codeUtilisateurAD,
       nomDocumentDecision: file.name,
     };
-
     console.log('reader' ,f);
-
     console.log(this.formulaire.get('nomFichier'));
     console.log('formulaire: ' ,  this.formulaire);
-    this.fichiers.push(f);
     console.log('Retour décision avant: ' , this.facadeService.retourDecision);
+    this.spinner.show();
     this.facadeService.ObtenirInfoDocument(f)
     .subscribe((s) => {
-      if(s != null){
         console.log('Valeur du resultat' , s);
+        this.fichiers.push(f);
         this.facadeService.retourDecision = s;
         this.buttonDisabled = false;
         this.formulaire.controls.description.setValue(s.description);
-        if( s.signataires != null)
+        this.messageErreurImport = false;
+        this.spinner.hide();
+        if ( s.signataires != null)
         {
-        this.ajoutJuges(s);
+          console.log('Ajout de juge');
+          this.ajoutJuges(s);
+
         }
-      }
-    });
-    // this.facadeService.TeleverserDocument(f)
-    //  .subscribe((s) => {
-    //    console.log(s);
-    //  });
+    },
+    err => {console.log('Erreur importation' , err);
+            this.spinner.hide();
+            this.messageErreurImport = true;
+  }
+    );
     this.messageErreurExtension = false;
-    // console.log('Contenu du fichier' , this.fichiers[0].contenu);
   };
   console.log(f);
 }
 else{
   this.messageErreurExtension = true;
 }
-
   console.log(this.fichiers);
 }
 gererFichiers(files: any) {
@@ -222,21 +235,26 @@ gererFichiers(files: any) {
     this.gererFichier(element);
   });
 }
-
  // Fin de méthode pour fichiers
-
  ajoutJuges(s: any){
   for (let i = 0; i < this.facadeService.retourDecision.signataires.length; i++) {
-
-
     this.formulaire.controls['nomJuge' + i].setValue( s.signataires[i].juge);
+
+    this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
+    this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);
+
+    // if(s.signataires[i].ordre === 1) {
+    //  this.formulaire.controls['redacteur' + i].setValue(true);
+    //  this.formulaire.controls['ordreSignataire' + i].setValue(true);
+    // }
+    // else{
+    //   this.formulaire.controls['redacteur' + i].setValue(false);
+    // }
+    //this.formulaire.controls['redacteur' + i].setValue(true);
     console.log(this.formulaire);
   }
-
  }
-
   onSubmit(){
     console.log(this.formulaire);
   }
-
 }

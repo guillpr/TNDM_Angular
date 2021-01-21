@@ -2,6 +2,7 @@
 <form [formGroup]="formulaire" (ngSubmit)="onSubmit()">
 <div class="divFond">
     <div class="divCentre">
+        <ngx-spinner bdColor = "rgba(140,137,137,0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
         <div class="titreImport">
             <app-texte cle="import.Titre"></app-texte>
         </div>
@@ -31,6 +32,7 @@
                 <app-texte cle="fj.Parcourir"></app-texte>
                </button>
             </div>
+            <div *ngIf="messageErreurImport" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
           </div>
             <div  class="row" *ngIf="fichiers.length>0 && this.facadeService.retourDecision">
                 <div class="nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
@@ -77,8 +79,9 @@
 <div class="col-2" >
 </div>
 <div class="col-3 fondGris">
-<div class="positionNomJuge">{{juge.juge}}
-</div>
+<input class="positionNomJuge"  formControlName="nomJuge{{i}}">
+<!-- <div class="positionNomJuge">{{juge.juge}}
+</div> -->
 </div>
 <div class="col-1 cbCentre">
     <input class="cbStyle" type="checkbox" formControlName="redacteur{{i}}">

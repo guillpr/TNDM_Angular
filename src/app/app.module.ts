@@ -17,6 +17,10 @@ import { FichierJointComponent } from './commun/fichier-joint.component';
 
 // Dialog
 import { BoiteDialogueComponent } from './commun/boite-dialogue.component';
+// Spinner
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// Import library module
+import { NgxSpinnerModule } from 'ngx-spinner';
 // Guard
 import { CanDeactivateGuard } from './commun/can-deactivate.guard';
 
@@ -113,12 +117,14 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatRippleModule,
     DragDropModule,
     MatInputModule,
+    NgxSpinnerModule
   ],
   providers: [
     HttpClientModule,
     DatePipe,
     {provide: MAT_DATE_LOCALE, useValue:  'fr'}
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

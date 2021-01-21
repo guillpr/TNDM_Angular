@@ -29,6 +29,7 @@
     "ngx-mask": "^11.1.4",
     "ngx-order-pipe": "^2.1.1",
     "ngx-pagination": "^5.0.0",
+    "ngx-spinner": "^10.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "web-animations-js": "^2.3.2",

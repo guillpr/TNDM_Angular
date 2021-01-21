@@ -325,6 +325,8 @@ text-align: center;
 .positionNomJuge{
   position: relative;
   top:10px;
+  background-color: #ecebeb;
+  border: none;
 }
 .nomCetm{
     font-weight: bold;
@@ -347,12 +349,21 @@ text-align: center;
   margin-top:10px;
 }
 .imageTrash{
-  height:30px;
+  height:25px;
   position: relative;
   margin-top:5px;
 }
 .imageTrashListe{
-  height:30px;
+  height:25px;
   position: relative;
   margin-top:8px;
 }
+.erreurImport{
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+  color: red;
+  font-weight: bold;
+}
+

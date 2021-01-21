@@ -57,37 +57,39 @@
         {"cle": "commun.typeDecision" , "valeur": "Décision"},
         {"cle": "commun.typeDecisionRect" , "valeur": "Décision rectifiée"},
         {"cle": "commun.typeDecisionIn" , "valeur": "Décision incidente"},
-        {"cle": "commun.typeDecisionMotifs" , "valeur": "Motifs"}
+        {"cle": "commun.typeDecisionMotifs" , "valeur": "Motifs"},
+        {"cle": "erreur.erreurImportation" , "valeur": "Une erreur est survenue lors de l'importation , veuillez contactez le support"}
 
 
 
 
 
 
-        
-
-        
-        
-        
-
-        
 
 
 
-        
-        
 
 
-        
 
-        
-    
 
-        
 
-        
-        
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ]
 }

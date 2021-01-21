@@ -72,12 +72,6 @@ maskValue: string;
       this.facadeService.listeJugesAdjointes = resJ;
     });
     });
-
-    // Obtenir la liste des Juges/Adjointes
-
-
-
-
     // TODO indicateur Juge codé dur
     this.facadeService.indicateurJuge = false;
     // this.facadeService.obtenirDecisionList()
@@ -89,57 +83,6 @@ maskValue: string;
     //    this.listeJuge = res;
     //  });
   }
-  // public RechercherDecisionBD(){
-  //   this.affTableau = false;
-  //   this.facadeService.obtenirDecisionList();
-  //   let requete = '';
-  //   let secondCritere = false;
-  //   let nonVide = false;
-
-  //   if (!this.formulaire.dirty){
-  //     requete = 'SELECT * FROM DecisionDetails';
-  //   }
-  //   else{
-  //     requete = 'SELECT * FROM DecisionDetails WHERE';
-  //   }
-  //   if (this.formulaire.get('rechercheNumDec').value)
-  //   {
-  //     requete += ' NumeroDecision =' + '\'' + this.formulaire.get('rechercheNumDec').value + '\'';
-  //     secondCritere = true;
-  //     nonVide = true;
-  //   }
-  //   if (this.formulaire.get('rechercheNumDossier').value){
-  //     if (secondCritere === true){
-  //       requete += ' AND';
-  //     }
-  //     requete += ' NumeroDossier =' + '\'' + this.formulaire.get('rechercheNumDossier').value + '\'';
-  //     secondCritere = true;
-  //     nonVide = true;
-  //   }
-  //   if (this.formulaire.get('rechercheStatut').value && Number(this.formulaire.get('rechercheStatut').value)){
-  //     if (secondCritere === true){
-  //       requete += ' AND';
-  //     }
-  //     requete += ' Statut =' + '\'' + this.formulaire.get('rechercheStatut').value + '\'';
-  //     secondCritere = true;
-  //     nonVide = true;
-  //   }
-  //   if (this.formulaire.get('rechercheJuge').value && (this.formulaire.get('rechercheJuge').value) !== '0'){
-  //     if (secondCritere === true){
-  //       requete += ' AND';
-  //     }
-  //     requete += ' Juge  LIKE ' + '\'' + '@' + this.formulaire.get('rechercheJuge').value + '@' + '\'';
-  //     secondCritere = true;
-  //     nonVide = true;
-  //   }
-  //   alert(requete);
-  //   if (nonVide === true){
-  //   if (this.facadeService.list.length > 0){
-  //     this.facadeService.obtenirDecisionListRecherche(requete);
-  //     this.affTableau = true;
-  //   }
-  //   }
-  // }
   public RechercherDecision(){
     this.affTableau = true;
   }
@@ -210,6 +153,8 @@ verifierDate(dd: string){
  }
 
 }
+
+
 }
 
 interface DurRest {
