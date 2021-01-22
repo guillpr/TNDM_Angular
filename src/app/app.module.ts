@@ -68,6 +68,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageComponent } from './commun/message.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -91,7 +92,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     FichierJointComponent,
     DndDirective,
     JugeAdmComponent,
-    BoiteDialogueComponent
+    BoiteDialogueComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

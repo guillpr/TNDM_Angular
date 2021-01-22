@@ -1,4 +1,4 @@
-import { ViewChild } from '@angular/core';
+import { ViewChild, Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
@@ -9,6 +9,8 @@ import { Juge } from '../entitees/juge';
 import { Router } from '@angular/router';
 import { EPriorite } from '../entitees/enums/priorite';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
+import { TextesService } from '../services/textes.service';
 
 
 
@@ -26,6 +28,10 @@ export class FondCommunAdjJugeComponent implements OnInit {
 
   public listeJuge: Juge[] = [];
   @ViewChild(MatSort) sort: MatSort;
+  @Input() public noMessageDateInvalide: string;
+
+  public extensionMessage: string;
+
     p = 1;
     affTableau = false;
     //public listeDecisions: Decision[] = [];
@@ -35,6 +41,10 @@ export class FondCommunAdjJugeComponent implements OnInit {
 
     currentDate: Date;
     dateRouge = false;
+
+    // Message d'erreur
+    dateAuPlusPetite = false;
+    dateErrors = false;
 
     formulaire = new FormGroup({
     rechercheNumDec: new FormControl(''),
@@ -46,7 +56,7 @@ export class FondCommunAdjJugeComponent implements OnInit {
     rechercheType: new FormControl(''),
     rechercheDateDu: new FormControl(''),
     rechercheDateAu: new FormControl(''),
-    NomJuge: new FormControl('')
+    nomJuge: new FormControl('')
 
   });
 
@@ -55,8 +65,11 @@ searchValue2: string;
 maskValue: string;
 
   constructor(public facadeService: FacadeService,
-              public router: Router) { }
+              public router: Router,
+              public datepipe: DatePipe,
+              public textesService: TextesService) { }
   ngOnInit() {
+    this.noMessageDateInvalide = '';
     // Obtenir le code usager AD
     this.facadeService.obtenirCodeUsagerAD()
     .subscribe(res => {
@@ -83,8 +96,42 @@ maskValue: string;
     //    this.listeJuge = res;
     //  });
   }
+  retournerValeurDate(dateMoment: any){
+    const dateMomentAConvertir = new Date(dateMoment);
+    const datePipe = this.datepipe.transform(dateMomentAConvertir, 'yyyy-MM-dd');
+    return datePipe;
+  }
+  validationChampsDate(){
+    let valeurDateDu = '';
+    let valeurDateAu = '';
+    if (this.formulaire.controls.rechercheDateDu.value){
+      valeurDateDu = this.retournerValeurDate(this.formulaire.controls.rechercheDateDu.value);
+      console.log('Valeur date du après conversion' , valeurDateDu);
+     }
+    if (this.formulaire.controls.rechercheDateAu.value){
+      valeurDateAu = this.retournerValeurDate(this.formulaire.controls.rechercheDateAu.value);
+      console.log('Valeur date Au après conversion' , valeurDateAu);
+      }
+    if (valeurDateAu < valeurDateDu ){
+       this.dateAuPlusPetite = true;
+       this.dateErrors = true;
+       this.noMessageDateInvalide = '0001';
+
+      }
+      else{
+        this.dateAuPlusPetite = false;
+        this.dateErrors = false;
+      }
+
+  }
+  validationDesChamps(){
+    this.validationChampsDate();
+
+  }
   public RechercherDecision(){
     this.affTableau = true;
+    console.log('Valeur des champs formulaire' , this.formulaire);
+    this.validationDesChamps();
   }
   public Renitialise(){
    this.formulaire.reset();
@@ -101,6 +148,7 @@ maskValue: string;
     elementAria.setAttribute('dropSpecialCharacters' , 'false');
   }
  }
+
  enMajuscule(texte: string){
   texte.toUpperCase();
  }

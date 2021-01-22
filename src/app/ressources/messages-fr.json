@@ -16,6 +16,10 @@
         { "cle": "0121S", "valeur": "La confirmation de l'adresse électronique doit être la même que l'adresse électronique." },
         { "cle": "0122S", "valeur": "Vous devez saisir une adresse." },
         { "cle": "0124S", "valeur": "La date de naissance doit précéder la date du jour." },
-        { "cle": "0127S", "valeur": "Avertissement - appartement non-saisie , champs non obligatoire."}
+        { "cle": "0127S", "valeur": "Avertissement - appartement non-saisie , champs non obligatoire."},
+        { "cle": "0127S", "valeur": "Avertissement - appartement non-saisie , champs non obligatoire."},
+        { "cle": "0001", "valeur": " Veuillez spécifier une date de début égale ou inférieure à la date de fin."},
+        { "cle": "0002", "valeur": " Un autre message pour faire des tests."}
+
     ]
 }

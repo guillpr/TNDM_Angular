@@ -62,7 +62,7 @@
     color: black;
     padding-top: 10px;
     width: 250px;
-   
+
 }
 .tbNormal {
 
@@ -216,7 +216,7 @@ input[type=radio]:checked:before {
     position: relative;
     right: 12.5px;
     max-width: 9.5%;
-    
+
  }
  .texteTitreDossTaq{
     font-size: 16px;
@@ -236,7 +236,7 @@ input[type=radio]:checked:before {
     top:2px;
     max-width: 12%;
  }
- 
+
  .spaceUpDownRow{
      margin-top:10px;
      height: 25px;
@@ -258,7 +258,7 @@ input[type=radio]:checked:before {
     max-width: 6%;
 }
 
-#inputNormal{
+.inputNormal{
     text-align: center;
     width: 250px;
     background-color: #f3f5fb;
@@ -282,6 +282,15 @@ input[type=radio]:checked:before {
     color:red;
     font-weight: bold;
 }
+.inputBorderRouge{
+    text-align: center;
+    width: 250px;
+    background-color: #f3f5fb;
+    border-radius: 5px;
+    border: solid 2px red;
+    height: 25px;
+    /*border-color: red;*/
+}
 .sectionTableauHeader{
     font-weight: bold;
     font-size: 16px;
@@ -300,4 +309,10 @@ input[type=radio]:checked:before {
 .hrClass{
     border: solid 3px #2257a7;
     opacity: 0.3;
+}
+.messageErreurAcc{
+  color:red;
+  font-weight: bold;
+  margin-left: 340px;
+  margin-top: 10px;
 }

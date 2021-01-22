@@ -30,6 +30,6 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "strictDomEventTypes":false
-    
+
   }
 }
