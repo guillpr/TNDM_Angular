@@ -23,7 +23,7 @@
     font-weight: 600;
     margin-top: 15px;
     margin-left: 10px;
-    color:black; 
+    color:black;
 }
 .arrowDown{
     margin-left: auto;
@@ -68,6 +68,7 @@
     max-width: 12%;
     padding-right: 5px;
     padding-left: 5px;
+    border:none;
 }
 .numUniCol{
     max-width: 10%;
@@ -99,7 +100,18 @@
 }
 .dlNormalGreen{
     background-color: lime;
-    
+
+}
+.buttonChangements{
+  background-color: #2257a7 !important;
+  color: white;
+  border: #2257a7 !important;
+ /* margin-left: 283px;*/
+  width:200px;
+  height:35px;
+  border-radius: 10px;
+  float: right;
+  margin-bottom: 10px;
 }
 .buttonDocument {
     background-color: #2257a7 !important;
@@ -128,7 +140,7 @@
     width:160px;
     height:35px;
     border-radius: 10px;
-    
+
 }
 .buttonDemarrer{
     background-color: #2257a7 !important;
@@ -139,8 +151,8 @@
     height:35px;
     border-radius: 10px;
     margin-right:20px;
-    
-    
+
+
 }
 .buttonFermer{
     background-color: #2257a7 !important;
@@ -154,6 +166,12 @@
 .inputDesc{
     border:none;
     resize: none;
+    border:none;
     background-color: white;
+
+}
+.inputDateDelibere{
+  border:none;
+  border:none;
 }
 

@@ -191,7 +191,7 @@ export class ImportDecisionComponent implements OnInit {
     f =
     {
       decisionWord:  reader.result.toString().replace(this.headers , '').replace('data:;base64,', ''),
-      codeReseauDepot: this.facadeService.listeAd.codeUtilisateurAD,
+      codeReseauDepot: this.facadeService.listeAd.codeReseau,
       nomDocumentDecision: file.name,
     };
     console.log('reader' ,f);

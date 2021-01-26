@@ -9,17 +9,21 @@
                     <hr class="hrClass" />
                     <div>
 
-                      <div class="row sectStatut">
+
+
+                      <div   class="row sectStatut">
                         <div class="col-2"></div>
                         <div class="col-1 texteTitreNormal">Statut</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Importé</div>
-                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Prêt pour la signature</div>
-                        <div class="col-1"> <input class="cbStyle" type="checkbox" > En cours</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Déposé</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Analysé</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Accepté</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" > Rejeté</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" formControlName="statutImporte" > Importé</div>
+                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" formControlName="statutPretSignature" > Prêt pour la signature</div>
+                        <div class="col-1"> <input class="cbStyle" type="checkbox"  formControlName="statutEnCours" > En cours</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox"   formControlName="statutDepose"> Déposé</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox"  formControlName="statutAnalyse"> Analysé</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox"   formControlName="statutAccepte"> Accepté</div>
+                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox"  formControlName="statutRejete"> Rejeté</div>
                       </div>
+
+
 
                        <!--Section 2e proposition MA-->
                        <div class="row spaceUpDownRow">
@@ -272,6 +276,7 @@
                   </tbody>
                 </table>
                 </div>
+              </form>
 
 
 

@@ -19,7 +19,7 @@
         { "cle": "0127S", "valeur": "Avertissement - appartement non-saisie , champs non obligatoire."},
         { "cle": "0127S", "valeur": "Avertissement - appartement non-saisie , champs non obligatoire."},
         { "cle": "0001", "valeur": " Veuillez spécifier une date de début égale ou inférieure à la date de fin."},
-        { "cle": "0002", "valeur": " Un autre message pour faire des tests."}
+        { "cle": "0002", "valeur": " Veuillez réduire la période pour le champ « Date importation » (moins d’un an)."}
 
     ]
 }

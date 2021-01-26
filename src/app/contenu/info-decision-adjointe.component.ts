@@ -21,6 +21,8 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   prioSelected = '';
   couleurPrio = false;
 
+  boutonSauvegardeModif = false;
+
   isEnabled = true;
 
   // Mail
@@ -66,6 +68,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     this.boiteHistorique = false;
   }
   getColor(event: any){
+    this.boutonSauvegardeModif=true;
     this.prioSelected = event.target.value;
     const valeurPrio = event.target.value;
     if(valeurPrio === '1'){
@@ -95,6 +98,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   }
   editionDescription(){
 
+
     const inputDesc: HTMLElement = document.querySelector(
       '#inputDescription'
   );
@@ -107,4 +111,12 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   }
   }
 
+  afficheBouton(){
+    this.boutonSauvegardeModif = true;
+  }
+  sauvegarderChangements(){
+    this.boutonSauvegardeModif = false;
+  }
+
 }
+

@@ -1,5 +1,6 @@
 export class Usager {
-  codeUtilisateurAD: string;
+  codeReseau: string;
+  accesUsager: number;
 
    constructor() {}
    }

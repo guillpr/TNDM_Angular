@@ -4,7 +4,7 @@
         <!--Début zone décision-->
         <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.decision"></app-texte>
-           
+
         </div>
         <!--Début row décision-->
         <div class="row bold">
@@ -13,7 +13,7 @@
             <div class="col dateImpCol"><app-texte cle="commun.dateImp"></app-texte></div>
             <div class="col numUtiCol"><app-texte cle="commun.utilisateur"></app-texte></div>
             <div class="col dateDeliCol"><app-texte cle="commun.requerant"></app-texte></div>
-            
+
             <div class="col-2 dateDeliCol"><app-texte cle="commun.dateDeli"></app-texte> <i class="fas fa-edit ml-1"></i></div>
             <div class="col numUniCol">Durée restante</div>
             <div class="col numUtiCol">Priorité</div>
@@ -25,28 +25,33 @@
             <div class="row">
                 <div class="col numUniCol">2020-01-123</div>
                 <div class="col dateDeliCol">
-                    <textarea [disabled]="isEnabled" class="inputDesc" rows="3" cols="18">numéro dossier -requérant</textarea>
+                    <textarea (change)="afficheBouton()"  class="inputDesc" rows="3" cols="18">numéro dossier -requérant</textarea>
                     </div>
                 <div class="col dateImpCol">2020-02-01</div>
                 <div class="col numUtiCol">prouguil001</div>
                 <div class="col dateDeliCol">Entreprise Les solutions vertes du québec
 
                 </div>
-              
-                <div class="col-2 dateDeliCol">2020-02-01</div>
+
+                <div class="col-2 dateDeliCol">
+                  <input class="inputDateDelibere" (change)="afficheBouton()"  value="2020-02-01">
+
+                </div>
                 <div class="col numUniCol">15 jours</div>
                 <div class="col numUtiCol">
                        <select  (change)="getColor($event)" [className]="couleurPrio ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
                          <option  selected value="1">Urgente</option>
                          <option  value="2">Normale</option>
-                         
+
                        </select>
-                     
-                          
+
+
                      </div>
                 <div class="col">Prête pour traitement</div>
             </div>
         </div>
+
+        <button *ngIf="boutonSauvegardeModif" (click)="sauvegarderChangements()" class="buttonChangements">Sauvegarder changements</button>
         <!--Fin zone décision-->
 
          <!--Début zone dossiers associés-->
@@ -87,7 +92,7 @@
             </div>
             <div class="row">
                 <div class=col-2>
-                    STE-Q-114287-1401 
+                    STE-Q-114287-1401
                 </div>
                 <div class=col-2>
                     Entreprise ABC
@@ -95,7 +100,7 @@
             </div>
             <div class="row">
                 <div class=col-2>
-                    STE-Q-114287-1401 
+                    STE-Q-114287-1401
                 </div>
                 <div class=col-2>
                     Entreprise ABC
@@ -197,13 +202,13 @@
       <!--Fin zone bouton-->
 
       <!--Début zone bouton juge-->
-    
+
       <div *ngIf="this.facadeService.indicateurJuge">
         <div class="row">
             <div class="col-2">
                 <button class="buttonDocument">Voir documents</button>
             </div>
-    
+
             <div class="col-2">
                 <a href="mailto:{{email}}?Subject={{emailSubject}}" target="_blank">
                 <button  class="buttonSignRejet">Signaler rejet décision</button>
@@ -212,7 +217,7 @@
             <div class="col-2">
                 <button class="buttonFermer">Fermer</button>
             </div>
-            
+
         </div>
     </div>
 

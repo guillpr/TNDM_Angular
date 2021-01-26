@@ -60,7 +60,7 @@ import { DndDirective } from './commun/dnd.directive';
 // Autres importations
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -69,6 +69,8 @@ import { OrderModule } from 'ngx-order-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageComponent } from './commun/message.component';
+import { WinAuthInterceptor } from './commun/WinAuthInterceptor';
+import { AccesRefuseComponent } from './commun/acces-refuse.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -93,7 +95,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     DndDirective,
     JugeAdmComponent,
     BoiteDialogueComponent,
-    MessageComponent
+    MessageComponent,
+    AccesRefuseComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +108,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
       {path: 'infoAdjointe', component: InfoDecisionAdjointeComponent },
       {path: 'infoJuge', component: InfoDecisionJugeComponent },
       {path: 'importDecision', component: ImportDecisionComponent , canDeactivate: [CanDeactivateGuard] },
-      {path: 'gestionPreferences', component: GestionPreferencesComponent }
+      {path: 'gestionPreferences', component: GestionPreferencesComponent },
+      {path: 'accesRefuse', component: AccesRefuseComponent }
     ]),
     HttpClientModule,
     NgxMaskModule.forRoot(),
@@ -130,7 +134,12 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   providers: [
     HttpClientModule,
     DatePipe,
-    {provide: MAT_DATE_LOCALE, useValue:  'fr'}
+    {provide: MAT_DATE_LOCALE, useValue:  'fr'},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: WinAuthInterceptor,
+      multi: true
+  }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

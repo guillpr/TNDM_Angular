@@ -1,6 +1,6 @@
 import { ViewChild, Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { Decision } from '../entitees/decision';
 import { FacadeService } from '../services/facade.service';
@@ -46,7 +46,15 @@ export class FondCommunAdjJugeComponent implements OnInit {
     dateAuPlusPetite = false;
     dateErrors = false;
 
-    formulaire = new FormGroup({
+    formulaire = this.fb.group({
+
+        statutImporte: new FormControl(true),
+        statutPretSignature: new FormControl(true),
+        statutEnCours: new FormControl(true),
+        statutDepose: new FormControl(false),
+        statutAnalyse: new FormControl(false),
+        statutAccepte: new FormControl(false),
+        statutRejete: new FormControl(false),
     rechercheNumDec: new FormControl(''),
     rechercheNumDossier: new FormControl(''),
     rechercheStatut: new FormControl(''),
@@ -67,8 +75,12 @@ maskValue: string;
   constructor(public facadeService: FacadeService,
               public router: Router,
               public datepipe: DatePipe,
-              public textesService: TextesService) { }
+              public textesService: TextesService,
+              public fb: FormBuilder) { }
   ngOnInit() {
+
+
+
     this.noMessageDateInvalide = '';
     // Obtenir le code usager AD
     this.facadeService.obtenirCodeUsagerAD()
@@ -76,10 +88,25 @@ maskValue: string;
       console.log('Résultat AD : ' , res);
       this.facadeService.listeAd = res;
       console.log('Liste AD service de facade: ' , this.facadeService.listeAd);
-      console.log('le nom utilisateur' , this.facadeService.listeAd.codeUtilisateurAD);
+      console.log('le nom utilisateur' , this.facadeService.listeAd.codeReseau);
 
-      console.log('Liste AD avant méthode obt Juges et Adjointes' , this.facadeService.listeAd.codeUtilisateurAD);
-      this.facadeService.ObtenirJugesAdjointes(this.facadeService.listeAd.codeUtilisateurAD)
+      switch (res.accesUsager) {
+        case 0: {
+          this.facadeService.indicateurJuge = false;
+          this.router.navigateByUrl('/infoAdjointe');
+          break;
+        }
+        case 1: {
+          this.facadeService.indicateurJuge = false;
+          break;
+        }
+        case 2: {
+          this.facadeService.indicateurJuge = true;
+          break;
+       }
+     }
+      console.log('Liste AD avant méthode obt Juges et Adjointes' , this.facadeService.listeAd.codeReseau);
+      this.facadeService.ObtenirJugesAdjointes(this.facadeService.listeAd.codeReseau)
     .subscribe(resJ => {
       console.log('Le résultat du AdjointeJuges' ,  resJ);
       this.facadeService.listeJugesAdjointes = resJ;
@@ -116,7 +143,9 @@ maskValue: string;
        this.dateAuPlusPetite = true;
        this.dateErrors = true;
        this.noMessageDateInvalide = '0001';
-
+      }
+    if (Number(valeurDateAu) - Number(valeurDateDu) > 365) {
+      this.noMessageDateInvalide = '0002';
       }
       else{
         this.dateAuPlusPetite = false;
@@ -185,6 +214,7 @@ dateDiffInDays(dd: string) {
   / (1000 * 60 * 60 * 24)).toString();
 
 }
+
 verifierDate(dd: string){
   this.currentDate = new Date();
   // round to the nearest whole number
@@ -199,11 +229,9 @@ verifierDate(dd: string){
  else{
   return true;
  }
-
+}
 }
 
-
-}
 
 interface DurRest {
   durRestante: number;

@@ -42,8 +42,19 @@ export class FacadeService {
   private JugeUrl = environment.apiBaseUrl + 'JugeDetail';
   private NoDecisionUrl = environment.apiBaseUrl + 'DecisionDetail/NoDecision';
   private obtenirInfoDocumentUrl = environment.apiBaseUrlSignature + 'v1/Decision/Info';
-  private usagerAdURL = environment.apiBaseUrlDossier + 'v1/Ressource/Ad';
-  private jugesAdjointesURL = environment.apiBaseUrlDossier + 'v1/Ressource/JugesAdjointe';
+
+  private usagerWindowsUrl = environment.apiBaseUrlFacade + 'v1/Decision//api/Decision/Ad';
+
+// Facade
+  private FacadeUrlAd = environment.apiBaseUrlFacade + 'v1/Decision/Ad';
+  private obtenirInfoDocumentUrlFacade = environment.apiBaseUrlFacade + 'v1/Decision/Info';
+
+  private jugesAdjointesURL = environment.apiBaseUrlFacade + 'v1/Decision/JugesAdjointe';
+
+
+
+
+    //private usagerAdURL = environment.apiBaseUrlDossier + 'v1/Ressource/Ad';
 
   private URL = 'http://localhost:57759/api/DecisionDetail';
   formData: Decision = new Decision();
@@ -54,28 +65,38 @@ export class FacadeService {
   // // public ObtenirDecision():Observable<ReponseBase<Decision>>{
   // //   return this.http.get<ReponseBase<Decision>>(this.obtenirDecision);
   // // }
+
   // Méthode GET
+
   public obtenirDecisionList(): Observable<Decision[]>{
    return this.http.get<Decision[]>(this.DecisionURL);
   }
   public obtenirJuges(): Observable<Juge[]>{
     return this.http.get<Juge[]>(this.JugeUrl);
   }
+  // Obtenir Code Usager du service de facade
   public obtenirCodeUsagerAD(): Observable<Usager>{
-    return this.http.get<Usager>(this.usagerAdURL);
+    console.log('dans obtenir code usager ad service de facade front-end');
+    return this.http.get<Usager>(this.FacadeUrlAd);
   }
-  public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
-    return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );
-  }
+ //   Obtenir Juges du service facade
+ public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
+  return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );
+}
+  // public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
+  //   return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );
+  // }
   // Méthode POST
-  public ObtenirInfoDocument(fichier: FichierJoint): Observable<RetourDecision>{
-    return this.http.post<RetourDecision>(this.obtenirInfoDocumentUrl, JSON.stringify(fichier), this.httpOptions);
 
-  }
+  // Obtenir InfoDécision du service de facade
+  public ObtenirInfoDocument(fichier: FichierJoint): Observable<RetourDecision>{
+       return this.http.post<RetourDecision>(this.obtenirInfoDocumentUrlFacade, JSON.stringify(fichier), this.httpOptions);
+     }
 
  public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision[]>{
    return this.http.post<RetourDecision[]>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
  }
+
   // public obtenirDecisionListRecherche(requete: string){
   //   return this.http.get(this.DecisionRecherche + requete)
   //    .toPromise()
