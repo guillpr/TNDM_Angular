@@ -1,12 +1,15 @@
 <app-banniere></app-banniere>
 <form [formGroup]="formulaire" (ngSubmit)="onSubmit()">
-<div class="divFond">
     <div class="divCentre">
         <ngx-spinner bdColor = "rgba(140,137,137,0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
+        <div class="containerTitre">
+        <div class="barreTitre"></div>
         <div class="titreImport">
             <app-texte cle="import.Titre"></app-texte>
         </div>
-         <hr/>
+      </div>
+    
+         <hr />
          <!-- <div class="espCetm" *ngIf="this.facadeService.retourDecision">
            <div class="row">
              <div class="col-2 nomCetm">
@@ -51,9 +54,10 @@
             <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
             <!--Fin Section dépot de fichier-->
 
-         <div class="espDesc" *ngIf="this.facadeService.retourDecision">
+         <div class="espDesc" >
             <div class="nomDescription">
                 <app-texte cle="import.Description"></app-texte>
+                <span class="requisAs">*</span>
 
             <input class="inputReg" formControlName="description" >
             </div>
@@ -147,7 +151,7 @@
             <button (click)="quitterDecision()" class="buttonQuitter" >Annuler</button>
     <button  [className]="buttonDisabled ? 'buttonImporterDis' : 'buttonImporter'" class="buttonImporter" (click)="importerDecision()" [disabled] = "buttonDisabled" >Importer</button>
     </div>
-  </div>
+ 
 
 
 </form>

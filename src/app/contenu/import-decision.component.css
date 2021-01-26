@@ -5,7 +5,7 @@
     height: 1000px;
 }
 .divCentre{
-    width: 90%;
+    width: 100%;
     background-color: white;
     display: block;
     margin: auto;
@@ -15,8 +15,10 @@
 .titreImport{
     margin: 0;
     padding-left:10px;
-    padding-top: 10px;
+    /* padding-top: 10px; */
     font-weight: bold;
+    position: relative;
+    bottom: 35px;
 }
 .espFichier{
     width: 100%;
@@ -381,4 +383,17 @@ text-align: center;
 #inputNormal{
   padding:10px;
 }
-
+.requisAs{
+  margin-left: 5px;
+  color:red;
+}
+.barreTitre{
+    background-color:  #2257a7;
+    opacity: 0.3;
+    height: 50px;
+}
+.containerTitre{
+  height: 50px;
+  width: 100%;
+ 
+}
