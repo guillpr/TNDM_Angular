@@ -17,7 +17,7 @@ export class DateFiltrePipe implements PipeTransform {
     }
     if (valeurDateDu && !valeurDateAu) {
       return list.filter(dec =>
-        dec.dateImportation.toLocaleLowerCase().includes(valeurDateDu.toLocaleLowerCase()));
+        dec.dateImportation.toDateString().toLocaleLowerCase().includes(valeurDateDu.toLocaleLowerCase()));
      }
     if (valeurDateDu && valeurDateAu){
        return list.filter(dec =>

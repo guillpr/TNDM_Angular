@@ -7,9 +7,9 @@
         <div class="titreImport">
             <app-texte cle="import.Titre"></app-texte>
         </div>
-        <div class="chObRouge">* Champ obligatoire</div>
+        <div *ngIf="fichiers.length>0 && this.facadeService.retourDecision" class="chObRouge">* Champ obligatoire</div>
       </div>
-    
+
          <hr />
          <!-- <div class="espCetm" *ngIf="this.facadeService.retourDecision">
            <div class="row">
@@ -152,7 +152,7 @@
             <button (click)="quitterDecision()" class="buttonQuitter" >Annuler</button>
     <button  [className]="buttonDisabled ? 'buttonImporterDis' : 'buttonImporter'" class="buttonImporter" (click)="importerDecision()" [disabled] = "buttonDisabled" >Importer</button>
     </div>
- 
+
 
 
 </form>

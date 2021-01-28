@@ -29,13 +29,13 @@ export class SortDirective {
 
      this.appSort.sort(sort.startSort(property, order, type));
      elem.setAttribute('data-order', 'asc');
-     this.facadeService.listeDecisions = this.appSort;
+     // this.facadeService.listeDecision = this.appSort;
 
    }
    else{
      this.appSort.sort(sort.startSort(property, order, type));
      elem.setAttribute('data-order' , 'desc');
-     this.facadeService.listeDecisions = this.appSort;
+     // this.facadeService.listeDecisions = this.appSort;
    }
   }
 

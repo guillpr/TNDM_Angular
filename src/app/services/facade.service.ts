@@ -24,13 +24,16 @@ export class FacadeService {
 
   numDecisionTemp: string;
   indicateurJuge: boolean;
+  reponseSuppressionFichier = false;
 
   // Liste ou object
   public listJuge: Juge[];
   public retourDecision: RetourDecision;
-  public listeDecisions: Decision[];
+  public listeDecision: Decision;
   public listeAd: Usager;
   public listeJugesAdjointes: JugesAdjointes[];
+  public body = { title: 'Angular PUT Request Example' };
+
 
 
 
@@ -48,8 +51,11 @@ export class FacadeService {
 // Facade
   private FacadeUrlAd = environment.apiBaseUrlFacade + 'v1/Decision/Ad';
   private obtenirInfoDocumentUrlFacade = environment.apiBaseUrlFacade + 'v1/Decision/Info';
+  private modifDecisionUrlFacade = environment.apiBaseUrlFacade + 'v1/Decision/ModifDecision';
 
   private jugesAdjointesURL = environment.apiBaseUrlFacade + 'v1/Decision/JugesAdjointe';
+
+  private obtenirInfosDecisionURL = environment.apiBaseUrlFacade + 'v1/Decision/InfosDecision';
 
 
 
@@ -57,7 +63,6 @@ export class FacadeService {
     //private usagerAdURL = environment.apiBaseUrlDossier + 'v1/Ressource/Ad';
 
   private URL = 'http://localhost:57759/api/DecisionDetail';
-  formData: Decision = new Decision();
   public httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -67,7 +72,6 @@ export class FacadeService {
   // // }
 
   // Méthode GET
-
   public obtenirDecisionList(): Observable<Decision[]>{
    return this.http.get<Decision[]>(this.DecisionURL);
   }
@@ -83,18 +87,31 @@ export class FacadeService {
  public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
   return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );
 }
+// Obtenir informations d'un décision par ID
+public ObtenirInfosDecision(idDocument: number): Observable<Decision>{
+  return this.http.get<Decision>(this.obtenirInfosDecisionURL + '?idDocument=' + idDocument );
+}
   // public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
   //   return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );
   // }
   // Méthode POST
 
   // Obtenir InfoDécision du service de facade
-  public ObtenirInfoDocument(fichier: FichierJoint): Observable<RetourDecision>{
-       return this.http.post<RetourDecision>(this.obtenirInfoDocumentUrlFacade, JSON.stringify(fichier), this.httpOptions);
+  public ObtenirInfoDocument(fichier: FichierJoint): Observable<Decision>{
+       return this.http.post<Decision>(this.obtenirInfoDocumentUrlFacade, JSON.stringify(fichier), this.httpOptions);
      }
 
  public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision[]>{
    return this.http.post<RetourDecision[]>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
+ }
+
+ // Méthode PUT
+ public modifieInfoDecision(idDecision: number, description: string,
+                            date: string, priorite: string, changementDate: boolean): Observable<boolean>{
+console.log('Date: ' , date);
+return this.http.put<boolean>(this.modifDecisionUrlFacade + '?idDocument=' + idDecision
+    + '&Description=' + description + '&DateFinDelibere=' + date + '&Priorite=' + priorite +
+     '&ChangementDate=' + changementDate, this.body);
  }
 
   // public obtenirDecisionListRecherche(requete: string){

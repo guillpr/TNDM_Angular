@@ -1,3 +1,4 @@
+import { FacadeService } from './../services/facade.service';
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,6 +10,7 @@ export interface DialogData {
   texteBoutonNon: string;
   reponse: string;
   afficherBoutonOui: boolean;
+  valeurReponse: boolean;
 }
 
 @Component({
@@ -19,17 +21,20 @@ export interface DialogData {
 export class BoiteDialogueComponent  {
 
   constructor( public dialogRef: MatDialogRef<BoiteDialogueComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
+               @Inject(MAT_DIALOG_DATA) public data: DialogData,
+               public facadeService: FacadeService) {
                 this.data.reponse = 'N';
                }
 
                public onNoClick(): void {
                 this.data.reponse = 'N';
+                this.facadeService.reponseSuppressionFichier = false;
                 this.dialogRef.close();
             }
 
             public onYesClick(): void {
                 this.data.reponse = 'O';
+                this.facadeService.reponseSuppressionFichier = true;
                 this.dialogRef.close();
               }
 }

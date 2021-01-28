@@ -15,11 +15,11 @@ export class Searchfilter3Pipe implements PipeTransform {
     }
     if (searchValue && nomParm === 'rechercheNumDec' ){
       return list.filter(dec =>
-        dec.numeroDecision.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
+        dec.identifiant.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
     }
     if (searchValue && nomParm === 'rechercheNumDossier'){
       return list.filter(dec =>
-        dec.numeroDossier.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
+        dec.dossiersTAQ[0].noDossierTAQ.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
     }
     if (searchValue && nomParm === 'rechercheStatut'){
       return list.filter(dec =>
@@ -27,7 +27,7 @@ export class Searchfilter3Pipe implements PipeTransform {
     }
     if (searchValue && nomParm === 'rechercheJuge'){
       return list.filter(dec =>
-        dec.juge.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
+        dec.nomRessourceDepot.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
     }
     else{
       return list;

@@ -44,10 +44,10 @@ export class FondCommunAdjJugeComponent implements OnInit {
 
     // Message d'erreur
     dateAuPlusPetite = false;
-    dateErrors = false;
+    ErreurDate = false;
 
     formulaire = this.fb.group({
-
+    statut: this.fb.group({
         statutImporte: new FormControl(true),
         statutPretSignature: new FormControl(true),
         statutEnCours: new FormControl(true),
@@ -55,16 +55,17 @@ export class FondCommunAdjJugeComponent implements OnInit {
         statutAnalyse: new FormControl(false),
         statutAccepte: new FormControl(false),
         statutRejete: new FormControl(false),
+      }),
     rechercheNumDec: new FormControl(''),
     rechercheNumDossier: new FormControl(''),
     rechercheStatut: new FormControl(''),
-    rechercheSection: new FormControl(''),
+    rechercheSection: new FormControl('0'),
     rechercheJuge: new FormControl(''),
-    recherchePriorite: new FormControl(''),
+    recherchePriorite: new FormControl('0'),
     rechercheType: new FormControl(''),
     rechercheDateDu: new FormControl(''),
     rechercheDateAu: new FormControl(''),
-    nomJuge: new FormControl('')
+    nomJuge: new FormControl('0')
 
   });
 
@@ -128,34 +129,69 @@ maskValue: string;
     const datePipe = this.datepipe.transform(dateMomentAConvertir, 'yyyy-MM-dd');
     return datePipe;
   }
+  reiniatialiserErreurs(){
+    this.ErreurDate = false;
+
+  }
   validationChampsDate(){
     let valeurDateDu = '';
     let valeurDateAu = '';
+    console.log('Valeur date du formulaire' , this.formulaire.controls.rechercheDateDu);
     if (this.formulaire.controls.rechercheDateDu.value){
       valeurDateDu = this.retournerValeurDate(this.formulaire.controls.rechercheDateDu.value);
+
+      const regexDate = '^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$';
+      console.log('Valeur date du t' , valeurDateDu);
+     // console.log("Resultat du regex " , valeurDateDu.match.toString()(regexDate));
+      if (valeurDateDu.match(regexDate))
+      {
+        console.log('Regex match');
+      }
+      else{
+        console.log('Regex ne match pas');
+      }
       console.log('Valeur date du après conversion' , valeurDateDu);
+     }
+     else{
+       console.log('Date non valide');
+       this.ErreurDate = true;
+
+       this.noMessageDateInvalide = '0003';
      }
     if (this.formulaire.controls.rechercheDateAu.value){
       valeurDateAu = this.retournerValeurDate(this.formulaire.controls.rechercheDateAu.value);
       console.log('Valeur date Au après conversion' , valeurDateAu);
       }
-    if (valeurDateAu < valeurDateDu ){
-       this.dateAuPlusPetite = true;
-       this.dateErrors = true;
-       this.noMessageDateInvalide = '0001';
+    if ((valeurDateAu && valeurDateDu) && valeurDateAu < valeurDateDu ){
+      console.log('valeurDateAu < valeurDateDu');
+      this.dateAuPlusPetite = true;
+      this.ErreurDate = true;
+      this.noMessageDateInvalide = '0001';
       }
-    if (Number(valeurDateAu) - Number(valeurDateDu) > 365) {
+
+    const date1 = new Date(valeurDateDu);
+    const date2 = new Date(valeurDateAu);
+
+    const diffDate = date2.getTime() - date1.getTime();
+    const diffEnJour = diffDate / (1000 * 3600 * 24);
+
+    console.log('Différence date: ' , diffEnJour);
+
+    console.log('Date 1' , date1);
+    if (diffEnJour > 365) {
+      console.log('> 365');
       this.noMessageDateInvalide = '0002';
+      this.ErreurDate = true;
       }
       else{
         this.dateAuPlusPetite = false;
-        this.dateErrors = false;
       }
-
   }
   validationDesChamps(){
-    this.validationChampsDate();
-
+    this.reiniatialiserErreurs();
+    if (this.formulaire.controls.rechercheDateDu.value || this.formulaire.controls.rechercheDateAu.value){
+      this.validationChampsDate();
+    }
   }
   public RechercherDecision(){
     this.affTableau = true;
@@ -164,6 +200,16 @@ maskValue: string;
   }
   public Renitialise(){
    this.formulaire.reset();
+   this.valeursParDefault();
+  }
+  valeursParDefault(){
+    this.formulaire.get('nomJuge').setValue(0);
+    this.formulaire.get('rechercheSection').setValue(0);
+    this.formulaire.get('recherchePriorite').setValue(0);
+    this.formulaire.get('statut').get('statutImporte').setValue(true);
+    this.formulaire.get('statut').get('statutPretSignature').setValue(true);
+    this.formulaire.get('statut').get('statutEnCours').setValue(true);
+    this.formulaire.updateValueAndValidity();
   }
  public correctionMasque(){
   const elementAria: HTMLElement = document.querySelector(
@@ -177,7 +223,6 @@ maskValue: string;
     elementAria.setAttribute('dropSpecialCharacters' , 'false');
   }
  }
-
  enMajuscule(texte: string){
   texte.toUpperCase();
  }
@@ -185,54 +230,7 @@ public SelectionDecision(numDec: string){
   this.facadeService.numDecisionTemp = numDec;
   this.router.navigateByUrl('/infoAdjointe');
 }
-dateDiffInDays(dd: string) {
-  this.currentDate = new Date();
-  // round to the nearest whole number
-  const newDate = new Date(dd);
-
- // return Math.round(( Number(this.currentDate) - Number(dd)) / (1000 * 60 * 60 * 24));
-
-  if (newDate > this.currentDate)
- {
-   this.dateRouge = true;
- }
- else{
-   this.dateRouge = false;
- }
-
-  const nombreAjouter = { durRestante: Math.floor((Date.UTC( newDate.getFullYear(),
- newDate.getMonth(),  newDate.getDate()) -
-  Date.UTC(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate()) )
- / (1000 * 60 * 60 * 24))};
-
-  this.listeDureeRestante.push(nombreAjouter);
-
-
-  return  Math.floor((Date.UTC( newDate.getFullYear(),
-  newDate.getMonth(),  newDate.getDate()) -
-   Date.UTC(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate()) )
-  / (1000 * 60 * 60 * 24)).toString();
-
 }
-
-verifierDate(dd: string){
-  this.currentDate = new Date();
-  // round to the nearest whole number
-  const newDate = new Date(dd);
-
- // return Math.round(( Number(this.currentDate) - Number(dd)) / (1000 * 60 * 60 * 24));
-
-  if (newDate > this.currentDate)
- {
-   return false;
- }
- else{
-  return true;
- }
-}
-}
-
-
 interface DurRest {
   durRestante: number;
 }

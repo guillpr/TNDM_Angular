@@ -68,7 +68,7 @@
 
     text-align: center;
     width: 250px;
-    background-color: #f3f5fb;
+    /* background-color: #f3f5fb; */
     border-radius: 5px;
     border: solid 1px #d0c9c9;
     height: 25px;
@@ -76,20 +76,20 @@
 }
 .dlNormal {
     width: 250px;
-    background-color: #f3f5fb;
+    /* background-color: #f3f5fb; */
     border-radius: 5px;
     border: solid 1px #d0c9c9;
     /* text-indent: 25%;  */
-    color:gray;
+    color:black;
     height: 25px;
 }
 .dlNormalStatut {
     width: 250px;
-    background-color: #f3f5fb;
+    /* background-color: #f3f5fb; */
     border-radius: 5px;
     border: solid 1px #d0c9c9;
     /* text-indent: 25%;  */
-    color:gray;
+    color:black;
     height: 25px;
 }
 
@@ -261,7 +261,7 @@ input[type=radio]:checked:before {
 .inputNormal{
     text-align: center;
     width: 250px;
-    background-color: #f3f5fb;
+    /* background-color: #f3f5fb; */
     border-radius: 5px;
     border: solid 1px #d0c9c9;
     height: 25px;

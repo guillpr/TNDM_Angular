@@ -1,6 +1,6 @@
 import { Signataires } from './../entitees/signataires';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -11,6 +11,7 @@ import { TextesService } from '../services/textes.service';
 import { map } from 'rxjs/operators';
 import { FichierJoint } from '../entitees/fichier-joint';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-import-decision',
@@ -33,6 +34,8 @@ export class ImportDecisionComponent implements OnInit {
   messageErreurImport = false;
   messageSuppression = false;
 
+
+
   // Fichiers
   files: any[] = [];
   fichiers: FichierJoint[] = [];
@@ -42,7 +45,8 @@ export class ImportDecisionComponent implements OnInit {
               public facadeService: FacadeService,
               public dialog: MatDialog,
               public router: Router,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService,
+              public datepipe: DatePipe) { }
 
 
   canDeactivate(
@@ -87,10 +91,13 @@ export class ImportDecisionComponent implements OnInit {
         map(() => donnees.reponse === 'O')
       );
     }
+
     return of(true);
   }
   ngOnInit(): void {
+   // this.facadeService.listeDecision = undefined;
     this.initialiserFormulaire();
+    this.facadeService.reponseSuppressionFichier = false;
     // if(!this.facadeService.listeAd){
     //   this.facadeService.obtenirCodeUsagerAD()
     //   .subscribe((s) => {
@@ -116,7 +123,7 @@ export class ImportDecisionComponent implements OnInit {
 
    initialiserFormulaire(){
     this.formulaire = this.fb.group({
-      description: new FormControl(''),
+      description: ['', [Validators.required]],
       dateDelibere: new FormControl(''),
       nomJuge0: new FormControl({value: '', disabled: true}),
       nomJuge1: new FormControl({value: '', disabled: true}),
@@ -167,13 +174,84 @@ export class ImportDecisionComponent implements OnInit {
   suppressionFichier(){
 
     this.messageSuppression = true;
-    console.log('Avant suppression' , this.fichiers);
-    this.formulaire.get('nomFichier').setValue('');
-    this.fichiers.shift();
-    this.facadeService.retourDecision = undefined;
-    this.buttonDisabled = true;
-    console.log('Apres suppression' , this.fichiers);
-    console.log('Retour décision: ' , this.facadeService.retourDecision);
+    console.log('Réponse supp Fichier avant message' , this.facadeService.reponseSuppressionFichier);
+    this.messageErreurFichier();
+
+    console.log('Réponse supp Fichier après message' , this.facadeService.reponseSuppressionFichier);
+
+    this.messageErreurFichier2();
+
+
+
+
+  }
+methodeSuppressionFichier(){
+  console.log('Avant suppression' , this.fichiers);
+  this.formulaire.get('nomFichier').setValue('');
+  this.fichiers.shift();
+  this.facadeService.retourDecision = undefined;
+  this.buttonDisabled = true;
+  console.log('Apres suppression' , this.fichiers);
+  console.log('Retour décision: ' , this.facadeService.retourDecision);
+
+}
+
+messageErreurFichier2(){
+  const donnees = {
+    texte: 'Voulez-vous vraiment supprimer le fichier?',
+    titre: 'Suppression de fichier',
+    texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+    texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+    afficherBoutonOui: true,
+    reponse: ''
+
+  };
+  const dialog = this.dialog.open(BoiteDialogueComponent, { width: '450px',
+ data: donnees,
+ ariaLabelledBy: 'titre-dialog',
+ ariaDescribedBy: 'contenu-dialogue'});
+  dialog.afterClosed().subscribe(() => {
+    if(this.facadeService.reponseSuppressionFichier){
+      this.methodeSuppressionFichier();
+      this.dialog.closeAll();
+    }
+    else{
+      this.dialog.closeAll();
+    }
+
+ });
+
+  return dialog;
+
+}
+
+
+  messageErreurFichier(): Observable<boolean>{
+    if ( this.messageSuppression){
+
+      const donnees = {
+        texte: 'Voulez-vous vraiment supprimer le fichier?',
+        titre: 'Suppression de fichier',
+        texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+        texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+        afficherBoutonOui: true,
+        reponse: ''
+
+      };
+      return  this.dialog.open(BoiteDialogueComponent, {
+        width: '450px',
+        data: donnees,
+        ariaLabelledBy: 'titre-dialog',
+        ariaDescribedBy: 'contenu-dialogue'
+      }).afterClosed().pipe(
+        map(() =>
+        this.facadeService.reponseSuppressionFichier = true,
+        donnees.reponse === 'O')
+      );
+
+      }
+    return of(true);
+
   }
   suppressionJuge(index: number){
     console.log('Index: ' ,index);
@@ -223,7 +301,8 @@ export class ImportDecisionComponent implements OnInit {
     .subscribe((s) => {
         console.log('Valeur du resultat' , s);
         this.fichiers.push(f);
-        this.facadeService.retourDecision = s;
+        this.facadeService.listeDecision = s;
+        console.log('Valeur liste décision facade' , this.facadeService.listeDecision);
         this.buttonDisabled = false;
         this.formulaire.controls.description.setValue(s.description);
         this.messageErreurImport = false;
