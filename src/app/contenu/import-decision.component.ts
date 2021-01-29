@@ -175,7 +175,7 @@ export class ImportDecisionComponent implements OnInit {
 
     this.messageSuppression = true;
     console.log('Réponse supp Fichier avant message' , this.facadeService.reponseSuppressionFichier);
-    this.messageErreurFichier();
+    // this.messageErreurFichier();
 
     console.log('Réponse supp Fichier après message' , this.facadeService.reponseSuppressionFichier);
 
@@ -189,7 +189,7 @@ methodeSuppressionFichier(){
   console.log('Avant suppression' , this.fichiers);
   this.formulaire.get('nomFichier').setValue('');
   this.fichiers.shift();
-  this.facadeService.retourDecision = undefined;
+  this.facadeService.listeDecision = undefined;
   this.buttonDisabled = true;
   console.log('Apres suppression' , this.fichiers);
   console.log('Retour décision: ' , this.facadeService.retourDecision);
@@ -212,6 +212,7 @@ messageErreurFichier2(){
  ariaDescribedBy: 'contenu-dialogue'});
   dialog.afterClosed().subscribe(() => {
     if(this.facadeService.reponseSuppressionFichier){
+      console.log('SI suppresion fichier');
       this.methodeSuppressionFichier();
       this.dialog.closeAll();
     }

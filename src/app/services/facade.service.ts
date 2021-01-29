@@ -10,6 +10,7 @@ import { Juge } from '../entitees/juge';
 import { RetourDecision } from '../entitees/RetourDecision';
 import { ReponseBase } from './reponseBase';
 import { Usager } from '../entitees/usager';
+import { Recherche } from '../entitees/recherche';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class FacadeService {
     public router: Router
   ) { }
 
-  numDecisionTemp: string;
+  numDecisionTemp: number;
   indicateurJuge: boolean;
   reponseSuppressionFichier = false;
 
@@ -30,6 +31,7 @@ export class FacadeService {
   public listJuge: Juge[];
   public tableauDecision: Decision[];
   public retourDecision: RetourDecision;
+  public recherche: Recherche;
   public listeDecision: Decision;
   public listeAd: Usager;
   public listeJugesAdjointes: JugesAdjointes[];
@@ -59,6 +61,8 @@ export class FacadeService {
   private obtenirInfosDecisionURL = environment.apiBaseUrlFacade + 'v1/Decision/InfosDecision';
 
   private obtenirRechercheDecisionURL = environment.apiBaseUrlFacade + 'v1/Decision/Recherche';
+
+  private obtenirRechercheDecisionTrieURL = environment.apiBaseUrlFacade + 'v1/Decision/Recherche2';
 
 
 
@@ -96,6 +100,10 @@ public ObtenirInfosDecision(idDocument: number): Observable<Decision>{
 }
 public ObtenirRechercheDecision(): Observable<Decision[]>{
   return this.http.get<Decision[]>(this.obtenirRechercheDecisionURL);
+}
+public obtenirDecisionListTrie(recherche: Recherche): Observable<Decision[]>{
+
+  return this.http.post<Decision[]>(this.obtenirRechercheDecisionTrieURL, JSON.stringify(recherche), this.httpOptions );
 }
   // public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
   //   return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );

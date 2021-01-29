@@ -1,3 +1,4 @@
+import { Signataires } from './../entitees/signataires';
 import { Decision } from './../entitees/decision';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit, Pipe } from '@angular/core';
@@ -10,6 +11,7 @@ import { TextesService } from '../services/textes.service';
 import { DatePipe } from '@angular/common';
 import { RetourDecision } from '../entitees/RetourDecision';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-info-decision-adjointe',
@@ -17,7 +19,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./info-decision-adjointe.component.css']
 })
 export class InfoDecisionAdjointeComponent implements OnInit {
-  numDecSelectionner: string;
+  numDecSelectionner: number;
 
   boiteDecisionOuverte = false;
   boiteDossAss = false;
@@ -57,20 +59,29 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     dateImportation: new FormControl({value: '', disabled: true}),
     dureeRestante: new FormControl({value: '', disabled: true}),
     statut: new FormControl({value: '', disabled: true}),
+    redacteur0: new FormControl({value: false, disabled: true}),
+    redacteur1: new FormControl({value: false, disabled: true}),
+    redacteur2: new FormControl({value: false, disabled: true}),
+    redacteur3: new FormControl({value: false, disabled: true}),
+    redacteur4: new FormControl({value: false, disabled: true})
   });
 
   constructor(public facadeService: FacadeService,
               public dialog: MatDialog,
               public textesService: TextesService,
+              public router: Router,
               public datepipe: DatePipe,
               public fb: FormBuilder,
               private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     //this.spinner.show();
+    this.numDecSelectionner = this.facadeService.numDecisionTemp;
+    if(this.numDecSelectionner === undefined){
+      this.router.navigateByUrl('/');
+    }
 
-
-    this.facadeService.ObtenirInfosDecision(7)
+    this.facadeService.ObtenirInfosDecision(this.numDecSelectionner)
     .subscribe((s) => {
         console.log('Valeur du resultat' , s);
         this.formulaire.controls.numero.setValue(s.identifiant);
@@ -83,52 +94,62 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         this.formulaire.controls.statut.setValue(s.statut);
 
 
+        console.log('Signataires :' , this.formulaire.controls['redacteur' + 0]);
+        console.log('S signataires' , s.signataires.length)
+        // ajouté checkbox
+        for (let i = 0; i < s.signataires.length; i++){
+          console.log('Dans la boucle for');
+          this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
 
+         }
+
+
+/*
+ajoutJuges(s: any){
+  for (let i = 0; i < this.facadeService.listeDecision.signataires.length; i++) {
+    this.formulaire.controls['nomJuge' + i].setValue( s.signataires[i].nomRessource);
+
+    this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
+    this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);
+
+
+*/
 
         this.facadeService.listeDecision = s;
-        //this.buttonDisabled = false;
-        //this.formulaire.controls.description.setValue(s.description);
-        //this.messageErreurImport = false;
-        // this.spinner.hide();
-        // if ( s.signataires != null)
-        // {
-        //   console.log('Ajout de juge');
-        //   this.ajoutJuges(s);
-
-       // }
+         // Remplir les valeurs de départ
+        this.valDepDescription = this.facadeService.listeDecision.description;
+        this.valDepDateDelibere = this.facadeService.listeDecision.dateFinDelibere;
+        this.valDepPriorite = this.facadeService.listeDecision.priorite;
     });
 
 
-    this.facadeService.ObtenirInfosDecision(7)
-    .subscribe((r) => {
-      console.log('Valeur du r' , r);
-      this.facadeService.listeDecision  = r;
-      console.log('Liste décisions services facade:' , this.facadeService.listeDecision);
+    // this.facadeService.ObtenirInfosDecision(5)
+    // .subscribe((r) => {
+    //   console.log('Valeur du r' , r);
+    //   this.facadeService.listeDecision  = r;
+    //   console.log('Liste décisions services facade:' , this.facadeService.listeDecision);
 
 
-     // console.log('liste decision [0]' , this.facadeService.listeDecision.toString().description);
-
-      // Remplir les valeurs de départ
-    //  this.valDepDescription = this.facadeService.listeDecision[0].description;
-   //   this.valDepDateDelibere = this.facadeService.listeDecision[0].dateFinDelibere;
-  //    this.valDepPriorite = this.facadeService.listeDecision[0].priorite;
-
-  //    console.log('DossierTAQ:' ,this.facadeService.listeDecision[0].dossiersTAQ);
+    //  // console.log('liste decision [0]' , this.facadeService.listeDecision.toString().description);
 
 
 
-      // Assigner FormControl
-      // this.formulaire.get('description').setValue(this.valDepDescription);
-      // this.formulaire.get('dateDelibere').setValue(this.valDepDateDelibere);
-      // this.formulaire.get('priorite').setValue(this.valDepPriorite);
-      // this.formulaire.get('numero').setValue(this.facadeService.listeDecision[0].identifiant);
-      // this.formulaire.get('importePar').setValue(this.facadeService.listeDecision[0].codeReseauDepot);
+    //   console.log('Valeur de départ:' , this.valDepDescription , this.valDepDateDelibere, this.valDepPriorite );
 
 
 
-      this.spinner.hide();
+    //   // Assigner FormControl
+    //   // this.formulaire.get('description').setValue(this.valDepDescription);
+    //   // this.formulaire.get('dateDelibere').setValue(this.valDepDateDelibere);
+    //   // this.formulaire.get('priorite').setValue(this.valDepPriorite);
+    //   // this.formulaire.get('numero').setValue(this.facadeService.listeDecision[0].identifiant);
+    //   // this.formulaire.get('importePar').setValue(this.facadeService.listeDecision[0].codeReseauDepot);
 
-    });
+
+
+    //   this.spinner.hide();
+
+    // });
 
     console.log('Liste de décision: ', this.facadeService.listeDecision);
 
@@ -141,7 +162,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     // TODO statut juge codé dur
     this.facadeService.indicateurJuge = false;
     this.couleurPrio = true;
-    this.numDecSelectionner = this.facadeService.numDecisionTemp;
+
   }
 
   ouvertureBoiteDecision(){
@@ -221,7 +242,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     console.log('Valeur description' , this.valDescription);
     console.log('Valeur date delibéré' , this.valDateDelibere);
     console.log('Valeur priorité' , this.valPriorite);
-    this.facadeService.modifieInfoDecision(5, this.valDescription, this.valDateDelibere, this.valPriorite,this.changementDate)
+    this.facadeService.modifieInfoDecision(7, this.valDescription, this.valDateDelibere, this.valPriorite, this.changementDate)
     .subscribe(resJ => {
       console.log('Le résultat Put décision' ,  resJ);
     });
@@ -234,7 +255,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   }
   verifierSiChangements(){
     if (this.formulaire.get('description').value !== this.valDepDescription){
-      if( this.formulaire.get('description').value){
+      if ( this.formulaire.get('description').value){
         this.valDescription =  this.formulaire.get('description').value;
       }
 
@@ -243,7 +264,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
       this.valDescription = '';
     }
     if (this.formulaire.get('dateDelibere').value !== this.valDepDateDelibere) {
-      if(this.formulaire.get('dateDelibere').value === ''){
+      if (this.formulaire.get('dateDelibere').value === ''){
         this.valDateDelibere = '0001-01-01';
       }
       else{
@@ -256,12 +277,8 @@ export class InfoDecisionAdjointeComponent implements OnInit {
       this.changementDate = false;
     }
     if (this.formulaire.get('priorite').value !== this.valDepPriorite){
-      if(this.formulaire.get('priorite').value === 1){
-        this.valPriorite = 'Urgente';
-      }
-      else{
-        this.valPriorite = 'Normale';
-      }
+
+      this.valPriorite = this.formulaire.get('priorite').value;
      }
      else{
       this.valPriorite = '';

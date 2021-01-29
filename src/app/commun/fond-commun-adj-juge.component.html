@@ -29,14 +29,14 @@
 
                        <!--Section 2e proposition MA-->
                        <div class="row spaceUpDownRow">
-                        <div class="col-xl-2 col-lg-1"></div>
+                        <div class="col-2 col2ModAdjJug"></div>
                         <div class="col-xl-2 col-lg-1 texteTitreProJuge">Adjointes/Juge</div>
                           <div class="flex">
                             <div class="padD">
                               <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="nomJuge">
                                 <option  selected value="0" >Toutes mes décisions</option>
                                 <option   value="1">Toutes les décisions</option>
-                              <option *ngFor="let jugAdj of this.facadeService.listeJugesAdjointes;let i= index; "  value="{{jugAdj.nom}},{{jugAdj.prenom}}">{{jugAdj.nom}} {{jugAdj.prenom}}</option>
+                              <option *ngFor="let jugAdj of this.facadeService.listeJugesAdjointes;let i= index; "  value="{{jugAdj.codeReseau}}">{{jugAdj.nom}} {{jugAdj.prenom}}</option>
                               </select>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                      <div class="row spaceUpDownRow" >
-                       <div class="col-2"></div>
+                       <div class="col-2 col2ModDosTaq"></div>
                        <div class="col-2 texteTitreDossTaq">
                          <app-texte  cle="commun.RechercheNumDoss"></app-texte>
                         </div>
@@ -233,7 +233,7 @@
 
                       <!--Début rangée 2-->
                       <tr *ngFor="let r of this.facadeService.tableauDecision;let i = index;" class="tableauPrincipalABoucler" >
-                      <td  class="numeroDec cent">{{r.identifiant}}</td>
+                      <td  class="numeroDec cent" (click)="SelectionDecision(this.facadeService.tableauDecision[i].idDocument)">{{r.identifiant}}</td>
                       <td class="noTaqEtRequeran cent">{{r.dossiersTAQ[0].noDossierTAQ}}-{{r.dossiersTAQ[0].requerant}}</td>
                       <td class="noDossier cent">{{r.dossiersTAQ.length}}</td>
                       <td class="dateImport cent">{{r.dateImportation | date: 'yyyy-MM-dd'}}</td>

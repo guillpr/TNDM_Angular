@@ -26,7 +26,7 @@
                 <app-texte cle="import.NomFichier"></app-texte>
             </div>
           </div> -->
-          <div class="row"  *ngIf="! this.facadeService.listeDecision">
+          <div class="row"  *ngIf="!this.facadeService.listeDecision">
             <div class="col-2 nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
             <div class="col-6 containerFichierJoint" [class.ErrorBorder]="messageErreurExtension" appDnd (fileDropped)="onFileDropped($event)">
                 <app-texte class="glisDep" cle="fj.GlisserDeposer"></app-texte>
@@ -39,8 +39,8 @@
             <div *ngIf="messageErreurImport" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
           </div>
             <div  class="row" *ngIf="fichiers.length>0 &&  this.facadeService.listeDecision">
-                <div class="nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
-                <div *ngFor="let f of fichiers" class="inputRegFichier" >
+                <div class="col-2 nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
+                <div *ngFor="let f of fichiers" class="col-6 inputRegFichier" >
                  <label class="labelNomFichier"  >{{f.nomDocumentDecision}}</label>
                  <span class="spaceLeft"></span>
 
@@ -55,13 +55,16 @@
             <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
             <!--Fin Section dépot de fichier-->
 
-         <div class="espDesc" *ngIf=" this.facadeService.listeDecision">
-            <div class="nomDescription">
+         <div class="row espDesc" *ngIf=" this.facadeService.listeDecision">
+            <div class="col-2 nomDescription">
                 <app-texte cle="import.Description"></app-texte>
                 <span class="requisAs">*</span>
-
+              </div>
+          <div class="col-6">
             <input class="inputReg" formControlName="description" >
-            </div>
+          </div>
+
+
          </div>
 <!--Début nouvelle row-->
 <div  *ngIf=" this.facadeService.listeDecision">
@@ -72,16 +75,16 @@
     <div class="col-3 nomJuge">
       Juges administratif(s)
     </div>
-    <div class="col-1 nomJuge">
+    <div class="col-1 nomRedacteur">
       Rédacteur
     </div>
-    <div class="col-4 nomJuge">
+    <div class="col-4 nomOrdreSign">
         Ordre de signature
       </div>
   </div>
      <!--Fin Row titre de section signature-->
 <div class="row" *ngFor="let juge of this.facadeService.listeDecision.signataires;let i = index" >
-<div class="col-2" >
+<div class="col-2 colSignature" >
 </div>
 <div class="col-3 fondGris">
 <input class="positionNomJuge"  formControlName="nomJuge{{i}}">
@@ -92,7 +95,7 @@
     <input class="cbStyle" type="checkbox" formControlName="redacteur{{i}}">
   </div>
   <div class="col-2 fondGris" >
-      <div class="flex" >
+      <div >
           <div>
           <select   class="dlNormalJuge" id="inputGroupSelect05" formControlName="ordreSignataire{{i}}" >
                <option  selected value="1">Signataire 1</option>

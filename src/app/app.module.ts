@@ -105,7 +105,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
       {path: '', component: AdjointeComponent },
       {path: 'adjointe', component: AdjointeComponent },
       {path: 'juge', component: JugeComponent },
-      {path: 'infoAdjointe', component: InfoDecisionAdjointeComponent },
+      {path: 'infoAdjointe', component: InfoDecisionAdjointeComponent},
       {path: 'infoJuge', component: InfoDecisionJugeComponent },
       {path: 'importDecision', component: ImportDecisionComponent , canDeactivate: [CanDeactivateGuard] },
       {path: 'gestionPreferences', component: GestionPreferencesComponent },

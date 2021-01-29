@@ -5,7 +5,7 @@ import { EPriorite } from './enums/priorite';
 import { HistoriqueStatut } from './historiqueStatut';
 
 export class Decision{
-     public iDDocument: number;
+     public idDocument: number;
      public identifiant: string;
      public identifiantWord: string;
      public codeReseauDepot: number;

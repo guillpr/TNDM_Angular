@@ -12,7 +12,7 @@ import { TextesService } from '../services/textes.service';
 })
 export class InfoDecisionJugeComponent implements OnInit {
 
-  numDecSelectionner: string;
+  numDecSelectionner: number;
 
   boiteDecisionOuverte = false;
   boiteDossAss = false;

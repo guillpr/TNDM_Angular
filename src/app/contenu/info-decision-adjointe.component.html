@@ -18,29 +18,29 @@
 
         <div class="row bold">
             <div class="col numUniCol"> <app-texte cle="commun.numero"></app-texte></div>
-            <div class="col dateDeliCol"><app-texte cle="commun.description"></app-texte>  <i (click)="editionDescription()" class="fas fa-edit ml-1"></i></div>
-            <div class="col numUtiCol"><app-texte cle="commun.impPar"></app-texte></div>
-            <div class="col dateImpCol"><app-texte cle="commun.dateImp"></app-texte></div>
+            <div class="col dateDeliCol center"><app-texte cle="commun.description"></app-texte>  <i (click)="editionDescription()" class="fas fa-edit ml-1"></i></div>
+            <div class="col numUtiCol center"><app-texte cle="commun.impPar"></app-texte></div>
+            <div class="col dateImpCol center"><app-texte cle="commun.dateImp"></app-texte></div>
 
 
-            <div class="col-2 dateDeliCol"><app-texte cle="commun.dateDeli"></app-texte> <i class="fas fa-edit ml-1"></i></div>
-            <div class="col numUniCol">Durée restante</div>
-            <div class="col numUtiCol">Priorité <i class="fas fa-edit ml-1"></i></div>
-            <div class="col">Statut</div>
+            <div class="col-2 dateDeliCol center"><app-texte cle="commun.dateDeli"></app-texte> <i class="fas fa-edit ml-1"></i></div>
+            <div class="col numUniCol center">Durée restante(jours)</div>
+            <div class="col numUtiCol center">Priorité <i class="fas fa-edit ml-1"></i></div>
+            <div class="col center">Statut</div>
         </div>
           <!--Fin row décision-->
 
         <div  class="testDecisionExpand">
             <div     class="row">
-            <div class="col numUniCol"><input class="noBorder"  formControlName="numero"></div>
+            <div class="col numUniCol"><input class="noBorder center"  formControlName="numero"></div>
                 <div class="col dateDeliCol">
                     <textarea (change)="afficheBouton()" formControlName="description" class="inputDesc" rows="auto" cols="18"></textarea>
                     </div>
                   <div class="col numUtiCol">
-                    <input class="noBorder"  formControlName="importePar">
+                    <input class="noBorder center"  formControlName="importePar">
                   </div>
                   <div class="col dateImpCol">
-                    <input class="noBorder"  formControlName="dateImportation">
+                    <input class="noBorder center"  formControlName="dateImportation">
                   </div>
 
 
@@ -49,7 +49,7 @@
                     <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                         <input
                         (dateChange)="afficheBouton()"
-                         class="inputNormal"
+                         class="inputNormal center"
                          matInput
                          [matDatepicker]="picker"
                          formControlName="dateDelibere">
@@ -59,9 +59,9 @@
 
                 </div>
               <div class="col numUniCol">
-                  <input class="noBorder"  formControlName="dureeRestante"></div>
+                  <input class="noBorder center"  formControlName="dureeRestante"></div>
                 <div class="col numUtiCol">
-                       <select formControlName="priorite"  (change)="getColor($event)" [className]="couleurPrio ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
+                       <select formControlName="priorite" (change)="afficheBouton()"  [className]="this.formulaire.get('priorite').value ==='Urgente' ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
                          <option  selected value="Urgente">Urgente</option>
                          <option  value="Normale">Normale</option>
 
@@ -70,7 +70,7 @@
 
                      </div>
                     <div class="col">
-                        <input class="noBorder"  formControlName="statut">
+                        <input class="noBorder center"  formControlName="statut">
 
                     </div>
             </div>
@@ -174,15 +174,22 @@
                    {{resT.nomRessource}}
                 </div>
                 <div class="col-2">
-                  TODO mettre case à cocher
-                   {{resT.redacteur}}
+                <input class="cbStyle" type="checkbox"  formControlName="redacteur{{i}}">
+                   <!-- {{resT.redacteur}} -->
                 </div>
                 <div class="col-2">
-                    TODO mettre dropdown
+                    Signataire
                     {{resT.ordre}}
                 </div>
                 <div class="col-2">
-                   {{resT.dateSignature}}
+                  <div *ngIf="(resT.dateSignature | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')"> {{resT.dateSignature | date: 'yyyy-MM-dd'}}</div>
+                  <div  *ngIf="(resT.dateSignature | date: 'yyyy-MM-dd') <= (0001-01-01 | date: 'yyyy-MM-dd')">-</div>
+
+
+                   <!--
+                     (r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')"> {{r.dateFinDelibere | date: 'yyyy-MM-dd'}}</div>
+                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') < (0001-01-01 | date: 'yyyy-MM-dd')
+                   -->
                 </div>
             </div>
 

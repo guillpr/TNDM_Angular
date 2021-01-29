@@ -11,6 +11,7 @@ import { EPriorite } from '../entitees/enums/priorite';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { TextesService } from '../services/textes.service';
+import { Recherche } from '../entitees/recherche';
 
 
 
@@ -27,6 +28,7 @@ import { TextesService } from '../services/textes.service';
 export class FondCommunAdjJugeComponent implements OnInit {
 
   public listeJuge: Juge[] = [];
+
   @ViewChild(MatSort) sort: MatSort;
   @Input() public noMessageDateInvalide: string;
 
@@ -88,19 +90,22 @@ maskValue: string;
               public fb: FormBuilder) { }
   ngOnInit() {
 
-    this.facadeService.ObtenirRechercheDecision()
-    .subscribe((rech => {
-      this.facadeService.tableauDecision = rech;
-      console.log('Juges: ' , this.facadeService.tableauDecision[0].signataires)
-      console.log('Tableau de décision:' , this.facadeService.tableauDecision);
-      console.log('Résultat de la recherche: ', rech);
-    }));
 
-console.log('Name of juges', this.nameOfJuges);
+     this.facadeService.recherche = new Recherche();
+     this.facadeService.ObtenirRechercheDecision()
+     .subscribe((rech => {
+       this.facadeService.tableauDecision = rech;
+       console.log('Juges: ' , this.facadeService.tableauDecision[0].signataires)
+       console.log('Tableau de décision:' , this.facadeService.tableauDecision);
+       console.log('ID document:' , this.facadeService.tableauDecision[0].idDocument)
+       console.log('Résultat de la recherche: ', rech);
+     }));
 
-    this.noMessageDateInvalide = '';
+     console.log('Name of juges', this.nameOfJuges);
+
+     this.noMessageDateInvalide = '';
     // Obtenir le code usager AD
-    this.facadeService.obtenirCodeUsagerAD()
+     this.facadeService.obtenirCodeUsagerAD()
     .subscribe(res => {
       console.log('Résultat AD : ' , res);
       this.facadeService.listeAd = res;
@@ -123,6 +128,22 @@ console.log('Name of juges', this.nameOfJuges);
        }
      }
       console.log('Liste AD avant méthode obt Juges et Adjointes' , this.facadeService.listeAd.codeReseau);
+
+      // Obtenir décision triés
+      this.facadeService.recherche.codeReseauDemandeur = res.codeReseau;
+      this.facadeService.recherche.profil = res.accesUsager;
+      console.log('Valeur de listeDecision' , this.facadeService.listeDecision);
+
+      console.log('Liste de recherche: ' ,this.facadeService.recherche);
+
+
+      // Méthode avec Trie
+      // this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
+      // .subscribe((rechercheR) => {
+      //   console.log('Resultat de rechercheR' , rechercheR);
+      // });
+
+
       this.facadeService.ObtenirJugesAdjointes(this.facadeService.listeAd.codeReseau)
     .subscribe(resJ => {
       console.log('Le résultat du AdjointeJuges' ,  resJ);
@@ -130,7 +151,7 @@ console.log('Name of juges', this.nameOfJuges);
     });
     });
     // TODO indicateur Juge codé dur
-    this.facadeService.indicateurJuge = false;
+     this.facadeService.indicateurJuge = false;
     // this.facadeService.obtenirDecisionList()
     //  .subscribe( res => {
     //     this.facadeService.listeDecisions = res;
@@ -242,8 +263,9 @@ console.log('Name of juges', this.nameOfJuges);
  enMajuscule(texte: string){
   texte.toUpperCase();
  }
-public SelectionDecision(numDec: string){
-  this.facadeService.numDecisionTemp = numDec;
+public SelectionDecision(numDocument: number){
+  this.facadeService.numDecisionTemp = numDocument;
+  console.log('Num docu' , numDocument);
   this.router.navigateByUrl('/infoAdjointe');
 }
 }

@@ -4,15 +4,7 @@
     display: block;
     height: auto;
 }
-.divCentre{
-    width: 100%;
-    background-color: white;
-    display: block;
-    margin: auto;
-    height: auto;
-    padding-bottom: 40px;
-    font-size: 14px;
-}
+
 .enteteBleu{
     width:100%;
     /* background-color: rgb(126, 162, 219); */
@@ -35,7 +27,7 @@
 }
 .testDecision{
     margin-top: 10px;
-    height: 50px;
+    height: 100px;
     font-weight: 500;
     margin-bottom: 30px;
     overflow: hidden;
@@ -69,24 +61,27 @@
     overflow-y: auto;
 }
 .dateDeliCol{
-    max-width: 12%;
+    /* max-width: 12%; */
     padding-right: 5px;
     padding-left: 5px;
     border:none;
+    text-align: center;
 }
 .numUniCol{
-    max-width: 10%;
+    /* max-width: 10%; */
     padding-right: 5px;
-    padding-left: 15px;
+    padding-left: 5px;
+    text-align: center;
 }
 .numUtiCol{
-    max-width: 8%;
+    /* max-width: 8%; */
     padding-right: 5px;
     padding-left: 5px;
     white-space: normal;
+    text-align: center;
 }
 .dateImpCol{
-    max-width: 11%;
+    /* max-width: 11%; */
     padding-right: 5px;
     padding-left: 5px;
 }
@@ -214,5 +209,8 @@ margin-top: 20px;
 }
 .maxW14{
   max-width: 14%;
+}
+.center{
+  text-align: center;
 }
 
