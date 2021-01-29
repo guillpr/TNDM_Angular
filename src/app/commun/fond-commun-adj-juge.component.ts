@@ -32,6 +32,14 @@ export class FondCommunAdjJugeComponent implements OnInit {
 
   public extensionMessage: string;
 
+
+// TODO TEST NOM JUGES
+nomDesJuges: string[] = ['Bianki André', 'Villeneuve André', 'Ménard Bernard Stanley', 'Labrosse Ginette-Hélène' , 'Blain,psychologue Louise M.' , 'Gingras-Lamarre Marguerite'];
+nameOfJuges = [
+  { sign: true, name: 'Bianki André' },
+  { sign: false, name: 'Villeneuve André' },
+  { sign: false, name: 'Ménard Bernard Stanley' }
+];
     p = 1;
     affTableau = false;
     //public listeDecisions: Decision[] = [];
@@ -80,7 +88,15 @@ maskValue: string;
               public fb: FormBuilder) { }
   ngOnInit() {
 
+    this.facadeService.ObtenirRechercheDecision()
+    .subscribe((rech => {
+      this.facadeService.tableauDecision = rech;
+      console.log('Juges: ' , this.facadeService.tableauDecision[0].signataires)
+      console.log('Tableau de décision:' , this.facadeService.tableauDecision);
+      console.log('Résultat de la recherche: ', rech);
+    }));
 
+console.log('Name of juges', this.nameOfJuges);
 
     this.noMessageDateInvalide = '';
     // Obtenir le code usager AD

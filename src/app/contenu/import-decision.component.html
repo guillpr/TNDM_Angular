@@ -7,7 +7,7 @@
         <div class="titreImport">
             <app-texte cle="import.Titre"></app-texte>
         </div>
-        <div *ngIf="fichiers.length>0 && this.facadeService.retourDecision" class="chObRouge">* Champ obligatoire</div>
+        <div *ngIf="fichiers.length>0 &&  this.facadeService.listeDecision" class="chObRouge">* Champ obligatoire</div>
       </div>
 
          <hr />
@@ -26,7 +26,7 @@
                 <app-texte cle="import.NomFichier"></app-texte>
             </div>
           </div> -->
-          <div class="row"  *ngIf="!this.facadeService.retourDecision">
+          <div class="row"  *ngIf="! this.facadeService.listeDecision">
             <div class="col-2 nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
             <div class="col-6 containerFichierJoint" [class.ErrorBorder]="messageErreurExtension" appDnd (fileDropped)="onFileDropped($event)">
                 <app-texte class="glisDep" cle="fj.GlisserDeposer"></app-texte>
@@ -38,7 +38,7 @@
             </div>
             <div *ngIf="messageErreurImport" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
           </div>
-            <div  class="row" *ngIf="fichiers.length>0 && this.facadeService.retourDecision">
+            <div  class="row" *ngIf="fichiers.length>0 &&  this.facadeService.listeDecision">
                 <div class="nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
                 <div *ngFor="let f of fichiers" class="inputRegFichier" >
                  <label class="labelNomFichier"  >{{f.nomDocumentDecision}}</label>
@@ -55,7 +55,7 @@
             <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
             <!--Fin Section dépot de fichier-->
 
-         <div class="espDesc" *ngIf="this.facadeService.retourDecision">
+         <div class="espDesc" *ngIf=" this.facadeService.listeDecision">
             <div class="nomDescription">
                 <app-texte cle="import.Description"></app-texte>
                 <span class="requisAs">*</span>
@@ -64,7 +64,7 @@
             </div>
          </div>
 <!--Début nouvelle row-->
-<div  *ngIf="this.facadeService.retourDecision">
+<div  *ngIf=" this.facadeService.listeDecision">
    <!--Row titre de section signature-->
    <div class="row">
       <div class="col-2 nomSignature">Signature(s)</div>
@@ -80,7 +80,7 @@
       </div>
   </div>
      <!--Fin Row titre de section signature-->
-<div class="row" *ngFor="let juge of this.facadeService.retourDecision.signataires;let i = index" >
+<div class="row" *ngFor="let juge of this.facadeService.listeDecision.signataires;let i = index" >
 <div class="col-2" >
 </div>
 <div class="col-3 fondGris">
@@ -112,7 +112,7 @@
 </div>
 </div>
 <!--fin nouvelle row-->
-        <div class="sectionDate" *ngIf="this.facadeService.retourDecision">
+        <div class="sectionDate" *ngIf=" this.facadeService.listeDecision">
             <div class="row">
                 <div class="col-2 nomDateDelibere">
                     <label class="">Date fin délibéré</label>
@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <div class="row"  *ngIf="this.facadeService.retourDecision">
+        <div class="row"  *ngIf=" this.facadeService.listeDecision">
           <div class="col-2 nomPriorite">
             Priorité
           </div>

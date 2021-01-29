@@ -12,33 +12,35 @@
 
 
 
-                      <div formGroupName="statut"  class="row sectStatut">
-                        <div class="col-2"></div>
-                        <div class="col-1 texteTitreNormal">Statut</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox" formControlName="statutImporte" > Importé</div>
-                        <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" formControlName="statutPretSignature" > Prêt pour la signature</div>
-                        <div class="col-1"> <input class="cbStyle" type="checkbox"  formControlName="statutEnCours" > En cours</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox"   formControlName="statutDepose"> Déposé</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox"  formControlName="statutAnalyse"> Analysé</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox"   formControlName="statutAccepte"> Accepté</div>
-                        <div class="col-1 colMod8"> <input class="cbStyle" type="checkbox"  formControlName="statutRejete"> Rejeté</div>
+                      <div formGroupName="statut"  >
+                        <div class="divVide"></div>
+                        <div class="texteTitreNormalMarR20">Statut</div>
+                        <div class="divInBlock" > <input class="cbStyle" type="checkbox" formControlName="statutImporte" > Importé</div>
+                        <div class="divInBlock"> <input class="cbStyle" type="checkbox" formControlName="statutPretSignature" > Prêt pour la signature</div>
+                        <div class="divInBlock"> <input class="cbStyle" type="checkbox"  formControlName="statutEnCours" > En cours</div>
+                        <div class="divInBlock"> <input class="cbStyle" type="checkbox"   formControlName="statutDepose"> Déposé</div>
+                        <div class="divInBlock"> <input class="cbStyle" type="checkbox"  formControlName="statutAnalyse"> Analysé</div>
+                        <div class="divInBlock"> <input class="cbStyle" type="checkbox"   formControlName="statutAccepte"> Accepté</div>
+                        <div class="divInBlock"> <input class="cbStyle" type="checkbox"  formControlName="statutRejete"> Rejeté</div>
+
                       </div>
 
 
 
                        <!--Section 2e proposition MA-->
                        <div class="row spaceUpDownRow">
-                        <div class="col-2"></div>
-                        <div class="col-2 texteTitreProJuge">Adjointes/Juge</div>
+                        <div class="col-xl-2 col-lg-1"></div>
+                        <div class="col-xl-2 col-lg-1 texteTitreProJuge">Adjointes/Juge</div>
                           <div class="flex">
                             <div class="padD">
                               <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="nomJuge">
                                 <option  selected value="0" >Toutes mes décisions</option>
-                                <option   value="2">Toutes les décisions</option>
+                                <option   value="1">Toutes les décisions</option>
                               <option *ngFor="let jugAdj of this.facadeService.listeJugesAdjointes;let i= index; "  value="{{jugAdj.nom}},{{jugAdj.prenom}}">{{jugAdj.nom}} {{jugAdj.prenom}}</option>
                               </select>
                             </div>
                         </div>
+                        <div class="col-6"></div>
                       </div>
                        <!--Fin Section 2e proposition MA-->
 
@@ -78,6 +80,7 @@
                           <option value="6">AUT</option>
                         </select>
                       </div>
+                      <div class="col-6"></div>
                       </div>
 
                       <!--Fin Sections-->
@@ -117,7 +120,7 @@
                       <div class="col-2 texteTitreDateImp">
                         <app-texte cle="commun.DateImp"  ></app-texte>
                       </div>
-                      <div class="col-3 mod3">
+                      <div class="col-2 mod3">
                        <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                        <input
                         [className]="ErreurDate ? 'inputBorderRouge' : 'inputNormal'"
@@ -128,7 +131,7 @@
                      </mat-form-field>
                     </div>
                     <div class="col-1 mod1"><span class="spanAu">au</span></div>
-                    <div class="col-3 mod3">
+                    <div class="col-2 mod3">
                       <mat-form-field class="matFormFieldCustom"   (click)="picker2.open()"  >
                       <input
                       [className]="ErreurDate ? 'inputBorderRouge' : 'inputNormal'"
@@ -185,10 +188,7 @@
                         Décision et motifs
                       </div>
                       <div class="col-6"></div>
-                      <div class="col-4 aligButton"><button ID="ButtonImporter" class="btn btn-primary buttonImpor" routerLink="/importDecision" >
-                        <app-texte cle="commun.boutonImporterNouvDec"></app-texte>
-                    </button>
-                </div>
+
                     </div>
                     <!-- <div *ngIf="this.facadeService.listeDecisions&&!(this.facadeService.listeDecisions
                     | searchfilter3: this.formulaire.get('rechercheNumDec').value : 'rechercheNumDec'
@@ -199,63 +199,83 @@
                     Aucun résultats
                     </div> -->
                     <div class="tableauDec">
-                        <table id="table" class="table">
+                        <table  id="table" class="table" >
                   <thead>
                     <tr>
-                      <th scope="col">
+                      <th scope="col cent" class="cent">
                          <app-texte cle="commun.numero"  ></app-texte>
                       </th>
-                      <th scope="col"  ><app-texte cle="commun.dossier" ></app-texte></th>
-                      <th scope="col"><app-texte cle="commun.nbDossier"></app-texte></th>
-                      <th scope="col"  data-order="desc" data-name="dateImportation" >
+                      <th scope="col cent" class="cent" ><app-texte cle="commun.dossier" ></app-texte></th>
+                      <th scope="col cent" class="cent"><app-texte cle="commun.nbDossier"></app-texte></th>
+                      <th scope="col cent" class="cent"  data-order="desc" data-name="dateImportation" >
                           <app-texte cle="commun.dateImp"></app-texte>
                           <span class="spanAu">
                           </span><i class="fa fa-sort"></i>
                         </th>
-                      <th scope="col"   data-order="desc" data-name="dateFinDelibere">
+                      <th scope="col cent" class="cent"   data-order="desc" data-name="dateFinDelibere">
                           <app-texte cle="commun.dateDeli"></app-texte>
                           <span class="spanAu">
                           </span><i class="fa fa-sort"></i>
                         </th>
-                      <th scope="col" *ngIf="!this.facadeService.indicateurJuge">
-                          <app-texte cle="commun.RechercheJuge"></app-texte>
+                      <th scope="col " *ngIf="!this.facadeService.indicateurJuge">
+                          <app-texte  class="centJuge" cle="commun.RechercheJuge"></app-texte>
                       </th>
-                      <th scope="col"  data-order="desc" data-name="durRestante">
+                      <th scope="col cent"  class="cent" data-order="desc" data-name="durRestante">
                           <app-texte cle="commun.durRestante"></app-texte>
                            <span class="spanAu">
                            </span><i class="fa fa-sort"></i>
                          </th>
-                      <th scope="col"   data-order="desc" data-name="priorite"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
-                      <th scope="col"><app-texte cle="commun.RechercheStatut"></app-texte></th>
+                      <th scope="col cent" class="cent"  data-order="desc" data-name="priorite"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
+                      <th scope="col cent" class="cent"><app-texte cle="commun.RechercheStatut"></app-texte></th>
                     </tr>
                   </thead>
                   <tbody>
-                     <tr >
-                        <td class="numeroDec"></td>
-                         <td></td>
-                         <td></td>
-                         <td> </td>
-                         <td></td>
-                         <td *ngIf="!this.facadeService.indicateurJuge">
-                            <img  class="imgSign" mat-raised-button
-                            matTooltip="Décision signé le "
-                            aria-label="L'image affiche la date de signature de la décision"
-                            matTooltipPosition="above" src="../../assets/images/crochetVert.png"
-                            matTooltipClass="my-class"
-                            />
-                         </td>
-                         <td ></td>
-                         <td class="bgWhite" >
-                           <span >
-                            <span >Urgente</span>
-                            <span >Normale</span>
-                           </span>
-                         </td>
-                         <td></td>
-                     </tr>
+
+                      <!--Début rangée 2-->
+                      <tr *ngFor="let r of this.facadeService.tableauDecision;let i = index;" class="tableauPrincipalABoucler" >
+                      <td  class="numeroDec cent">{{r.identifiant}}</td>
+                      <td class="noTaqEtRequeran cent">{{r.dossiersTAQ[0].noDossierTAQ}}-{{r.dossiersTAQ[0].requerant}}</td>
+                      <td class="noDossier cent">{{r.dossiersTAQ.length}}</td>
+                      <td class="dateImport cent">{{r.dateImportation | date: 'yyyy-MM-dd'}}</td>
+                           <td class="finDeli cent">
+                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')"> {{r.dateFinDelibere | date: 'yyyy-MM-dd'}}</div>
+                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') < (0001-01-01 | date: 'yyyy-MM-dd')">-</div>
+                           </td>
+                           <td  *ngIf="!this.facadeService.indicateurJuge">
+                             <div *ngFor="let r of  this.facadeService.tableauDecision[i].signataires">
+                                {{r.nomRessource}}
+                                <img *ngIf="(r.dateSignature | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')" class="imgSign" mat-raised-button
+                                matTooltip="Décision signé le  {{r.dateSignature | date: 'd-LL-yyyy'}}"
+                                aria-label="L'image affiche la date de signature de la décision"
+                                matTooltipPosition="above" src="../../assets/images/crochetVert.png"
+                                matTooltipClass="my-class"
+                                />
+                             </div>
+
+
+
+
+
+                           </td>
+                          <td [className]="r.dureeRestante < 5 ? 'texteDurRestanteRouge cent' : 'cent'" >{{r.dureeRestante}}</td>
+                           <td class="bgWhite" >
+                           <span [className]="r.priorite=='Urgente' ? 'yellowClass' : ''" >{{r.priorite}}</span>
+                              <!-- <span [className]="pd.priorite==1 ? 'yellowClass' : ''"> -->
+
+                             <!-- </span> -->
+                           </td>
+                          <td class="statutCss cent">{{r.statut}}</td>
+                       </tr>
+                       <!--Fin rangée 2-->
+
                   </tbody>
                 </table>
+
                 </div>
+                <div class="aligButton"><button ID="ButtonImporter" class="btn btn-primary buttonImpor" routerLink="/importDecision" >
+                  <app-texte cle="commun.boutonImporterNouvDec"></app-texte>
+              </button>
+          </div>
               </form>
 
 

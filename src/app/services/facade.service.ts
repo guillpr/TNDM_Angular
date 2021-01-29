@@ -28,6 +28,7 @@ export class FacadeService {
 
   // Liste ou object
   public listJuge: Juge[];
+  public tableauDecision: Decision[];
   public retourDecision: RetourDecision;
   public listeDecision: Decision;
   public listeAd: Usager;
@@ -56,6 +57,8 @@ export class FacadeService {
   private jugesAdjointesURL = environment.apiBaseUrlFacade + 'v1/Decision/JugesAdjointe';
 
   private obtenirInfosDecisionURL = environment.apiBaseUrlFacade + 'v1/Decision/InfosDecision';
+
+  private obtenirRechercheDecisionURL = environment.apiBaseUrlFacade + 'v1/Decision/Recherche';
 
 
 
@@ -90,6 +93,9 @@ export class FacadeService {
 // Obtenir informations d'un décision par ID
 public ObtenirInfosDecision(idDocument: number): Observable<Decision>{
   return this.http.get<Decision>(this.obtenirInfosDecisionURL + '?idDocument=' + idDocument );
+}
+public ObtenirRechercheDecision(): Observable<Decision[]>{
+  return this.http.get<Decision[]>(this.obtenirRechercheDecisionURL);
 }
   // public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
   //   return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );

@@ -115,7 +115,7 @@ export class FichierJointComponent implements OnInit {
       .subscribe((s) => {
         if(s != null){
           console.log(s);
-          this.facadeService.retourDecision = s;
+          this.facadeService.listeDecision = s;
 
 
 

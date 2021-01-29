@@ -301,18 +301,21 @@ messageErreurFichier2(){
     .subscribe((s) => {
         console.log('Valeur du resultat' , s);
         this.fichiers.push(f);
+
         this.facadeService.listeDecision = s;
+        console.log('Valeur du S après assignation facade:' , s);
         console.log('Valeur liste décision facade' , this.facadeService.listeDecision);
         this.buttonDisabled = false;
         this.formulaire.controls.description.setValue(s.description);
         this.messageErreurImport = false;
         this.spinner.hide();
-        if ( s.signataires != null)
-        {
-          console.log('Ajout de juge');
-          this.ajoutJuges(s);
 
-        }
+        if ( s.signataires != null)
+         {
+           console.log('Ajout de juge');
+           this.ajoutJuges(s);
+
+         }
     },
     err => {console.log('Erreur importation' , err);
             this.spinner.hide();
@@ -336,8 +339,8 @@ gererFichiers(files: any) {
 }
  // Fin de méthode pour fichiers
  ajoutJuges(s: any){
-  for (let i = 0; i < this.facadeService.retourDecision.signataires.length; i++) {
-    this.formulaire.controls['nomJuge' + i].setValue( s.signataires[i].juge);
+  for (let i = 0; i < this.facadeService.listeDecision.signataires.length; i++) {
+    this.formulaire.controls['nomJuge' + i].setValue( s.signataires[i].nomRessource);
 
     this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
     this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);

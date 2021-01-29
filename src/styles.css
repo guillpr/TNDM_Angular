@@ -2,7 +2,12 @@
     max-width: 100%;
 }
 .cont90{
-    max-width: 70%;
+    max-width: 90%;
+}
+@media screen and (max-width: 1300px) {
+  .cont90{
+    max-width: 100%;
+}
 }
 
 html, body { height: 100%; }
