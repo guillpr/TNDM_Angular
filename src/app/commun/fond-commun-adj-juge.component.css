@@ -356,6 +356,7 @@ left: 25px;
   .col2ModDosTaq{
     max-width: 14%;
   }
+
   .texteTitreProJuge{
     font-size: 16px;
     color:black;
@@ -363,6 +364,7 @@ left: 25px;
     margin-right: 3px;
     max-width: 13.2%;
  }
+
  .texteTitreNormal{
   font-size: 16px;
   color:black;
@@ -383,13 +385,103 @@ left: 25px;
   max-width: 15.8%;
 }
 .mod1{
-  max-width: 4.5%;
+    max-width: 4.5%;
+  }
+  .mod2{
+    max-width: 12%;
+  }
+  .mod3{
+    max-width: 20%;
+  }
+@media screen and (max-width: 1200px) {
+    .texteTitreNormalMarR20{
+        font-size: 11px;
+        color:black;
+        display: inline-block;
+        margin-right: 50px;
+        /* text-align: right;
+        margin-right: 20px; */
+       }
+    .texteTitreProJuge{
+        font-size: 11px;
+        color:black;
+        margin-left: 8px;
+        margin-right: 3px;
+        max-width: 13.2%;
+     }
+    
+     .texteTitreNormal{
+      font-size: 11px;
+      color:black;
+      text-align: right;
+      margin-right: 1.2%;
+    }
+    .texteTitreDossTaq{
+      font-size: 11px;
+      color:black;
+      text-align: left;
+      max-width: 11.7%;
+      margin-right: 2.3%;
+    }
+    .texteTitreDateImp{
+      font-size: 11px;
+      color:black;
+      text-align: left;
+      max-width: 15.8%;
+    }
+    .mod1{
+        max-width: 5.5%;
+      }
+    .mod2{
+        max-width: 13.2%;
+      }
+      .mod3{
+        max-width: 31%;
+      }
+      
+.buttonRechercher {
+    background-color: #2257a7 !important;
+    color: white;
+    border: #2257a7 !important;
+    margin-left: 27%;
+    margin-top:10px;
+    width:100px;
+    height:25px;
+    border-radius: 10px;
+    font-size: 11px;
 }
-.mod2{
-  max-width: 12%;
+.buttonImpor{
+    background-color: #2257a7 !important;
+    color: white;
+    border: #2257a7 !important;
+    width:150px;
+    height:25px;
+    border-radius: 10px;
+    justify-content: end;
+    font-size: 11px;
 }
-.mod3{
-  max-width: 20%;
+.buttonReini {
+    background-color: #2257a7 !important;
+    color: white;
+    border: #2257a7 !important;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 100px;
+    height: 25px;
+    border-radius: 10px;
+    font-size: 11px;
+}
+.tableauDec {
+    background-color:white;
+    font-size: 10px;
+    overflow-y: scroll;
+    height: 300px;
+}
+.sectionTableauHeader{
+    font-weight: bold;
+    font-size: 11px;
+   height: 25px;
+}
 }
 }
 

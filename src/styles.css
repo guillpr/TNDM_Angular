@@ -47,6 +47,14 @@ body
     font-size: 5px;
    }
 }
+@media screen and (max-width: 1200px) {
+  .cont90{
+    max-width: 100%;
+    overflow: auto;
+    font-size: 10px;
+
+}
+}
 
 
 
