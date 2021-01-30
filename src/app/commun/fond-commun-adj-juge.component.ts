@@ -90,7 +90,6 @@ maskValue: string;
               public fb: FormBuilder) { }
   ngOnInit() {
 
-
      this.facadeService.recherche = new Recherche();
      this.facadeService.ObtenirRechercheDecision()
      .subscribe((rech => {
@@ -237,10 +236,13 @@ maskValue: string;
   }
   public Renitialise(){
    this.formulaire.reset();
+ // this.viderValeurs();
+   console.log('AVANT VALEURS PAR DÉFAULT');
    this.valeursParDefault();
   }
   valeursParDefault(){
-    this.formulaire.get('nomJuge').setValue(0);
+    console.log('Dans valeurs par défautl');
+    this.formulaire.controls.nomJuge.setValue(0);
     this.formulaire.get('rechercheSection').setValue(0);
     this.formulaire.get('recherchePriorite').setValue(0);
     this.formulaire.get('statut').get('statutImporte').setValue(true);
