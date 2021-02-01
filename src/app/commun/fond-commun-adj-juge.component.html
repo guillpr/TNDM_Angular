@@ -1,3 +1,46 @@
+<!--Test div col-->
+
+<div class="row mb-2">
+  <div class="col-sm-0 col-lg-1"></div>
+  <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">Adjointes/Juge</div>
+  <div class="col"><input class="inputW"></div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-sm-0 col-lg-1"></div>
+  <div class="col-sm-2 col-md-4 col-lg-2 taR">Section</div>
+  <div class="col"><input class="inputW"></div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-sm-0 col-lg-1"></div>
+  <div class="col-sm-2 col-md-4 col-lg-2 taR">Numéro</div>
+  <div class="col"><input class="inputW"></div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-sm-0 col-lg-1"></div>
+  <div class="col-sm-2 col-md-4 col-lg-2 taR">Dossier TAQ</div>
+  <div class="col"><input class="inputW"></div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-md-0 col-lg-1"></div>
+  <div class="col-sm-2 col-md-4 col-lg-2 taR">Date d'importation</div>
+  <div class="col-sm-1 col-lg-2"><input class="inputW"></div>
+  <div class="col-sm-1 col-md-1 col-lg-1">au</div>
+  <div class="col-sm-1 col-lg-2"><input class="inputW"></div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-sm-0 col-lg-1"></div>
+  <div class="col-sm-2 md-4 col-lg-2 taR">Priorité</div>
+  <div class="col"><input class="inputW"></div>
+</div>
+
+<!--Fin test div col-->
+
+
 <form [formGroup]="formulaire">
             <div >
             <div>{{noMessageDateInvalide}}</div>
@@ -28,11 +71,11 @@
 
 
                        <!--Section 2e proposition MA-->
-                       <div class="row spaceUpDownRow">
-                        <div class="col-2 col2ModAdjJug"></div>
-                        <div class="col-xl-2 col-lg-1 texteTitreProJuge">Adjointes/Juge</div>
-                          <div class="flex">
-                            <div class="padD">
+                       <div class="row mb-2 mt-2">
+                        <div class="col-sm-0 col-lg-1"></div>
+                        <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">Adjointes/Juge</div>
+                          <div class="col">
+                            <div >
                               <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="nomJuge">
                                 <option  selected value="0" >Toutes mes décisions</option>
                                 <option   value="1">Toutes les décisions</option>
@@ -64,12 +107,12 @@
 
                       <!--Début Sections-->
 
-                      <div class="row flex spaceUpDownRow">
-                        <div class="col-2"></div>
-                        <div class="col-1 texteTitreNormal">
+                      <div class="row mb-2">
+                        <div class="col-sm-0 col-lg-1"></div>
+                        <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                          <app-texte cle="commun.RechercheSection"></app-texte>
                         </div>
-                      <div class="col-2 padD">
+                      <div class="col">
                         <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="rechercheSection">
                           <option  selected value="0">Toutes</option>
                           <option value="1">CETM</option>
@@ -93,34 +136,38 @@
                         <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Tous mes groupes</div>
                       </div> -->
                        <!--Fin  Section première proposition Myriam-->
-                    <div class="row spaceUpDownRow">
-                      <div class="col-2"></div>
-                      <div class="col-1 texteTitreNormal">
+                    <div class="row mb-2">
+                      <div class="col-sm-0 col-lg-1"></div>
+                      <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                         <app-texte  cle="commun.RechercheNumDec"></app-texte>
                       </div>
-                        <div class="col-2">
+                        <div class="col">
                           <input type="text"
                            class="tbNormal"
                            formControlName="rechercheNumDec"
                            aria-describedby="TextBoxRechNumDec">
                         </div>
                     </div>
-                     <div class="row spaceUpDownRow" >
-                       <div class="col-2 col2ModDosTaq"></div>
-                       <div class="col-2 texteTitreDossTaq">
+                     <div class="row mb-1" >
+                       <div class="col-sm-0 col-lg-1"></div>
+                       <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                          <app-texte  cle="commun.RechercheNumDoss"></app-texte>
                         </div>
+                        <div class="col">
                          <input type="text" class="tbNormal"
                           mask="000000"
                          formControlName="rechercheNumDossier"
                          aria-describedby="TextBoxRechNumDoss" >
+                        </div>
                     </div>
-                    <div class="row spaceUpDownRow" >
-                      <div class="col-2 mod2"></div>
-                      <div class="col-2 texteTitreDateImp">
+
+                    <!--Date d'importation-->
+                    <div class="row" >
+                      <div class="col-md-0 col-lg-1"></div>
+                      <div class="col-sm-2 col-md-4 col-lg-2 taRDate">
                         <app-texte cle="commun.DateImp"  ></app-texte>
                       </div>
-                      <div class="col-2 mod3">
+                      <div class="col-sm-1 col-lg-2">
                        <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                        <input
                         [className]="ErreurDate ? 'inputBorderRouge' : 'inputNormal'"
@@ -130,8 +177,9 @@
                        <mat-datepicker #picker></mat-datepicker>
                      </mat-form-field>
                     </div>
-                    <div class="col-1 mod1"><span class="spanAu">au</span></div>
-                    <div class="col-2 mod3">
+                    <div class="disInBl">au</div>
+                     <!-- <div class="col-sm-1 col-md-1 col-lg-1"><span class="spanAu">au</span></div>  -->
+                    <div class="col-sm-1 col-lg-2">
                       <mat-form-field class="matFormFieldCustom"   (click)="picker2.open()"  >
                       <input
                       [className]="ErreurDate ? 'inputBorderRouge' : 'inputNormal'"
@@ -142,19 +190,48 @@
                     </mat-form-field>
                    </div>
                   </div>
+                   <!--Fin Date d'importation-->
 
                   <div *ngIf="ErreurDate" class="messageErreurAcc">
                       <app-message  [cle]='noMessageDateInvalide' [variables]="[extensionMessage]"  id="erreurFichierInvalide"></app-message>
                      <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
 
                     </div>
-                     <div class="row flex spaceUpDownRow">
-                       <div class="col-2"></div>
-                       <div class="col-1 texteTitreNormal">
+                    <!--Priorité-->
+
+                    <!-- 
+                         <div class="row mb-2">
+                      <div class="col-sm-0 col-lg-1"></div>
+                      <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
+                        <app-texte  cle="commun.RechercheNumDec"></app-texte>
+                      </div>
+                        <div class="col">
+                          <input type="text"
+                           class="tbNormal"
+                           formControlName="rechercheNumDec"
+                           aria-describedby="TextBoxRechNumDec">
+                        </div>
+                    </div>
+                     <div class="row mb-1" >
+                       <div class="col-sm-0 col-lg-1"></div>
+                       <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
+                         <app-texte  cle="commun.RechercheNumDoss"></app-texte>
+                        </div>
+                        <div class="col">
+                         <input type="text" class="tbNormal"
+                          mask="000000"
+                         formControlName="rechercheNumDossier"
+                         aria-describedby="TextBoxRechNumDoss" >
+                        </div>
+                    </div>
+                    -->
+                     <div class="row mb-2">
+                       <div class="col-sm-0 col-lg-1"></div>
+                       <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                         <app-texte cle="commun.RecherchePrio"></app-texte>
                        </div>
 
-                        <div class="col-2 padD">
+                        <div class="col">
                           <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
                             <option  selected value="0">Toutes</option>
                             <option value="1">Urgente</option>
@@ -162,6 +239,7 @@
                           </select>
                         </div>
                     </div>
+                    <!--Fin Priorité-->
                         <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button>

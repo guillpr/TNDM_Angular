@@ -89,16 +89,18 @@ maskValue: string;
               public textesService: TextesService,
               public fb: FormBuilder) { }
   ngOnInit() {
-
+    console.table(this.nameOfJuges);
      this.facadeService.recherche = new Recherche();
      this.facadeService.ObtenirRechercheDecision()
-     .subscribe((rech => {
+     .subscribe((rech) => {
        this.facadeService.tableauDecision = rech;
        console.log('Juges: ' , this.facadeService.tableauDecision[0].signataires)
        console.log('Tableau de décision:' , this.facadeService.tableauDecision);
        console.log('ID document:' , this.facadeService.tableauDecision[0].idDocument)
        console.log('Résultat de la recherche: ', rech);
-     }));
+     },
+     (err) => {console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
+     );
 
      console.log('Name of juges', this.nameOfJuges);
 
@@ -114,7 +116,7 @@ maskValue: string;
       switch (res.accesUsager) {
         case 0: {
           this.facadeService.indicateurJuge = false;
-          this.router.navigateByUrl('/infoAdjointe');
+          this.router.navigateByUrl('/accesRefuse');
           break;
         }
         case 1: {
@@ -148,7 +150,9 @@ maskValue: string;
       console.log('Le résultat du AdjointeJuges' ,  resJ);
       this.facadeService.listeJugesAdjointes = resJ;
     });
-    });
+    
+    },(err) => {console.log('Erreur lors de l\'obtention du code Usager AD')}
+    );
     // TODO indicateur Juge codé dur
      this.facadeService.indicateurJuge = false;
     // this.facadeService.obtenirDecisionList()

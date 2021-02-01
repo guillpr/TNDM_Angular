@@ -216,7 +216,7 @@ input[type=radio]:checked:before {
   font-size: 16px;
   color:black;
   display: inline-block;
-  margin-right: 50px;
+  margin-right: 1.8%;
   /* text-align: right;
   margin-right: 20px; */
  }
@@ -277,16 +277,22 @@ input[type=radio]:checked:before {
     height: 25px;
 }
 .matFormFieldCustom{
-    width: 250px;
+    /* width: 250px;
     display: relative;
     bottom:18px;
-    right: 22px;
+    right: 22px; */
 }
 ::ng-deep .mat-form-field-underline {
     display: none;
 }
 .mat-form-field-underline  {
     display: none;
+}
+.mat-form-field-infix{
+    border-top:none;
+}
+.mat-form-field{
+    height: 40px;
 }
 .texteDurRestanteRouge{
     color:red;
@@ -343,7 +349,7 @@ left: 25px;
 }
 .divVide{
   display: inline-block;
-  width: 21.2%;
+  width: 21.3%;
 }
 @media screen and (max-width: 1300px) {
   .divVide{
@@ -393,12 +399,17 @@ left: 25px;
   .mod3{
     max-width: 20%;
   }
+}
 @media screen and (max-width: 1200px) {
+    .divVide{
+        display: inline-block;
+        width: 21.3%;
+      }
     .texteTitreNormalMarR20{
         font-size: 11px;
         color:black;
         display: inline-block;
-        margin-right: 50px;
+        margin-right: 2%;
         /* text-align: right;
         margin-right: 20px; */
        }
@@ -420,23 +431,47 @@ left: 25px;
       font-size: 11px;
       color:black;
       text-align: left;
-      max-width: 11.7%;
-      margin-right: 2.3%;
+      max-width: 12.7%;
+      margin-right: 0.8%;
     }
     .texteTitreDateImp{
       font-size: 11px;
       color:black;
       text-align: left;
-      max-width: 15.8%;
+      max-width: 17.1%;
     }
     .mod1{
         max-width: 5.5%;
       }
     .mod2{
-        max-width: 13.2%;
+        max-width: 12%;
       }
       .mod3{
         max-width: 31%;
+      }
+      .mod4{
+          max-width: 19.3%;
+      }
+      .mod5{
+          max-width: 19%;
+      }
+      .mod6{
+        max-width: 20%;
+    }
+      .padD{
+          margin-left: -2.6%;
+      }
+      .mar2_6{
+        margin-left: -2.3%;
+    }
+    .mar3_3{
+        margin-left: -3.3%;
+    }
+    .col2ModDosTaq{
+        max-width: 14.7%;
+      }
+      .inputNormal{
+        width: 170px;
       }
       
 .buttonRechercher {
@@ -483,6 +518,35 @@ left: 25px;
    height: 25px;
 }
 }
+
+/*CSS test*/
+.taR{
+    text-align: right;
+    font-size: 16px;
 }
+.taRDate{
+    text-align: right;
+    font-size: 16px;
+    margin-top: 6px;
+}
+.disInBl{
+    display: inline-block;
+    margin-top:6px;
+    margin-right: 10px;
+    
+}
+.inputW{
+    width: 250px;
+}
+@media screen and (max-width: 725px) {
 
+    .inputW{
+        width: 200px;
+    }
+}
+@media screen and (max-width: 610px) {
 
+    .inputW{
+        width: 100px;
+    }
+}
