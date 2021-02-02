@@ -329,8 +329,8 @@ input[type=radio]:checked:before {
 .messageErreurAcc{
   color:red;
   font-weight: bold;
-  margin-left: 340px;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 .cent{
   text-align: center;

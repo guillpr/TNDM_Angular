@@ -156,8 +156,29 @@
                   </div>
                    <!--Fin Date d'importation-->
 
-                  <div *ngIf="ErreurDate" class="messageErreurAcc">
-                      <app-message  [cle]='noMessageDateInvalide' [variables]="[extensionMessage]"  id="erreurFichierInvalide"></app-message>
+                   <!--
+                        <div class="row mb-1" >
+                       <div class="col-sm-0 col-lg-1"></div>
+                       <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
+                         <app-texte  cle="commun.RechercheNumDoss"></app-texte>
+                        </div>
+                        <div class="col">
+                         <input type="text" class="tbNormal"
+                          mask="000000"
+                         formControlName="rechercheNumDossier"
+                         aria-describedby="TextBoxRechNumDoss" >
+                        </div>
+                    </div>
+
+                    -->
+
+                  <div *ngIf="ErreurDate" class="row mb-2 mt-1">
+                    <div class="col-sm-0 col-lg-1"></div>
+                    <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR"> </div>
+                    <div class="col">
+                      <app-message class="messageErreurAcc" [cle]='noMessageDateInvalide' [variables]="[extensionMessage]"  id="erreurFichierInvalide"></app-message>
+                    </div>
+                      
                      <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
 
                     </div>
