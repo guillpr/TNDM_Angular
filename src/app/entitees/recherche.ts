@@ -1,7 +1,7 @@
 
 
 export class Recherche{
-  public status: number[];
+  public statuts: number[];
   public adjointesJuges: string;
   public section: string;
   public numero: string;

@@ -44,7 +44,7 @@ nameOfJuges = [
 ];
     p = 1;
     affTableau = false;
-    //public listeDecisions: Decision[] = [];
+    // public listeDecisions: Decision[] = [];
 
     public listeDureeRestante: DurRest [] = [];
 
@@ -69,19 +69,20 @@ nameOfJuges = [
     rechercheNumDec: new FormControl(''),
     rechercheNumDossier: new FormControl(''),
     rechercheStatut: new FormControl(''),
-    rechercheSection: new FormControl('0'),
+    rechercheSection: new FormControl('Toutes'),
     rechercheJuge: new FormControl(''),
     recherchePriorite: new FormControl('0'),
     rechercheType: new FormControl(''),
     rechercheDateDu: new FormControl(''),
     rechercheDateAu: new FormControl(''),
-    nomJuge: new FormControl('0')
+    nomJuge: new FormControl('Toutes mes décisions')
 
   });
 
 searchValue: string;
 searchValue2: string;
 maskValue: string;
+valeurDuTri = 'ASC';
 
   constructor(public facadeService: FacadeService,
               public router: Router,
@@ -89,24 +90,26 @@ maskValue: string;
               public textesService: TextesService,
               public fb: FormBuilder) { }
   ngOnInit() {
-    console.table(this.nameOfJuges);
-     this.facadeService.recherche = new Recherche();
-     this.facadeService.ObtenirRechercheDecision()
-     .subscribe((rech) => {
-       this.facadeService.tableauDecision = rech;
-       console.log('Juges: ' , this.facadeService.tableauDecision[0].signataires)
-       console.log('Tableau de décision:' , this.facadeService.tableauDecision);
-       console.log('ID document:' , this.facadeService.tableauDecision[0].idDocument)
-       console.log('Résultat de la recherche: ', rech);
-     },
-     (err) => {console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
-     );
+    this.facadeService.recherche = new Recherche();
 
-     console.log('Name of juges', this.nameOfJuges);
 
-     this.noMessageDateInvalide = '';
+
+    // this.facadeService.ObtenirRechercheDecision()
+    //  .subscribe((rech) => {
+    //    this.facadeService.tableauDecision = rech;
+    //    console.log('Juges: ' , this.facadeService.tableauDecision[0].signataires)
+    //    console.log('Tableau de décision:' , this.facadeService.tableauDecision);
+    //    console.log('ID document:' , this.facadeService.tableauDecision[0].idDocument)
+    //    console.log('Résultat de la recherche: ', rech);
+    //  },
+    //  (err) => {console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
+    //  );
+
+    console.log('Name of juges', this.nameOfJuges);
+
+    this.noMessageDateInvalide = '';
     // Obtenir le code usager AD
-     this.facadeService.obtenirCodeUsagerAD()
+    this.facadeService.obtenirCodeUsagerAD()
     .subscribe(res => {
       console.log('Résultat AD : ' , res);
       this.facadeService.listeAd = res;
@@ -130,12 +133,23 @@ maskValue: string;
      }
       console.log('Liste AD avant méthode obt Juges et Adjointes' , this.facadeService.listeAd.codeReseau);
 
-      // Obtenir décision triés
+        // Valeurs par défault du recherche
       this.facadeService.recherche.codeReseauDemandeur = res.codeReseau;
       this.facadeService.recherche.profil = res.accesUsager;
+      this.facadeService.recherche.statuts = [1, 2, 3];
+      this.facadeService.recherche.adjointesJuges = 'Toutes mes décisions';
+      this.facadeService.recherche.dateDebutImportation = new Date('0001-01-01');
+      this.facadeService.recherche.dateFinImportation = new Date('0001-01-01');
+
+      // Vidé valeur null
+      this.facadeService.recherche.section = '';
+      this.facadeService.recherche.numero = '';
+      this.facadeService.recherche.priorite = '';
+
+
       console.log('Valeur de listeDecision' , this.facadeService.listeDecision);
 
-      console.log('Liste de recherche: ' ,this.facadeService.recherche);
+      console.log('Liste de recherche: ' , this.facadeService.recherche);
 
 
       // Méthode avec Trie
@@ -145,16 +159,38 @@ maskValue: string;
       // });
 
 
+    // Nouvelle méthode trié
+
+     // this.facadeService.ObtenirRechercheDecision()
+    //  .subscribe((rech) => {
+    //    this.facadeService.tableauDecision = rech;
+    //    console.log('Juges: ' , this.facadeService.tableauDecision[0].signataires)
+    //    console.log('Tableau de décision:' , this.facadeService.tableauDecision);
+    //    console.log('ID document:' , this.facadeService.tableauDecision[0].idDocument)
+    //    console.log('Résultat de la recherche: ', rech);
+    //  },
+    //  (err) => {console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
+    //  );
+
+
+      this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
+    .subscribe((resR) => {
+      this.facadeService.tableauDecision = resR;
+      console.log('Résultat recherche trié: ' , resR);
+    },
+    (err) => { console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
+    );
+
+
       this.facadeService.ObtenirJugesAdjointes(this.facadeService.listeAd.codeReseau)
     .subscribe(resJ => {
       console.log('Le résultat du AdjointeJuges' ,  resJ);
       this.facadeService.listeJugesAdjointes = resJ;
     });
-    
-    },(err) => {console.log('Erreur lors de l\'obtention du code Usager AD')}
+    }, (err) => {console.log('Erreur lors de l\'obtention du code Usager AD')}
     );
     // TODO indicateur Juge codé dur
-     this.facadeService.indicateurJuge = false;
+    this.facadeService.indicateurJuge = false;
     // this.facadeService.obtenirDecisionList()
     //  .subscribe( res => {
     //     this.facadeService.listeDecisions = res;
@@ -237,6 +273,124 @@ maskValue: string;
     this.affTableau = true;
     console.log('Valeur des champs formulaire' , this.formulaire);
     this.validationDesChamps();
+
+    this.remplirRechercheAvecFormulaire();
+  }
+  remplirRechercheAvecFormulaire(){
+    this.videValeur();
+    this.remplirStatut();
+    this.remplirAutresChamps();
+
+    // Envoyer recherche
+
+    if(!this.ErreurDate){
+      this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
+      .subscribe((resultat) => {
+        this.facadeService.tableauDecision = resultat;
+        console.log('Valeur du résultat trié' , resultat);
+
+      },
+      (erreur) => {console.log('Erreur lors de l\'obtention des valeurs triées')}
+      );
+    }
+
+
+
+
+    console.log('Valeur des champs formulaire ' , this.formulaire);
+    console.log('Valeur de recherche après remplisage ' , this.facadeService.recherche);
+      //this.facadeService.recherche.statuts.push()
+    }
+    remplirAutresChamps(){
+      if(this.formulaire.get('nomJuge').value){
+        this.facadeService.recherche.adjointesJuges = this.formulaire.get('nomJuge').value;
+      }
+      if(this.formulaire.get('rechercheSection').value){
+        if(this.formulaire.get('rechercheSection').value === 'Toutes'){
+          this.facadeService.recherche.section = '';
+        }
+        else{
+          this.facadeService.recherche.section = this.formulaire.get('rechercheSection').value;
+        }
+      }
+      if(this.formulaire.get('rechercheNumDec').value){
+        this.facadeService.recherche.numero = this.formulaire.get('rechercheNumDec').value;
+      }
+      if(this.formulaire.get('rechercheNumDossier').value){
+        this.facadeService.recherche.noDossierTAQ = this.formulaire.get('rechercheNumDossier').value;
+      }
+      if(this.formulaire.get('rechercheDateDu').value){
+        this.facadeService.recherche.dateDebutImportation = new Date(this.formulaire.controls.rechercheDateDu.value);
+      }
+      if(this.formulaire.get('rechercheDateAu').value){
+       // const datePipe = this.datepipe.transform(this.formulaire.get('rechercheDateAu').value, 'yyyy-MM-dd');
+      //  console.log('Date pipe:' , datePipe);
+        this.facadeService.recherche.dateFinImportation = new Date(this.formulaire.controls.rechercheDateAu.value);
+      }
+      if(this.formulaire.get('recherchePriorite').value){
+        if(this.formulaire.get('recherchePriorite').value === '0'){
+          this.facadeService.recherche.priorite = '';
+        }
+        else{
+          this.facadeService.recherche.priorite = this.formulaire.get('recherchePriorite').value;
+        }
+      }
+
+
+     /* rechercheNumDec: new FormControl(''),
+      rechercheNumDossier: new FormControl(''),
+      rechercheStatut: new FormControl(''),
+      rechercheSection: new FormControl('0'),
+      rechercheJuge: new FormControl(''),
+      recherchePriorite: new FormControl('0'),
+      rechercheType: new FormControl(''),
+      rechercheDateDu: new FormControl(''),
+      rechercheDateAu: new FormControl(''),
+      nomJuge: new FormControl('0')
+      */
+    }
+    videValeur(){
+      this.facadeService.recherche.statuts = [];
+      this.facadeService.recherche.adjointesJuges = '';
+      this.facadeService.recherche.section = '';
+      this.facadeService.recherche.numero = '';
+      this.facadeService.recherche.noDossierTAQ = 0;
+      this.facadeService.recherche.dateDebutImportation = new Date('0001-01-01');
+      this.facadeService.recherche.dateFinImportation = new Date('0001-01-01');
+      this.facadeService.recherche.priorite = '';
+
+    }
+
+  remplirStatut(){
+    // Statuts
+    // 1 : Importé,
+    // 2: Prêt pour signature
+    // 3: En cours
+    // 4: Déposé
+    // 5: Analysé
+    // 6: Accepté
+    // 7: Rejeté
+    if(this.formulaire.get('statut').get('statutImporte').value === true){
+      this.facadeService.recherche.statuts.push(1);
+    }
+    if(this.formulaire.get('statut').get('statutPretSignature').value === true){
+      this.facadeService.recherche.statuts.push(2);
+    }
+    if(this.formulaire.get('statut').get('statutEnCours').value === true){
+      this.facadeService.recherche.statuts.push(3);
+    }
+    if(this.formulaire.get('statut').get('statutDepose').value === true){
+      this.facadeService.recherche.statuts.push(4);
+    }
+    if(this.formulaire.get('statut').get('statutAnalyse').value === true){
+      this.facadeService.recherche.statuts.push(5);
+    }
+    if(this.formulaire.get('statut').get('statutAccepte').value === true){
+      this.facadeService.recherche.statuts.push(6);
+    }
+    if(this.formulaire.get('statut').get('statutRejete').value === true){
+      this.facadeService.recherche.statuts.push(7);
+    }
   }
   public Renitialise(){
    this.formulaire.reset();
@@ -273,6 +427,51 @@ public SelectionDecision(numDocument: number){
   this.facadeService.numDecisionTemp = numDocument;
   console.log('Num docu' , numDocument);
   this.router.navigateByUrl('/infoAdjointe');
+}
+changerValeurTri(elementHtml: any){
+  console.log('Valeur de élément html:' , elementHtml);
+  const elem = elementHtml;
+  const valeurColonne = elem.getAttribute('data-name');
+  console.log('Valeur de la colonne' , valeurColonne);
+ // this.attValFormulaire(valeurColonne);
+
+
+
+  if (this.valeurDuTri === 'ASC'){
+    elem.setAttribute('data-name', Number(valeurColonne) + 1);
+    this.facadeService.recherche.triRecherche = Number(valeurColonne);
+    this.valeurDuTri = 'DESC';
+
+  }
+  else{
+    elem.setAttribute('data-name', Number(valeurColonne) - 1);
+    this.facadeService.recherche.triRecherche = Number(valeurColonne);
+    this.valeurDuTri = 'ASC';
+  }
+  this.lancerRechercheTri();
+}
+lancerRechercheTri(){
+  console.log('Valeur du formulaire' , this.formulaire);
+  console.log('Valeur de l\'objet recherche');
+/*
+  this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
+    .subscribe((resR) => {
+      this.facadeService.tableauDecision = resR;
+      console.log('Résultat recherche trié: ' , resR);
+    },
+    (err) => { console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
+    );
+*/
+
+
+  this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
+  .subscribe((res) => {
+    this.facadeService.tableauDecision  = res;
+    console.log('Résultat:' , res);
+  },
+  (err) => {console.log('Erreur triage')}
+  );
+
 }
 }
 interface DurRest {

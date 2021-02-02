@@ -1,50 +1,14 @@
-<!--Test div col-->
 
-<div class="row mb-2">
-  <div class="col-sm-0 col-lg-1"></div>
-  <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">Adjointes/Juge</div>
-  <div class="col"><input class="inputW"></div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-sm-0 col-lg-1"></div>
-  <div class="col-sm-2 col-md-4 col-lg-2 taR">Section</div>
-  <div class="col"><input class="inputW"></div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-sm-0 col-lg-1"></div>
-  <div class="col-sm-2 col-md-4 col-lg-2 taR">Numéro</div>
-  <div class="col"><input class="inputW"></div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-sm-0 col-lg-1"></div>
-  <div class="col-sm-2 col-md-4 col-lg-2 taR">Dossier TAQ</div>
-  <div class="col"><input class="inputW"></div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-md-0 col-lg-1"></div>
-  <div class="col-sm-2 col-md-4 col-lg-2 taR">Date d'importation</div>
-  <div class="col-sm-1 col-lg-2"><input class="inputW"></div>
-  <div class="col-sm-1 col-md-1 col-lg-1">au</div>
-  <div class="col-sm-1 col-lg-2"><input class="inputW"></div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-sm-0 col-lg-1"></div>
-  <div class="col-sm-2 md-4 col-lg-2 taR">Priorité</div>
-  <div class="col"><input class="inputW"></div>
-</div>
-
-<!--Fin test div col-->
 
 
 <form [formGroup]="formulaire">
+  <!--TODO test-->
             <div >
             <div>{{noMessageDateInvalide}}</div>
             <div>{{ErreurDate}}</div>
+            <div>{{valeurDuTri}}</div>
+            <div *ngIf="this.facadeService.tableauDecision">Nombres de résultats: {{this.facadeService.tableauDecision.length}}</div>
+
                 <div class="divRight">
 
                     <div class="rechDec">
@@ -77,8 +41,8 @@
                           <div class="col">
                             <div >
                               <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="nomJuge">
-                                <option  selected value="0" >Toutes mes décisions</option>
-                                <option   value="1">Toutes les décisions</option>
+                                <option  selected value="Toutes mes décisions" >Toutes mes décisions</option>
+                                <option   value="Toutes les décisions">Toutes les décisions</option>
                               <option *ngFor="let jugAdj of this.facadeService.listeJugesAdjointes;let i= index; "  value="{{jugAdj.codeReseau}}">{{jugAdj.nom}} {{jugAdj.prenom}}</option>
                               </select>
                             </div>
@@ -114,13 +78,13 @@
                         </div>
                       <div class="col">
                         <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="rechercheSection">
-                          <option  selected value="0">Toutes</option>
-                          <option value="1">CETM</option>
-                          <option value="2">SAS</option>
-                          <option value="3">SAI</option>
-                          <option value="4">SAE</option>
-                          <option value="5">STE</option>
-                          <option value="6">AUT</option>
+                          <option  selected value="Toutes">Toutes</option>
+                          <option value="CETM">CETM</option>
+                          <option value="SAS">SAS</option>
+                          <option value="SAI">SAI</option>
+                          <option value="SAE">SAE</option>
+                          <option value="STE">STE</option>
+                          <option value="AUT">AUT</option>
                         </select>
                       </div>
                       <div class="col-6"></div>
@@ -199,7 +163,7 @@
                     </div>
                     <!--Priorité-->
 
-                    <!-- 
+                    <!--
                          <div class="row mb-2">
                       <div class="col-sm-0 col-lg-1"></div>
                       <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
@@ -233,9 +197,9 @@
 
                         <div class="col">
                           <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
-                            <option  selected value="0">Toutes</option>
-                            <option value="1">Urgente</option>
-                            <option value="2">Normale</option>
+                            <option  selected value="">Toutes</option>
+                            <option value="Urgente">Urgente</option>
+                            <option value="Normale">Normale</option>
                           </select>
                         </div>
                     </div>
@@ -285,12 +249,12 @@
                       </th>
                       <th scope="col cent" class="cent" ><app-texte cle="commun.dossier" ></app-texte></th>
                       <th scope="col cent" class="cent"><app-texte cle="commun.nbDossier"></app-texte></th>
-                      <th scope="col cent" class="cent"  data-order="desc" data-name="dateImportation" >
+                      <th scope="col cent" class="cent" style="cursor: pointer;"  data-order="desc" data-name="1" #dateImportation (click)="changerValeurTri(dateImportation)">
                           <app-texte cle="commun.dateImp"></app-texte>
                           <span class="spanAu">
                           </span><i class="fa fa-sort"></i>
                         </th>
-                      <th scope="col cent" class="cent"   data-order="desc" data-name="dateFinDelibere">
+                      <th scope="col cent" class="cent"   style="cursor: pointer;"  data-order="desc" data-name="3" #dateFinDelibere (click)="changerValeurTri(dateFinDelibere)">
                           <app-texte cle="commun.dateDeli"></app-texte>
                           <span class="spanAu">
                           </span><i class="fa fa-sort"></i>
@@ -298,12 +262,12 @@
                       <th scope="col " *ngIf="!this.facadeService.indicateurJuge">
                           <app-texte  class="centJuge" cle="commun.RechercheJuge"></app-texte>
                       </th>
-                      <th scope="col cent"  class="cent" data-order="desc" data-name="durRestante">
+                      <th scope="col cent" style="cursor: pointer;" class="cent" data-order="desc" data-name="5"  #durRestante (click)="changerValeurTri(durRestante)">
                           <app-texte cle="commun.durRestante"></app-texte>
                            <span class="spanAu">
                            </span><i class="fa fa-sort"></i>
                          </th>
-                      <th scope="col cent" class="cent"  data-order="desc" data-name="priorite"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
+                      <th scope="col cent" class="cent" style="cursor: pointer;"  data-order="desc" data-name="7" #priorite (click)="changerValeurTri(priorite)"><app-texte cle="commun.RecherchePrio"></app-texte><span class="spanAu"></span><i class="fa fa-sort"></i></th>
                       <th scope="col cent" class="cent"><app-texte cle="commun.RechercheStatut"></app-texte></th>
                     </tr>
                   </thead>
