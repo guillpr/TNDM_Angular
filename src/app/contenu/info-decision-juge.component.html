@@ -2,7 +2,7 @@
 <div class="divFond">
     <div class="divCentre">
         <!--Début zone décision-->
-        <div class="enteteBleu">
+        <!-- <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.decision"></app-texte>
             <span id="boiteDecisionOuverte" *ngIf="!boiteDecisionOuverte" class="arrowDown" (click)="ouvertureBoiteDecision()">
                 <i class="fas fa-angle-down fa-3x"></i>
@@ -10,9 +10,9 @@
             <span id="boiteDecisionFerme" *ngIf="boiteDecisionOuverte" class="arrowDown" (click)="fermetureBoiteDecision()">
                 <i class="fas fa-angle-up fa-3x"></i>
             </span>
-        </div>
+        </div> -->
         <!--Début row décision-->
-        <div class="row bold">
+        <!-- <div class="row bold">
             <div class="col numUniCol"><app-texte cle="commun.numUnique"></app-texte></div>
             <div class="col"><app-texte cle="commun.dateImp"></app-texte></div>
             <div class="col numUtiCol"><app-texte cle="commun.utilisateur"></app-texte></div>
@@ -22,10 +22,10 @@
             <div class="col numUniCol">Durée restante</div>
             <div class="col numUtiCol">Priorité</div>
             <div class="col">Statut</div>
-        </div>
+        </div> -->
           <!--Fin row décision-->
 
-        <div [className]="!boiteDecisionOuverte ? 'testDecision' : 'testDecisionExpand' " class="testDecision">
+        <!-- <div [className]="!boiteDecisionOuverte ? 'testDecision' : 'testDecisionExpand' " class="testDecision">
             <div class="row">
                 <div class="col numUniCol">2020-01-123</div>
                 <div class="col">2020-02-01</div>
@@ -45,11 +45,11 @@
                      </div>
                 <div class="col">Prête pour traitement</div>
             </div>
-        </div>
+        </div> -->
         <!--Fin zone décision-->
 
          <!--Début zone dossiers associés-->
-         <div class="enteteBleu">
+         <!-- <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.dossierAsso"></app-texte>
             <span id="boiteDossAssoOuverte" *ngIf="!boiteDossAss" class="arrowDown" (click)="ouvertureBoiteDossAss()">
                 <i class="fas fa-angle-down fa-3x"></i>
@@ -100,11 +100,11 @@
                     Entreprise ABC
                 </div>
             </div>
-        </div>
+        </div> -->
        <!--Fin zone dossiers associés-->
 
          <!--Début zone signature-->
-         <div class="enteteBleu">
+         <!-- <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.signature"></app-texte>
             <span id="boiteDossAssoOuverte" *ngIf="!boiteSignature" class="arrowDown" (click)="ouvertureBoiteSignature()">
                 <i class="fas fa-angle-down fa-3x"></i>
@@ -129,7 +129,7 @@
                     Date de signature
                 </div>
             </div>
-        </div>
+        </div> -->
        <!--Fin zone signature-->
 
          <!--Début zone historique de décision-->
@@ -157,22 +157,24 @@
             </div>
 
 
-            <div class="row">
+            <div *ngIf="this.facadeService.listeDecision">
+            <div *ngFor="let hist of this.facadeService.listeDecision.historiqueStatuts" class="row">
                 <div class="col-2">
-                   Décision importée
+                  {{hist.statut}}
                 </div>
                 <div class="col-2">
-                    2020-02-01
+                  {{hist.dateStatut}}
                 </div>
                 <div class="col-2">
-                    EXABB03
+                    {{hist.codeReseau}}
                 </div>
             </div>
+          </div>
         </div>
        <!--Fin zone historique de décision-->
     </div>
       <!--Début zone bouton-->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col"></div>
         <div class="col">
             <button class="buttonDocument">Voir documents</button>
@@ -185,12 +187,12 @@
 
         <div class="col">
             <button class="buttonDemarrer">Démarrer la signature</button>
-        </div>
+        </div> -->
         <div class="col">
-            <button class="buttonFermer">Fermer</button>
+            <button class="buttonFermer" (click)="fermerPage()">Fermer</button>
         </div>
-        <div class="col"></div>
-    </div>
+        <!-- <div class="col"></div>
+    </div> -->
 
 
 

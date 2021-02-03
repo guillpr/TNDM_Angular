@@ -2,6 +2,7 @@
 
 
 <form [formGroup]="formulaire">
+    <ngx-spinner bdColor = "rgba(140,137,137,0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
   <!--TODO test-->
             <div >
             <div>{{noMessageDateInvalide}}</div>
@@ -35,7 +36,7 @@
 
 
                        <!--Section 2e proposition MA-->
-                       <div class="row mb-2 mt-2">
+                       <div *ngIf="!this.facadeService.indicateurJuge" class="row mb-2 mt-2">
                         <div class="col-sm-0 col-lg-1"></div>
                         <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">Adjointes/Juge</div>
                           <div class="col">
@@ -71,7 +72,7 @@
 
                       <!--Début Sections-->
 
-                      <div class="row mb-2">
+                      <div *ngIf="!this.facadeService.indicateurJuge" class="row mb-2">
                         <div class="col-sm-0 col-lg-1"></div>
                         <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                          <app-texte cle="commun.RechercheSection"></app-texte>
@@ -100,7 +101,7 @@
                         <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Tous mes groupes</div>
                       </div> -->
                        <!--Fin  Section première proposition Myriam-->
-                    <div class="row mb-2">
+                    <div class="row mb-2 mt-2">
                       <div class="col-sm-0 col-lg-1"></div>
                       <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                         <app-texte  cle="commun.RechercheNumDec"></app-texte>
@@ -108,6 +109,8 @@
                         <div class="col">
                           <input type="text"
                            class="tbNormal"
+                           [dropSpecialCharacters]="false"
+                           mask="0000-00-0000"
                            formControlName="rechercheNumDec"
                            aria-describedby="TextBoxRechNumDec">
                         </div>
@@ -178,7 +181,7 @@
                     <div class="col">
                       <app-message class="messageErreurAcc" [cle]='noMessageDateInvalide' [variables]="[extensionMessage]"  id="erreurFichierInvalide"></app-message>
                     </div>
-                      
+
                      <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
 
                     </div>
@@ -218,7 +221,7 @@
 
                         <div class="col">
                           <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="recherchePriorite">
-                            <option  selected value="">Toutes</option>
+                            <option  selected value="Toutes">Toutes</option>
                             <option value="Urgente">Urgente</option>
                             <option value="Normale">Normale</option>
                           </select>
@@ -296,7 +299,10 @@
 
                       <!--Début rangée 2-->
                       <tr *ngFor="let r of this.facadeService.tableauDecision;let i = index;" class="tableauPrincipalABoucler" >
-                      <td  class="numeroDec cent" (click)="SelectionDecision(this.facadeService.tableauDecision[i].idDocument)">{{r.identifiant}}</td>
+                      <td    >
+                        <div class="numeroDec cent" (click)="SelectionDecision(this.facadeService.tableauDecision[i].idDocument,i)" *ngIf="r.identifiant"> {{r.identifiant}}</div>
+                        <div class="cent"  *ngIf="!r.identifiant">-</div>
+                        </td>
                       <td class="noTaqEtRequeran cent">{{r.dossiersTAQ[0].noDossierTAQ}}-{{r.dossiersTAQ[0].requerant}}</td>
                       <td class="noDossier cent">{{r.dossiersTAQ.length}}</td>
                       <td class="dateImport cent">{{r.dateImportation | date: 'yyyy-MM-dd'}}</td>
@@ -327,7 +333,10 @@
 
                              <!-- </span> -->
                            </td>
-                          <td class="statutCss cent">{{r.statut}}</td>
+                          <td >
+                          <div class="numeroDec cent" *ngIf="this.facadeService.indicateurJuge" (click)="historiqueJuge(this.facadeService.tableauDecision[i].idDocument,i)">{{r.statut}}</div>
+                          <div class="statutCss cent" *ngIf="!this.facadeService.indicateurJuge">{{r.statut}}</div>
+                          </td>
                        </tr>
                        <!--Fin rangée 2-->
 

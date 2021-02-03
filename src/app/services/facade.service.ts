@@ -71,7 +71,7 @@ export class FacadeService {
 
   private URL = 'http://localhost:57759/api/DecisionDetail';
   public httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    headers: new HttpHeaders({'Content-Type': 'application/json'}),
   };
 
   // // public ObtenirDecision():Observable<ReponseBase<Decision>>{

@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
 import { FacadeService } from '../services/facade.service';
 import { TextesService } from '../services/textes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-info-decision-juge',
@@ -23,12 +24,21 @@ export class InfoDecisionJugeComponent implements OnInit {
 
   constructor(public facadeService: FacadeService,
               public dialog: MatDialog,
+              public router: Router,
               public textesService: TextesService) { }
 
   ngOnInit(): void {
     this.couleurPrio = true;
     this.numDecSelectionner = this.facadeService.numDecisionTemp;
 
+    if(this.numDecSelectionner === undefined){
+      this.router.navigateByUrl('/');
+    }
+
+    this.facadeService.ObtenirInfosDecision(this.numDecSelectionner)
+    .subscribe((s) => {
+      this.facadeService.listeDecision = s;
+    });
 
   }
 
@@ -65,6 +75,9 @@ export class InfoDecisionJugeComponent implements OnInit {
     else{
       this.couleurPrio = false;
     }
+  }
+  fermerPage(){
+    this.router.navigateByUrl('/');
   }
   rejeterDecision(){
         const donnees = {

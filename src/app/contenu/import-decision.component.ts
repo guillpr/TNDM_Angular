@@ -164,7 +164,10 @@ export class ImportDecisionComponent implements OnInit {
     this.myComponents.splice(-1);
   }
   public importerDecision(){
-    alert('Décision Importée');
+    if(this.formulaire.valid){
+      alert('Décision Importée');
+    }
+
    // this.router.navigateByUrl('/juge');
   }
   public quitterDecision(){

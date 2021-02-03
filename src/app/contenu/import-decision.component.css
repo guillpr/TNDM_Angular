@@ -419,3 +419,8 @@ margin-top: 20px;
 .colSignature{
   margin-left: 0.5%;
 }
+.descError{
+  margin-top: -25px;
+  color: red;
+  font-weight: bold
+}

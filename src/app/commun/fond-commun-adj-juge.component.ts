@@ -12,6 +12,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { TextesService } from '../services/textes.service';
 import { Recherche } from '../entitees/recherche';
+import { NgxSpinnerService } from 'ngx-spinner';
+import moment from 'moment';
 
 
 
@@ -71,7 +73,7 @@ nameOfJuges = [
     rechercheStatut: new FormControl(''),
     rechercheSection: new FormControl('Toutes'),
     rechercheJuge: new FormControl(''),
-    recherchePriorite: new FormControl('0'),
+    recherchePriorite: new FormControl('Toutes'),
     rechercheType: new FormControl(''),
     rechercheDateDu: new FormControl(''),
     rechercheDateAu: new FormControl(''),
@@ -88,6 +90,7 @@ valeurDuTri = 'ASC';
               public router: Router,
               public datepipe: DatePipe,
               public textesService: TextesService,
+              private spinner: NgxSpinnerService,
               public fb: FormBuilder) { }
   ngOnInit() {
     this.facadeService.recherche = new Recherche();
@@ -108,6 +111,7 @@ valeurDuTri = 'ASC';
     console.log('Name of juges', this.nameOfJuges);
 
     this.noMessageDateInvalide = '';
+    this.spinner.show();
     // Obtenir le code usager AD
     this.facadeService.obtenirCodeUsagerAD()
     .subscribe(res => {
@@ -135,6 +139,7 @@ valeurDuTri = 'ASC';
 
         // Valeurs par défault du recherche
       this.facadeService.recherche.codeReseauDemandeur = res.codeReseau;
+      // this.facadeService.recherche.profil = res.accesUsager;
       this.facadeService.recherche.profil = res.accesUsager;
       this.facadeService.recherche.statuts = [1, 2, 3];
       this.facadeService.recherche.adjointesJuges = 'Toutes mes décisions';
@@ -186,8 +191,9 @@ valeurDuTri = 'ASC';
     .subscribe(resJ => {
       console.log('Le résultat du AdjointeJuges' ,  resJ);
       this.facadeService.listeJugesAdjointes = resJ;
+      this.spinner.hide();
     });
-    }, (err) => {console.log('Erreur lors de l\'obtention du code Usager AD')}
+    }, (err) => {console.log('Erreur lors de l\'obtention du code Usager AD' ,  this.spinner.hide()); }
     );
     // TODO indicateur Juge codé dur
     this.facadeService.indicateurJuge = false;
@@ -210,30 +216,43 @@ valeurDuTri = 'ASC';
 
   }
   validationChampsDate(){
+
+    if(moment(this.formulaire.controls.rechercheDateDu.value,' yyyy-MM-dd').isValid()
+    &&moment(this.formulaire.controls.rechercheDateAu.value,' yyyy-MM-dd').isValid()){
+      console.log('Date du valide');
+    }
+    else{
+      console.log('Date invalide');
+      this.ErreurDate = true;
+      this.noMessageDateInvalide = '0003';
+    }
+
+  // console.log(moment(this.formulaire.controls.rechercheDateDu.value,' yyyy-MM-dd').isValid());
     let valeurDateDu = '';
     let valeurDateAu = '';
     console.log('Valeur date du formulaire' , this.formulaire.controls.rechercheDateDu);
     if (this.formulaire.controls.rechercheDateDu.value){
-      valeurDateDu = this.retournerValeurDate(this.formulaire.controls.rechercheDateDu.value);
+       valeurDateDu = this.retournerValeurDate(this.formulaire.controls.rechercheDateDu.value);
+    }
 
-      const regexDate = '^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$';
-      console.log('Valeur date du t' , valeurDateDu);
-     // console.log("Resultat du regex " , valeurDateDu.match.toString()(regexDate));
-      if (valeurDateDu.match(regexDate))
-      {
-        console.log('Regex match');
-      }
-      else{
-        console.log('Regex ne match pas');
-      }
-      console.log('Valeur date du après conversion' , valeurDateDu);
-     }
-     else{
-       console.log('Date non valide');
-       this.ErreurDate = true;
+    //   const regexDate = '^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$';
+    //   console.log('Valeur date du t' , valeurDateDu);
+    //  // console.log("Resultat du regex " , valeurDateDu.match.toString()(regexDate));
+    //   if (valeurDateDu.match(regexDate))
+    //   {
+    //     console.log('Regex match');
+    //   }
+    //   else{
+    //     console.log('Regex ne match pas');
+    //   }
+    //   console.log('Valeur date du après conversion' , valeurDateDu);
+    //  }
+    //  else{
+    //    console.log('Date non valide');
+    //    this.ErreurDate = true;
 
-       this.noMessageDateInvalide = '0003';
-     }
+    //    this.noMessageDateInvalide = '0003';
+    //  }
     if (this.formulaire.controls.rechercheDateAu.value){
       valeurDateAu = this.retournerValeurDate(this.formulaire.controls.rechercheDateAu.value);
       console.log('Valeur date Au après conversion' , valeurDateAu);
@@ -243,6 +262,11 @@ valeurDuTri = 'ASC';
       this.dateAuPlusPetite = true;
       this.ErreurDate = true;
       this.noMessageDateInvalide = '0001';
+      }
+    if(valeurDateDu && !valeurDateAu){
+        console.log('Pas de valeur date du et valeur date au');
+        this.ErreurDate = true;
+        this.noMessageDateInvalide = '0004';
       }
 
     const date1 = new Date(valeurDateDu);
@@ -263,7 +287,7 @@ valeurDuTri = 'ASC';
         this.dateAuPlusPetite = false;
       }
   }
-  validationDesChamps(){
+    validationDesChamps(){
     this.reiniatialiserErreurs();
     if (this.formulaire.controls.rechercheDateDu.value || this.formulaire.controls.rechercheDateAu.value){
       this.validationChampsDate();
@@ -271,6 +295,7 @@ valeurDuTri = 'ASC';
   }
   public RechercherDecision(){
     this.affTableau = true;
+    this.ErreurDate = true;
     console.log('Valeur des champs formulaire' , this.formulaire);
     this.validationDesChamps();
 
@@ -284,13 +309,15 @@ valeurDuTri = 'ASC';
     // Envoyer recherche
 
     if(!this.ErreurDate){
+      this.spinner.show();
       this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
       .subscribe((resultat) => {
         this.facadeService.tableauDecision = resultat;
         console.log('Valeur du résultat trié' , resultat);
+        this.spinner.hide();
 
       },
-      (erreur) => {console.log('Erreur lors de l\'obtention des valeurs triées')}
+      (erreur) => {console.log('Erreur lors de l\'obtention des valeurs triées' ,  this.spinner.hide()); }
       );
     }
 
@@ -328,7 +355,7 @@ valeurDuTri = 'ASC';
         this.facadeService.recherche.dateFinImportation = new Date(this.formulaire.controls.rechercheDateAu.value);
       }
       if(this.formulaire.get('recherchePriorite').value){
-        if(this.formulaire.get('recherchePriorite').value === '0'){
+        if(this.formulaire.get('recherchePriorite').value === 'Toutes'){
           this.facadeService.recherche.priorite = '';
         }
         else{
@@ -393,16 +420,17 @@ valeurDuTri = 'ASC';
     }
   }
   public Renitialise(){
-   this.formulaire.reset();
+    this.ErreurDate = false;
+    this.formulaire.reset();
  // this.viderValeurs();
-   console.log('AVANT VALEURS PAR DÉFAULT');
-   this.valeursParDefault();
+    console.log('AVANT VALEURS PAR DÉFAULT');
+    this.valeursParDefault();
   }
   valeursParDefault(){
     console.log('Dans valeurs par défautl');
-    this.formulaire.controls.nomJuge.setValue(0);
-    this.formulaire.get('rechercheSection').setValue(0);
-    this.formulaire.get('recherchePriorite').setValue(0);
+    this.formulaire.controls.nomJuge.setValue('Toutes mes décisions');
+    this.formulaire.get('rechercheSection').setValue('Toutes');
+    this.formulaire.get('recherchePriorite').setValue('Toutes');
     this.formulaire.get('statut').get('statutImporte').setValue(true);
     this.formulaire.get('statut').get('statutPretSignature').setValue(true);
     this.formulaire.get('statut').get('statutEnCours').setValue(true);
@@ -423,10 +451,21 @@ valeurDuTri = 'ASC';
  enMajuscule(texte: string){
   texte.toUpperCase();
  }
-public SelectionDecision(numDocument: number){
-  this.facadeService.numDecisionTemp = numDocument;
-  console.log('Num docu' , numDocument);
-  this.router.navigateByUrl('/infoAdjointe');
+public SelectionDecision(numDocument: number , index: number){
+  if(this.facadeService.indicateurJuge === false){
+    this.facadeService.numDecisionTemp = numDocument;
+    console.log('Num docu' , numDocument);
+    this.router.navigateByUrl('/infoAdjointe');
+  }
+  else{
+    console.log('Indicateur juge = true');
+    console.log('Valeur de index:' , index);
+    console.log(this.facadeService.tableauDecision[0].urlVoute);
+    const urlVoute = this.facadeService.tableauDecision[index].urlVoute;
+    console.log('URL voute:' , urlVoute);
+    window.open(urlVoute, '_blank');
+  }
+
 }
 changerValeurTri(elementHtml: any){
   console.log('Valeur de élément html:' , elementHtml);
@@ -473,6 +512,12 @@ lancerRechercheTri(){
   );
 
 }
+historiqueJuge(numDocument: number , index: number){
+  this.facadeService.numDecisionTemp = numDocument;
+  this.router.navigateByUrl('/infoJuge');
+// infoJuge
+}
+
 }
 interface DurRest {
   durRestante: number;

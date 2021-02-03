@@ -9,7 +9,7 @@ export class WinAuthInterceptor implements HttpInterceptor{
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       console.log('Dans winAuth');
-        req = req.clone({ withCredentials: true });
-        return next.handle(req);
+      req = req.clone({ withCredentials: true  });
+      return next.handle(req);
     }
 }

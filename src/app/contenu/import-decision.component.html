@@ -52,7 +52,14 @@
                 </div>
 
             </div>
-            <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
+             <!--Erreur Extension-->
+         <div *ngIf="messageErreurExtension"  class="row">
+            <div class="col-2"></div>
+            <div class="col-4 red ml-3">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
+          </div>
+          <!--Fin Erreur Extension-->
+
+            <!-- <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div> -->
             <!--Fin Section dépot de fichier-->
 
          <div class="row espDesc" *ngIf=" this.facadeService.listeDecision">
@@ -63,9 +70,13 @@
           <div class="col-6">
             <input class="inputReg" formControlName="description" >
           </div>
-
-
          </div>
+         <!--Erreur description-->
+         <div *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors" class="row">
+           <div class="col-2"></div>
+           <div class="col-2 descError">La description est requise.</div>
+         </div>
+         <!--Fin Erreur description-->
 <!--Début nouvelle row-->
 <div  *ngIf=" this.facadeService.listeDecision">
    <!--Row titre de section signature-->

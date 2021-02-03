@@ -23,9 +23,9 @@ export class Decision{
      public statut: string;
      public priorite: string;
      public erreur: string;
-     public uRLDecisionWord: string;
-     public uRLDecisionPDF: string;
-     public uRLVoute: string;
+     public urlDecisionWord: string;
+     public urlDecisionPDF: string;
+     public urlVoute: string;
      public uRLDecisionPDFFinale: string;
      public historiqueStatuts: HistoriqueStatut[];
 
