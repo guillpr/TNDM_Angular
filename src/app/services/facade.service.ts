@@ -64,6 +64,8 @@ export class FacadeService {
 
   private obtenirRechercheDecisionTrieURL = environment.apiBaseUrlFacade + 'v1/Decision/Recherche2';
 
+  private rejetDecisionURL = environment.apiBaseUrlFacade + 'v1/Decision';
+
 
 
 
@@ -126,6 +128,11 @@ console.log('Date: ' , date);
 return this.http.put<boolean>(this.modifDecisionUrlFacade + '?idDocument=' + idDecision
     + '&Description=' + description + '&DateFinDelibere=' + date + '&Priorite=' + priorite +
      '&ChangementDate=' + changementDate, this.body);
+ }
+
+ // Méthode DELETE
+ public rejetDecision(idDocument: number, codeReseau: string){
+   return this.http.delete(this.rejetDecisionURL + '?' + idDocument + '&' + codeReseau );
  }
 
   // public obtenirDecisionListRecherche(requete: string){

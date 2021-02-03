@@ -1,7 +1,6 @@
 
 // Importation composants
 import { AppComponent } from './app.component';
-import { JugeComponent } from './contenu/juge.component';
 import { InfoDecisionAdjointeComponent } from './contenu/info-decision-adjointe.component';
 import { InfoDecisionJugeComponent } from './contenu/info-decision-juge.component';
 import { ImportDecisionComponent } from './contenu/import-decision.component';
@@ -28,7 +27,6 @@ import { CanDeactivateGuard } from './commun/can-deactivate.guard';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { TestMatTableComponent } from './commun/test-mat-table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -81,7 +79,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     TexteComponent,
     TextePilotableComponent,
     AdjointeComponent,
-    JugeComponent,
     InfoDecisionAdjointeComponent,
     InfoDecisionJugeComponent,
     ImportDecisionComponent,
@@ -89,7 +86,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     InsertDecisionComponent,
     Searchfilter3Pipe,
     DateFiltrePipe,
-    TestMatTableComponent,
     SortDirective,
     FichierJointComponent,
     DndDirective,
@@ -103,8 +99,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     ReactiveFormsModule,
     RouterModule.forRoot([
       {path: '', component: AdjointeComponent },
-      {path: 'adjointe', component: AdjointeComponent },
-      {path: 'juge', component: JugeComponent },
       {path: 'infoAdjointe', component: InfoDecisionAdjointeComponent},
       {path: 'infoJuge', component: InfoDecisionJugeComponent },
       {path: 'importDecision', component: ImportDecisionComponent , canDeactivate: [CanDeactivateGuard] },

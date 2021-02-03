@@ -1,15 +1,10 @@
-import { Signataires } from './../entitees/signataires';
-import { Decision } from './../entitees/decision';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit, Pipe } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AnyARecord } from 'dns';
-import { map } from 'rxjs/operators';
 import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
 import { FacadeService } from '../services/facade.service';
 import { TextesService } from '../services/textes.service';
 import { DatePipe } from '@angular/common';
-import { RetourDecision } from '../entitees/RetourDecision';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 
@@ -28,8 +23,6 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   prioSelected = '';
   couleurPrio = false;
   changementDate = false;
-
-  //public listeDecision: Decision[];
 
   boutonSauvegardeModif = false;
 
@@ -80,7 +73,6 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     if(this.numDecSelectionner === undefined){
       this.router.navigateByUrl('/');
     }
-
     this.facadeService.ObtenirInfosDecision(this.numDecSelectionner)
     .subscribe((s) => {
         console.log('Valeur du resultat' , s);
@@ -93,17 +85,13 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         this.formulaire.controls.priorite.setValue(s.priorite);
         this.formulaire.controls.statut.setValue(s.statut);
 
-
         console.log('Signataires :' , this.formulaire.controls['redacteur' + 0]);
         console.log('S signataires' , s.signataires.length)
         // ajouté checkbox
         for (let i = 0; i < s.signataires.length; i++){
           console.log('Dans la boucle for');
           this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
-
          }
-
-
 /*
 ajoutJuges(s: any){
   for (let i = 0; i < this.facadeService.listeDecision.signataires.length; i++) {
@@ -114,47 +102,29 @@ ajoutJuges(s: any){
 
 
 */
-
         this.facadeService.listeDecision = s;
          // Remplir les valeurs de départ
         this.valDepDescription = this.facadeService.listeDecision.description;
         this.valDepDateDelibere = this.facadeService.listeDecision.dateFinDelibere;
         this.valDepPriorite = this.facadeService.listeDecision.priorite;
     });
-
-
     // this.facadeService.ObtenirInfosDecision(5)
     // .subscribe((r) => {
     //   console.log('Valeur du r' , r);
     //   this.facadeService.listeDecision  = r;
     //   console.log('Liste décisions services facade:' , this.facadeService.listeDecision);
-
-
     //  // console.log('liste decision [0]' , this.facadeService.listeDecision.toString().description);
-
-
-
     //   console.log('Valeur de départ:' , this.valDepDescription , this.valDepDateDelibere, this.valDepPriorite );
-
-
-
     //   // Assigner FormControl
     //   // this.formulaire.get('description').setValue(this.valDepDescription);
     //   // this.formulaire.get('dateDelibere').setValue(this.valDepDateDelibere);
     //   // this.formulaire.get('priorite').setValue(this.valDepPriorite);
     //   // this.formulaire.get('numero').setValue(this.facadeService.listeDecision[0].identifiant);
     //   // this.formulaire.get('importePar').setValue(this.facadeService.listeDecision[0].codeReseauDepot);
-
-
-
     //   this.spinner.hide();
 
     // });
-
     console.log('Liste de décision: ', this.facadeService.listeDecision);
-
-
-
 
  // TODO mail
     this.email = 'proulxguill@gmail.com';
@@ -162,9 +132,7 @@ ajoutJuges(s: any){
     // TODO statut juge codé dur
     this.facadeService.indicateurJuge = false;
     this.couleurPrio = true;
-
   }
-
   ouvertureBoiteDecision(){
     this.boiteDecisionOuverte = true;
   }
@@ -201,43 +169,69 @@ ajoutJuges(s: any){
     }
   }
   rejeterDecision(){
-        const donnees = {
-          texte: 'Cette décision sera supprimée définitivement de TNDM',
-          titre: 'Confirmation',
-          texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
-          texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
-          afficherBoutonOui: true,
-          reponse: ''
-        };
-        return this.dialog.open(BoiteDialogueComponent, {
-          width: '450px',
-          data: donnees,
-          ariaLabelledBy: 'titre-dialog',
-          ariaDescribedBy: 'contenu-dialogue'
-        }).afterClosed().pipe(
-          map(() => donnees.reponse === 'O')
+    const donnees = {
+      texte: 'Voulez-vous vraiment procéder au rejet de cette décision? IMPORTANT : Assurez-vous d’avoir une copie du document WORD avant de procéder au rejet puisque toutes les informations seront perdues. ',
+      titre: 'Rejeté décision',
+      texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+      texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+      afficherBoutonOui: true,
+      reponse: ''
+    };
+    const dialog = this.dialog.open(BoiteDialogueComponent, { width: '450px',
+   data: donnees,
+   ariaLabelledBy: 'titre-dialog',
+   ariaDescribedBy: 'contenu-dialogue'});
+    dialog.afterClosed().subscribe(() => {
+      if(this.facadeService.reponseSuppressionFichier){
+        console.log('SI suppresion décision');
+        this.facadeService.rejetDecision(this.numDecSelectionner,this.formulaire.controls.importePar.value)
+        .subscribe((s) => {
+          console.log('Rejet de décision effectué avec success');
+        },
+        (erreur) => {console.log('Erreur lors du rejet de la décision')}
+        
         );
+        this.dialog.closeAll();
+      }
+      else{
+        this.dialog.closeAll();
+      }
+   });
+    return dialog;
+        // const donnees = {
+        //   texte: 'Cette décision sera supprimée définitivement de TNDM',
+        //   titre: 'Confirmation',
+        //   texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+        //   texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+        //   afficherBoutonOui: true,
+        //   reponse: ''
+        // };
+        // return this.dialog.open(BoiteDialogueComponent, {
+        //   width: '450px',
+        //   data: donnees,
+        //   ariaLabelledBy: 'titre-dialog',
+        //   ariaDescribedBy: 'contenu-dialogue'
+        // }).afterClosed().pipe(
+        //   map(() => donnees.reponse === 'O')
+        // );
   }
-  editionDescription(){
-
-
-    const inputDesc: HTMLElement = document.querySelector(
-      '#inputDescription'
-  );
-    if (this.isEnabled === false)
-  {
-    this.isEnabled = true;
+  voirDocumentWord(){
+    console.log('Voir document word');
   }
-  else{
-    this.isEnabled = false;
+  voirDocumentPdf(){
+    console.log('Voir document pdf');
   }
+  demarrerSignature(){
+    console.log('Démarrer la signature');
   }
-
+  fermer(){
+    console.log('Fermer');
+    this.router.navigateByUrl('/');
+  }
   afficheBouton(){
     this.boutonSauvegardeModif = true;
   }
   sauvegarderChangements(){
-
     this.verifierSiChangements();
     console.log('Valeur description' , this.valDescription);
     console.log('Valeur date delibéré' , this.valDateDelibere);
@@ -258,7 +252,6 @@ ajoutJuges(s: any){
       if ( this.formulaire.get('description').value){
         this.valDescription =  this.formulaire.get('description').value;
       }
-
     }
     else{
       this.valDescription = '';
@@ -284,6 +277,5 @@ ajoutJuges(s: any){
       this.valPriorite = '';
     }
   }
-
 }
 

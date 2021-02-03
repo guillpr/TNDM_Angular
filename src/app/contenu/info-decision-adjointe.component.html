@@ -247,20 +247,20 @@
             <button (click)="rejeterDecision()" class="buttonRejet">Rejeter la décision/motifs</button>
         </div>
         <div class="col-2 maxW12">
-            <button class="buttonDocument">Voir Word</button>
+            <button class="buttonDocument" (click)="voirDocumentWord()">Voir Word</button>
         </div>
         <div class="col-2">
-            <button class="buttonDocument">Voir PDF</button>
+            <button class="buttonDocument"  (click)="voirDocumentPdf()">Voir PDF</button>
         </div>
 
 
         <div class="col-3"></div>
 
         <div class="col-2 maxW14">
-            <button class="buttonDemarrer">Démarrer la signature</button>
+            <button class="buttonDemarrer" (click)="demarrerSignature()">Démarrer la signature</button>
         </div>
         <div class="col-1">
-            <button class="buttonFermer">Fermer</button>
+            <button class="buttonFermer" (click)="fermer()">Fermer</button>
         </div>
 
     </div>
@@ -269,7 +269,7 @@
 
       <!--Début zone bouton juge-->
 
-      <div *ngIf="this.facadeService.indicateurJuge">
+      <!-- <div *ngIf="this.facadeService.indicateurJuge">
         <div class="row">
             <div class="col-2">
                 <button class="buttonDocument">Voir documents</button>
@@ -285,7 +285,7 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 
        <!--Fin zone bouton juge-->
 </div>
