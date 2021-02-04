@@ -132,7 +132,9 @@ return this.http.put<boolean>(this.modifDecisionUrlFacade + '?idDocument=' + idD
 
  // Méthode DELETE
  public rejetDecision(idDocument: number, codeReseau: string){
-   return this.http.delete(this.rejetDecisionURL + '?' + idDocument + '&' + codeReseau );
+   console.log('Valeur de idDocument service de facade avant delete' , idDocument);
+   console.log('Valeur du code réseau service de facade avant delete' , codeReseau);
+   return this.http.delete(this.rejetDecisionURL + '?idDocument=' + idDocument + '&CodeReseau=' + codeReseau );
  }
 
   // public obtenirDecisionListRecherche(requete: string){

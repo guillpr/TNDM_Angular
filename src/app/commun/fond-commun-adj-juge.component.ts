@@ -181,9 +181,10 @@ valeurDuTri = 'ASC';
       this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
     .subscribe((resR) => {
       this.facadeService.tableauDecision = resR;
+      this.spinner.hide();
       console.log('Résultat recherche trié: ' , resR);
     },
-    (err) => { console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
+    (err) => { console.log('Une erreur est survenue lors de l\'appel des données de la recherche') ,  this.spinner.hide()}
     );
 
 

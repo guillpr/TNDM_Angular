@@ -117,16 +117,25 @@
     color: white;
     border: #2257a7 !important;
    /* margin-left: 283px;*/
-    width:150px;
+    width:160px;
     height:35px;
     border-radius: 10px;
+}
+.buttonDocumentDis{
+  background-color: grey !important;
+  color: white;
+  border: grey !important;
+ /* margin-left: 283px;*/
+  width:160px;
+  height:35px;
+  border-radius: 10px;
 }
 .buttonRejet {
     background-color: #f5250a !important;
     color: white;
     border:#f5250a !important;
    /* margin-left: 283px;*/
-    width:175px;
+    width:185px;
     height:35px;
     border-radius: 10px;
 
@@ -162,6 +171,7 @@
     height:35px;
     border-radius: 10px;
 }
+
 .inputDesc{
     border:none;
     resize: none;

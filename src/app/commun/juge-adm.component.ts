@@ -19,12 +19,12 @@ export class JugeAdmComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.facadeService.obtenirJuges();
+    // this.facadeService.obtenirJuges();
 
-    this.facadeService.obtenirJuges()
-     .subscribe( res => {
-        this.listeJuge = res;
-     });
+    // this.facadeService.obtenirJuges()
+    //  .subscribe( res => {
+    //     this.listeJuge = res;
+    //  });
   }
   public f(item: string): FormControl {
     return this.formulaire.get(`${item}`) as FormControl;

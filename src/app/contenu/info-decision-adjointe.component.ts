@@ -24,6 +24,8 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   couleurPrio = false;
   changementDate = false;
 
+  pdfClique = false;
+
   boutonSauvegardeModif = false;
 
   isEnabled = true;
@@ -68,9 +70,11 @@ export class InfoDecisionAdjointeComponent implements OnInit {
               private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.pdfClique = false;
     //this.spinner.show();
     this.numDecSelectionner = this.facadeService.numDecisionTemp;
-    if(this.numDecSelectionner === undefined){
+    console.log('Numéro de la décsion sélectionné:' , this.numDecSelectionner);
+    if (this.numDecSelectionner === undefined){
       this.router.navigateByUrl('/');
     }
     this.facadeService.ObtenirInfosDecision(this.numDecSelectionner)
@@ -84,6 +88,9 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         this.formulaire.controls.dureeRestante.setValue(s.dureeRestante);
         this.formulaire.controls.priorite.setValue(s.priorite);
         this.formulaire.controls.statut.setValue(s.statut);
+
+        this.facadeService.listeDecision = s;
+        console.log('Liste de décision: ', this.facadeService.listeDecision);
 
         console.log('Signataires :' , this.formulaire.controls['redacteur' + 0]);
         console.log('S signataires' , s.signataires.length)
@@ -102,7 +109,8 @@ ajoutJuges(s: any){
 
 
 */
-        this.facadeService.listeDecision = s;
+
+
          // Remplir les valeurs de départ
         this.valDepDescription = this.facadeService.listeDecision.description;
         this.valDepDateDelibere = this.facadeService.listeDecision.dateFinDelibere;
@@ -124,7 +132,8 @@ ajoutJuges(s: any){
     //   this.spinner.hide();
 
     // });
-    console.log('Liste de décision: ', this.facadeService.listeDecision);
+
+   // console.log('Statut dans la liste de décision' , this.facadeService.listeDecision.statut);
 
  // TODO mail
     this.email = 'proulxguill@gmail.com';
@@ -169,6 +178,8 @@ ajoutJuges(s: any){
     }
   }
   rejeterDecision(){
+    console.log('Numéro de la décsion sélectionné dans rejet:' , this.numDecSelectionner);
+    console.log('Importé par:' , this.formulaire.controls.importePar.value);
     const donnees = {
       texte: 'Voulez-vous vraiment procéder au rejet de cette décision? IMPORTANT : Assurez-vous d’avoir une copie du document WORD avant de procéder au rejet puisque toutes les informations seront perdues. ',
       titre: 'Rejeté décision',
@@ -182,14 +193,16 @@ ajoutJuges(s: any){
    ariaLabelledBy: 'titre-dialog',
    ariaDescribedBy: 'contenu-dialogue'});
     dialog.afterClosed().subscribe(() => {
-      if(this.facadeService.reponseSuppressionFichier){
+      if (this.facadeService.reponseSuppressionFichier){
         console.log('SI suppresion décision');
-        this.facadeService.rejetDecision(this.numDecSelectionner,this.formulaire.controls.importePar.value)
+        console.log('Numéro de la décsion sélectionné dans rejet dans le after close:' , this.numDecSelectionner);
+        console.log('Importé par dans le after close:' , this.formulaire.controls.importePar.value);
+        this.facadeService.rejetDecision(this.numDecSelectionner, this.formulaire.controls.importePar.value)
         .subscribe((s) => {
           console.log('Rejet de décision effectué avec success');
         },
         (erreur) => {console.log('Erreur lors du rejet de la décision')}
-        
+
         );
         this.dialog.closeAll();
       }
@@ -217,9 +230,19 @@ ajoutJuges(s: any){
   }
   voirDocumentWord(){
     console.log('Voir document word');
+    const urlVouteWord = this.facadeService.listeDecision.urlDecisionWord;
+    console.log('URL word:' , urlVouteWord);
+    window.open(urlVouteWord);
+
   }
   voirDocumentPdf(){
     console.log('Voir document pdf');
+    const urlVoute = this.facadeService.listeDecision.urlDecisionPDF;
+    console.log('URL voute:' , urlVoute);
+
+    window.open(urlVoute, '_blank' , 'height=' + screen.height + ',width=' + screen.width + ',resizable=yes,top=0,left=0');
+    this.pdfClique = true;
+
   }
   demarrerSignature(){
     console.log('Démarrer la signature');

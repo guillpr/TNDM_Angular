@@ -18,7 +18,7 @@
 
         <div class="row bold">
             <div class="col numUniCol"> <app-texte cle="commun.numero"></app-texte></div>
-            <div class="col dateDeliCol center"><app-texte cle="commun.description"></app-texte>  <i (click)="editionDescription()" class="fas fa-edit ml-1"></i></div>
+            <div class="col dateDeliCol center"><app-texte cle="commun.description"></app-texte>  <i  class="fas fa-edit ml-1"></i></div>
             <div class="col numUtiCol center"><app-texte cle="commun.impPar"></app-texte></div>
             <div class="col dateImpCol center"><app-texte cle="commun.dateImp"></app-texte></div>
 
@@ -242,22 +242,22 @@
     </div>
       <!--Début zone bouton adjointe-->
       <div *ngIf="!this.facadeService.indicateurJuge">
-    <div class="row">
-        <div class="col-2">
-            <button (click)="rejeterDecision()" class="buttonRejet">Rejeter la décision/motifs</button>
+    <div class="row" >
+        <div class="col-2" >
+            <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'" (click)="rejeterDecision()" class="buttonRejet">Rejeter la décision/motifs</button>
         </div>
         <div class="col-2 maxW12">
-            <button class="buttonDocument" (click)="voirDocumentWord()">Voir Word</button>
+            <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'" class="buttonDocument" (click)="voirDocumentWord()">Voir Word</button>
         </div>
         <div class="col-2">
-            <button class="buttonDocument"  (click)="voirDocumentPdf()">Voir PDF</button>
+            <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'" class="buttonDocument"  (click)="voirDocumentPdf()">Voir PDF</button>
         </div>
 
 
         <div class="col-3"></div>
 
         <div class="col-2 maxW14">
-            <button class="buttonDemarrer" (click)="demarrerSignature()">Démarrer la signature</button>
+            <button class="buttonDemarrer" [className]="pdfClique ? 'buttonDocument' : 'buttonDocumentDis'" (click)="demarrerSignature()">Démarrer la signature</button>
         </div>
         <div class="col-1">
             <button class="buttonFermer" (click)="fermer()">Fermer</button>

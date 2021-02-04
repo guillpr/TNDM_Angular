@@ -5,9 +5,9 @@
     <ngx-spinner bdColor = "rgba(140,137,137,0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
   <!--TODO test-->
             <div >
-            <div>{{noMessageDateInvalide}}</div>
+            <!-- <div>{{noMessageDateInvalide}}</div>
             <div>{{ErreurDate}}</div>
-            <div>{{valeurDuTri}}</div>
+            <div>{{valeurDuTri}}</div> -->
             <div *ngIf="this.facadeService.tableauDecision">Nombres de résultats: {{this.facadeService.tableauDecision.length}}</div>
 
                 <div class="divRight">
@@ -316,7 +316,7 @@
                                 <img *ngIf="(r.dateSignature | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')" class="imgSign" mat-raised-button
                                 matTooltip="Décision signé le  {{r.dateSignature | date: 'd-LL-yyyy'}}"
                                 aria-label="L'image affiche la date de signature de la décision"
-                                matTooltipPosition="above" src="../../assets/images/crochetVert.png"
+                                matTooltipPosition="above" src="assets/images/crochetVert.png"
                                 matTooltipClass="my-class"
                                 />
                              </div>
