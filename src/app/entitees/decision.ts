@@ -8,7 +8,7 @@ export class Decision{
      public idDocument: number;
      public identifiant: string;
      public identifiantWord: string;
-     public codeReseauDepot: number;
+     public codeReseauDepot: string;
      public nomRessourceDepot: string;
      public nomDocumentDecision: string;
      public dateImportation: Date;

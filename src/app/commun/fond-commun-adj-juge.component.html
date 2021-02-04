@@ -134,7 +134,7 @@
                       <div class="col-sm-2 col-md-4 col-lg-2 taRDate">
                         <app-texte cle="commun.DateImp"  ></app-texte>
                       </div>
-                      <div class="col-sm-1 col-lg-2">
+                      <div class="col-3 col-lg-3 col-xl-3 col-xxl-2">
                        <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                        <input
                         [className]="ErreurDate ? 'inputBorderRouge' : 'inputNormal'"
@@ -146,7 +146,7 @@
                     </div>
                     <div class="disInBl">au</div>
                      <!-- <div class="col-sm-1 col-md-1 col-lg-1"><span class="spanAu">au</span></div>  -->
-                    <div class="col-sm-1 col-lg-2">
+                    <div class="col-3">
                       <mat-form-field class="matFormFieldCustom"   (click)="picker2.open()"  >
                       <input
                       [className]="ErreurDate ? 'inputBorderRouge' : 'inputNormal'"
@@ -228,16 +228,43 @@
                         </div>
                     </div>
                     <!--Fin Priorité-->
+
+
+                    <div class="divVideButt"></div>
+
+                    <div class="divInBlock" >
                         <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button>
+                    </div>
+                    <div class="divInBlock" >
                         <button
-                         class="btn btn-primary buttonReini"
-                        (click)="Renitialise()"
-                        type="button">
-                        <app-texte cle="commun.boutonReni"></app-texte>
-                        </button>
+                        class="btn btn-primary buttonReini"
+                       (click)="Renitialise()"
+                       type="button">
+                       <app-texte cle="commun.boutonReni"></app-texte>
+                       </button>
+                    </div>
+
+                    <!-- <div class="row">
+                      <div class="col-sm-0 col-lg-1"></div>
+                      <div class="col-2 col-sm-2 col-md-4 col-lg-2"></div>
+                      <div class="col-sm-1 col-lg-2">
+                          <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
+                              <app-texte cle="commun.boutonRechercher"></app-texte>
+                          </button>
+                      </div>
+                      <div class="col-sm-1 col-lg-2">
+                          <button
+                          class="btn btn-primary buttonReini"
+                         (click)="Renitialise()"
+                         type="button">
+                         <app-texte cle="commun.boutonReni"></app-texte>
+                         </button>
+                      </div>
+
                         <br />
+                      </div> -->
                         <!-- <label ID="LabelMessageErreur" class="errorRed" runat="server" >
                             <i class="fas fa-exclamation-triangle"></i>
                             Ceci est un message d'erreur
@@ -310,7 +337,7 @@
                             <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')"> {{r.dateFinDelibere | date: 'yyyy-MM-dd'}}</div>
                             <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') < (0001-01-01 | date: 'yyyy-MM-dd')">-</div>
                            </td>
-                           <td  *ngIf="!this.facadeService.indicateurJuge">
+                           <td>
                              <div *ngFor="let r of  this.facadeService.tableauDecision[i].signataires">
                                 {{r.nomRessource}}
                                 <img *ngIf="(r.dateSignature | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')" class="imgSign" mat-raised-button

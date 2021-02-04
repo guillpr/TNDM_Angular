@@ -33,6 +33,8 @@ export class FacadeService {
   public retourDecision: RetourDecision;
   public recherche: Recherche;
   public listeDecision: Decision;
+  // Liste décision pour importation
+  public listeDecisionImp: Decision;
   public listeAd: Usager;
   public listeJugesAdjointes: JugesAdjointes[];
   public body = { title: 'Angular PUT Request Example' };
@@ -43,7 +45,7 @@ export class FacadeService {
 
 
   // Url controller
-  private DecisionURL = environment.apiBaseUrl + 'DecisionDetail';
+  //private DecisionURL = environment.apiBaseUrl + 'DecisionDetail';
   private DecisionRecherche = environment.apiBaseUrl + 'DecisionDetail/Requete/';
   private JugeUrl = environment.apiBaseUrl + 'JugeDetail';
   private NoDecisionUrl = environment.apiBaseUrl + 'DecisionDetail/NoDecision';
@@ -64,7 +66,12 @@ export class FacadeService {
 
   private obtenirRechercheDecisionTrieURL = environment.apiBaseUrlFacade + 'v1/Decision/Recherche2';
 
-  private rejetDecisionURL = environment.apiBaseUrlFacade + 'v1/Decision';
+  // Decision GET et POST
+  private DecisionURL = environment.apiBaseUrlFacade + 'v1/Decision';
+
+  private demarrerSignatureURL = environment.apiBaseUrlFacade + 'v1/Decision/DemarrerSignature';
+
+
 
 
 
@@ -81,9 +88,10 @@ export class FacadeService {
   // // }
 
   // Méthode GET
-  public obtenirDecisionList(): Observable<Decision[]>{
-   return this.http.get<Decision[]>(this.DecisionURL);
-  }
+  // TODO
+  // public obtenirDecisionList(): Observable<Decision[]>{
+  //  return this.http.get<Decision[]>(this.DecisionURL);
+  // }
   public obtenirJuges(): Observable<Juge[]>{
     return this.http.get<Juge[]>(this.JugeUrl);
   }
@@ -107,6 +115,9 @@ public obtenirDecisionListTrie(recherche: Recherche): Observable<Decision[]>{
 
   return this.http.post<Decision[]>(this.obtenirRechercheDecisionTrieURL, JSON.stringify(recherche), this.httpOptions );
 }
+public DemarrerSignature(idDocument: number, codeReseau: string){
+  return this.http.get(this.demarrerSignatureURL + '?idDocument=' + idDocument + '&CodeReseau=' + codeReseau);
+}
   // public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
   //   return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );
   // }
@@ -119,6 +130,10 @@ public obtenirDecisionListTrie(recherche: Recherche): Observable<Decision[]>{
 
  public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision[]>{
    return this.http.post<RetourDecision[]>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
+ }
+ public ImporterDecision(decision: Decision): Observable<Decision>{
+   console.log('JSON decision:' , JSON.stringify(decision));
+   return this.http.post<Decision>(this.DecisionURL, JSON.stringify(decision), this.httpOptions);
  }
 
  // Méthode PUT
@@ -134,7 +149,7 @@ return this.http.put<boolean>(this.modifDecisionUrlFacade + '?idDocument=' + idD
  public rejetDecision(idDocument: number, codeReseau: string){
    console.log('Valeur de idDocument service de facade avant delete' , idDocument);
    console.log('Valeur du code réseau service de facade avant delete' , codeReseau);
-   return this.http.delete(this.rejetDecisionURL + '?idDocument=' + idDocument + '&CodeReseau=' + codeReseau );
+   return this.http.delete(this.DecisionURL + '?idDocument=' + idDocument + '&CodeReseau=' + codeReseau );
  }
 
   // public obtenirDecisionListRecherche(requete: string){

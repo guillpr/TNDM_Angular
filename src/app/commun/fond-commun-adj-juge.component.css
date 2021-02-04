@@ -102,7 +102,7 @@
     background-color: #2257a7 !important;
     color: white;
     border: #2257a7 !important;
-    margin-left: 335px;
+    /* margin-left: 335px; */
     margin-top:10px;
     width:200px;
     height:35px;
@@ -172,7 +172,8 @@ input[type=radio]:checked:before {
 
 .imgSign{
     padding-left: 5px;
-    height: 20px;;
+    height: 20px;
+    margin-bottom: 5px;
 }
 .my-class{
     color: white;
@@ -351,6 +352,10 @@ left: 25px;
   display: inline-block;
   width: 21.3%;
 }
+.divVideButt{
+  display:inline-block;
+  width: 25.5%;
+}
 @media screen and (max-width: 1300px) {
   .divVide{
     display: inline-block;
@@ -420,7 +425,7 @@ left: 25px;
         margin-right: 3px;
         max-width: 13.2%;
      }
-    
+
      .texteTitreNormal{
       font-size: 11px;
       color:black;
@@ -473,7 +478,7 @@ left: 25px;
       .inputNormal{
         width: 170px;
       }
-      
+
 .buttonRechercher {
     background-color: #2257a7 !important;
     color: white;
@@ -533,11 +538,19 @@ left: 25px;
     display: inline-block;
     margin-top:6px;
     margin-right: 10px;
-    
+    margin-left: -10px;
+
 }
 .inputW{
     width: 250px;
 }
+@media (min-width: 1400px){
+  .col-xxl-2 {
+    flex: 0 0 25%;
+    max-width: 17%;
+}
+}
+
 @media screen and (max-width: 725px) {
 
     .inputW{

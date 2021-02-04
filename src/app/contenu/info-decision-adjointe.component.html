@@ -8,24 +8,27 @@
     <div  class="divCentre">
 
         <!-- Début zone décision -->
+        <div class="row">
         <div class="containerTitre">
             <div class="barreTitre"></div>
         <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.decision"></app-texte>
+            <span *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="errorRed">* champ obligatoire</span>
             </div>
         </div>
+      </div>
         <!--Début row décision-->
 
         <div class="row bold">
             <div class="col numUniCol"> <app-texte cle="commun.numero"></app-texte></div>
-            <div class="col dateDeliCol center"><app-texte cle="commun.description"></app-texte>  <i  class="fas fa-edit ml-1"></i></div>
+            <div class="col dateDeliCol center"><app-texte cle="commun.description"></app-texte><span *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="asteRed">*</span>  <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'"   class="fas fa-edit ml-1"></i></div>
             <div class="col numUtiCol center"><app-texte cle="commun.impPar"></app-texte></div>
             <div class="col dateImpCol center"><app-texte cle="commun.dateImp"></app-texte></div>
 
 
-            <div class="col-2 dateDeliCol center"><app-texte cle="commun.dateDeli"></app-texte> <i class="fas fa-edit ml-1"></i></div>
+            <div class="col-2 dateDeliCol center"><app-texte cle="commun.dateDeli"></app-texte> <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit ml-1"></i></div>
             <div class="col numUniCol center">Durée restante(jours)</div>
-            <div class="col numUtiCol center">Priorité <i class="fas fa-edit ml-1"></i></div>
+            <div class="col numUtiCol center">Priorité <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit ml-1"></i></div>
             <div class="col center">Statut</div>
         </div>
           <!--Fin row décision-->
@@ -34,7 +37,7 @@
             <div     class="row">
             <div class="col numUniCol"><input class="noBorder center"  formControlName="numero"></div>
                 <div class="col dateDeliCol">
-                    <textarea (change)="afficheBouton()" formControlName="description" class="inputDesc" rows="auto" cols="18"></textarea>
+                    <textarea  [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null" (change)="afficheBouton()" formControlName="description" class="inputDesc" rows="auto" cols="18"></textarea>
                     </div>
                   <div class="col numUtiCol">
                     <input class="noBorder center"  formControlName="importePar">
@@ -48,6 +51,7 @@
                 <div class="col-2 dateDeliCol">
                     <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                         <input
+                        [disabled]="this.facadeService.listeDecision.statut === 'Rejeté'"
                         (dateChange)="afficheBouton()"
                          class="inputNormal center"
                          matInput
@@ -61,7 +65,7 @@
               <div class="col numUniCol">
                   <input class="noBorder center"  formControlName="dureeRestante"></div>
                 <div class="col numUtiCol">
-                       <select formControlName="priorite" (change)="afficheBouton()"  [className]="this.formulaire.get('priorite').value ==='Urgente' ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
+                       <select  [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null" formControlName="priorite" (change)="afficheBouton()"  [className]="this.formulaire.get('priorite').value ==='Urgente' ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
                          <option  selected value="Urgente">Urgente</option>
                          <option  value="Normale">Normale</option>
 
@@ -75,7 +79,12 @@
                     </div>
             </div>
             <button *ngIf="boutonSauvegardeModif" (click)="sauvegarderChangements()" class="buttonChangements">Sauvegarder changements</button>
+            <div *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors" class="row">
+                <div class="col-2 maxW15"></div>
+                <div class="col-2 descError">La description est requise.</div>
+              </div>
         </div>
+
 
 
         <!--Fin zone décision-->
@@ -231,7 +240,7 @@
                    {{hist.statut}}
                 </div>
                 <div class="col-2">
-                    {{hist.dateStatut}}
+                    {{hist.dateStatut | date: 'yyyy-MM-dd'}}
                 </div>
                 <div class="col-2">
                    {{hist.codeReseau}}
@@ -257,7 +266,7 @@
         <div class="col-3"></div>
 
         <div class="col-2 maxW14">
-            <button class="buttonDemarrer" [className]="pdfClique ? 'buttonDocument' : 'buttonDocumentDis'" (click)="demarrerSignature()">Démarrer la signature</button>
+            <button *ngIf="this.facadeService.listeDecision.statut === 'Prêt pour signature'" class="buttonDemarrer" [className]="pdfClique ? 'buttonDocument' : 'buttonDocumentDis'" (click)="demarrerSignature()">Démarrer la signature</button>
         </div>
         <div class="col-1">
             <button class="buttonFermer" (click)="fermer()">Fermer</button>

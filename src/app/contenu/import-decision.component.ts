@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 import { FichierJoint } from '../entitees/fichier-joint';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DatePipe } from '@angular/common';
+import { Decision } from '../entitees/decision';
 
 @Component({
   selector: 'app-import-decision',
@@ -95,7 +96,7 @@ export class ImportDecisionComponent implements OnInit {
     return of(true);
   }
   ngOnInit(): void {
-   // this.facadeService.listeDecision = undefined;
+    this.facadeService.listeDecisionImp = undefined;
     this.initialiserFormulaire();
     this.facadeService.reponseSuppressionFichier = false;
     // if(!this.facadeService.listeAd){
@@ -165,7 +166,19 @@ export class ImportDecisionComponent implements OnInit {
   }
   public importerDecision(){
     if(this.formulaire.valid){
-      alert('Décision Importée');
+
+      // if(!this.facadeService.listeDecisionImp.identifiant){
+      //   this.facadeService.listeDecisionImp.identifiant = '';
+      // }
+
+
+
+      this.facadeService.ImporterDecision(this.facadeService.listeDecisionImp)
+      .subscribe((r => {
+        console.log('Valeur du résultat de importer décision' , r);
+      }));
+
+
     }
 
    // this.router.navigateByUrl('/juge');
@@ -192,7 +205,7 @@ methodeSuppressionFichier(){
   console.log('Avant suppression' , this.fichiers);
   this.formulaire.get('nomFichier').setValue('');
   this.fichiers.shift();
-  this.facadeService.listeDecision = undefined;
+  this.facadeService.listeDecisionImp = undefined;
   this.buttonDisabled = true;
   console.log('Apres suppression' , this.fichiers);
   console.log('Retour décision: ' , this.facadeService.retourDecision);
@@ -306,9 +319,9 @@ messageErreurFichier2(){
         console.log('Valeur du resultat' , s);
         this.fichiers.push(f);
 
-        this.facadeService.listeDecision = s;
+        this.facadeService.listeDecisionImp = s;
         console.log('Valeur du S après assignation facade:' , s);
-        console.log('Valeur liste décision facade' , this.facadeService.listeDecision);
+        console.log('Valeur liste décision facade' , this.facadeService.listeDecisionImp);
         this.buttonDisabled = false;
         this.formulaire.controls.description.setValue(s.description);
         this.messageErreurImport = false;
@@ -343,7 +356,7 @@ gererFichiers(files: any) {
 }
  // Fin de méthode pour fichiers
  ajoutJuges(s: any){
-  for (let i = 0; i < this.facadeService.listeDecision.signataires.length; i++) {
+  for (let i = 0; i < this.facadeService.listeDecisionImp.signataires.length; i++) {
     this.formulaire.controls['nomJuge' + i].setValue( s.signataires[i].nomRessource);
 
     this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);

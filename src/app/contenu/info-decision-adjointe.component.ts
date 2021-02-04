@@ -1,4 +1,4 @@
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Pipe } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
@@ -46,7 +46,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
 
   // Formulaire
   formulaire = this.fb.group({
-    description: new FormControl(''),
+    description: ['', [Validators.required]],
     dateDelibere: new FormControl(''),
     priorite: new FormControl(''),
     numero: new FormControl({value: '', disabled: true}),
@@ -73,6 +73,8 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     this.pdfClique = false;
     //this.spinner.show();
     this.numDecSelectionner = this.facadeService.numDecisionTemp;
+
+
     console.log('Numéro de la décsion sélectionné:' , this.numDecSelectionner);
     if (this.numDecSelectionner === undefined){
       this.router.navigateByUrl('/');
@@ -115,6 +117,10 @@ ajoutJuges(s: any){
         this.valDepDescription = this.facadeService.listeDecision.description;
         this.valDepDateDelibere = this.facadeService.listeDecision.dateFinDelibere;
         this.valDepPriorite = this.facadeService.listeDecision.priorite;
+
+
+
+        console.log('Valeur du formulaire' , this.formulaire);
     });
     // this.facadeService.ObtenirInfosDecision(5)
     // .subscribe((r) => {
@@ -246,6 +252,25 @@ ajoutJuges(s: any){
   }
   demarrerSignature(){
     console.log('Démarrer la signature');
+
+    this.facadeService.DemarrerSignature( this.numDecSelectionner, this.facadeService.listeAd.codeReseau)
+    .subscribe((res) => {
+      console.log('Valeur du résultat bool ' , res);
+    },
+    (erreur) => {console.log('Erreur lors de démarrer la signature')  ,  this.spinner.hide(); }
+    );
+
+
+
+    /**
+      .subscribe((resR) => {
+      this.facadeService.tableauDecision = resR;
+      this.spinner.hide();
+      console.log('Résultat recherche trié: ' , resR);
+    },
+    (err) => { console.log('Une erreur est survenue lors de l\'appel des données de la recherche') ,  this.spinner.hide()}
+    );
+    */
   }
   fermer(){
     console.log('Fermer');

@@ -189,7 +189,7 @@
 .matFormFieldCustom{
   width: 250px;
   display: relative;
-  bottom:18px;
+  bottom:10px;
   right: 22px;
 }
 ::ng-deep .mat-form-field-underline {
@@ -223,4 +223,33 @@ margin-top: 20px;
 .center{
   text-align: center;
 }
-
+.errorRed{
+  color:red;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: 12px;
+}
+.asteRed{
+  color:red;
+  font-weight: bold;
+  margin: 0px 2px 0px 2px;
+}
+.descError{
+  color: red;
+  font-weight: bold
+}
+.maxW15{
+  max-width: 14.5%;
+}
+/* textarea:disabled{
+  color:violet;
+  background-color: white;
+} */
+select[disabled],
+textarea:disabled,
+input:disabled
+ {
+    color: black !important;
+    background-color: white !important;
+}
