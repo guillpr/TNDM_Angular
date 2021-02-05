@@ -56,42 +56,42 @@ export class ImportDecisionComponent implements OnInit {
     currentState: RouterStateSnapshot,
     nextState: RouterStateSnapshot
   ): Observable<boolean> {
-    if( this.messageSuppression){
-      const donnees = {
-        texte: 'Voulez-vous vraiment supprimer le fichier?',
-        titre: 'Suppression de fichier',
-        texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
-        texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
-        afficherBoutonOui: true,
-        reponse: ''
-      };
-      return this.dialog.open(BoiteDialogueComponent, {
-        width: '450px',
-        data: donnees,
-        ariaLabelledBy: 'titre-dialog',
-        ariaDescribedBy: 'contenu-dialogue'
-      }).afterClosed().pipe(
-        map(() => donnees.reponse === 'O')
-      );
-    }
-    if (nextState.url !== '/juge') {
-      const donnees = {
-        texte: this.textesService.obtenirTexte('commun.descriptionPerteDonnees'),
-        titre: this.textesService.obtenirTexte('commun.titrePerteDonnees'),
-        texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
-        texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
-        afficherBoutonOui: true,
-        reponse: ''
-      };
-      return this.dialog.open(BoiteDialogueComponent, {
-        width: '450px',
-        data: donnees,
-        ariaLabelledBy: 'titre-dialog',
-        ariaDescribedBy: 'contenu-dialogue'
-      }).afterClosed().pipe(
-        map(() => donnees.reponse === 'O')
-      );
-    }
+    // if( this.messageSuppression){
+    //   const donnees = {
+    //     texte: 'Voulez-vous vraiment supprimer le fichier?',
+    //     titre: 'Suppression de fichier',
+    //     texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+    //     texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+    //     afficherBoutonOui: true,
+    //     reponse: ''
+    //   };
+    //   return this.dialog.open(BoiteDialogueComponent, {
+    //     width: '450px',
+    //     data: donnees,
+    //     ariaLabelledBy: 'titre-dialog',
+    //     ariaDescribedBy: 'contenu-dialogue'
+    //   }).afterClosed().pipe(
+    //     map(() => donnees.reponse === 'O')
+    //   );
+    // }
+    // if (nextState.url !== '/juge') {
+    //   const donnees = {
+    //     texte: this.textesService.obtenirTexte('commun.descriptionPerteDonnees'),
+    //     titre: this.textesService.obtenirTexte('commun.titrePerteDonnees'),
+    //     texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+    //     texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+    //     afficherBoutonOui: true,
+    //     reponse: ''
+    //   };
+    //   return this.dialog.open(BoiteDialogueComponent, {
+    //     width: '450px',
+    //     data: donnees,
+    //     ariaLabelledBy: 'titre-dialog',
+    //     ariaDescribedBy: 'contenu-dialogue'
+    //   }).afterClosed().pipe(
+    //     map(() => donnees.reponse === 'O')
+    //   );
+    // }
 
     return of(true);
   }
@@ -172,10 +172,11 @@ export class ImportDecisionComponent implements OnInit {
       // }
 
 
-
+      this.spinner.show();
       this.facadeService.ImporterDecision(this.facadeService.listeDecisionImp)
       .subscribe((r => {
         console.log('Valeur du résultat de importer décision' , r);
+        this.spinner.hide();
       }));
 
 

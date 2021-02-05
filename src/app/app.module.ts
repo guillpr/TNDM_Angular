@@ -13,6 +13,7 @@ import { TextePilotableComponent } from './commun/texte-pilotable.component';
 import { AdjointeComponent } from './contenu/adjointe.component';
 import { JugeAdmComponent } from './commun/juge-adm.component';
 import { FichierJointComponent } from './commun/fichier-joint.component';
+import { AccesRefuseComponent } from './commun/acces-refuse.component';
 
 // Dialog
 import { BoiteDialogueComponent } from './commun/boite-dialogue.component';
@@ -42,9 +43,6 @@ import { MY_DATE_FORMATS } from './commun/date-formats';
 // Moment
 import { MomentDateModule } from '@angular/material-moment-adapter';
 
-
-
-
 // Importation pipe
 import { Searchfilter3Pipe } from './commun/searchfilter3.pipe';
 import { DateFiltrePipe } from './commun/date-filtre.pipe';
@@ -68,7 +66,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageComponent } from './commun/message.component';
 import { WinAuthInterceptor } from './commun/WinAuthInterceptor';
-import { AccesRefuseComponent } from './commun/acces-refuse.component';
+
+// Toastr
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -96,6 +98,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       {path: '', component: AdjointeComponent },
@@ -108,6 +111,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     HttpClientModule,
     NgxMaskModule.forRoot(),
     NgxPaginationModule,
+    ToastrModule.forRoot(),
     Ng2SearchPipeModule,
     OrderModule,
     BrowserAnimationsModule,

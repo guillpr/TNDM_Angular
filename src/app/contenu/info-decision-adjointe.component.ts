@@ -7,6 +7,7 @@ import { TextesService } from '../services/textes.service';
 import { DatePipe } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-info-decision-adjointe',
@@ -67,7 +68,8 @@ export class InfoDecisionAdjointeComponent implements OnInit {
               public router: Router,
               public datepipe: DatePipe,
               public fb: FormBuilder,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.pdfClique = false;
@@ -95,7 +97,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         console.log('Liste de décision: ', this.facadeService.listeDecision);
 
         console.log('Signataires :' , this.formulaire.controls['redacteur' + 0]);
-        console.log('S signataires' , s.signataires.length)
+        console.log('S signataires' , s.signataires.length);
         // ajouté checkbox
         for (let i = 0; i < s.signataires.length; i++){
           console.log('Dans la boucle for');
@@ -207,7 +209,7 @@ ajoutJuges(s: any){
         .subscribe((s) => {
           console.log('Rejet de décision effectué avec success');
         },
-        (erreur) => {console.log('Erreur lors du rejet de la décision')}
+        (erreur) => {console.log('Erreur lors du rejet de la décision');}
 
         );
         this.dialog.closeAll();
@@ -253,11 +255,18 @@ ajoutJuges(s: any){
   demarrerSignature(){
     console.log('Démarrer la signature');
 
+    this.spinner.show();
     this.facadeService.DemarrerSignature( this.numDecSelectionner, this.facadeService.listeAd.codeReseau)
     .subscribe((res) => {
       console.log('Valeur du résultat bool ' , res);
+      this.spinner.hide();
+      this.router.navigateByUrl('/');
+     // this.toastr.success('Signature démarré avec succès , un courriel vous sera envoyé sous peu.', 'Message:');
+
     },
-    (erreur) => {console.log('Erreur lors de démarrer la signature')  ,  this.spinner.hide(); }
+    (erreur) => {console.log('Erreur lors de démarrer la signature' , erreur) ;
+                 this.toastr.error('Une erreur est survenue avec la signature.' , 'Erreur:');
+  }
     );
 
 
@@ -284,7 +293,8 @@ ajoutJuges(s: any){
     console.log('Valeur description' , this.valDescription);
     console.log('Valeur date delibéré' , this.valDateDelibere);
     console.log('Valeur priorité' , this.valPriorite);
-    this.facadeService.modifieInfoDecision(7, this.valDescription, this.valDateDelibere, this.valPriorite, this.changementDate)
+    this.facadeService.modifieInfoDecision(this.numDecSelectionner, this.valDescription,
+       this.valDateDelibere, this.valPriorite, this.changementDate)
     .subscribe(resJ => {
       console.log('Le résultat Put décision' ,  resJ);
     });
@@ -319,6 +329,7 @@ ajoutJuges(s: any){
     }
     if (this.formulaire.get('priorite').value !== this.valDepPriorite){
 
+      console.log('Dans priorité pas égal valeur départ');
       this.valPriorite = this.formulaire.get('priorite').value;
      }
      else{
