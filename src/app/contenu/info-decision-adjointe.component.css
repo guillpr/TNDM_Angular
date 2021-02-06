@@ -185,6 +185,7 @@
 }
 .inputNormal{
   margin-left: 22px;
+  border:none;
 }
 .matFormFieldCustom{
   width: 250px;

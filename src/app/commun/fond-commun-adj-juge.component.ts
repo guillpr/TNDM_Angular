@@ -213,26 +213,36 @@ valeurDuTri = 'ASC';
     return datePipe;
   }
   reiniatialiserErreurs(){
+    console.log('Dans erreur false');
     this.ErreurDate = false;
 
   }
   validationChampsDate(){
 
-    if(moment(this.formulaire.controls.rechercheDateDu.value,' yyyy-MM-dd').isValid()
+console.log('Dans validation champs date');
+if(moment(this.formulaire.controls.rechercheDateDu.value,' yyyy-MM-dd').isValid()
     &&moment(this.formulaire.controls.rechercheDateAu.value,' yyyy-MM-dd').isValid()){
       console.log('Date du valide');
     }
     else{
-      console.log('Date invalide');
-      this.ErreurDate = true;
-      this.noMessageDateInvalide = '0003';
+      if(this.formulaire.controls.rechercheDateAu.value){
+        console.log(this.formulaire.controls.rechercheDateAu.value);
+        console.log('Date invalide if');
+        this.ErreurDate = true;
+        this.noMessageDateInvalide = '0003';
+      }
+      else if(this.formulaire.controls.rechercheDateAu.value == null){
+        console.log('Date invalide null');
+        this.ErreurDate = true;
+        this.noMessageDateInvalide = '0003';
+      }
     }
 
   // console.log(moment(this.formulaire.controls.rechercheDateDu.value,' yyyy-MM-dd').isValid());
-    let valeurDateDu = '';
-    let valeurDateAu = '';
-    console.log('Valeur date du formulaire' , this.formulaire.controls.rechercheDateDu);
-    if (this.formulaire.controls.rechercheDateDu.value){
+let valeurDateDu = '';
+let valeurDateAu = '';
+console.log('Valeur date du formulaire' , this.formulaire.controls.rechercheDateDu);
+if (this.formulaire.controls.rechercheDateDu.value){
        valeurDateDu = this.retournerValeurDate(this.formulaire.controls.rechercheDateDu.value);
     }
 
@@ -254,32 +264,32 @@ valeurDuTri = 'ASC';
 
     //    this.noMessageDateInvalide = '0003';
     //  }
-    if (this.formulaire.controls.rechercheDateAu.value){
+if (this.formulaire.controls.rechercheDateAu.value){
       valeurDateAu = this.retournerValeurDate(this.formulaire.controls.rechercheDateAu.value);
       console.log('Valeur date Au après conversion' , valeurDateAu);
       }
-    if ((valeurDateAu && valeurDateDu) && valeurDateAu < valeurDateDu ){
+if ((valeurDateAu && valeurDateDu) && valeurDateAu < valeurDateDu ){
       console.log('valeurDateAu < valeurDateDu');
       this.dateAuPlusPetite = true;
       this.ErreurDate = true;
       this.noMessageDateInvalide = '0001';
       }
-    if(valeurDateDu && !valeurDateAu){
-        console.log('Pas de valeur date du et valeur date au');
+if(valeurDateAu && !valeurDateDu){
+        console.log('Pas de valeur date du et valeur date au' , valeurDateAu);
         this.ErreurDate = true;
-        this.noMessageDateInvalide = '0004';
+        this.noMessageDateInvalide = '0006';
       }
 
-    const date1 = new Date(valeurDateDu);
-    const date2 = new Date(valeurDateAu);
+const date1 = new Date(valeurDateDu);
+const date2 = new Date(valeurDateAu);
 
-    const diffDate = date2.getTime() - date1.getTime();
-    const diffEnJour = diffDate / (1000 * 3600 * 24);
+const diffDate = date2.getTime() - date1.getTime();
+const diffEnJour = diffDate / (1000 * 3600 * 24);
 
-    console.log('Différence date: ' , diffEnJour);
+console.log('Différence date: ' , diffEnJour);
 
-    console.log('Date 1' , date1);
-    if (diffEnJour > 365) {
+console.log('Date 1' , date1);
+if (diffEnJour > 365) {
       console.log('> 365');
       this.noMessageDateInvalide = '0002';
       this.ErreurDate = true;
@@ -290,9 +300,64 @@ valeurDuTri = 'ASC';
   }
     validationDesChamps(){
     this.reiniatialiserErreurs();
-    if (this.formulaire.controls.rechercheDateDu.value || this.formulaire.controls.rechercheDateAu.value){
-      this.validationChampsDate();
+    this.formulaire.controls.rechercheDateDu.setErrors(null);
+    this.formulaire.controls.rechercheDateAu.setErrors(null);
+    this.noMessageDateInvalide = '';
+
+    // Déposer valeur de date dans une constante
+    const constDateDu = this.formulaire.controls.rechercheDateDu.value;
+    const constDateAu = this.formulaire.controls.rechercheDateAu.value;
+
+    console.log('Valeur const Du:' , constDateDu);
+    console.log('Valeur const Au:' , constDateAu);
+    console.log('Valeur du formalaire pour voir erreurs: ', this.formulaire);
+    if(constDateAu == null && constDateDu == null){
+      console.log('NULL NULL')
+      this.ErreurDate = true;
+      this.noMessageDateInvalide = '0003';
+      this.formulaire.controls.rechercheDateDu.setErrors({erreurFormatDate: true});
+      this.formulaire.controls.rechercheDateAu.setErrors({erreurFormatDate: true});
+
     }
+    if(constDateAu == null && constDateDu){
+      this.ErreurDate = true;
+      this.noMessageDateInvalide = '0005';
+      this.formulaire.controls.rechercheDateAu.setErrors({erreurFormatDate: true});
+    }
+    if(constDateAu === '' && constDateDu == null){
+      console.log('constDateau vide et constDateDu null')
+      this.ErreurDate = true;
+      this.noMessageDateInvalide = '0004';
+      this.formulaire.controls.rechercheDateDu.setErrors({erreurFormatDate: true});
+    }
+    if(!this.ErreurDate){
+      this.validationChampsDate();
+
+    }
+
+    // const dateAu = this.formulaire.controls.rechercheDateDu.value;
+    // console.log('VALEUR DATE: DU '  , dateAu);
+    // console.log('VALEUR DATE: AU '  , this.formulaire.controls.rechercheDateAu.value);
+    // if (this.formulaire.controls.rechercheDateDu.value && this.formulaire.controls.rechercheDateAu.value){
+    //   console.log('Dans le if les deux valeurs ne sont pas vide');
+    //   this.validationChampsDate();
+    // }
+    // if (this.formulaire.controls.rechercheDateDu.value && this.formulaire.controls.rechercheDateAu.value !== null ){
+    //   console.log('Dans le if Du pas vide');
+    //   this.validationChampsDate();
+    // }
+    // if(this.formulaire.controls.rechercheDateDu.value == null ){
+    //   console.log('Dans else date invalide');
+    //   this.ErreurDate = true;
+    //   this.noMessageDateInvalide = '0003';
+    //   if(this.formulaire.controls.rechercheDateDu.value == null){
+    //     this.formulaire.get('rechercheDateDu').setValue('');
+    //   }
+    //   if(this.formulaire.controls.rechercheDateAu.value == null){
+    //     this.formulaire.get('rechercheDateAu').setValue('');
+    //   }
+  //  }
+
   }
   public RechercherDecision(){
     this.affTableau = true;
@@ -435,6 +500,8 @@ valeurDuTri = 'ASC';
     this.formulaire.get('statut').get('statutImporte').setValue(true);
     this.formulaire.get('statut').get('statutPretSignature').setValue(true);
     this.formulaire.get('statut').get('statutEnCours').setValue(true);
+    this.formulaire.get('rechercheDateDu').setValue('');
+    this.formulaire.get('rechercheDateAu').setValue('');
     this.formulaire.updateValueAndValidity();
   }
  public correctionMasque(){

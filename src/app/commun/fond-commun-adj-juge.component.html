@@ -9,6 +9,8 @@
             <div>{{ErreurDate}}</div>
             <div>{{valeurDuTri}}</div> -->
             <div *ngIf="this.facadeService.tableauDecision">Nombres de résultats: {{this.facadeService.tableauDecision.length}}</div>
+            {{noMessageDateInvalide}}
+            {{ErreurDate}}
 
                 <div class="divRight">
 
@@ -137,10 +139,10 @@
                       <div class="col-3 col-lg-3 col-xl-3 col-xxl-2">
                        <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                        <input
-                        [className]="ErreurDate ? 'inputBorderRouge' : 'inputNormal'"
+                        [className]="ErreurDate&&this.formulaire.controls.rechercheDateDu.errors ? 'inputBorderRouge' : 'inputNormal'"
                         matInput
                         [matDatepicker]="picker"
-                        formControlName="rechercheDateDu">
+                       formControlName="rechercheDateDu">
                        <mat-datepicker #picker></mat-datepicker>
                      </mat-form-field>
                     </div>
@@ -149,7 +151,7 @@
                     <div class="col-3">
                       <mat-form-field class="matFormFieldCustom"   (click)="picker2.open()"  >
                       <input
-                      [className]="ErreurDate ? 'inputBorderRouge' : 'inputNormal'"
+                      [className]="ErreurDate&&this.formulaire.controls.rechercheDateAu.errors ? 'inputBorderRouge' : 'inputNormal'"
                        matInput
                        [matDatepicker]="picker2"
                        formControlName="rechercheDateAu">
@@ -157,6 +159,8 @@
                     </mat-form-field>
                    </div>
                   </div>
+
+
                    <!--Fin Date d'importation-->
 
                    <!--
@@ -179,7 +183,7 @@
                     <div class="col-sm-0 col-lg-1"></div>
                     <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR"> </div>
                     <div class="col">
-                      <app-message class="messageErreurAcc" [cle]='noMessageDateInvalide' [variables]="[extensionMessage]"  id="erreurFichierInvalide"></app-message>
+                      <app-message class="messageErreurAcc" *ngIf="noMessageDateInvalide"  [cle]='noMessageDateInvalide' [variables]="[extensionMessage]"  id="erreurFichierInvalide"></app-message>
                     </div>
 
                      <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->

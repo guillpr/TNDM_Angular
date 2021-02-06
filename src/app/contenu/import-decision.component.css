@@ -422,5 +422,6 @@ margin-top: 20px;
 .descError{
   margin-top: -25px;
   color: red;
-  font-weight: bold
+  font-weight: bold;
+  margin-bottom:10px;
 }

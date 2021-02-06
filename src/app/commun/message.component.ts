@@ -51,7 +51,7 @@ export class MessageComponent implements OnInit {
             }
         }
 
-        this.result = this.domSanitizer.sanitize(SecurityContext.HTML,
+      this.result = this.domSanitizer.sanitize(SecurityContext.HTML,
             this.domSanitizer.bypassSecurityTrustHtml(message));
     }
 }
