@@ -8,9 +8,9 @@
             <!-- <div>{{noMessageDateInvalide}}</div>
             <div>{{ErreurDate}}</div>
             <div>{{valeurDuTri}}</div> -->
-            <div *ngIf="this.facadeService.tableauDecision">Nombres de résultats: {{this.facadeService.tableauDecision.length}}</div>
+            <!-- <div *ngIf="this.facadeService.tableauDecision">Nombres de résultats: {{this.facadeService.tableauDecision.length}}</div>
             {{noMessageDateInvalide}}
-            {{ErreurDate}}
+            {{ErreurDate}} -->
 
                 <div class="divRight">
 
@@ -178,6 +178,17 @@
                     </div>
 
                     -->
+                    <div  *ngIf="formulaire.get('rechercheDateDu').invalid && formulaire.get('rechercheDateDu').dirty  || formulaire.get('rechercheDateAu').invalid && formulaire.get('rechercheDateAu').dirty" class="row mb-2 mt-1">
+                        <div class="col-sm-0 col-lg-1"></div>
+                        <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR"> </div>
+                        <div class="col messageErreurAcc">
+
+                          Veuillez spécifier une date (début et fin) valide (AAAA-MM-JJ).
+                        </div>
+
+                         <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
+
+                        </div>
 
                   <div *ngIf="ErreurDate" class="row mb-2 mt-1">
                     <div class="col-sm-0 col-lg-1"></div>

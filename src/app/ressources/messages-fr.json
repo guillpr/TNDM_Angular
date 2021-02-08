@@ -23,7 +23,8 @@
         { "cle": "0003", "valeur": " Veuillez spécifier une date (début et fin) valide (AAAA-MM-JJ)."},
         { "cle": "0004", "valeur": " Veuillez spécifier une date  de début valide (AAAA-MM-JJ)."},
         { "cle": "0005", "valeur": " Veuillez spécifier une date  de fin valide (AAAA-MM-JJ)."},
-        { "cle": "0006", "valeur": " Veuillez spécifier une date de début si vous spécifiez une date de fin"}
+        { "cle": "0006", "valeur": " Veuillez spécifier une date de début si vous spécifiez une date de fin"},
+        { "cle": "0007", "valeur": " Veuillez spécifier une date de fin si vous spécifiez une date de début"}
 
 
 

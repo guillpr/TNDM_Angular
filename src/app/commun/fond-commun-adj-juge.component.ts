@@ -75,8 +75,8 @@ nameOfJuges = [
     rechercheJuge: new FormControl(''),
     recherchePriorite: new FormControl('Toutes'),
     rechercheType: new FormControl(''),
-    rechercheDateDu: new FormControl(''),
-    rechercheDateAu: new FormControl(''),
+    rechercheDateDu: ['' , this.validDate],
+    rechercheDateAu: ['' , this.validDate],
     nomJuge: new FormControl('Toutes mes décisions')
 
   });
@@ -207,6 +207,21 @@ valeurDuTri = 'ASC';
     //    this.listeJuge = res;
     //  });
   }
+  validDate(control: FormControl): {[key: string]: any}|null
+  {
+  const dateVal = control.value;
+  if (control && dateVal && !moment(dateVal, 'YYYY-MM-DD', true).isValid()) {
+    return { dateVaidator: true };
+  }
+  return null;
+}
+ // }
+  // console.log('Date val:' ,dateVal);
+  // return moment(dateVal, 'YYYY-MM-DD', true).isValid() ?
+  // null : {
+  // invalidDate: true
+  // }
+  //}
   retournerValeurDate(dateMoment: any){
     const dateMomentAConvertir = new Date(dateMoment);
     const datePipe = this.datepipe.transform(dateMomentAConvertir, 'yyyy-MM-dd');
@@ -220,23 +235,23 @@ valeurDuTri = 'ASC';
   validationChampsDate(){
 
 console.log('Dans validation champs date');
-if(moment(this.formulaire.controls.rechercheDateDu.value,' yyyy-MM-dd').isValid()
-    &&moment(this.formulaire.controls.rechercheDateAu.value,' yyyy-MM-dd').isValid()){
-      console.log('Date du valide');
-    }
-    else{
-      if(this.formulaire.controls.rechercheDateAu.value){
-        console.log(this.formulaire.controls.rechercheDateAu.value);
-        console.log('Date invalide if');
-        this.ErreurDate = true;
-        this.noMessageDateInvalide = '0003';
-      }
-      else if(this.formulaire.controls.rechercheDateAu.value == null){
-        console.log('Date invalide null');
-        this.ErreurDate = true;
-        this.noMessageDateInvalide = '0003';
-      }
-    }
+// if (moment(this.formulaire.controls.rechercheDateDu.value, ' yyyy-MM-dd').isValid()
+//     && moment(this.formulaire.controls.rechercheDateAu.value, ' yyyy-MM-dd').isValid()){
+//       console.log('Date du valide');
+//     }
+//     else{
+//       if (this.formulaire.controls.rechercheDateAu.value){
+//         console.log(this.formulaire.controls.rechercheDateAu.value);
+//         console.log('Date invalide if');
+//         this.ErreurDate = true;
+//         this.noMessageDateInvalide = '0003';
+//       }
+//       else if (this.formulaire.controls.rechercheDateAu.value == null){
+//         console.log('Date invalide null');
+//         this.ErreurDate = true;
+//         this.noMessageDateInvalide = '0003';
+//       }
+//     }
 
   // console.log(moment(this.formulaire.controls.rechercheDateDu.value,' yyyy-MM-dd').isValid());
 let valeurDateDu = '';
@@ -274,10 +289,15 @@ if ((valeurDateAu && valeurDateDu) && valeurDateAu < valeurDateDu ){
       this.ErreurDate = true;
       this.noMessageDateInvalide = '0001';
       }
-if(valeurDateAu && !valeurDateDu){
+if (valeurDateAu && !valeurDateDu){
         console.log('Pas de valeur date du et valeur date au' , valeurDateAu);
         this.ErreurDate = true;
         this.noMessageDateInvalide = '0006';
+      }
+if (!valeurDateAu && valeurDateDu){
+        console.log('Pas de valeur date du et valeur date au' , valeurDateAu);
+        this.ErreurDate = true;
+        this.noMessageDateInvalide = '0007';
       }
 
 const date1 = new Date(valeurDateDu);
@@ -311,26 +331,26 @@ if (diffEnJour > 365) {
     console.log('Valeur const Du:' , constDateDu);
     console.log('Valeur const Au:' , constDateAu);
     console.log('Valeur du formalaire pour voir erreurs: ', this.formulaire);
-    if(constDateAu == null && constDateDu == null){
-      console.log('NULL NULL')
-      this.ErreurDate = true;
-      this.noMessageDateInvalide = '0003';
-      this.formulaire.controls.rechercheDateDu.setErrors({erreurFormatDate: true});
-      this.formulaire.controls.rechercheDateAu.setErrors({erreurFormatDate: true});
+    // if (constDateAu == null && constDateDu == null){
+    //   console.log('NULL NULL')
+    //   this.ErreurDate = true;
+    //   this.noMessageDateInvalide = '0003';
+    //   this.formulaire.controls.rechercheDateDu.setErrors({erreurFormatDate: true});
+    //   this.formulaire.controls.rechercheDateAu.setErrors({erreurFormatDate: true});
 
-    }
-    if(constDateAu == null && constDateDu){
-      this.ErreurDate = true;
-      this.noMessageDateInvalide = '0005';
-      this.formulaire.controls.rechercheDateAu.setErrors({erreurFormatDate: true});
-    }
-    if(constDateAu === '' && constDateDu == null){
-      console.log('constDateau vide et constDateDu null')
-      this.ErreurDate = true;
-      this.noMessageDateInvalide = '0004';
-      this.formulaire.controls.rechercheDateDu.setErrors({erreurFormatDate: true});
-    }
-    if(!this.ErreurDate){
+    // }
+    // if (constDateAu == null && constDateDu){
+    //   this.ErreurDate = true;
+    //   this.noMessageDateInvalide = '0005';
+    //   this.formulaire.controls.rechercheDateAu.setErrors({erreurFormatDate: true});
+    // }
+    // if (constDateAu === '' && constDateDu == null){
+    //   console.log('constDateau vide et constDateDu null')
+    //   this.ErreurDate = true;
+    //   this.noMessageDateInvalide = '0004';
+    //   this.formulaire.controls.rechercheDateDu.setErrors({erreurFormatDate: true});
+    // }
+    if (!this.ErreurDate){
       this.validationChampsDate();
 
     }
@@ -374,7 +394,7 @@ if (diffEnJour > 365) {
 
     // Envoyer recherche
 
-    if(!this.ErreurDate){
+    if (!this.ErreurDate){
       this.spinner.show();
       this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
       .subscribe((resultat) => {
@@ -395,33 +415,33 @@ if (diffEnJour > 365) {
       //this.facadeService.recherche.statuts.push()
     }
     remplirAutresChamps(){
-      if(this.formulaire.get('nomJuge').value){
+      if (this.formulaire.get('nomJuge').value){
         this.facadeService.recherche.adjointesJuges = this.formulaire.get('nomJuge').value;
       }
-      if(this.formulaire.get('rechercheSection').value){
-        if(this.formulaire.get('rechercheSection').value === 'Toutes'){
+      if (this.formulaire.get('rechercheSection').value){
+        if (this.formulaire.get('rechercheSection').value === 'Toutes'){
           this.facadeService.recherche.section = '';
         }
         else{
           this.facadeService.recherche.section = this.formulaire.get('rechercheSection').value;
         }
       }
-      if(this.formulaire.get('rechercheNumDec').value){
+      if (this.formulaire.get('rechercheNumDec').value){
         this.facadeService.recherche.numero = this.formulaire.get('rechercheNumDec').value;
       }
-      if(this.formulaire.get('rechercheNumDossier').value){
+      if (this.formulaire.get('rechercheNumDossier').value){
         this.facadeService.recherche.noDossierTAQ = this.formulaire.get('rechercheNumDossier').value;
       }
-      if(this.formulaire.get('rechercheDateDu').value){
+      if (this.formulaire.get('rechercheDateDu').value){
         this.facadeService.recherche.dateDebutImportation = new Date(this.formulaire.controls.rechercheDateDu.value);
       }
-      if(this.formulaire.get('rechercheDateAu').value){
+      if (this.formulaire.get('rechercheDateAu').value){
        // const datePipe = this.datepipe.transform(this.formulaire.get('rechercheDateAu').value, 'yyyy-MM-dd');
       //  console.log('Date pipe:' , datePipe);
         this.facadeService.recherche.dateFinImportation = new Date(this.formulaire.controls.rechercheDateAu.value);
       }
-      if(this.formulaire.get('recherchePriorite').value){
-        if(this.formulaire.get('recherchePriorite').value === 'Toutes'){
+      if (this.formulaire.get('recherchePriorite').value){
+        if (this.formulaire.get('recherchePriorite').value === 'Toutes'){
           this.facadeService.recherche.priorite = '';
         }
         else{
@@ -463,25 +483,25 @@ if (diffEnJour > 365) {
     // 5: Analysé
     // 6: Accepté
     // 7: Rejeté
-    if(this.formulaire.get('statut').get('statutImporte').value === true){
+    if (this.formulaire.get('statut').get('statutImporte').value === true){
       this.facadeService.recherche.statuts.push(1);
     }
-    if(this.formulaire.get('statut').get('statutPretSignature').value === true){
+    if (this.formulaire.get('statut').get('statutPretSignature').value === true){
       this.facadeService.recherche.statuts.push(2);
     }
-    if(this.formulaire.get('statut').get('statutEnCours').value === true){
+    if (this.formulaire.get('statut').get('statutEnCours').value === true){
       this.facadeService.recherche.statuts.push(3);
     }
-    if(this.formulaire.get('statut').get('statutDepose').value === true){
+    if (this.formulaire.get('statut').get('statutDepose').value === true){
       this.facadeService.recherche.statuts.push(4);
     }
-    if(this.formulaire.get('statut').get('statutAnalyse').value === true){
+    if (this.formulaire.get('statut').get('statutAnalyse').value === true){
       this.facadeService.recherche.statuts.push(5);
     }
-    if(this.formulaire.get('statut').get('statutAccepte').value === true){
+    if (this.formulaire.get('statut').get('statutAccepte').value === true){
       this.facadeService.recherche.statuts.push(6);
     }
-    if(this.formulaire.get('statut').get('statutRejete').value === true){
+    if (this.formulaire.get('statut').get('statutRejete').value === true){
       this.facadeService.recherche.statuts.push(7);
     }
   }
@@ -520,7 +540,7 @@ if (diffEnJour > 365) {
   texte.toUpperCase();
  }
 public SelectionDecision(numDocument: number , index: number){
-  if(this.facadeService.indicateurJuge === false){
+  if (this.facadeService.indicateurJuge === false){
     this.facadeService.numDecisionTemp = numDocument;
     console.log('Num docu' , numDocument);
     this.router.navigateByUrl('/infoAdjointe');
