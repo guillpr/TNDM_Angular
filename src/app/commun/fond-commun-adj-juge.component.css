@@ -278,14 +278,11 @@ input[type=radio]:checked:before {
     height: 25px;
 }
 .matFormFieldCustom{
-    /* width: 250px;
-    display: relative;
-    bottom:18px;
-    right: 22px; */
+   text-decoration: none;
 }
-::ng-deep .mat-form-field-underline {
+/* ::ng-deep .mat-form-field-underline {
     display: none;
-}
+} */
 .mat-form-field-underline  {
     display: none;
 }

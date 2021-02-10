@@ -23,7 +23,7 @@
     font-weight: 600;
     margin-top: 15px;
     margin-left: 10px;
-    color:black; 
+    color:black;
 }
 .arrowDown{
     margin-left: auto;
@@ -82,7 +82,7 @@
 }
 .dlNormalGreen{
     background-color: lime;
-    
+
 }
 .buttonDocument {
     background-color: #2257a7 !important;
@@ -112,8 +112,8 @@
     height:35px;
     border-radius: 10px;
     margin-right:20px;
-    
-    
+
+
 }
 .buttonFermer{
     background-color: #2257a7 !important;
@@ -123,4 +123,10 @@
     width:150px;
     height:35px;
     border-radius: 10px;
+}
+.messageErreurAcc{
+  color:red;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

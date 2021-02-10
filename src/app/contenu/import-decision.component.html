@@ -108,7 +108,7 @@
   <div class="col-2 fondGris" >
       <div >
           <div>
-          <select   class="dlNormalJuge" id="inputGroupSelect05" formControlName="ordreSignataire{{i}}" >
+          <select   class="dlNormalJuge" id="inputGroupSelect05" formControlName="ordreSignataire{{i}}"  [attr.disabled]="this.facadeService.listeDecisionImp.signataires.length === 1 ? 'disabled' : null">
                <option  selected value="1">Signataire 1</option>
                <option value="2">Signataire 2</option>
                <option value="3">Signataire 3</option>
@@ -141,30 +141,46 @@
                          formControlName="dateDelibere">
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
-                   <!-- <input class="dateInput" formControlName="dateDelibere" > -->
+
                 </div>
             </div>
         </div>
-        <div class="row"  *ngIf=" this.facadeService.listeDecisionImp">
+
+        <!--Erreur date-->
+        <div  *ngIf="formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty  || formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty" class="row mb-2 mt-1">
+            <div class="col-sm-0 col-lg-1"></div>
+            <div class="col-2 col-sm-2 col-md-4 col-lg-1 taR"> </div>
+            <div class="col messageErreurAcc">
+
+              Veuillez spécifier une date (début et fin) valide (AAAA-MM-JJ).
+            </div>
+
+             <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
+
+            </div>
+
+        <!--Fin erreur date-->
+
+        <div class="row mt-2"  *ngIf=" this.facadeService.listeDecisionImp">
           <div class="col-2 nomPriorite">
             Priorité
           </div>
           <div class="col-2 prio" >
-              <div class="flex" >
-                  <div>
-                  <select   class="dlNormalPrio" id="inputGroupSelect05"  >
-                       <option  selected value="1">Normale</option>
-                       <option value="2">Urgente</option>
+
+
+                  <select   class="dlNormalPrio" id="inputGroupSelect05" formControlName='priorite' >
+                       <option  value="Normale">Normale</option>
+                       <option value="Urgente">Urgente</option>
                      </select>
                    </div>
-             </div>
-          </div>
+
+
 
         </div>
     </div>
     <div class="sectionButton">
             <button (click)="quitterDecision()" class="buttonQuitter" >Annuler</button>
-    <button  [className]="buttonDisabled ? 'buttonImporterDis' : 'buttonImporter'" class="buttonImporter" (click)="importerDecision()" [disabled] = "buttonDisabled" >Importer</button>
+    <button  [className]="buttonDisabled || !formulaire.valid ? 'buttonImporterDis' : 'buttonImporter'" class="buttonImporter" (click)="importerDecision()" [disabled] = "buttonDisabled || !formulaire.valid" >Importer</button>
     </div>
 
 

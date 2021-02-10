@@ -27,9 +27,9 @@
 }
 .testDecision{
     margin-top: 10px;
-    height: 100px;
+    height: 0px;
     font-weight: 500;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     overflow: hidden;
 }
 .testDecisionExpand{
@@ -37,13 +37,13 @@
     height: auto;
     font-weight: 500;
     /* margin-bottom: 30px; */
-    padding-bottom: 20px;
+   /* padding-bottom: 20px; */
 }
 .testDossAsso{
     margin-top: 10px;
-    height: 100px;
+    height: 0px;
     font-weight: 500;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     overflow: hidden;
 }
 .testDossAssoExpand{
@@ -84,6 +84,7 @@
     /* max-width: 11%; */
     padding-right: 5px;
     padding-left: 5px;
+    text-align: center;
 }
 
 .pCol{
@@ -110,7 +111,18 @@
   height:35px;
   border-radius: 10px;
   float: right;
-  margin-bottom: 10px;
+  margin-right: 10px;
+}
+.buttonChangementsDis{
+  background-color: grey !important;
+  color: white;
+  border: grey !important;
+ /* margin-left: 283px;*/
+  width:200px;
+  height:35px;
+  border-radius: 10px;
+  float: right;
+  margin-right: 10px;
 }
 .buttonDocument {
     background-color: #2257a7 !important;
@@ -238,10 +250,11 @@ margin-top: 20px;
 }
 .descError{
   color: red;
-  font-weight: bold
+  font-weight: bold;
+  max-width: 38%;
 }
 .maxW15{
-  max-width: 14.5%;
+  max-width: 13.5%;
 }
 /* textarea:disabled{
   color:violet;
@@ -253,4 +266,13 @@ input:disabled
  {
     color: black !important;
     background-color: white !important;
+}
+.texteBe{
+  display: block;
+  position: relative;
+  top:10px;
+}
+.adjust{
+  width: 100%;
+  margin-left: 0px;
 }

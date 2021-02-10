@@ -13,6 +13,7 @@ import { FichierJoint } from '../entitees/fichier-joint';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DatePipe } from '@angular/common';
 import { Decision } from '../entitees/decision';
+import moment from 'moment';
 
 @Component({
   selector: 'app-import-decision',
@@ -121,11 +122,20 @@ export class ImportDecisionComponent implements OnInit {
 
  //  }
   }
+  validDate(control: FormControl): {[key: string]: any}|null
+  {
+  const dateVal = control.value;
+  if (control && dateVal && !moment(dateVal, 'YYYY-MM-DD', true).isValid()) {
+    return { dateVaidator: true };
+  }
+  return null;
+}
 
    initialiserFormulaire(){
     this.formulaire = this.fb.group({
       description: ['', [Validators.required]],
-      dateDelibere: new FormControl(''),
+      dateDelibere:  ['' , this.validDate],
+      priorite: new FormControl('Normale'),
       nomJuge0: new FormControl({value: '', disabled: true}),
       nomJuge1: new FormControl({value: '', disabled: true}),
       nomJuge2: new FormControl({value: '', disabled: true}),
@@ -164,20 +174,44 @@ export class ImportDecisionComponent implements OnInit {
     this.compteur--;
     this.myComponents.splice(-1);
   }
-  public importerDecision(){
-    if(this.formulaire.valid){
+  public remplirChampsModifie(){
 
+    if (this.formulaire.get('description').value){
+      this.facadeService.listeDecisionImp.description = this.formulaire.get('description').value;
+    }
+    if(this.formulaire.get('dateDelibere').value){
+      this.facadeService.listeDecisionImp.dateFinDelibere = this.formulaire.get('dateDelibere').value;
+    }
+    else{
+      this.facadeService.listeDecisionImp.dateFinDelibere = new Date('0001-01-01');
+    }
+    if(this.formulaire.get('priorite').value){
+      this.facadeService.listeDecisionImp.priorite = this.formulaire.get('priorite').value;
+    }
+    for (let i = 0; i < this.facadeService.listeDecisionImp.signataires.length; i++) {
+      this.facadeService.listeDecisionImp.signataires[i].ordre= this.formulaire.controls['ordreSignataire' + i].value;
+     // this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);
+    }
+  }
+  public importerDecision(){
+    if (this.formulaire.valid){
+
+      console.log('Valeur du formulaire avant importation:' , this.formulaire);
+      console.log('Valeur listeDecisionImp: ' , this.facadeService.listeDecisionImp);
       // if(!this.facadeService.listeDecisionImp.identifiant){
       //   this.facadeService.listeDecisionImp.identifiant = '';
       // }
 
 
+      this.remplirChampsModifie();
+      console.log('Valeur listeDecisionImp apres remplissage: ' , this.facadeService.listeDecisionImp);
       this.spinner.show();
       this.facadeService.ImporterDecision(this.facadeService.listeDecisionImp)
-      .subscribe((r => {
-        console.log('Valeur du résultat de importer décision' , r);
-        this.spinner.hide();
-      }));
+       .subscribe((r => {
+         console.log('Valeur du résultat de importer décision' , r);
+         this.spinner.hide();
+         this.router.navigateByUrl('/');
+       }));
 
 
     }

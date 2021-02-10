@@ -394,6 +394,7 @@ if (diffEnJour > 365) {
 
     // Envoyer recherche
 
+    console.log('rechercher:' , this.facadeService.recherche);
     if (!this.ErreurDate){
       this.spinner.show();
       this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
@@ -430,7 +431,7 @@ if (diffEnJour > 365) {
         this.facadeService.recherche.numero = this.formulaire.get('rechercheNumDec').value;
       }
       if (this.formulaire.get('rechercheNumDossier').value){
-        this.facadeService.recherche.noDossierTAQ = this.formulaire.get('rechercheNumDossier').value;
+        this.facadeService.recherche.noDossierTAQ = Number(this.formulaire.get('rechercheNumDossier').value);
       }
       if (this.formulaire.get('rechercheDateDu').value){
         this.facadeService.recherche.dateDebutImportation = new Date(this.formulaire.controls.rechercheDateDu.value);

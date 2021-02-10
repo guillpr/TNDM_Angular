@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import moment from 'moment';
 
 @Component({
   selector: 'app-info-decision-adjointe',
@@ -18,9 +19,9 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   numDecSelectionner: number;
 
   boiteDecisionOuverte = false;
-  boiteDossAss = false;
-  boiteSignature = false;
-  boiteHistorique = false;
+  boiteDossAss = true;
+  boiteSignature = true;
+  boiteHistorique = true;
   prioSelected = '';
   couleurPrio = false;
   changementDate = false;
@@ -48,7 +49,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   // Formulaire
   formulaire = this.fb.group({
     description: ['', [Validators.required]],
-    dateDelibere: new FormControl(''),
+    dateDelibere:['' , this.validDate],
     priorite: new FormControl(''),
     numero: new FormControl({value: '', disabled: true}),
     importePar: new FormControl({value: '', disabled: true}),
@@ -88,7 +89,18 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         this.formulaire.controls.description.setValue(s.description);
         this.formulaire.controls.importePar.setValue(s.codeReseauDepot);
         this.formulaire.controls.dateImportation.setValue(this.datepipe.transform(s.dateImportation, 'yyyy-MM-dd'));
-        this.formulaire.controls.dateDelibere.setValue(s.dateFinDelibere);
+        console.log('Valeur de dateFinDelibere:' , this.datepipe.transform(s.dateFinDelibere, 'yyyy-MM-dd'));
+        if (this.datepipe.transform(s.dateFinDelibere, 'yyyy-MM-dd') === '0001-01-01'){
+           this.formulaire.controls.dateDelibere.setValue('');
+           console.log(this.formulaire);
+        }
+        else{
+          this.formulaire.controls.dateDelibere.setValue(s.dateFinDelibere);
+        }
+
+
+
+
         this.formulaire.controls.dureeRestante.setValue(s.dureeRestante);
         this.formulaire.controls.priorite.setValue(s.priorite);
         this.formulaire.controls.statut.setValue(s.statut);
@@ -150,6 +162,16 @@ ajoutJuges(s: any){
     this.facadeService.indicateurJuge = false;
     this.couleurPrio = true;
   }
+
+  validDate(control: FormControl): {[key: string]: any}|null
+  {
+  const dateVal = control.value;
+  if (control && dateVal && !moment(dateVal, 'YYYY-MM-DD', true).isValid()) {
+    return { dateVaidator: true };
+  }
+  return null;
+}
+
   ouvertureBoiteDecision(){
     this.boiteDecisionOuverte = true;
   }
@@ -208,8 +230,9 @@ ajoutJuges(s: any){
         this.facadeService.rejetDecision(this.numDecSelectionner, this.formulaire.controls.importePar.value)
         .subscribe((s) => {
           console.log('Rejet de décision effectué avec success');
+          this.router.navigateByUrl('/');
         },
-        (erreur) => {console.log('Erreur lors du rejet de la décision');}
+        (erreur) => {console.log('Erreur lors du rejet de la décision'); }
 
         );
         this.dialog.closeAll();
@@ -289,6 +312,7 @@ ajoutJuges(s: any){
     this.boutonSauvegardeModif = true;
   }
   sauvegarderChangements(){
+    console.log('Sauvegarder changement valeur du formulaire:' , this.formulaire);
     this.verifierSiChangements();
     console.log('Valeur description' , this.valDescription);
     console.log('Valeur date delibéré' , this.valDateDelibere);
@@ -315,11 +339,14 @@ ajoutJuges(s: any){
       this.valDescription = '';
     }
     if (this.formulaire.get('dateDelibere').value !== this.valDepDateDelibere) {
-      if (this.formulaire.get('dateDelibere').value === ''){
+      if (this.formulaire.get('dateDelibere').value === ''|| this.formulaire.get('dateDelibere').value === null){
+        console.log('this.formulaire.get(dateDelibere).value !== this.valDepDateDelibere' , this.valDepDateDelibere);
         this.valDateDelibere = '0001-01-01';
+
       }
       else{
         this.valDateDelibere = this.retournerValeurDate(this.formulaire.get('dateDelibere').value);
+        console.log('Dans le else retourner valeur: ' , this.valDateDelibere);
       }
       this.changementDate = true;
      }

@@ -8,7 +8,7 @@
     <div  class="divCentre">
 
         <!-- Début zone décision -->
-        <div class="row">
+        <div class="row adjust">
         <div class="containerTitre">
             <div class="barreTitre"></div>
         <div class="enteteBleu">
@@ -17,6 +17,7 @@
             </div>
         </div>
       </div>
+
         <!--Début row décision-->
 
         <div class="row bold">
@@ -49,19 +50,29 @@
 
 
                 <div class="col-2 dateDeliCol">
-                    <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
+                    <span *ngIf="formulaire.get('dateDelibere').value  === '' " class="texteBe">-
+                      </span>
+
+                    <mat-form-field class="matFormFieldCustom"  (click)="picker.open()" >
+
                         <input
                         [disabled]="this.facadeService.listeDecision.statut === 'Rejeté'"
                         (dateChange)="afficheBouton()"
                          class="inputNormal center"
                          matInput
                          [matDatepicker]="picker"
-                         formControlName="dateDelibere">
+                         formControlName="dateDelibere"
+
+                        >
+
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
                   <!-- <input class="inputDateDelibere" (change)="afficheBouton()" formControlName="dateDelibere" value="2020-02-01"> -->
 
                 </div>
+
+
+
               <div class="col numUniCol">
                   <input class="noBorder center"  formControlName="dureeRestante"></div>
                 <div class="col numUtiCol">
@@ -73,15 +84,40 @@
 
 
                      </div>
-                    <div class="col">
+                    <div class="col center">
                         <input class="noBorder center"  formControlName="statut">
 
                     </div>
             </div>
-            <button *ngIf="boutonSauvegardeModif" (click)="sauvegarderChangements()" class="buttonChangements">Sauvegarder changements</button>
-            <div *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors" class="row">
+
+            <div  class="row">
                 <div class="col-2 maxW15"></div>
-                <div class="col-2 descError">La description est requise.</div>
+                <div class="col-5 descError"><span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors" >La description est requise.</span></div>
+                <div class="col-2">
+                    <!--Erreur date-->
+        <div  *ngIf="formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty  || formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty">
+
+
+            <div class="messageErreurAcc">
+
+              Veuillez spécifier une date (début et fin) valide (AAAA-MM-JJ).
+            </div>
+
+             <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
+
+            </div>
+
+        <!--Fin erreur date-->
+                </div>
+                <div class="col">
+                  <button
+                  [attr.disabled]="!formulaire.valid ? 'disabled' : null"
+                   *ngIf="boutonSauvegardeModif"
+                    (click)="sauvegarderChangements()"
+                    [className]="formulaire.valid ? 'buttonChangements' : 'buttonChangementsDis'"
+                     class="buttonChangements">
+                     Sauvegarder changements
+                    </button></div>
               </div>
         </div>
 
@@ -94,16 +130,16 @@
             <div class="barreTitre"></div>
          <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.dossierAsso"></app-texte>
-            <span id="boiteDossAssoOuverte" *ngIf="!boiteDossAss" class="arrowDown" (click)="ouvertureBoiteDossAss()">
+            <span style ="cursor: pointer" id="boiteDossAssoOuverte" *ngIf="!boiteDossAss" class="arrowDown" (click)="ouvertureBoiteDossAss()">
                 <i class="fas fa-angle-down fa-3x"></i>
             </span>
-            <span id="boiteDossAssoFerme" *ngIf="boiteDossAss" class="arrowDown" (click)="fermetureBoiteDossAss()">
+            <span style ="cursor: pointer" id="boiteDossAssoFerme" *ngIf="boiteDossAss" class="arrowDown" (click)="fermetureBoiteDossAss()">
                 <i class="fas fa-angle-up fa-3x"></i>
             </span>
         </div>
          </div>
 
-        <div [className]="!boiteDossAss ? 'testDossAsso' : 'testDossAssoExpand' " class="testDossAsso">
+        <div [className]=" !boiteDossAss ? 'testDossAsso' : 'testDossAssoExpand' " class="testDossAsso">
             <div class="row">
                 <div class="col-2 bold">
                   <app-texte cle="commun.numero"></app-texte>
@@ -153,10 +189,10 @@
             <div class="barreTitre"></div>
          <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.signature"></app-texte>
-            <span id="boiteDossAssoOuverte" *ngIf="!boiteSignature" class="arrowDown" (click)="ouvertureBoiteSignature()">
+            <span style ="cursor: pointer" id="boiteDossAssoOuverte" *ngIf="!boiteSignature" class="arrowDown" (click)="ouvertureBoiteSignature()">
                 <i class="fas fa-angle-down fa-3x"></i>
             </span>
-            <span id="boiteDossAssoFerme" *ngIf="boiteSignature" class="arrowDown" (click)="fermetureBoiteSignature()">
+            <span style ="cursor: pointer" id="boiteDossAssoFerme" *ngIf="boiteSignature" class="arrowDown" (click)="fermetureBoiteSignature()">
                 <i class="fas fa-angle-up fa-3x"></i>
             </span>
         </div>
@@ -212,16 +248,16 @@
             <div class="barreTitre"></div>
          <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.histDecision"></app-texte>
-            <span id="boiteDossAssoOuverte" *ngIf="!boiteHistorique" class="arrowDown" (click)="ouvertureBoiteHistorique()">
+            <span style ="cursor: pointer" id="boiteDossAssoOuverte" *ngIf="!boiteHistorique" class="arrowDown" (click)="ouvertureBoiteHistorique()">
                 <i class="fas fa-angle-down fa-3x"></i>
             </span>
-            <span id="boiteDossAssoFerme" *ngIf="boiteHistorique" class="arrowDown" (click)="fermetureBoiteHistorique()">
+            <span style ="cursor: pointer" id="boiteDossAssoFerme" *ngIf="boiteHistorique" class="arrowDown" (click)="fermetureBoiteHistorique()">
                 <i class="fas fa-angle-up fa-3x"></i>
             </span>
         </div>
          </div>
 
-        <div [className]="!boiteHistorique ? 'testDossAsso' : 'testDossAssoExpand' " class="testDecision">
+        <div [className]="!boiteHistorique && this.facadeService.listeDecision.historiqueStatuts.length !=1 ? 'testDossAsso' : 'testDossAssoExpand' " class="testDecision">
             <div class="row bold">
                 <div class="col-2">
                    Statut
@@ -250,6 +286,7 @@
        <!--Fin zone historique de décision-->
     </div>
       <!--Début zone bouton adjointe-->
+
       <div *ngIf="!this.facadeService.indicateurJuge">
     <div class="row" >
         <div class="col-2" >
@@ -266,7 +303,7 @@
         <div class="col-3"></div>
 
         <div class="col-2 maxW14">
-            <button *ngIf="this.facadeService.listeDecision.statut === 'Prêt pour signature'" class="buttonDemarrer" [className]="pdfClique ? 'buttonDocument' : 'buttonDocumentDis'" (click)="demarrerSignature()">Démarrer la signature</button>
+            <button *ngIf="this.facadeService.listeDecision.statut === 'Prêt pour signature'" class="buttonDemarrer" [attr.disabled]="!pdfClique || !formulaire.valid  ? 'disabled' : null"  [className]="pdfClique && formulaire.valid ? 'buttonDocument' : 'buttonDocumentDis'" (click)="demarrerSignature()">Démarrer la signature</button>
         </div>
         <div class="col-1">
             <button class="buttonFermer" (click)="fermer()">Fermer</button>
