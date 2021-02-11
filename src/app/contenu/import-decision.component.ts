@@ -189,7 +189,7 @@ export class ImportDecisionComponent implements OnInit {
       this.facadeService.listeDecisionImp.priorite = this.formulaire.get('priorite').value;
     }
     for (let i = 0; i < this.facadeService.listeDecisionImp.signataires.length; i++) {
-      this.facadeService.listeDecisionImp.signataires[i].ordre= this.formulaire.controls['ordreSignataire' + i].value;
+      this.facadeService.listeDecisionImp.signataires[i].ordre= Number(this.formulaire.controls['ordreSignataire' + i].value);
      // this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);
     }
   }
@@ -203,15 +203,21 @@ export class ImportDecisionComponent implements OnInit {
       // }
 
 
+
+
       this.remplirChampsModifie();
       console.log('Valeur listeDecisionImp apres remplissage: ' , this.facadeService.listeDecisionImp);
       this.spinner.show();
       this.facadeService.ImporterDecision(this.facadeService.listeDecisionImp)
-       .subscribe((r => {
+       .subscribe((r) => {
          console.log('Valeur du résultat de importer décision' , r);
          this.spinner.hide();
          this.router.navigateByUrl('/');
-       }));
+       },
+       (erreur) => {console.log('Erreur' , erreur);
+                    this.spinner.hide();
+      }
+       );
 
 
     }
