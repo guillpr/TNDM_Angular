@@ -213,14 +213,7 @@ input[type=radio]:checked:before {
      text-align: right;
      margin-right: 15px;
  }
- .texteTitreNormalMarR20{
-  font-size: 16px;
-  color:black;
-  display: inline-block;
-  margin-right: 1.8%;
-  /* text-align: right;
-  margin-right: 20px; */
- }
+ 
  .texteTitreProJuge{
     font-size: 16px;
     color:black;
@@ -345,73 +338,296 @@ left: 25px;
   display: inline-block;
   margin-right: 10px;
 }
-.divVide{
-  display: inline-block;
-  width: 21.3%;
+.divInBlockButton{
+    display: inline-block;
+  margin-right: 10px;
 }
+
 .divVideButt{
   display:inline-block;
   width: 25.5%;
 }
-@media screen and (max-width: 1300px) {
-  .divVide{
-    display: inline-block;
-    width: 19.7%;
-  }
-  .col2ModAdjJug{
-    max-width: 13.4%;
-  }
-  .col2ModDosTaq{
-    max-width: 14%;
-  }
 
-  .texteTitreProJuge{
+
+
+/*CSS test*/
+.taR{
+    text-align: right;
+    font-size: 16px;
+}
+.taRDate{
+    text-align: right;
+    font-size: 16px;
+    margin-top: 6px;
+}
+.disInBl{
+    display: inline-block;
+    margin-top:6px;
+    margin-right: 10px;
+    margin-left: -10px;
+
+}
+.inputW{
+    width: 250px;
+}
+.divVide{
+    display: inline-block;
+    width: 22.2%;
+  }
+  .texteTitreNormalMarR20{
     font-size: 16px;
     color:black;
-    margin-left: 8px;
-    margin-right: 3px;
-    max-width: 13.2%;
- }
+    display: inline-block;
+    margin-right: 1.4%;
+    /* text-align: right;
+    margin-right: 20px; */
+   }
+   .col-xxl-2 {
+    flex: 0 0 25%;
+    max-width: 16%;
+}
+@media  screen and (max-width: 2400px){
+    .divVide{
+        display: inline-block;
+        width: 22.1%;
+      }
+      .col-xxl-2 {
+        flex: 0 0 25%;
+        max-width: 14.5%;
+    }
+    .texteTitreNormalMarR20{
+        font-size: 16px;
+        color:black;
+        display: inline-block;
+        margin-right: 1.4%;
+        /* text-align: right;
+        margin-right: 20px; */
+       }
+}
+@media  screen and (max-width: 2400px){
+    .divVide{
+        display: inline-block;
+        width: 21.9%;
+      }
+      .col-xxl-2 {
+        flex: 0 0 25%;
+        max-width: 14.5%;
+    }
+}
+@media  screen and (max-width: 2300px){
+    .divVide{
+        display: inline-block;
+        width: 21.9%;
+      }
+      .col-xxl-2 {
+        flex: 0 0 25%;
+        max-width: 14.5%;
+    }
+}
+@media  screen and (max-width: 2200px){
+    .divVide{
+        display: inline-block;
+        width: 21.7%;
+      }
+     
+}
 
- .texteTitreNormal{
-  font-size: 16px;
-  color:black;
-  text-align: right;
-  margin-right: 1.2%;
+
+
+@media  screen and (max-width: 2000px){
+    .divVide{
+        display: inline-block;
+        width: 21.45%;
+      }
+      .col-xxl-2 {
+        flex: 0 0 25%;
+        max-width: 16.5%;
+    }
+    .texteTitreNormalMarR20{
+        font-size: 16px;
+        color:black;
+        display: inline-block;
+        margin-right: 1.7%;
+        /* text-align: right;
+        margin-right: 20px; */
+       }
+       .disInBl{
+        display: inline-block;
+        margin-top:6px;
+        margin-right: 10px;
+        margin-left: -10px;
+    }
 }
-.texteTitreDossTaq{
-  font-size: 16px;
-  color:black;
-  text-align: left;
-  max-width: 11%;
-  margin-right: 2.3%;
-}
-.texteTitreDateImp{
-  font-size: 16px;
-  color:black;
-  text-align: left;
-  max-width: 15.8%;
-}
-.mod1{
-    max-width: 4.5%;
-  }
-  .mod2{
-    max-width: 12%;
-  }
-  .mod3{
-    max-width: 20%;
-  }
-}
-@media screen and (max-width: 1200px) {
+@media  screen and (max-width: 1900px){
     .divVide{
         display: inline-block;
         width: 21.3%;
+      }
+      .col-xxl-2 {
+        flex: 0 0 25%;
+        max-width: 17.5%;
+    }
+}
+@media  screen and (max-width: 1800px){
+    .col-xxl-2 {
+      flex: 0 0 25%;
+      max-width: 19%;
+  }
+  .divVide{
+    display: inline-block;
+    width: 21.1%;
+  }
+  .disInBl{
+    display: inline-block;
+    margin-top:6px;
+    margin-right: 25px;
+    margin-left: -10px;
+}
+}
+@media  screen and (max-width: 1700px){
+    .col-xxl-2 {
+      flex: 0 0 25%;
+      max-width: 21%;
+  }
+  .divVide{
+    display: inline-block;
+    width: 20.95%;
+  }
+  
+}
+@media  screen and (max-width: 1600px){
+    .col-xxl-2 {
+      flex: 0 0 25%;
+      max-width: 21%;
+  }
+  .divVide{
+    display: inline-block;
+    width: 20.6%;
+  }
+  .texteTitreNormalMarR20{
+    font-size: 16px;
+    color:black;
+    display: inline-block;
+    margin-right: 2%;
+    /* text-align: right;
+    margin-right: 20px; */
+   }
+}
+@media  screen and (max-width: 1500px){
+    .col-xxl-2 {
+      flex: 0 0 25%;
+      max-width: 21%;
+  }
+  .divVide{
+    display: inline-block;
+    width: 20.3%;
+  }
+  .texteTitreNormalMarR20{
+    font-size: 16px;
+    color:black;
+    display: inline-block;
+    margin-right: 2.3%;
+    /* text-align: right;
+    margin-right: 20px; */
+   }
+}
+@media  screen and (max-width: 1400px){
+    .col-xxl-2 {
+      flex: 0 0 25%;
+      max-width: 21%;
+  }
+  .disInBl{
+    display: inline-block;
+    margin-top:6px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+  .divVide{
+    display: inline-block;
+    width: 20%;
+  }
+  .texteTitreNormalMarR20{
+    font-size: 16px;
+    color:black;
+    display: inline-block;
+    margin-right: 2.6%;
+    /* text-align: right;
+    margin-right: 20px; */
+   }
+}
+@media screen and (max-width: 1300px) {
+    .col-xxl-2 {
+        flex: 0 0 25%;
+        max-width: 21%;
+    }
+    .disInBl{
+        display: inline-block;
+        margin-top:6px;
+        margin-right: 5px;
+        margin-left: 20px;
+    }
+    .divVide{
+      display: inline-block;
+      width: 19.7%;
+    }
+    .col2ModAdjJug{
+      max-width: 13.4%;
+    }
+    .col2ModDosTaq{
+      max-width: 14%;
+    }
+  
+    .texteTitreProJuge{
+      font-size: 16px;
+      color:black;
+      margin-left: 8px;
+      margin-right: 3px;
+      max-width: 13.2%;
+   }
+  
+   .texteTitreNormal{
+    font-size: 16px;
+    color:black;
+    text-align: right;
+    margin-right: 1.2%;
+  }
+  .texteTitreDossTaq{
+    font-size: 16px;
+    color:black;
+    text-align: left;
+    max-width: 11%;
+    margin-right: 2.3%;
+  }
+  .texteTitreDateImp{
+    font-size: 16px;
+    color:black;
+    text-align: left;
+    max-width: 15.8%;
+  }
+  .mod1{
+      max-width: 4.5%;
+    }
+    .mod2{
+      max-width: 12%;
+    }
+    .mod3{
+      max-width: 20%;
+    }
+  }
+@media screen and (max-width: 1200px) {
+    .col-xxl-2 {
+        flex: 0 0 25%;
+        max-width: 19%;
+    }
+    .divVide{
+        display: inline-block;
+        width: 20.6%;
       }
     .texteTitreNormalMarR20{
         font-size: 11px;
         color:black;
         display: inline-block;
-        margin-right: 2%;
+        margin-right: 2.6%;
         /* text-align: right;
         margin-right: 20px; */
        }
@@ -441,6 +657,15 @@ left: 25px;
       color:black;
       text-align: left;
       max-width: 17.1%;
+    }
+    .taR{
+        text-align: right;
+        font-size: 11px;
+    }
+    .taRDate {
+        text-align: right;
+        font-size: 11px;
+        margin-top: 6px;
     }
     .mod1{
         max-width: 5.5%;
@@ -519,44 +744,201 @@ left: 25px;
     font-size: 11px;
    height: 25px;
 }
-}
-
-/*CSS test*/
-.taR{
-    text-align: right;
-    font-size: 16px;
-}
-.taRDate{
-    text-align: right;
-    font-size: 16px;
-    margin-top: 6px;
-}
-.disInBl{
+.divVideButt{
+    display:inline-block;
+    width: 23.5%;
+  }
+  .divInBlockButton{
     display: inline-block;
-    margin-top:6px;
-    margin-right: 10px;
-    margin-left: -10px;
+    margin-right: 20px;
+  }
+}
+@media screen and (max-width: 1100px) {
+    .divVide{
+        display: inline-block;
+        width: 20.2%;
+      }
+    .texteTitreNormalMarR20{
+        font-size: 11px;
+        color:black;
+        display: inline-block;
+        margin-right: 2.8%;
+        /* text-align: right;
+        margin-right: 20px; */
+       }
+       .divVideButt{
+        display:inline-block;
+        width: 23%;
+      }
+      .divInBlockButton{
+        display: inline-block;
+        margin-right: 20px;
+      }
+    }
+    @media screen and (max-width: 1000px) {
+        .divVide{
+            display: inline-block;
+            width: 19.6%;
+          }
+        .texteTitreNormalMarR20{
+            font-size: 11px;
+            color:black;
+            display: inline-block;
+            margin-right: 3.2%;
+            /* text-align: right;
+            margin-right: 20px; */
+           }
+           .centJuge{
+            position: unset;
+            }
+            .divVideButt{
+                display:inline-block;
+                width: 23%;
+              }
+              .divInBlockButton{
+                display: inline-block;
+                margin-right: 20px;
+              }
+        }
+        @media screen and (max-width: 900px) {
+            .divVide{
+                display: inline-block;
+                width: 27.6%;
+              }
+            .texteTitreNormalMarR20{
+                font-size: 11px;
+                color:black;
+                display: inline-block;
+                margin-right: 3.5%;
+                /* text-align: right;
+                margin-right: 20px; */
+               }
+               .divVideButt{
+                display:inline-block;
+                width: 31%;
+              }
+               .divInBlockButton{
+                display: inline-block;
+                margin-right: 20px;
+              }
+              .inputNormal{
+                width: 130px;
+              }
+              .centJuge{
+                position: unset;
+                }
+            }
+            @media screen and (max-width: 800px) {
+                .divVide{
+                    display: inline-block;
+                    width: 26.9%;
+                  }
+                .texteTitreNormalMarR20{
+                    font-size: 11px;
+                    color:black;
+                    display: inline-block;
+                    margin-right: 4.2%;
+                    /* text-align: right;
+                    margin-right: 20px; */
+                   }
+                   .divVideButt{
+                    display:inline-block;
+                    width: 31%;
+                  }
+                  .divInBlockButton{
+                    display: inline-block;
+                    margin-right: 20px;
+                  }
+                  .disInBl{
+                    display: inline-block;
+                    margin-top:6px;
+                    margin-right: 0px;
+                }
+                .centJuge{
+                    position: unset;
+                    }
+                  
+                  
+                }
 
-}
-.inputW{
-    width: 250px;
-}
-@media (min-width: 1400px){
-  .col-xxl-2 {
-    flex: 0 0 25%;
-    max-width: 17%;
-}
-}
-
-@media screen and (max-width: 725px) {
-
+@media screen and (max-width: 700px) {
+    .divVide{
+        display: inline-block;
+        width: 8.5%;
+      }
+    .texteTitreNormalMarR20{
+        font-size: 11px;
+        color:black;
+        display: inline-block;
+        margin-right: 4.2%;
+        /* text-align: right;
+        margin-right: 20px; */
+       }
+       .divVideButt{
+        display:inline-block;
+        width: 31%;
+      }
+      .divInBlockButton{
+        display: inline-block;
+        margin-right: 20px;
+      }
+      .disInBl{
+        display: inline-block;
+        margin-top:6px;
+        margin-right: 0px;
+    }
+    .inputNormal{
+        width: 100px;
+      }
     .inputW{
         width: 200px;
     }
+    .divInBlockButton{
+        display: inline-block;
+        margin-right: 20px;
+      }
 }
-@media screen and (max-width: 610px) {
+ @media screen and (max-width: 600px) {
 
+    .divVide{
+        display: inline-block;
+        width: 7.8%;
+      }
+    .texteTitreNormalMarR20{
+        font-size: 11px;
+        color:black;
+        display: inline-block;
+        margin-right: 4.2%;
+        /* text-align: right;
+        margin-right: 20px; */
+       }
+       .divVideButt{
+        display:inline-block;
+        width: 31%;
+      }
+      .divInBlockButton{
+        display: inline-block;
+        margin-right: 20px;
+      }
+      .divInBlock{
+        display: inline-block;
+        margin-right: 5px;
+      }
+      .disInBl{
+        display: inline-block;
+        margin-top:6px;
+        margin-right: 0px;
+    }
+    .inputNormal{
+        width: 100px;
+      }
     .inputW{
         width: 100px;
     }
-}
+    .divInBlockButton{
+        display: inline-block;
+        margin-right: 20px;
+      }
+} 
+
+

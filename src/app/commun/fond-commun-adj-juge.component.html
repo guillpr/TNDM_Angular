@@ -136,7 +136,7 @@
                       <div class="col-sm-2 col-md-4 col-lg-2 taRDate">
                         <app-texte cle="commun.DateImp"  ></app-texte>
                       </div>
-                      <div class="col-3 col-lg-3 col-xl-3 col-xxl-2">
+                      <div class="col-3 col-md-2  col-lg-3 col-xl-3 col-xxl-2">
                        <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                        <input
                         [className]="ErreurDate&&this.formulaire.controls.rechercheDateDu.errors ? 'inputBorderRouge' : 'inputNormal'"
@@ -247,12 +247,12 @@
 
                     <div class="divVideButt"></div>
 
-                    <div class="divInBlock" >
+                    <div class="divInBlockButton" >
                         <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button>
                     </div>
-                    <div class="divInBlock" >
+                    <div class="divInBlockButton" >
                         <button
                         class="btn btn-primary buttonReini"
                        (click)="Renitialise()"
