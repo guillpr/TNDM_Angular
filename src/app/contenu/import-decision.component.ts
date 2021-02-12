@@ -1,6 +1,6 @@
 import { Signataires } from './../entitees/signataires';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -14,6 +14,29 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { DatePipe } from '@angular/common';
 import { Decision } from '../entitees/decision';
 import moment from 'moment';
+
+const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
+const dateMomentConv = moment(ctrl.get('dateDelibere').value).format('YYYY-MM-DD');
+const dateDuJour = new Date();
+const momentNewDate = new Date(dateMomentConv);
+console.log(dateMomentConv);
+const diffDate = momentNewDate.getTime() - dateDuJour.getTime();
+
+const diffEnJour = diffDate / (1000 * 3600 * 24);
+console.log('Différence entre les deux dates' , diffEnJour);
+if (diffEnJour > 365) {
+    console.log('Date delibere plus grand que date du jour');
+    return { erreurDatePlusUnAn: true };
+  }
+if (diffEnJour < -731) {
+    console.log('Date delibere moins de deux ans');
+    return { erreurDateMoinsDeuxAn: true };
+  }
+console.log('Moins grand que date du jour');
+return null;
+};
+
+
 
 @Component({
   selector: 'app-import-decision',
@@ -125,16 +148,43 @@ export class ImportDecisionComponent implements OnInit {
   validDate(control: FormControl): {[key: string]: any}|null
   {
   const dateVal = control.value;
+  const dateDuJour = new Date();
+  console.log(dateVal);
+  console.log(control);
+
+  if(dateVal){
+    console.log('Dans dateVal');
+    const dateMomentAConvertir = new Date(dateVal);
+    console.log(dateMomentAConvertir);
+    //const dateAPipe = this.datepipe.transform(dateMomentAConvertir);
+  }
+
+  // if(dateVal !== undefined){
+  //   const dateMomentAConvertir = new Date(dateVal);
+  //   const datePipe = this.datepipe.transform(dateMomentAConvertir, 'yyyy-MM-dd');
+  //  // const diffDate = dateDuJour.getTime() - dateVal.getTime();
+  // //  const diffEnJour = diffDate / (1000 * 3600 * 24);
+  // }
+
+
+
+  if(Number(dateVal) - Number(new Date()) > 365){
+   console.log('Plus grand que 365' , Number(new Date()));
+  }
+
+
   if (control && dateVal && !moment(dateVal, 'YYYY-MM-DD', true).isValid()) {
     return { dateVaidator: true };
   }
   return null;
 }
 
+
    initialiserFormulaire(){
+// tslint:disable-next-line: deprecation
     this.formulaire = this.fb.group({
       description: ['', [Validators.required]],
-      dateDelibere:  ['' , this.validDate],
+      dateDelibere:  ['' , this.validDate ],
       priorite: new FormControl('Normale'),
       nomJuge0: new FormControl({value: '', disabled: true}),
       nomJuge1: new FormControl({value: '', disabled: true}),
@@ -152,7 +202,7 @@ export class ImportDecisionComponent implements OnInit {
       redacteur3: new FormControl({value: '', disabled: true}),
       redacteur4: new FormControl({value: '', disabled: true}),
       nomFichier: new FormControl('')
-    });
+    }, { validator:[validDatePlusUnAn]});
    }
 
 
@@ -193,6 +243,7 @@ export class ImportDecisionComponent implements OnInit {
      // this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);
     }
   }
+
   public importerDecision(){
     if (this.formulaire.valid){
 
@@ -201,8 +252,6 @@ export class ImportDecisionComponent implements OnInit {
       // if(!this.facadeService.listeDecisionImp.identifiant){
       //   this.facadeService.listeDecisionImp.identifiant = '';
       // }
-
-
 
 
       this.remplirChampsModifie();
@@ -224,9 +273,49 @@ export class ImportDecisionComponent implements OnInit {
 
    // this.router.navigateByUrl('/juge');
   }
+
+  messageErreurQuitter(){
+    const donnees = {
+      texte: 'Vous êtes sur le point de retourner à l’écran d’accueil. Une décision est en cours d’importation, toutes les informations seront perdues. ',
+      titre: '',
+      texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+      texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+      afficherBoutonOui: true,
+      reponse: ''
+    };
+    const dialog = this.dialog.open(BoiteDialogueComponent, { width: '450px',
+   data: donnees,
+   ariaLabelledBy: 'titre-dialog',
+   ariaDescribedBy: 'contenu-dialogue'});
+    dialog.afterClosed().subscribe(() => {
+      if(this.facadeService.reponseSuppressionFichier){
+        console.log('SI suppresion fichier dans quitter');
+        this.methodeSuppressionFichier();
+        this.dialog.closeAll();
+        this.router.navigateByUrl('/');
+      }
+      else{
+        this.dialog.closeAll();
+      }
+   });
+
+    return dialog;
+
+  }
+
   public quitterDecision(){
+    console.log('SUP fichier' ,this.facadeService.reponseSuppressionFichier);
+    if(this.facadeService.listeDecisionImp){
+      this.messageErreurQuitter();
+      console.log('SUP fichier apres' ,this.facadeService.reponseSuppressionFichier);
+
+
+
+  }
+  else{
     this.router.navigateByUrl('/');
   }
+}
   // Méthode pour Fichiers
   suppressionFichier(){
 
@@ -255,8 +344,8 @@ methodeSuppressionFichier(){
 
 messageErreurFichier2(){
   const donnees = {
-    texte: 'Voulez-vous vraiment supprimer le fichier?',
-    titre: 'Suppression de fichier',
+    texte: 'Voulez-vous vraiment procéder à l’importation d’une nouvelle décision? Toutes les informations seront perdues.',
+    titre: '',
     texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
     texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
     afficherBoutonOui: true,

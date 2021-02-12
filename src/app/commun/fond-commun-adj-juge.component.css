@@ -213,7 +213,7 @@ input[type=radio]:checked:before {
      text-align: right;
      margin-right: 15px;
  }
- 
+
  .texteTitreProJuge{
     font-size: 16px;
     color:black;
@@ -429,7 +429,7 @@ left: 25px;
         display: inline-block;
         width: 21.7%;
       }
-     
+
 }
 
 
@@ -454,7 +454,7 @@ left: 25px;
        .disInBl{
         display: inline-block;
         margin-top:6px;
-        margin-right: 10px;
+        margin-right: 5px;
         margin-left: -10px;
     }
 }
@@ -493,7 +493,7 @@ left: 25px;
     display: inline-block;
     width: 20.95%;
   }
-  
+
 }
 @media  screen and (max-width: 1600px){
     .col-xxl-2 {
@@ -576,7 +576,7 @@ left: 25px;
     .col2ModDosTaq{
       max-width: 14%;
     }
-  
+
     .texteTitreProJuge{
       font-size: 16px;
       color:black;
@@ -584,7 +584,7 @@ left: 25px;
       margin-right: 3px;
       max-width: 13.2%;
    }
-  
+
    .texteTitreNormal{
     font-size: 16px;
     color:black;
@@ -857,8 +857,8 @@ left: 25px;
                 .centJuge{
                     position: unset;
                     }
-                  
-                  
+
+
                 }
 
 @media screen and (max-width: 700px) {
@@ -939,6 +939,6 @@ left: 25px;
         display: inline-block;
         margin-right: 20px;
       }
-} 
+}
 
 

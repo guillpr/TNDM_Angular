@@ -18,7 +18,7 @@ export class InfoDecisionJugeComponent implements OnInit {
   boiteDecisionOuverte = false;
   boiteDossAss = false;
   boiteSignature = false;
-  boiteHistorique = false;
+  boiteHistorique = true;
   prioSelected = '';
   couleurPrio = false;
 

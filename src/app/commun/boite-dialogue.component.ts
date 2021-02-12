@@ -27,12 +27,14 @@ export class BoiteDialogueComponent  {
                }
 
                public onNoClick(): void {
+                 console.log('dans click no');
                 this.data.reponse = 'N';
                 this.facadeService.reponseSuppressionFichier = false;
                 this.dialogRef.close();
             }
 
             public onYesClick(): void {
+              console.log('dans click yes');
                 this.data.reponse = 'O';
                 this.facadeService.reponseSuppressionFichier = true;
                 this.dialogRef.close();

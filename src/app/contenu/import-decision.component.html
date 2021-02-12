@@ -145,8 +145,37 @@
                 </div>
             </div>
         </div>
+      <div class="" ></div>
+        <!--Erreur date moins de deux ans-->
+        <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDateMoinsDeuxAn" class="row mb-2 mt-1">
+            <div class="col-sm-0 col-lg-1"></div>
+            <div class="col-2 col-sm-2 col-md-4 col-lg-1 taR"> </div>
+            <div class="col messageErreurAcc">
 
-        <!--Erreur date-->
+                La date de fin de délibéré ne peut être antérieure à 2 ans de la date du jour.
+            </div>
+
+             <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
+
+            </div>
+
+        <!--Fin erreur date-->
+       <!--Erreur date Plus d'un an-->
+       <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDatePlusUnAn" class="row mb-2 mt-1">
+          <div class="col-sm-0 col-lg-1"></div>
+          <div class="col-2 col-sm-2 col-md-4 col-lg-1 taR"> </div>
+          <div class="col messageErreurAcc">
+
+              La date de fin de délibéré ne peut être supérieure à un an de la date du jour.
+          </div>
+
+           <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
+
+          </div>
+
+      <!--Fin erreur date-->
+
+        <!--Erreur date valide-->
         <div  *ngIf="formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty  || formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty" class="row mb-2 mt-1">
             <div class="col-sm-0 col-lg-1"></div>
             <div class="col-2 col-sm-2 col-md-4 col-lg-1 taR"> </div>

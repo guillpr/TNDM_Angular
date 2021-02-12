@@ -95,17 +95,29 @@
                 <div class="col-5 descError"><span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors" >La description est requise.</span></div>
                 <div class="col-2">
                     <!--Erreur date-->
-        <div  *ngIf="formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty  || formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty">
-
-
+        <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDatePlusUnAn">
             <div class="messageErreurAcc">
-
-              Veuillez spécifier une date (début et fin) valide (AAAA-MM-JJ).
+                La date de fin de délibéré ne peut être supérieure à un an de la date du jour.
+            </div>
             </div>
 
-             <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
+            <!--Erreur date deux ans-->
+            <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDateMoinsDeuxAn">
+                <div class="messageErreurAcc">
+                    La date de fin de délibéré ne peut être antérieure à 2 ans de la date du jour.
+                </div>
+                </div>
 
-            </div>
+            <!--Fin erreur date deux ans-->
+
+             <!--Erreur date plus d'un an-->
+             <div  *ngIf="formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty  || formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty">
+                <div class="messageErreurAcc">
+                  Veuillez spécifier une date (début et fin) valide (AAAA-MM-JJ).
+                </div>
+                </div>
+
+            <!--Fin erreur date plus d'un an-->
 
         <!--Fin erreur date-->
                 </div>
@@ -116,7 +128,7 @@
                     (click)="sauvegarderChangements()"
                     [className]="formulaire.valid ? 'buttonChangements' : 'buttonChangementsDis'"
                      class="buttonChangements">
-                     Sauvegarder changements
+                     Enregistrer
                     </button></div>
               </div>
         </div>
@@ -298,8 +310,6 @@
         <div class="col-2">
             <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'" class="buttonDocument"  (click)="voirDocumentPdf()">Voir PDF</button>
         </div>
-
-
         <div class="col-3"></div>
 
         <div class="col-2 maxW14">

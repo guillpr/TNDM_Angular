@@ -1,4 +1,4 @@
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Component, OnInit, Pipe } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
@@ -9,6 +9,27 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import moment from 'moment';
+
+const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
+  const dateMomentConv = moment(ctrl.get('dateDelibere').value).format('YYYY-MM-DD');
+  const dateDuJour = new Date();
+  const momentNewDate = new Date(dateMomentConv);
+  console.log(dateMomentConv);
+  const diffDate = momentNewDate.getTime() - dateDuJour.getTime();
+
+  const diffEnJour = diffDate / (1000 * 3600 * 24);
+  console.log('Différence entre les deux dates' , diffEnJour);
+  if (diffEnJour > 365) {
+      console.log('Date delibere plus grand que date du jour');
+      return { erreurDatePlusUnAn: true };
+    }
+  if (diffEnJour < -731) {
+      console.log('Date delibere moins de deux ans');
+      return { erreurDateMoinsDeuxAn: true };
+    }
+  console.log('Moins grand que date du jour');
+  return null;
+  };
 
 @Component({
   selector: 'app-info-decision-adjointe',
@@ -61,7 +82,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     redacteur2: new FormControl({value: false, disabled: true}),
     redacteur3: new FormControl({value: false, disabled: true}),
     redacteur4: new FormControl({value: false, disabled: true})
-  });
+  }, { validator: [validDatePlusUnAn]});
 
   constructor(public facadeService: FacadeService,
               public dialog: MatDialog,
@@ -166,11 +187,18 @@ ajoutJuges(s: any){
   validDate(control: FormControl): {[key: string]: any}|null
   {
   const dateVal = control.value;
-  if (control && dateVal && !moment(dateVal, 'YYYY-MM-DD', true).isValid()) {
-    return { dateVaidator: true };
+  console.log(dateVal);
+  if(moment.isMoment(dateVal)){
+    if (control && dateVal && !moment(dateVal, 'yyyy-MM-dd', true).isValid()) {
+      return { dateVaidator: true };
+    }
+    return null;
   }
-  return null;
-}
+  else{
+    return null;
+  }
+  }
+
 
   ouvertureBoiteDecision(){
     this.boiteDecisionOuverte = true;
@@ -275,7 +303,22 @@ ajoutJuges(s: any){
     this.pdfClique = true;
 
   }
+  verifSiSauvegarde(){
+    if (this.formulaire.get('description').value !== this.valDepDescription ||
+     this.formulaire.get('dateDelibere').value !== this.valDepDateDelibere ||
+     this.formulaire.get('priorite').value !== this.valDepPriorite ){
+       console.log('Changements true');
+       return true;
+    }
+    else{
+      console.log('Changements false');
+      return false;
+    }
+  }
   demarrerSignature(){
+    if(this.verifSiSauvegarde()){
+      this.sauvegarderChangements();
+    }
     console.log('Démarrer la signature');
 
     this.spinner.show();
