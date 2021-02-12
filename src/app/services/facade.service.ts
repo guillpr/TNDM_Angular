@@ -46,10 +46,10 @@ export class FacadeService {
 
   // Url controller
   //private DecisionURL = environment.apiBaseUrl + 'DecisionDetail';
-  private DecisionRecherche = environment.apiBaseUrl + 'DecisionDetail/Requete/';
-  private JugeUrl = environment.apiBaseUrl + 'JugeDetail';
-  private NoDecisionUrl = environment.apiBaseUrl + 'DecisionDetail/NoDecision';
-  private obtenirInfoDocumentUrl = environment.apiBaseUrlSignature + 'v1/Decision/Info';
+ // private DecisionRecherche = environment.apiBaseUrl + 'DecisionDetail/Requete/';
+  //private JugeUrl = environment.apiBaseUrl + 'JugeDetail';
+ // private NoDecisionUrl = environment.apiBaseUrl + 'DecisionDetail/NoDecision';
+ // private obtenirInfoDocumentUrl = environment.apiBaseUrlSignature + 'v1/Decision/Info';
 
   private usagerWindowsUrl = environment.apiBaseUrlFacade + 'v1/Decision//api/Decision/Ad';
 
@@ -92,9 +92,9 @@ export class FacadeService {
   // public obtenirDecisionList(): Observable<Decision[]>{
   //  return this.http.get<Decision[]>(this.DecisionURL);
   // }
-  public obtenirJuges(): Observable<Juge[]>{
-    return this.http.get<Juge[]>(this.JugeUrl);
-  }
+  // public obtenirJuges(): Observable<Juge[]>{
+  //   return this.http.get<Juge[]>(this.JugeUrl);
+  // }
   // Obtenir Code Usager du service de facade
   public obtenirCodeUsagerAD(): Observable<Usager>{
     console.log('dans obtenir code usager ad service de facade front-end');
@@ -128,9 +128,9 @@ public DemarrerSignature(idDocument: number, codeReseau: string){
        return this.http.post<Decision>(this.obtenirInfoDocumentUrlFacade, JSON.stringify(fichier), this.httpOptions);
      }
 
- public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision[]>{
-   return this.http.post<RetourDecision[]>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
- }
+//  public TeleverserDocument(fichier: FichierJoint): Observable<RetourDecision[]>{
+//    return this.http.post<RetourDecision[]>(this.NoDecisionUrl, JSON.stringify(fichier),  this.httpOptions);
+//  }
  public ImporterDecision(decision: Decision): Observable<Decision>{
    console.log('JSON decision:' , JSON.stringify(decision));
    return this.http.post<Decision>(this.DecisionURL, JSON.stringify(decision), this.httpOptions);

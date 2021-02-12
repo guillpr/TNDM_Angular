@@ -20,36 +20,43 @@
 
         <!--Début row décision-->
 
-        <div class="row bold">
-            <div class="col numUniCol"> <app-texte cle="commun.numero"></app-texte></div>
-            <div class="col dateDeliCol center"><app-texte cle="commun.description"></app-texte><span *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="asteRed">*</span>  <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'"   class="fas fa-edit ml-1"></i></div>
-            <div class="col numUtiCol center"><app-texte cle="commun.impPar"></app-texte></div>
-            <div class="col dateImpCol center"><app-texte cle="commun.dateImp"></app-texte></div>
+
+        <div class="row bold adjRow">
+            <div class="col col-xl-1 numUniCol"> <app-texte cle="commun.numero"></app-texte></div>
+            <div class="col col-xl-3 chDescr"><app-texte cle="commun.description"></app-texte><span *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="asteRed">*</span>  <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'"   class="fas fa-edit ml-1"></i></div>
+            <div class="col col-xl-1 numUtiCol center"><app-texte cle="commun.impPar"></app-texte></div>
+            <div class="col col-xl-1 dateImpCol center"><app-texte cle="commun.dateImp"></app-texte></div>
 
 
-            <div class="col-2 dateDeliCol center"><app-texte cle="commun.dateDeli"></app-texte> <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit ml-1"></i></div>
-            <div class="col numUniCol center">Durée restante(jours)</div>
-            <div class="col numUtiCol center">Priorité <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit ml-1"></i></div>
-            <div class="col center">Statut</div>
+            <div class="col col-xl-2 dateDeliCol center"><app-texte cle="commun.dateDeli"></app-texte> <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit ml-1"></i></div>
+            <div class="col col-xl-2 dureeRest center">Durée restante(jours)</div>
+            <div class="col col-xl-1 numUtiCol center">Priorité <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit ml-1"></i></div>
+            <div class="col col-xl-2 statutCss center">Statut</div>
         </div>
           <!--Fin row décision-->
 
         <div  class="testDecisionExpand">
-            <div     class="row">
-            <div class="col numUniCol"><input class="noBorder center"  formControlName="numero"></div>
-                <div class="col dateDeliCol">
-                    <textarea  [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null" (change)="afficheBouton()" formControlName="description" class="inputDesc" rows="auto" cols="18"></textarea>
+            <div     class="row adjRow">
+            <div class="col col-xl-1 numUniCol"><input class="inputNo"  formControlName="numero"></div>
+                <div class="col col-xl-3 chDescr">
+                    <textarea
+                    [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null"
+                     (change)="afficheBouton()"
+                      formControlName="description"
+                      spellcheck="false"
+                       class="inputDesc"
+                        ></textarea>
                     </div>
-                  <div class="col numUtiCol">
+                  <div class="col col-xl-1 numUtiCol">
                     <input class="noBorder center"  formControlName="importePar">
                   </div>
-                  <div class="col dateImpCol">
+                  <div class="col col-xl-1 dateImpCol">
                     <input class="noBorder center"  formControlName="dateImportation">
                   </div>
 
 
 
-                <div class="col-2 dateDeliCol">
+                <div class="col col-xl-2 dateDeliCol">
                     <span *ngIf="formulaire.get('dateDelibere').value  === '' " class="texteBe">-
                       </span>
 
@@ -73,9 +80,9 @@
 
 
 
-              <div class="col numUniCol">
+              <div class="col col-xl-2 dureeRest">
                   <input class="noBorder center"  formControlName="dureeRestante"></div>
-                <div class="col numUtiCol">
+                <div class="col col-xl-1 numUtiCol">
                        <select  [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null" formControlName="priorite" (change)="afficheBouton()"  [className]="this.formulaire.get('priorite').value ==='Urgente' ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
                          <option  selected value="Urgente">Urgente</option>
                          <option  value="Normale">Normale</option>
@@ -84,7 +91,7 @@
 
 
                      </div>
-                    <div class="col center">
+                    <div class="col col-xl-2 statutCss center">
                         <input class="noBorder center"  formControlName="statut">
 
                     </div>
@@ -132,6 +139,8 @@
                     </button></div>
               </div>
         </div>
+
+
 
 
 

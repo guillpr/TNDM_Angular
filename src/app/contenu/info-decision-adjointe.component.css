@@ -72,6 +72,7 @@
     padding-right: 5px;
     padding-left: 5px;
     text-align: center;
+    max-width: 6%;
 }
 .numUtiCol{
     /* max-width: 8%; */
@@ -184,33 +185,12 @@
     border-radius: 10px;
 }
 
-.inputDesc{
-    border:none;
-    resize: none;
-    border:none;
-    background-color: white;
 
-}
 .inputDateDelibere{
   border:none;
   border:none;
 }
-.inputNormal{
-  margin-left: 22px;
-  border:none;
-}
-.matFormFieldCustom{
-  width: 250px;
-  display: relative;
-  bottom:10px;
-  right: 22px;
-}
-::ng-deep .mat-form-field-underline {
-  display: none;
-}
-.mat-form-field-underline  {
-  display: none;
-}
+
 .barreTitre{
   background-color:  #2257a7;
   opacity: 0.3;
@@ -235,6 +215,7 @@ margin-top: 20px;
 }
 .center{
   text-align: center;
+  width: 100%;
 }
 .errorRed{
   color:red;
@@ -276,3 +257,254 @@ input:disabled
   width: 100%;
   margin-left: 0px;
 }
+.overRow{
+  overflow-x: auto;
+
+}
+.inputNo{
+  width: 100%;
+  border: none;
+  text-align: center;
+}
+.chDescr{
+  text-align: center;
+  max-width: 20%;
+}
+.dateDeliCol{
+  /* max-width: 12%; */
+  padding-right: 5px;
+  padding-left: 5px;
+  border:none;
+  text-align: center;
+  max-width: 8%;
+}
+.numUniCol{
+  /* max-width: 10%; */
+  padding-right: 5px;
+  padding-left: 5px;
+  text-align: center;
+  max-width: 7%;
+}
+.numUtiCol{
+  /* max-width: 8%; */
+  padding-right: 5px;
+  padding-left: 5px;
+  white-space: normal;
+  text-align: center;
+}
+.dateImpCol{
+  /* max-width: 11%; */
+  padding-right: 5px;
+  padding-left: 5px;
+  text-align: center;
+}
+.dureeRest{
+  max-width: 10%;
+}
+.statutCss{
+  max-width: 12%;
+}
+.inputNormal{
+  margin-left: 22px;
+  border:none;
+}
+.inputDesc{
+  border:none;
+  resize: none;
+  border:none;
+  background-color: white;
+  width: 100%;
+  text-align: center;
+
+}
+.matFormFieldCustom{
+  width: 100%;
+  display: relative;
+  bottom:10px;
+  right: 22px;
+}
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+.mat-form-field-underline  {
+  display: none;
+}
+.adjRow{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media screen and (max-width: 1800px) {
+  .chDescr{
+    text-align: center;
+    max-width: 22%;
+  }
+}
+@media screen and (max-width: 1600px) {
+  .chDescr{
+    text-align: center;
+    max-width: 24%;
+  }
+  .dateDeliCol{
+    /* max-width: 12%; */
+    padding-right: 5px;
+    padding-left: 5px;
+    border:none;
+    text-align: center;
+    max-width: 9%;
+  }
+  .dureeRest{
+    max-width: 11%;
+  }
+}
+@media screen and (max-width: 1500px) {
+  .chDescr{
+    text-align: center;
+    max-width: 25%;
+  }
+  .dateDeliCol{
+    /* max-width: 12%; */
+    padding-right: 5px;
+    padding-left: 5px;
+    border:none;
+    text-align: center;
+    max-width: 10%;
+  }
+  .dureeRest{
+    max-width: 12%;
+  }
+  .numUniCol{
+    /* max-width: 10%; */
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
+    max-width: 8%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .chDescr{
+    text-align: center;
+    max-width: 25%;
+  }
+  .dateDeliCol{
+    /* max-width: 12%; */
+    padding-right: 5px;
+    padding-left: 5px;
+    border:none;
+    text-align: center;
+    max-width: 10%;
+  }
+  .dureeRest{
+    max-width: 12%;
+  }
+  .numUniCol{
+    /* max-width: 10%; */
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
+    max-width: 8%;
+  }
+  .maxW12{
+    max-width: 13%;
+  }
+  .errorRed{
+    color:red;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 12px;
+    font-size: 12px;
+  }
+  .buttonChangements{
+    background-color: #2257a7 !important;
+    color: white;
+    border: #2257a7 !important;
+   /* margin-left: 283px;*/
+    width:150px;
+    height:30px;
+    border-radius: 10px;
+    float: right;
+    margin-right: 10px;
+    font-size: 12px;
+  }
+  .buttonChangementsDis{
+    background-color: grey !important;
+    color: white;
+    border: grey !important;
+   /* margin-left: 283px;*/
+    width:150px;
+    height:30px;
+    border-radius: 10px;
+    float: right;
+    margin-right: 10px;
+    font-size: 12px;
+  }
+  .buttonDocument {
+      background-color: #2257a7 !important;
+      color: white;
+      border: #2257a7 !important;
+     /* margin-left: 283px;*/
+      width:140px;
+      height:30px;
+      border-radius: 10px;
+      font-size: 12px;
+  }
+  .buttonDocumentDis{
+    background-color: grey !important;
+    color: white;
+    border: grey !important;
+   /* margin-left: 283px;*/
+    width:140px;
+    height:30px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+  .buttonRejet {
+      background-color: #f5250a !important;
+      color: white;
+      border:#f5250a !important;
+     /* margin-left: 283px;*/
+      width:155px;
+      height:30px;
+      border-radius: 10px;
+      font-size: 12px;
+
+  }
+  .buttonSignRejet{
+      background-color: #ff6004 !important;
+      color: white;
+      border:#ff6004 !important;
+     /* margin-left: 283px;*/
+      width:155px;
+      height:30px;
+      border-radius: 10px;
+      font-size: 12px;
+
+  }
+  .buttonDemarrer{
+      background-color: #2257a7 !important;
+      color: white;
+      border: #2257a7 !important;
+     /* margin-left: 283px;*/
+       width:135px;
+      height:30px;
+      border-radius: 10px;
+      margin-right:20px;
+      font-size: 12px;
+
+
+  }
+  .buttonFermer{
+      background-color: #2257a7 !important;
+      color: white;
+      border: #2257a7 !important;
+     /* margin-left: 283px;*/
+      width:110px;
+      height:30px;
+      border-radius: 10px;
+      font-size: 12px;
+  }
+}
+
+
+

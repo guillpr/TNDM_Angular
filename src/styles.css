@@ -19,7 +19,7 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
   .cont90{
     max-width: 100%;
     overflow: auto;
@@ -54,7 +54,26 @@ body
     font-size: 10px;
 
 }
+.divCentre{
+  width: 100%;
+  background-color: white;
+  display: block;
+  margin: auto;
+  height: auto;
+  padding-bottom: 40px;
+  font-size: 11px;
 }
+}
+
+@media screen and (max-width: 600px) {
+  .cont90{
+    max-width: 100%;
+    overflow: auto;
+    font-size: 10px;
+
+}
+}
+
 
 
 
