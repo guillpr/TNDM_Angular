@@ -319,7 +319,7 @@
         <div class="col-2">
             <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'" class="buttonDocument"  (click)="voirDocumentPdf()">Voir PDF</button>
         </div>
-        <div class="col-3"></div>
+        <div class="col-3 col3Adj"></div>
 
         <div class="col-2 maxW14">
             <button *ngIf="this.facadeService.listeDecision.statut === 'Prêt pour signature'" class="buttonDemarrer" [attr.disabled]="!pdfClique || !formulaire.valid  ? 'disabled' : null"  [className]="pdfClique && formulaire.valid ? 'buttonDocument' : 'buttonDocumentDis'" (click)="demarrerSignature()">Démarrer la signature</button>
