@@ -106,13 +106,7 @@
 .spaceUp{
     margin-top: 10px;
 }
-.boutonPlus{
-    width: 50px;
-    height: 50px;
-    font-size: 40px;
-    color:#8a8787;
-    border: none;
-}
+
 .boutonMoins{
     width: 50px;
     height: 50px;
@@ -120,13 +114,7 @@
     color:#8a8787;
     border:none;
 }
-.aJuge{
-    position: relative;
-    top:12px;
-    font-size: 16px;
-    font-weight:600;
-    color:#8a8787;
-}
+
 .buttonQuitter {
     background-color: #2257a7 !important;
     color: white;
@@ -214,12 +202,7 @@ text-align: center;
   padding-right: 15px;
 
 }
-.labelNomFichier{
-  font-size: 16px;
-  font-weight: 600;
-  color: #8a8787;
 
-}
 .spaceLeft{
    margin-left: 10px;;
 }
@@ -228,11 +211,7 @@ text-align: center;
    border:none;
    background-color: white;
 }
-.red{
-   font-size: 13px;
-   font-weight: bold;
-   color:red;
-}
+
 .ErrorBorder{
    border:solid red 1px;
 }
@@ -279,18 +258,6 @@ text-align: center;
   width: 200px;
 
 }
-.fondGris{
-  background-color:#ecebeb;
-  border:solid white;
-  border-radius:10px;
-  font-size: 16px;
-  font-weight: 600;
-   color: #8a8787;
-   /* height: 50px; */
-   /* position: relative;
-   left: 8px; */
-
-}
 
 
 .marginR{
@@ -321,14 +288,7 @@ text-align: center;
  /* border-collapse:separate;
     border-spacing:0 5px;*/
 }
-.sectionTableNomJuge{
-  width: 260px;
-  background-color: #ecebeb;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 10px;
-  color:#8a8787;
-}
+
 .signWith{
   width: 200px;
 }
@@ -367,14 +327,7 @@ text-align: center;
   position: relative;
   margin-top:8px;
 }
-.erreurImport{
-  width: 100%;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 16px;
-  color: red;
-  font-weight: bold;
-}
+
 .matFormFieldCustom{
   width: 250px;
   display: relative;
@@ -432,6 +385,63 @@ margin-top: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.boutonPlus{
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  color:#8a8787;
+  border: none;
+}
+
+.sectionTableNomJuge{
+  width: 260px;
+  background-color: #ecebeb;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  color:#8a8787;
+}
+.aJuge{
+  position: relative;
+  top:12px;
+  font-size: 16px;
+  font-weight:600;
+  color:#8a8787;
+}
+.labelNomFichier{
+  font-size: 16px;
+  font-weight: 600;
+  color: #8a8787;
+
+}
+.red{
+  font-size: 13px;
+  font-weight: bold;
+  color:red;
+}
+.fondGris{
+  background-color:#ecebeb;
+  border:solid white;
+  border-radius:10px;
+  font-size: 16px;
+  font-weight: 600;
+   color: #8a8787;
+   /* height: 50px; */
+   /* position: relative;
+   left: 8px; */
+}
+.erreurImport{
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+  color: red;
+  font-weight: bold;
+}
+.hiddenOption{
+  display: none;
+  visibility: hidden;
+}
 
 @media screen and (max-width: 1300px) {
   .nomDateDelibere{
@@ -445,5 +455,22 @@ margin-top: 20px;
   margin-left: -0.8%;
   font-weight: bold;
     text-align: right;
+}
+.fondGris{
+  background-color:#ecebeb;
+  border:solid white;
+  border-radius:10px;
+  font-size: 11px;
+  font-weight: 600;
+   color: #8a8787;
+   /* height: 50px; */
+   /* position: relative;
+   left: 8px; */
+}
+.labelNomFichier{
+  font-size: 11px;
+  font-weight: 600;
+  color: #8a8787;
+
 }
 }

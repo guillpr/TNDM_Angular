@@ -108,22 +108,30 @@
   <div class="col-2 fondGris" >
       <div >
           <div>
-          <select   class="dlNormalJuge" id="inputGroupSelect05" formControlName="ordreSignataire{{i}}"  [attr.disabled]="this.facadeService.listeDecisionImp.signataires.length === 1 ? 'disabled' : null">
+          <select    class="dlNormalJuge" id="inputGroupSelect05" formControlName="ordreSignataire{{i}}"  [attr.disabled]="this.facadeService.listeDecisionImp.signataires.length === 1 ? 'disabled' : null">
                <option  selected value="1">Signataire 1</option>
-               <option value="2">Signataire 2</option>
-               <option value="3">Signataire 3</option>
-               <option value="4">Signataire 4</option>
-               <option value="4">Signataire 5</option>
+               <option  value="2">Signataire 2</option>
+               <option  [attr.disabled]="this.facadeService.listeDecisionImp.signataires.length < 3 ? 'disabled' : null" [className]="this.facadeService.listeDecisionImp.signataires.length >= 3 ? '' : 'hiddenOption'" value="3"  >Signataire 3</option>
+               <option [attr.disabled]="this.facadeService.listeDecisionImp.signataires.length < 4 ? 'disabled' : null" [className]="this.facadeService.listeDecisionImp.signataires.length >= 4 ? '' : 'hiddenOption'"  value="4">Signataire 4</option>
+               <option [attr.disabled]="this.facadeService.listeDecisionImp.signataires.length < 5 ? 'disabled' : null" [className]="this.facadeService.listeDecisionImp.signataires.length >= 5 ? '' : 'hiddenOption'"   value="5">Signataire 5</option>
              </select>
            </div>
      </div>
   </div>
+
+
   <!-- <div class="col-1">
       <button class="noBorder" type="button" (click)="suppressionJuge(i)">
     <img class="imageTrashListe" src="../../assets/images/trash.png">
   </button>
   </div> -->
 </div>
+<div class="row">
+  <div class="col-6"></div>
+  <div class="col messageErreurAcc" *ngIf="this.formulaire.errors && formulaire.errors.erreurOrdre">Vous ne pouvez pas sélectionner deux fois le même ordre de signature.</div>
+</div>
+
+
 </div>
 <!--fin nouvelle row-->
         <div class="sectionDate" *ngIf=" this.facadeService.listeDecisionImp">

@@ -15,24 +15,50 @@ import { DatePipe } from '@angular/common';
 import { Decision } from '../entitees/decision';
 import moment from 'moment';
 
+const ordreDejaPris: ValidatorFn = (valeur: AbstractControl) => {
+
+  if (Number(valeur.get('ordreSignataire0').value) === Number(valeur.get('ordreSignataire1').value)
+  || Number(valeur.get('ordreSignataire0').value) === Number(valeur.get('ordreSignataire2').value)
+  || Number(valeur.get('ordreSignataire0').value) === Number(valeur.get('ordreSignataire3').value)
+  || Number(valeur.get('ordreSignataire0').value) === Number(valeur.get('ordreSignataire4').value)){
+    console.log('Dans la premiere condition');
+    return { erreurOrdre: true };
+  }
+  if (valeur.get('ordreSignataire1').value && (Number(valeur.get('ordreSignataire1').value) === Number(valeur.get('ordreSignataire2').value)
+  || Number(valeur.get('ordreSignataire1').value) === Number(valeur.get('ordreSignataire3').value)
+  || Number(valeur.get('ordreSignataire1').value) === Number(valeur.get('ordreSignataire4').value))){
+    console.log('Dans la deuxieme condition');
+    return { erreurOrdre: true };
+  }
+  if (valeur.get('ordreSignataire2').value &&
+    (Number(valeur.get('ordreSignataire2').value) === Number(valeur.get('ordreSignataire3').value)
+  || Number(valeur.get('ordreSignataire2').value) === Number(valeur.get('ordreSignataire4').value))){
+    console.log('Dans la troisieme condition');
+    return { erreurOrdre: true };
+  }
+  if (valeur.get('ordreSignataire3').value &&
+  (Number(valeur.get('ordreSignataire3').value) === Number(valeur.get('ordreSignataire4').value))){
+  console.log('Dans la quatrième condition');
+  return { erreurOrdre: true };
+}
+  return null;
+};
+
 const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
 const dateMomentConv = moment(ctrl.get('dateDelibere').value).format('YYYY-MM-DD');
 const dateDuJour = new Date();
 const momentNewDate = new Date(dateMomentConv);
-console.log(dateMomentConv);
 const diffDate = momentNewDate.getTime() - dateDuJour.getTime();
 
+
+
 const diffEnJour = diffDate / (1000 * 3600 * 24);
-console.log('Différence entre les deux dates' , diffEnJour);
 if (diffEnJour > 365) {
-    console.log('Date delibere plus grand que date du jour');
     return { erreurDatePlusUnAn: true };
   }
 if (diffEnJour < -731) {
-    console.log('Date delibere moins de deux ans');
     return { erreurDateMoinsDeuxAn: true };
   }
-console.log('Moins grand que date du jour');
 return null;
 };
 
@@ -49,6 +75,7 @@ export class ImportDecisionComponent implements OnInit {
 
   public formulaire: FormGroup;
 
+  listeSignataire: number[]  = [];
 
   myComponents: any[] = [];
   // Conditions
@@ -58,6 +85,8 @@ export class ImportDecisionComponent implements OnInit {
   headers = '';
   messageErreurImport = false;
   messageSuppression = false;
+
+  erreurOrdre = false;
 
 
 
@@ -80,70 +109,12 @@ export class ImportDecisionComponent implements OnInit {
     currentState: RouterStateSnapshot,
     nextState: RouterStateSnapshot
   ): Observable<boolean> {
-    // if( this.messageSuppression){
-    //   const donnees = {
-    //     texte: 'Voulez-vous vraiment supprimer le fichier?',
-    //     titre: 'Suppression de fichier',
-    //     texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
-    //     texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
-    //     afficherBoutonOui: true,
-    //     reponse: ''
-    //   };
-    //   return this.dialog.open(BoiteDialogueComponent, {
-    //     width: '450px',
-    //     data: donnees,
-    //     ariaLabelledBy: 'titre-dialog',
-    //     ariaDescribedBy: 'contenu-dialogue'
-    //   }).afterClosed().pipe(
-    //     map(() => donnees.reponse === 'O')
-    //   );
-    // }
-    // if (nextState.url !== '/juge') {
-    //   const donnees = {
-    //     texte: this.textesService.obtenirTexte('commun.descriptionPerteDonnees'),
-    //     titre: this.textesService.obtenirTexte('commun.titrePerteDonnees'),
-    //     texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
-    //     texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
-    //     afficherBoutonOui: true,
-    //     reponse: ''
-    //   };
-    //   return this.dialog.open(BoiteDialogueComponent, {
-    //     width: '450px',
-    //     data: donnees,
-    //     ariaLabelledBy: 'titre-dialog',
-    //     ariaDescribedBy: 'contenu-dialogue'
-    //   }).afterClosed().pipe(
-    //     map(() => donnees.reponse === 'O')
-    //   );
-    // }
-
     return of(true);
   }
   ngOnInit(): void {
     this.facadeService.listeDecisionImp = undefined;
     this.initialiserFormulaire();
     this.facadeService.reponseSuppressionFichier = false;
-    // if(!this.facadeService.listeAd){
-    //   this.facadeService.obtenirCodeUsagerAD()
-    //   .subscribe((s) => {
-    //     this.facadeService.listeAd = s;
-    //   });
-
-
-      // .subscribe((s) => {
-      //   console.log('Valeur du resultat' , s);
-      //   this.fichiers.push(f);
-      //   this.facadeService.retourDecision = s;
-      //   this.buttonDisabled = false;
-      //   this.formulaire.controls.description.setValue(s.description);
-      //   this.messageErreurImport = false;
-      //   this.spinner.hide();
-
-
-
-
-
- //  }
   }
   validDate(control: FormControl): {[key: string]: any}|null
   {
@@ -152,27 +123,14 @@ export class ImportDecisionComponent implements OnInit {
   console.log(dateVal);
   console.log(control);
 
-  if(dateVal){
+  if (dateVal){
     console.log('Dans dateVal');
     const dateMomentAConvertir = new Date(dateVal);
     console.log(dateMomentAConvertir);
-    //const dateAPipe = this.datepipe.transform(dateMomentAConvertir);
   }
-
-  // if(dateVal !== undefined){
-  //   const dateMomentAConvertir = new Date(dateVal);
-  //   const datePipe = this.datepipe.transform(dateMomentAConvertir, 'yyyy-MM-dd');
-  //  // const diffDate = dateDuJour.getTime() - dateVal.getTime();
-  // //  const diffEnJour = diffDate / (1000 * 3600 * 24);
-  // }
-
-
-
-  if(Number(dateVal) - Number(new Date()) > 365){
+  if (Number(dateVal) - Number(new Date()) > 365){
    console.log('Plus grand que 365' , Number(new Date()));
   }
-
-
   if (control && dateVal && !moment(dateVal, 'YYYY-MM-DD', true).isValid()) {
     return { dateVaidator: true };
   }
@@ -202,73 +160,43 @@ export class ImportDecisionComponent implements OnInit {
       redacteur3: new FormControl({value: '', disabled: true}),
       redacteur4: new FormControl({value: '', disabled: true}),
       nomFichier: new FormControl('')
-    }, { validator:[validDatePlusUnAn]});
+    }, { validator: [ validDatePlusUnAn, ordreDejaPris]});
    }
-
-
   get f() {
     return this.formulaire.controls;
   }
-
-
-  public ajouterJuge(){
-    console.log('adding');
-    const valeur = 'valeur';
-    this.compteur++;
-    const newValeur = valeur + this.compteur;
-    console.log(newValeur);
-    this.myComponents.push(newValeur);
-
-  }
-  public supprimerJuge(){
-    this.compteur--;
-    this.myComponents.splice(-1);
-  }
   public remplirChampsModifie(){
-
     if (this.formulaire.get('description').value){
       this.facadeService.listeDecisionImp.description = this.formulaire.get('description').value;
     }
-    if(this.formulaire.get('dateDelibere').value){
+    if (this.formulaire.get('dateDelibere').value){
       this.facadeService.listeDecisionImp.dateFinDelibere = this.formulaire.get('dateDelibere').value;
     }
     else{
       this.facadeService.listeDecisionImp.dateFinDelibere = new Date('0001-01-01');
     }
-    if(this.formulaire.get('priorite').value){
+    if (this.formulaire.get('priorite').value){
       this.facadeService.listeDecisionImp.priorite = this.formulaire.get('priorite').value;
     }
     for (let i = 0; i < this.facadeService.listeDecisionImp.signataires.length; i++) {
-      this.facadeService.listeDecisionImp.signataires[i].ordre= Number(this.formulaire.controls['ordreSignataire' + i].value);
-     // this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);
+      this.facadeService.listeDecisionImp.signataires[i].ordre = Number(this.formulaire.controls['ordreSignataire' + i].value);
     }
   }
 
   public importerDecision(){
     if (this.formulaire.valid){
-
-      console.log('Valeur du formulaire avant importation:' , this.formulaire);
-      console.log('Valeur listeDecisionImp: ' , this.facadeService.listeDecisionImp);
-      // if(!this.facadeService.listeDecisionImp.identifiant){
-      //   this.facadeService.listeDecisionImp.identifiant = '';
-      // }
-
-
       this.remplirChampsModifie();
-      console.log('Valeur listeDecisionImp apres remplissage: ' , this.facadeService.listeDecisionImp);
       this.spinner.show();
       this.facadeService.ImporterDecision(this.facadeService.listeDecisionImp)
        .subscribe((r) => {
          console.log('Valeur du résultat de importer décision' , r);
          this.spinner.hide();
-         this.router.navigateByUrl('/');
        },
        (erreur) => {console.log('Erreur' , erreur);
                     this.spinner.hide();
       }
        );
-
-
+      this.router.navigateByUrl('/');
     }
 
    // this.router.navigateByUrl('/juge');
@@ -288,7 +216,7 @@ export class ImportDecisionComponent implements OnInit {
    ariaLabelledBy: 'titre-dialog',
    ariaDescribedBy: 'contenu-dialogue'});
     dialog.afterClosed().subscribe(() => {
-      if(this.facadeService.reponseSuppressionFichier){
+      if (this.facadeService.reponseSuppressionFichier){
         console.log('SI suppresion fichier dans quitter');
         this.methodeSuppressionFichier();
         this.dialog.closeAll();
@@ -298,19 +226,12 @@ export class ImportDecisionComponent implements OnInit {
         this.dialog.closeAll();
       }
    });
-
     return dialog;
-
   }
 
   public quitterDecision(){
-    console.log('SUP fichier' ,this.facadeService.reponseSuppressionFichier);
-    if(this.facadeService.listeDecisionImp){
+    if (this.facadeService.listeDecisionImp){
       this.messageErreurQuitter();
-      console.log('SUP fichier apres' ,this.facadeService.reponseSuppressionFichier);
-
-
-
   }
   else{
     this.router.navigateByUrl('/');
@@ -318,28 +239,15 @@ export class ImportDecisionComponent implements OnInit {
 }
   // Méthode pour Fichiers
   suppressionFichier(){
-
     this.messageSuppression = true;
-    console.log('Réponse supp Fichier avant message' , this.facadeService.reponseSuppressionFichier);
-    // this.messageErreurFichier();
-
-    console.log('Réponse supp Fichier après message' , this.facadeService.reponseSuppressionFichier);
-
     this.messageErreurFichier2();
-
-
-
-
   }
+
 methodeSuppressionFichier(){
-  console.log('Avant suppression' , this.fichiers);
   this.formulaire.get('nomFichier').setValue('');
   this.fichiers.shift();
   this.facadeService.listeDecisionImp = undefined;
   this.buttonDisabled = true;
-  console.log('Apres suppression' , this.fichiers);
-  console.log('Retour décision: ' , this.facadeService.retourDecision);
-
 }
 
 messageErreurFichier2(){
@@ -357,7 +265,7 @@ messageErreurFichier2(){
  ariaLabelledBy: 'titre-dialog',
  ariaDescribedBy: 'contenu-dialogue'});
   dialog.afterClosed().subscribe(() => {
-    if(this.facadeService.reponseSuppressionFichier){
+    if (this.facadeService.reponseSuppressionFichier){
       console.log('SI suppresion fichier');
       this.methodeSuppressionFichier();
       this.dialog.closeAll();
@@ -365,13 +273,9 @@ messageErreurFichier2(){
     else{
       this.dialog.closeAll();
     }
-
  });
-
   return dialog;
-
 }
-
 
   messageErreurFichier(): Observable<boolean>{
     if ( this.messageSuppression){
@@ -395,28 +299,15 @@ messageErreurFichier2(){
         this.facadeService.reponseSuppressionFichier = true,
         donnees.reponse === 'O')
       );
-
       }
     return of(true);
 
   }
-  suppressionJuge(index: number){
-    console.log('Index: ' ,index);
-    console.log('Valeur signataire' , this.facadeService.retourDecision.signataires);
-    this.facadeService.retourDecision.signataires.splice(index, 1);
-    this.formulaire.controls['nomJuge' + index].setValue('');
-    if ( this.facadeService.retourDecision.signataires.length < 1 ){
-      this.suppressionFichier();
-    }
-    console.log(this.formulaire);
-  }
   onFileDropped($event: any){
-    console.log('Le fichier' , this.fichiers);
-    console.log(this.fichiers.length);
+    console.log('On file droped');
     this.gererFichiers((event as DragEvent).dataTransfer.files);
  }
  fileBrowseHandler(files: any){
-  console.log('Le fichier' , files);
   this.gererFichiers(files);
   this.fileInput.nativeElement.value = '';
  }
@@ -424,9 +315,6 @@ messageErreurFichier2(){
 
   this.headers = file.type;
   const ext = file.name.substr(file.name.lastIndexOf('.') + 1).toLowerCase();
-  console.log('Extension:');
-  console.log(ext);
-
   if (ext === 'doc' || ext === 'docx')
  {
   const reader = new FileReader();
@@ -439,10 +327,6 @@ messageErreurFichier2(){
       codeReseauDepot: this.facadeService.listeAd.codeReseau,
       nomDocumentDecision: file.name,
     };
-    console.log('reader' ,f);
-    console.log(this.formulaire.get('nomFichier'));
-    console.log('formulaire: ' ,  this.formulaire);
-    console.log('Retour décision avant: ' , this.facadeService.retourDecision);
     this.spinner.show();
     this.facadeService.ObtenirInfoDocument(f)
     .subscribe((s) => {
@@ -488,18 +372,8 @@ gererFichiers(files: any) {
  ajoutJuges(s: any){
   for (let i = 0; i < this.facadeService.listeDecisionImp.signataires.length; i++) {
     this.formulaire.controls['nomJuge' + i].setValue( s.signataires[i].nomRessource);
-
     this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
     this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);
-
-    // if(s.signataires[i].ordre === 1) {
-    //  this.formulaire.controls['redacteur' + i].setValue(true);
-    //  this.formulaire.controls['ordreSignataire' + i].setValue(true);
-    // }
-    // else{
-    //   this.formulaire.controls['redacteur' + i].setValue(false);
-    // }
-    //this.formulaire.controls['redacteur' + i].setValue(true);
     console.log(this.formulaire);
   }
  }
