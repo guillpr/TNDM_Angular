@@ -1,6 +1,6 @@
 {
     "textes": [
-        { "cle": "banniere.Titre", "valeur": "Traitement numérique des décisions et des motifs TNDM" },
+        { "cle": "banniere.Titre", "valeur": "Traitement numérique des décisions et des motifs (TNDM)" },
         { "cle": "banniere.Connexion", "valeur": "Déconnexion" },
         { "cle": "commun.ProUtil", "valeur": "Profil utilisateur" },
         { "cle": "commun.GestDec", "valeur": "Gestion des décisions" },
@@ -23,7 +23,7 @@
         { "cle": "commun.boutonReni", "valeur": "Réinitialiser" } ,
         { "cle": "commun.dossier", "valeur": "Dossier TAQ" } ,
         { "cle": "commun.numero", "valeur": "Numéro" } ,
-        { "cle": "commun.nbDossier", "valeur": "Nb. dossier" } ,
+        { "cle": "commun.nbDossier", "valeur": "Nb. dossiers" } ,
         { "cle": "commun.dateImp", "valeur": "Date importation" } ,
         { "cle": "commun.dateDeli", "valeur": "Date fin délibéré" } ,
         { "cle": "commun.description", "valeur": "Description" },
@@ -40,6 +40,8 @@
         { "cle": "commun.titrePerteDonnees", "valeur": "Modifications en cours" },
         { "cle": "commun.oui", "valeur": "Oui" },
         { "cle": "commun.non", "valeur": "Non" },
+        { "cle": "commun.Ok", "valeur": "Ok" },
+        { "cle": "commun.Annuler", "valeur": "Annuler" },
         {"cle": "commun.decision" , "valeur" : "Information sur la décision/motifs"},
         {"cle": "commun.dossierAsso" , "valeur": "Dossier(s)"},
         {"cle": "commun.signature" , "valeur": "Signature(s)"},

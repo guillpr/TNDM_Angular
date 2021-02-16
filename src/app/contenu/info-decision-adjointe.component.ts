@@ -96,6 +96,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   ngOnInit(): void {
     this.pdfClique = false;
     //this.spinner.show();
+    this.numDecSelectionner = null;
     this.numDecSelectionner = this.facadeService.numDecisionTemp;
 
 
@@ -125,6 +126,8 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         this.formulaire.controls.dureeRestante.setValue(s.dureeRestante);
         this.formulaire.controls.priorite.setValue(s.priorite);
         this.formulaire.controls.statut.setValue(s.statut);
+
+        console.log('STATUT' , s.statut);
 
         this.facadeService.listeDecision = s;
         console.log('Liste de décision: ', this.facadeService.listeDecision);
@@ -240,9 +243,9 @@ ajoutJuges(s: any){
     console.log('Importé par:' , this.formulaire.controls.importePar.value);
     const donnees = {
       texte: 'Voulez-vous vraiment procéder au rejet de cette décision? IMPORTANT : Assurez-vous d’avoir une copie du document WORD avant de procéder au rejet puisque toutes les informations seront perdues. ',
-      titre: 'Rejeté décision',
-      texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
-      texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+      titre: 'Rejet de la décision',
+      texteBoutonOui: this.textesService.obtenirTexte('commun.Ok'),
+      texteBoutonNon: this.textesService.obtenirTexte('commun.Annuler'),
       afficherBoutonOui: true,
       reponse: ''
     };

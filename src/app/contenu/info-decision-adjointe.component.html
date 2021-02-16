@@ -92,14 +92,14 @@
 
                      </div>
                     <div class="col col-xl-2 statutCss center">
-                        <input class="noBorder center"  formControlName="statut">
+                        <input class="inputStatut"  formControlName="statut">
 
                     </div>
             </div>
 
             <div  class="row">
                 <div class="col-2 maxW15"></div>
-                <div class="col-5 descError"><span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors" >La description est requise.</span></div>
+                <div class="col-5 descError"><span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors" >Le champ description est obligatoire.</span></div>
                 <div class="col-2">
                     <!--Erreur date-->
         <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDatePlusUnAn">
@@ -224,13 +224,13 @@
                 <div class="col-2">
                     Juge(s) administratif(s)
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                     Rédacteur
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                     Ordre de signature
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                     Date de signature
                 </div>
             </div>
@@ -239,15 +239,15 @@
                 <div class="col-2">
                    {{resT.nomRessource}}
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                 <input class="cbStyle" type="checkbox"  formControlName="redacteur{{i}}">
                    <!-- {{resT.redacteur}} -->
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                     Signataire
                     {{resT.ordre}}
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                   <div *ngIf="(resT.dateSignature | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')"> {{resT.dateSignature | date: 'yyyy-MM-dd'}}</div>
                   <div  *ngIf="(resT.dateSignature | date: 'yyyy-MM-dd') <= (0001-01-01 | date: 'yyyy-MM-dd')">-</div>
 
@@ -283,10 +283,10 @@
                 <div class="col-2">
                    Statut
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                     Date
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                     Utilisateur
                 </div>
             </div>
@@ -296,10 +296,10 @@
                 <div class="col-2">
                    {{hist.statut}}
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                     {{hist.dateStatut | date: 'yyyy-MM-dd'}}
                 </div>
-                <div class="col-2">
+                <div class="col-2 center">
                    {{hist.codeReseau}}
                 </div>
             </div>
