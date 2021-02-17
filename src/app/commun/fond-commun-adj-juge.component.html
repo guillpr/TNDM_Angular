@@ -368,9 +368,14 @@
 
 
                            </td>
-                          <td [className]="r.dureeRestante < 5 ? 'texteDurRestanteRouge cent' : 'cent'" >{{r.dureeRestante}}</td>
+                          <td [className]="r.dureeRestante < 5 && (r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd') ? 'texteDurRestanteRouge cent' : 'cent'" >
+                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')">  {{r.dureeRestante}}</div>
+                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') < (0001-01-01 | date: 'yyyy-MM-dd')">-</div>
+
+                           </td>
                            <td class="bgWhite" >
-                           <span [className]="r.priorite=='Urgente' ? 'yellowClass' : ''" >{{r.priorite}}</span>
+                           <span [className]="r.priorite=='Urgente' ? 'yellowClass' : ''" >
+                            {{r.priorite}}</span>
                               <!-- <span [className]="pd.priorite==1 ? 'yellowClass' : ''"> -->
 
                              <!-- </span> -->

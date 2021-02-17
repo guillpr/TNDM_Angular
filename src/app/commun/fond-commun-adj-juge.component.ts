@@ -547,12 +547,16 @@ public SelectionDecision(numDocument: number , index: number){
     this.router.navigateByUrl('/infoAdjointe');
   }
   else{
-    console.log('Indicateur juge = true');
-    console.log('Valeur de index:' , index);
-    console.log(this.facadeService.tableauDecision[0].urlVoute);
-    const urlVoute = this.facadeService.tableauDecision[index].urlVoute;
-    console.log('URL voute:' , urlVoute);
-    window.open(urlVoute, '_blank');
+ if( this.facadeService.tableauDecision[index].codeReseauSignataire !== ''
+  && this.facadeService.listeAd.codeReseau === this.facadeService.tableauDecision[index].codeReseauSignataire){
+  console.log('Indicateur juge = true');
+  console.log('Valeur de index:' , index);
+  console.log(this.facadeService.tableauDecision[0].urlVoute);
+  const urlVoute = this.facadeService.tableauDecision[index].urlVoute;
+  console.log('URL voute:' , urlVoute);
+  window.open(urlVoute, '_blank');
+ }
+
   }
 
 }

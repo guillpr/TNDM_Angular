@@ -52,6 +52,7 @@ import { DatePipe } from '@angular/common'
 // Importation Directive
 import { SortDirective } from './directive/sort.directive';
 import { DndDirective } from './commun/dnd.directive';
+import { TextareaAutoresizeDirective } from './directive/textarea-autoresize.directive';
 
 // Autres importations
 import { BrowserModule } from '@angular/platform-browser';
@@ -70,6 +71,7 @@ import { WinAuthInterceptor } from './commun/WinAuthInterceptor';
 // Toastr
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -94,7 +96,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     JugeAdmComponent,
     BoiteDialogueComponent,
     MessageComponent,
-    AccesRefuseComponent
+    AccesRefuseComponent,
+    TextareaAutoresizeDirective
   ],
   imports: [
     BrowserModule,
