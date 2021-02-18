@@ -1,4 +1,4 @@
-import { ViewChild, Input } from '@angular/core';
+import { ViewChild, Input, HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
@@ -33,6 +33,19 @@ export class FondCommunAdjJugeComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @Input() public noMessageDateInvalide: string;
+
+  @HostListener('document:keydown', ['$event'])
+onKeyDown(evt: KeyboardEvent) {
+  const valeurTarget = evt.target as Element
+  if (
+    evt.which === 8 && 
+    (
+    
+      valeurTarget.nodeName !== "INPUT" && valeurTarget.nodeName !== "SELECT" ) 
+  ) { 
+    evt.preventDefault();
+  }
+}
 
   public extensionMessage: string;
 
