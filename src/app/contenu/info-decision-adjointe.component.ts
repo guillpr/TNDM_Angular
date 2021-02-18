@@ -1,5 +1,5 @@
 import { FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit, Pipe, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
 import { FacadeService } from '../services/facade.service';
@@ -14,20 +14,19 @@ const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
   const dateMomentConv = moment(ctrl.get('dateDelibere').value).format('YYYY-MM-DD');
   const dateDuJour = new Date();
   const momentNewDate = new Date(dateMomentConv);
-  console.log(dateMomentConv);
   const diffDate = momentNewDate.getTime() - dateDuJour.getTime();
 
   const diffEnJour = diffDate / (1000 * 3600 * 24);
-  console.log('Différence entre les deux dates' , diffEnJour);
+
   if (diffEnJour > 365) {
-      console.log('Date delibere plus grand que date du jour');
+
       return { erreurDatePlusUnAn: true };
     }
   if (diffEnJour < -731) {
-      console.log('Date delibere moins de deux ans');
+
       return { erreurDateMoinsDeuxAn: true };
     }
-  console.log('Moins grand que date du jour');
+
   return null;
   };
 
@@ -37,6 +36,7 @@ const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
   styleUrls: ['./info-decision-adjointe.component.css']
 })
 export class InfoDecisionAdjointeComponent implements OnInit {
+  @ViewChild('someVar') el: ElementRef;
   numDecSelectionner: number;
 
   boiteDecisionOuverte = false;
@@ -109,6 +109,16 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         console.log('Valeur du resultat' , s);
         this.formulaire.controls.numero.setValue(s.identifiant);
         this.formulaire.controls.description.setValue(s.description);
+        let tArea = document.getElementsByClassName('inputDesc');
+        //tArea[0].setAttribute('style' , 'height:50px');
+
+        console.log('tArea' , tArea);
+
+
+
+
+        // textArea.style.overflow = 'hidden';
+        // textArea.style.height = 'auto';
         this.formulaire.controls.importePar.setValue(s.codeReseauDepot);
         this.formulaire.controls.dateImportation.setValue(this.datepipe.transform(s.dateImportation, 'yyyy-MM-dd'));
         console.log('Valeur de dateFinDelibere:' , this.datepipe.transform(s.dateFinDelibere, 'yyyy-MM-dd'));
@@ -125,6 +135,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
 
         this.formulaire.controls.dureeRestante.setValue(s.dureeRestante);
         this.formulaire.controls.priorite.setValue(s.priorite);
+        console.log('Valeur de priorité du s:' ,  s.priorite);
         this.formulaire.controls.statut.setValue(s.statut);
 
         console.log('STATUT' , s.statut);
@@ -138,6 +149,10 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         for (let i = 0; i < s.signataires.length; i++){
           console.log('Dans la boucle for');
           this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
+
+
+
+
          }
 /*
 ajoutJuges(s: any){
@@ -159,7 +174,11 @@ ajoutJuges(s: any){
 
 
         console.log('Valeur du formulaire' , this.formulaire);
+
+        const liveVeuillezPatienter = document.getElementById('test');
+        console.log('By id' , liveVeuillezPatienter);
     });
+
     // this.facadeService.ObtenirInfosDecision(5)
     // .subscribe((r) => {
     //   console.log('Valeur du r' , r);
@@ -190,7 +209,6 @@ ajoutJuges(s: any){
   validDate(control: FormControl): {[key: string]: any}|null
   {
   const dateVal = control.value;
-  console.log(dateVal);
   if(moment.isMoment(dateVal)){
     if (control && dateVal && !moment(dateVal, 'yyyy-MM-dd', true).isValid()) {
       return { dateVaidator: true };

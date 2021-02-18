@@ -3,8 +3,10 @@
 <form [formGroup]="formulaire">
 
 
-<div *ngIf="this.facadeService.listeDecision" class="divFond" >
 
+
+<div *ngIf="this.facadeService.listeDecision" class="divFond" >
+  <div id="test"></div>
     <div  class="divCentre">
 
         <!-- Début zone décision -->
@@ -23,14 +25,14 @@
 
         <div class="row bold adjRow">
             <div class="col col-xl-1 numUniCol"> <app-texte cle="commun.numero"></app-texte></div>
-            <div class="col col-xl-3 chDescr"><app-texte cle="commun.description"></app-texte><span *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="asteRed">*</span>  <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'"   class="fas fa-edit ml-1"></i></div>
-            <div class="col col-xl-1 numUtiCol center"><app-texte cle="commun.impPar"></app-texte></div>
+            <div class="col col-xl-3 chDescr"><app-texte cle="commun.description"></app-texte><span *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="asteRed">*</span>  <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'"   class="fas fa-edit fa-xs ml-1"></i></div>
+            <div class="col col-xl-1 numImpCol center"><app-texte cle="commun.impPar"></app-texte></div>
             <div class="col col-xl-1 dateImpCol center"><app-texte cle="commun.dateImp"></app-texte></div>
 
 
-            <div class="col col-xl-2 dateDeliCol center"><app-texte cle="commun.dateDeli"></app-texte> <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit ml-1"></i></div>
+            <div class="col col-xl-2 dateDeliCol center"><app-texte cle="commun.dateDeli"></app-texte> <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit fa-xs ml-1"></i></div>
             <div class="col col-xl-2 dureeRest center">Durée restante(jours)</div>
-            <div class="col col-xl-1 numUtiCol center">Priorité <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit ml-1"></i></div>
+            <div class="col col-xl-1 numUtiCol center">Priorité <i *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'" class="fas fa-edit fa-xs ml-1"></i></div>
             <div class="col col-xl-2 statutCss center">Statut</div>
         </div>
           <!--Fin row décision-->
@@ -38,9 +40,11 @@
         <div  class="testDecisionExpand">
             <div     class="row adjRow">
             <div class="col col-xl-1 numUniCol"><input class="inputNo"  formControlName="numero"></div>
-                <div class="col col-xl-3 chDescr">
+                <div  class="col col-xl-3 chDescr">
                     <textarea
+
                     appTextareaAutoresize
+                    id="descriptionID"
                     [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null"
                      (change)="afficheBouton()"
                       formControlName="description"
@@ -48,7 +52,7 @@
                        class="inputDesc"
                         ></textarea>
                     </div>
-                  <div class="col col-xl-1 numUtiCol">
+                  <div class="col col-xl-1 numImpCol">
                     <input class="noBorder center"  formControlName="importePar">
                   </div>
                   <div class="col col-xl-1 dateImpCol">

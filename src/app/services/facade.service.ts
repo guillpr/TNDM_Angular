@@ -80,7 +80,12 @@ export class FacadeService {
 
   private URL = 'http://localhost:57759/api/DecisionDetail';
   public httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'}),
+    headers: new HttpHeaders({
+      'Cache-Control': 'no-cache, must-revalidate , post-check=0, pre-check=0',
+      'Content-Type': 'application/json',
+      Pragma: 'no-cache',
+        Expires: '0'
+  }),
   };
 
   // // public ObtenirDecision():Observable<ReponseBase<Decision>>{
@@ -106,7 +111,7 @@ export class FacadeService {
 }
 // Obtenir informations d'un décision par ID
 public ObtenirInfosDecision(idDocument: number): Observable<Decision>{
-  return this.http.get<Decision>(this.obtenirInfosDecisionURL + '?idDocument=' + idDocument );
+  return this.http.get<Decision>(this.obtenirInfosDecisionURL + '?idDocument=' + idDocument, this.httpOptions );
 }
 public ObtenirRechercheDecision(): Observable<Decision[]>{
   return this.http.get<Decision[]>(this.obtenirRechercheDecisionURL);

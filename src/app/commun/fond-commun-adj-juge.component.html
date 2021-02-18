@@ -39,11 +39,11 @@
 
                        <!--Section 2e proposition MA-->
                        <div *ngIf="!this.facadeService.indicateurJuge" class="row mb-2 mt-2">
-                        <div class="col-sm-0 col-lg-1"></div>
+                        <div class="col-sm-0 col-lg-2"></div>
                         <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">Adjointes/Juge</div>
                           <div class="col">
                             <div >
-                              <select   class="dlNormalStatut" id="inputGroupSelectPrio" formControlName="nomJuge">
+                              <select   class="dlNormalJuge" id="inputGroupSelectPrio" formControlName="nomJuge">
                                 <option  selected value="Toutes mes décisions" >Toutes mes décisions</option>
                                 <option   value="Toutes les décisions">Toutes les décisions</option>
                               <option *ngFor="let jugAdj of this.facadeService.listeJugesAdjointes;let i= index; "  value="{{jugAdj.codeReseau}}">{{jugAdj.nom}} {{jugAdj.prenom}}</option>
@@ -75,7 +75,7 @@
                       <!--Début Sections-->
 
                       <div *ngIf="!this.facadeService.indicateurJuge" class="row mb-2">
-                        <div class="col-sm-0 col-lg-1"></div>
+                        <div class="col-sm-0 col-lg-2"></div>
                         <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                          <app-texte cle="commun.RechercheSection"></app-texte>
                         </div>
@@ -104,7 +104,7 @@
                       </div> -->
                        <!--Fin  Section première proposition Myriam-->
                     <div class="row mb-2 mt-2">
-                      <div class="col-sm-0 col-lg-1"></div>
+                      <div class="col-sm-0 col-lg-2"></div>
                       <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                         <app-texte  cle="commun.RechercheNumDec"></app-texte>
                       </div>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                      <div class="row mb-1" >
-                       <div class="col-sm-0 col-lg-1"></div>
+                       <div class="col-sm-0 col-lg-2"></div>
                        <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                          <app-texte  cle="commun.RechercheNumDoss"></app-texte>
                         </div>
@@ -132,13 +132,14 @@
 
                     <!--Date d'importation-->
                     <div class="row" >
-                      <div class="col-md-0 col-lg-1"></div>
+                      <div class="col-md-0 col-lg-2"></div>
                       <div class="col-sm-2 col-md-4 col-lg-2 taRDate">
                         <app-texte cle="commun.DateImp"  ></app-texte>
                       </div>
                       <div class="col-3 col-md-2  col-lg-3 col-xl-3 col-xxl-2">
                        <mat-form-field class="matFormFieldCustom"  (click)="picker.open()"  >
                        <input
+
                         [className]="ErreurDate&&this.formulaire.controls.rechercheDateDu.errors ? 'inputBorderRouge' : 'inputNormal'"
                         matInput
                         [matDatepicker]="picker"
@@ -179,7 +180,7 @@
 
                     -->
                     <div  *ngIf="formulaire.get('rechercheDateDu').invalid && formulaire.get('rechercheDateDu').dirty  || formulaire.get('rechercheDateAu').invalid && formulaire.get('rechercheDateAu').dirty" class="row mb-2 mt-1">
-                        <div class="col-sm-0 col-lg-1"></div>
+                        <div class="col-sm-0 col-lg-2"></div>
                         <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR"> </div>
                         <div class="col messageErreurAcc">
 
@@ -191,7 +192,7 @@
                         </div>
 
                   <div *ngIf="ErreurDate" class="row mb-2 mt-1">
-                    <div class="col-sm-0 col-lg-1"></div>
+                    <div class="col-sm-0 col-lg-2"></div>
                     <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR"> </div>
                     <div class="col">
                       <app-message class="messageErreurAcc" *ngIf="noMessageDateInvalide"  [cle]='noMessageDateInvalide' [variables]="[extensionMessage]"  id="erreurFichierInvalide"></app-message>
@@ -229,7 +230,7 @@
                     </div>
                     -->
                      <div class="row mb-2">
-                       <div class="col-sm-0 col-lg-1"></div>
+                       <div class="col-sm-0 col-lg-2"></div>
                        <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                         <app-texte cle="commun.RecherchePrio"></app-texte>
                        </div>

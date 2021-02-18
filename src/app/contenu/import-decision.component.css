@@ -37,8 +37,8 @@
     font-weight: bold;
     text-align: right;
     margin-top: 0.8%;
-    margin-left: 0.5%;
-    margin-right: 0.9%;
+    /* margin-left: 0.5%; */
+    margin-right: 1.2%;
     /* position: relative;
     top:10px;
     margin-right: 1%;
@@ -122,7 +122,7 @@
    /* margin-left: 283px;*/
     margin-top:10px;
     width:100px;
-    height:35px;
+    height:30px;
     border-radius: 10px;
 }
 .buttonImporter {
@@ -132,7 +132,7 @@
     margin-left: 20px;
     margin-top:10px;
     width:100px;
-    height:35px;
+    height:30px;
     border-radius: 10px;
 }
 .buttonImporterDis {
@@ -142,7 +142,7 @@
   margin-left: 20px;
   margin-top:10px;
   width:100px;
-  height:35px;
+  height:30px;
   border-radius: 10px;
 }
 .sectionButton{
@@ -255,7 +255,7 @@ text-align: center;
   color:gray;
   height: 50px;
   outline: none;
-  width: 200px;
+  width: 120px;
 
 }
 
@@ -343,6 +343,7 @@ text-align: center;
 #inputNormal{
   padding:10px;
   height: 50px;
+  width: 120px
 }
 .requisAs{
   margin-left: 5px;
@@ -368,6 +369,7 @@ margin-top: 20px;
     float: right;
     position: relative;
     bottom: 55px;
+    font-size: 12px;
 
 }
 .colSignature{
@@ -377,13 +379,13 @@ margin-top: 20px;
   margin-top: -25px;
   color: red;
   font-weight: bold;
-  margin-bottom:10px;
+  font-size: 12px;
 }
 .messageErreurAcc{
   color:red;
   font-weight: bold;
-  margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 12px;
 }
 .boutonPlus{
   width: 50px;
@@ -432,11 +434,12 @@ margin-top: 20px;
 }
 .erreurImport{
   width: 100%;
-  text-align: center;
+  /* text-align: center; */
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 12px;
   color: red;
   font-weight: bold;
+  margin-left: 18%;
 }
 .hiddenOption{
   display: none;
@@ -448,7 +451,7 @@ margin-top: 20px;
     font-weight: bold;
     text-align: right;
     margin-top: 0.5%;
-    margin-right: -0.4%;
+    margin-right: -0.8%;
 }
 .nomPriorite{
   margin-top: 1.75%;
@@ -463,7 +466,8 @@ margin-top: 20px;
   font-size: 11px;
   font-weight: 600;
    color: #8a8787;
-   /* height: 50px; */
+   height: 40px;
+
    /* position: relative;
    left: 8px; */
 }
@@ -478,5 +482,164 @@ margin-top: 20px;
   display: relative;
   bottom:12px;
   /*right: 22px;*/
+}
+.buttonQuitter {
+  background-color: #2257a7 !important;
+  color: white;
+  border: #2257a7 !important;
+ /* margin-left: 283px;*/
+  margin-top:10px;
+  width:100px;
+  height:22px;
+  border-radius: 10px;
+  font-size:11px;
+}
+.buttonImporter {
+  background-color: #2257a7 !important;
+  color: white;
+  border: #2257a7 !important;
+  margin-left: 20px;
+  margin-top:10px;
+  width:100px;
+  height:22px;
+  border-radius: 10px;
+  font-size:11px;
+}
+.buttonImporterDis {
+background-color: grey;
+color: white;
+border: grey;
+margin-left: 20px;
+margin-top:10px;
+width:100px;
+height:22px;
+border-radius: 10px;
+font-size:11px;
+}
+.containerFichierJoint{
+  width: 600px;
+height: 40px;
+text-align: center;
+  border: solid  #ecebeb;
+  background-color:#ecebeb ;
+  border-radius: 10px;
+/* position: absolute; */
+/* margin: 0 auto; */
+/* display: block; */
+  flex-wrap: nowrap;
+  /* overflow-x: auto; */
+}
+.inputRegFichier{
+  background-color:#ecebeb;
+  border-radius:10px;
+  border: solid #ecebeb ;
+  height: 40px;
+  min-width: 350px;
+  width: auto;
+  /* position: relative;
+  top:3px; */
+  text-align: center;
+  padding: 0.8%;
+  padding-left: 15px;
+  padding-right: 15px;
+
+}
+.imageTrash{
+  height:20px;
+  position: relative;
+  margin-top:8px;
+}
+.inputReg{
+  background-color:#ecebeb;
+  border-radius:10px;
+  border: solid #ecebeb ;
+  height: 40px;
+  width: 440px;
+  padding:10px;
+}
+.nomFichier{
+  font-weight: bold;
+  text-align: right;
+  margin-top: 0.8%;
+  /* margin-left: 0.5%; */
+  margin-right: 2%;
+  /* position: relative;
+  top:10px;
+  margin-right: 1%;
+  margin-left: 9%;
+  right: 30px; */
+}
+.positionNomJuge{
+  position: relative;
+  top:8px;
+  background-color: #ecebeb;
+  border: none;
+}
+.dlNormalJuge {
+  padding-left:10px;
+  padding-right:10px;
+  background-color: #ecebeb;
+  border-radius: 10px;
+  border: solid 1px #ecebeb;
+  /* text-indent: 25%;  */
+  color:gray;
+  height: 30px;
+  outline: none;
+  width: 100%;
+}
+.cbStyle{
+  height: 25px;
+  width: 25px;
+  position: relative;
+  top:8px;
+}
+.dlNormalPrio{
+  padding-left:10px;
+  padding-right:10px;
+  background-color: #ecebeb;
+  border-radius: 10px;
+  border: solid 1px #ecebeb;
+  color:gray;
+  height: 40px;
+  outline: none;
+  width: 120px;
+
+}
+.dateInput{
+  background-color:#ecebeb;
+  border-radius:10px;
+  border: solid #ecebeb ;
+  height: 40px!important;
+  width: 200px;
+}
+.nomPriorite{
+
+  margin-left: -0.8%;
+  font-weight: bold;
+    text-align: right;
+}
+.descError{
+  margin-top: -25px;
+  color: red;
+  font-weight: bold;
+  font-size: 10px;
+}
+.messageErreurAcc{
+  color:red;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 10px;
+}
+.chObRouge{
+  font-weight: bold;
+  color:red;
+  margin: 0;
+    padding-right:10px;
+    /* padding-top: 10px; */
+    float: right;
+    position: relative;
+    bottom: 55px;
+    font-size: 10px;
+
 }
 }

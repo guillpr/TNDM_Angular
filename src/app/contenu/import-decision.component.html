@@ -7,7 +7,7 @@
         <div class="titreImport">
             <app-texte cle="import.Titre"></app-texte>
         </div>
-        <div *ngIf="fichiers.length>0 &&  this.facadeService.listeDecisionImp" class="chObRouge">* Champ obligatoire</div>
+        <div *ngIf="fichiers.length>0 &&  this.facadeService.listeDecisionImp && !this.facadeService.listeDecisionImp.erreur" class="chObRouge">* Champ obligatoire</div>
       </div>
 
          <hr />
@@ -36,8 +36,15 @@
                 <app-texte cle="fj.Parcourir"></app-texte>
                </button>
             </div>
-            <div *ngIf="messageErreurImport" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
+
           </div>
+
+
+
+
+        <div *ngIf="this.facadeService.listeDecisionImp">
+          <div *ngIf="this.facadeService.listeDecisionImp.erreur" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
+
             <div  class="row" *ngIf="fichiers.length>0 &&  this.facadeService.listeDecisionImp">
                 <div class="col-2 nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
                 <div *ngFor="let f of fichiers" class="col-6 inputRegFichier" >
@@ -62,7 +69,7 @@
             <!-- <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div> -->
             <!--Fin Section dépot de fichier-->
 
-         <div class="row espDesc" *ngIf=" this.facadeService.listeDecisionImp">
+         <div class="row espDesc" *ngIf=" this.facadeService.listeDecisionImp && !this.facadeService.listeDecisionImp.erreur">
             <div class="col-2 nomDescription">
                 <app-texte cle="import.Description"></app-texte>
                 <span class="requisAs">*</span>
@@ -72,13 +79,15 @@
           </div>
          </div>
          <!--Erreur description-->
-         <div *ngIf="this.facadeService.listeDecisionImp&&this.formulaire.controls.description.errors" class="row">
+         <div *ngIf="this.facadeService.listeDecisionImp&&this.formulaire.controls.description.errors && !this.facadeService.listeDecisionImp.erreur" class="row">
            <div class="col-2"></div>
-           <div class="col-2 descError">La description est requise.</div>
+           <div class="col-2 descError">
+            <app-texte cle="commun.descObli"></app-texte>
+            </div>
          </div>
          <!--Fin Erreur description-->
 <!--Début nouvelle row-->
-<div  *ngIf=" this.facadeService.listeDecisionImp">
+<div  *ngIf=" this.facadeService.listeDecisionImp && !this.facadeService.listeDecisionImp.erreur">
    <!--Row titre de section signature-->
    <div class="row">
       <div class="col-2 nomSignature">Signature(s)</div>
@@ -134,7 +143,7 @@
 
 </div>
 <!--fin nouvelle row-->
-        <div class="sectionDate" *ngIf=" this.facadeService.listeDecisionImp">
+        <div class="sectionDate" *ngIf=" this.facadeService.listeDecisionImp && !this.facadeService.listeDecisionImp.erreur">
             <div class="row">
                 <div class="col-2 nomDateDelibere">
                     <label class="">Date fin délibéré</label>
@@ -198,7 +207,7 @@
 
         <!--Fin erreur date-->
 
-        <div class="row mt-2"  *ngIf=" this.facadeService.listeDecisionImp">
+        <div class="row"  *ngIf=" this.facadeService.listeDecisionImp && !this.facadeService.listeDecisionImp.erreur">
           <div class="col-2 nomPriorite">
             Priorité
           </div>
@@ -220,7 +229,7 @@
     <button  [className]="buttonDisabled || !formulaire.valid ? 'buttonImporterDis' : 'buttonImporter'" class="buttonImporter" (click)="importerDecision()" [disabled] = "buttonDisabled || !formulaire.valid" >Importer</button>
     </div>
 
-
+  </div>
 
 </form>
 

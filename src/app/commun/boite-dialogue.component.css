@@ -1,0 +1,10 @@
+.buttPrimMod{
+  background-color:#2257a7 !important;
+}
+.btn:focus{
+  outline: none;
+  box-shadow: none;
+}
+.buttAnuMod{
+  color:#2257a7 !important;
+}
