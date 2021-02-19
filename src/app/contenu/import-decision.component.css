@@ -11,7 +11,7 @@
     /* padding-top: 10px; */
     font-weight: bold;
     position: relative;
-    bottom: 35px;
+    bottom: 30px;
 }
 .espFichier{
     width: 100%;
@@ -24,8 +24,8 @@
     width: 100%;
     background-color: white;
     display: flex;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 .espJugeAdm{
     width: 100%;
@@ -38,7 +38,7 @@
     text-align: right;
     margin-top: 0.8%;
     /* margin-left: 0.5%; */
-    margin-right: 1.2%;
+    margin-right: 0.6%;
     /* position: relative;
     top:10px;
     margin-right: 1%;
@@ -97,7 +97,7 @@
     background-color:#ecebeb;
     border-radius:10px;
     border: solid #ecebeb ;
-    height: 40px;
+    height: 50px;
     width: 200px;
 }
 .wRow{
@@ -270,7 +270,7 @@ text-align: center;
   height: 30px;
   width: 30px;
   position: relative;
-  top:8px;
+  top:10px;
 }
 .cbCentre{
   text-align: center;
@@ -352,7 +352,7 @@ text-align: center;
 .barreTitre{
   background-color:  #2257a7;
   opacity: 0.3;
-  height: 50px;
+  height: 40px;
 }
 .containerTitre{
 height: 50px;
@@ -368,7 +368,7 @@ margin-top: 20px;
     /* padding-top: 10px; */
     float: right;
     position: relative;
-    bottom: 55px;
+    bottom: 50px;
     font-size: 12px;
 
 }
@@ -376,7 +376,7 @@ margin-top: 20px;
   margin-left: 0.5%;
 }
 .descError{
-  margin-top: -25px;
+  margin-top: -20px;
   color: red;
   font-weight: bold;
   font-size: 12px;
@@ -446,12 +446,30 @@ margin-top: 20px;
   visibility: hidden;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
   .nomDateDelibere{
     font-weight: bold;
     text-align: right;
     margin-top: 0.5%;
-    margin-right: -0.8%;
+    margin-right: -0.7%;
+    position: relative;
+    bottom: 7px;
+}
+.nomFichier{
+  font-weight: bold;
+  text-align: right;
+  margin-top: 0.8%;
+  /* margin-left: 0.5%; */
+  margin-right: 1%;
+  /* position: relative;
+  top:10px;
+  margin-right: 1%;
+  margin-left: 9%;
+  right: 30px; */
+}
+.sectionDate{
+  margin-top: 1%;
+  height: 30px;
 }
 .nomPriorite{
   margin-top: 1.75%;
@@ -466,7 +484,7 @@ margin-top: 20px;
   font-size: 11px;
   font-weight: 600;
    color: #8a8787;
-   height: 40px;
+   height: 30px;
 
    /* position: relative;
    left: 8px; */
@@ -475,12 +493,14 @@ margin-top: 20px;
   font-size: 11px;
   font-weight: 600;
   color: #8a8787;
+  position: relative;
+  bottom: 4px;
 
 }
 .matFormFieldCustom{
   width: 250px;
   display: relative;
-  bottom:12px;
+  /* bottom:12px; */
   /*right: 22px;*/
 }
 .buttonQuitter {
@@ -533,7 +553,7 @@ text-align: center;
   background-color:#ecebeb;
   border-radius:10px;
   border: solid #ecebeb ;
-  height: 40px;
+  height: 30px;
   min-width: 350px;
   width: auto;
   /* position: relative;
@@ -547,13 +567,13 @@ text-align: center;
 .imageTrash{
   height:20px;
   position: relative;
-  margin-top:8px;
+  margin-top:4px;
 }
 .inputReg{
   background-color:#ecebeb;
   border-radius:10px;
   border: solid #ecebeb ;
-  height: 40px;
+  height: 30px;
   width: 440px;
   padding:10px;
 }
@@ -562,7 +582,7 @@ text-align: center;
   text-align: right;
   margin-top: 0.8%;
   /* margin-left: 0.5%; */
-  margin-right: 2%;
+
   /* position: relative;
   top:10px;
   margin-right: 1%;
@@ -571,9 +591,10 @@ text-align: center;
 }
 .positionNomJuge{
   position: relative;
-  top:8px;
+  top:2px;
   background-color: #ecebeb;
   border: none;
+  height: 18px;
 }
 .dlNormalJuge {
   padding-left:10px;
@@ -583,15 +604,17 @@ text-align: center;
   border: solid 1px #ecebeb;
   /* text-indent: 25%;  */
   color:gray;
-  height: 30px;
+  height: 20px;
+  position: relative;
+  top:2px;
   outline: none;
   width: 100%;
 }
 .cbStyle{
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   position: relative;
-  top:8px;
+  top:5px;
 }
 .dlNormalPrio{
   padding-left:10px;
@@ -600,26 +623,31 @@ text-align: center;
   border-radius: 10px;
   border: solid 1px #ecebeb;
   color:gray;
-  height: 40px;
+  height: 30px;
   outline: none;
   width: 120px;
+  position: relative;
+    bottom: 8px;
+    right: 2px;
 
 }
 .dateInput{
   background-color:#ecebeb;
   border-radius:10px;
   border: solid #ecebeb ;
-  height: 40px!important;
+  height: 20px!important;
   width: 200px;
 }
 .nomPriorite{
 
-  margin-left: -0.8%;
+  margin-left: -0.5%;
   font-weight: bold;
     text-align: right;
+    position: relative;
+    bottom: 10px;
 }
 .descError{
-  margin-top: -25px;
+  margin-top: -10px;
   color: red;
   font-weight: bold;
   font-size: 10px;
@@ -638,7 +666,7 @@ text-align: center;
     /* padding-top: 10px; */
     float: right;
     position: relative;
-    bottom: 55px;
+    bottom: 50px;
     font-size: 10px;
 
 }

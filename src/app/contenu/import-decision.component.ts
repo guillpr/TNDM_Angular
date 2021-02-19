@@ -1,5 +1,5 @@
 import { Signataires } from './../entitees/signataires';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
@@ -73,6 +73,7 @@ export class ImportDecisionComponent implements OnInit {
 
   @ViewChild('fileDropRef') fileInput: any;
 
+
   public formulaire: FormGroup;
 
   listeSignataire: number[]  = [];
@@ -94,6 +95,18 @@ export class ImportDecisionComponent implements OnInit {
   files: any[] = [];
   fichiers: FichierJoint[] = [];
 
+  @HostListener('document:keydown', ['$event'])
+onKeyDown(evt: KeyboardEvent) {
+  const valeurTarget = evt.target as Element;
+  if (
+    evt.which === 8 &&
+    (
+      valeurTarget.nodeName !== 'INPUT' && valeurTarget.nodeName !== 'SELECT' )
+  ) {
+    evt.preventDefault();
+  }
+}
+
   constructor(private fb: FormBuilder,
               public textesService: TextesService,
               public facadeService: FacadeService,
@@ -101,6 +114,8 @@ export class ImportDecisionComponent implements OnInit {
               public router: Router,
               private spinner: NgxSpinnerService,
               public datepipe: DatePipe) { }
+
+
 
 
   canDeactivate(

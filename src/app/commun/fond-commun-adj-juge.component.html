@@ -347,7 +347,17 @@
                         <div class="cent"  *ngIf="!r.identifiant">-</div>
                         </td>
                       <td class="noTaqEtRequeran cent">{{r.dossiersTAQ[0].noDossierTAQ}}-{{r.dossiersTAQ[0].requerant}}</td>
-                      <td class="noDossier cent">{{r.dossiersTAQ.length}}</td>
+                      <td class="noDossier cent" >
+                        <span  [matTooltip]="this.facadeService.tableauDecision[i].dossiersTAQ | tooltipListPipe" >
+                            {{r.dossiersTAQ.length}}
+                        </span>
+
+
+                      <!-- <div *ngFor="let doss of this.facadeService.tableauDecision[i].dossiersTAQ;let in = index;" matTooltip="{{doss.noDossierTAQ}}">
+                            {{r.dossiersTAQ.length}}
+                        <label > </label>
+                      </div> -->
+                      </td>
                       <td class="dateImport cent">{{r.dateImportation | date: 'yyyy-MM-dd'}}</td>
                            <td class="finDeli cent">
                             <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')"> {{r.dateFinDelibere | date: 'yyyy-MM-dd'}}</div>
@@ -357,7 +367,7 @@
                              <div *ngFor="let r of  this.facadeService.tableauDecision[i].signataires">
                                 {{r.nomRessource}}
                                 <img *ngIf="(r.dateSignature | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')" class="imgSign" mat-raised-button
-                                matTooltip="Décision signé le  {{r.dateSignature | date: 'd-LL-yyyy'}}"
+                                matTooltip="Décision signé le  {{r.dateSignature | date: 'yyyy-MM-dd'}}"
                                 aria-label="L'image affiche la date de signature de la décision"
                                 matTooltipPosition="above" src="assets/images/crochetVert.png"
                                 matTooltipClass="my-class"

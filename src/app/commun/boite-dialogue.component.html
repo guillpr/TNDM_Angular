@@ -7,6 +7,6 @@
   </mat-form-field> -->
 </div>
 <div mat-dialog-actions>
-  <button class="btn btn-link" mat-button (click)="onNoClick()" cdkFocusInitial>{{data.texteBoutonNon}}</button>
+  <button class="btn btn-link buttAnuMod" mat-button (click)="onNoClick()" cdkFocusInitial>{{data.texteBoutonNon}}</button>
   <button *ngIf="data.afficherBoutonOui === true" class="btn btn-primary buttPrimMod" mat-button (click)="onYesClick()" >{{data.texteBoutonOui}}</button>
 </div>

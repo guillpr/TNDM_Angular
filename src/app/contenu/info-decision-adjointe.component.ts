@@ -1,5 +1,5 @@
 import { FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Component, OnInit, Pipe, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Pipe, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
 import { FacadeService } from '../services/facade.service';
@@ -69,7 +69,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
 
   // Formulaire
   formulaire = this.fb.group({
-    description: ['', [Validators.required]],
+    description: ['', [Validators.required , Validators.maxLength(125)], ],
     dateDelibere:['' , this.validDate],
     priorite: new FormControl(''),
     numero: new FormControl({value: '', disabled: true}),
@@ -83,6 +83,8 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     redacteur3: new FormControl({value: false, disabled: true}),
     redacteur4: new FormControl({value: false, disabled: true})
   }, { validator: [validDatePlusUnAn]});
+
+
 
   constructor(public facadeService: FacadeService,
               public dialog: MatDialog,

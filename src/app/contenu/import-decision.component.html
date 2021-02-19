@@ -43,6 +43,7 @@
 
 
         <div *ngIf="this.facadeService.listeDecisionImp">
+
           <div *ngIf="this.facadeService.listeDecisionImp.erreur" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
 
             <div  class="row" *ngIf="fichiers.length>0 &&  this.facadeService.listeDecisionImp">
@@ -75,13 +76,15 @@
                 <span class="requisAs">*</span>
               </div>
           <div class="col-6">
+
             <input class="inputReg" formControlName="description" >
+
           </div>
          </div>
          <!--Erreur description-->
          <div *ngIf="this.facadeService.listeDecisionImp&&this.formulaire.controls.description.errors && !this.facadeService.listeDecisionImp.erreur" class="row">
            <div class="col-2"></div>
-           <div class="col-2 descError">
+           <div class="col-3 descError">
             <app-texte cle="commun.descObli"></app-texte>
             </div>
          </div>
@@ -198,7 +201,7 @@
             <div class="col-2 col-sm-2 col-md-4 col-lg-1 taR"> </div>
             <div class="col messageErreurAcc">
 
-              Veuillez spécifier une date (début et fin) valide (AAAA-MM-JJ).
+              Veuillez spécifier une date valide (AAAA-MM-JJ).
             </div>
 
              <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->

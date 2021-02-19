@@ -51,9 +51,13 @@
                       spellcheck="false"
                        class="inputDesc"
                         ></textarea>
+
                     </div>
-                  <div class="col col-xl-1 numImpCol">
-                    <input class="noBorder center"  formControlName="importePar">
+                  <div class="col col-xl-1 numImpCol"
+                   matTooltip="{{this.facadeService.listeDecision.nomRessourceDepot}}"
+                   matTooltipPosition="above"
+                   matTooltipClass="my-class">
+                    <input class="noBorder center"  formControlName="importePar" >
                   </div>
                   <div class="col col-xl-1 dateImpCol">
                     <input class="noBorder center"  formControlName="dateImportation">
@@ -74,6 +78,7 @@
                          matInput
                          [matDatepicker]="picker"
                          formControlName="dateDelibere"
+
 
                         >
 
@@ -104,7 +109,14 @@
 
             <div  class="row">
                 <div class="col-2 maxW15"></div>
-                <div class="col-5 descError"><span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors" >Le champ description est obligatoire.</span></div>
+                <div class="col-5 descError"><span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors && this.facadeService.listeDecision&&this.formulaire.controls.description.errors.required" >
+                  <app-texte cle="commun.descObli"></app-texte>
+                 </span>
+                 <span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors && this.facadeService.listeDecision&&this.formulaire.controls.description.errors.maxlength" >
+                    <app-texte cle="commun.desTropLong"></app-texte>
+                   </span>
+                </div>
+
                 <div class="col-2">
                     <!--Erreur date-->
         <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDatePlusUnAn">
@@ -304,7 +316,10 @@
                 <div class="col-2 center">
                     {{hist.dateStatut | date: 'yyyy-MM-dd'}}
                 </div>
-                <div class="col-2 center">
+                <div class="col-2 center"
+                 matTooltip="{{hist.nomRessource}}"
+                matTooltipPosition="above"
+                matTooltipClass="my-class">
                    {{hist.codeReseau}}
                 </div>
             </div>

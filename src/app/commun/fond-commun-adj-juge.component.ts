@@ -17,6 +17,8 @@ import moment from 'moment';
 
 
 
+
+
 @Component({
   selector: 'app-fond-commun-adj-juge',
   templateUrl: './fond-commun-adj-juge.component.html',
@@ -34,34 +36,19 @@ export class FondCommunAdjJugeComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @Input() public noMessageDateInvalide: string;
 
-  @HostListener('document:keydown', ['$event'])
-onKeyDown(evt: KeyboardEvent) {
-  const valeurTarget = evt.target as Element
-  if (
-    evt.which === 8 && 
-    (
-    
-      valeurTarget.nodeName !== "INPUT" && valeurTarget.nodeName !== "SELECT" ) 
-  ) { 
-    evt.preventDefault();
-  }
-}
+
+
 
   public extensionMessage: string;
 
 
-// TODO TEST NOM JUGES
-nomDesJuges: string[] = ['Bianki André', 'Villeneuve André', 'Ménard Bernard Stanley', 'Labrosse Ginette-Hélène' , 'Blain,psychologue Louise M.' , 'Gingras-Lamarre Marguerite'];
-nameOfJuges = [
-  { sign: true, name: 'Bianki André' },
-  { sign: false, name: 'Villeneuve André' },
-  { sign: false, name: 'Ménard Bernard Stanley' }
-];
+
     p = 1;
     affTableau = false;
     // public listeDecisions: Decision[] = [];
 
     public listeDureeRestante: DurRest [] = [];
+
 
 
     currentDate: Date;
@@ -94,10 +81,23 @@ nameOfJuges = [
 
   });
 
+
 searchValue: string;
 searchValue2: string;
 maskValue: string;
 valeurDuTri = 'ASC';
+
+@HostListener('document:keydown', ['$event'])
+onKeyDown(evt: KeyboardEvent) {
+  const valeurTarget = evt.target as Element;
+  if (
+    evt.which === 8 &&
+    (
+      valeurTarget.nodeName !== 'INPUT' && valeurTarget.nodeName !== 'SELECT' )
+  ) {
+    evt.preventDefault();
+  }
+}
 
   constructor(public facadeService: FacadeService,
               public router: Router,
@@ -105,7 +105,12 @@ valeurDuTri = 'ASC';
               public textesService: TextesService,
               private spinner: NgxSpinnerService,
               public fb: FormBuilder) { }
+
+
+
+
   ngOnInit() {
+
     this.facadeService.recherche = new Recherche();
 
 
@@ -121,7 +126,7 @@ valeurDuTri = 'ASC';
     //  (err) => {console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
     //  );
 
-    console.log('Name of juges', this.nameOfJuges);
+
 
     this.noMessageDateInvalide = '';
     this.spinner.show();
@@ -194,6 +199,8 @@ valeurDuTri = 'ASC';
       this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
     .subscribe((resR) => {
       this.facadeService.tableauDecision = resR;
+
+      console.log('Liste dossiers:' , this.facadeService.tableauDecision[0].dossiersTAQ[0].noDossierTAQ);
       this.spinner.hide();
       console.log('Résultat recherche trié: ' , resR);
     },

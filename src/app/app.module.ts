@@ -71,6 +71,7 @@ import { WinAuthInterceptor } from './commun/WinAuthInterceptor';
 // Toastr
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { TooltipListPipePipe } from './commun/tooltip-list-pipe.pipe';
 
 
 
@@ -97,7 +98,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     BoiteDialogueComponent,
     MessageComponent,
     AccesRefuseComponent,
-    TextareaAutoresizeDirective
+    TextareaAutoresizeDirective,
+    TooltipListPipePipe
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,12 @@
     display: block;
     height: auto;
 }
+.my-class{
+  color: white;
+  font-size: 16px;
+  background: #2257a7 ;
+  padding:10px;
+}
 
 
 .enteteBleu{
@@ -88,6 +94,14 @@
     padding-left: 5px;
     text-align: center;
 }
+.numImpCol{
+  /* max-width: 8%; */
+  padding-right: 5px;
+  padding-left: 5px;
+  white-space: normal;
+  text-align: center;
+  max-width: 9%;
+}
 
 .pCol{
     padding-right: 5px;
@@ -110,10 +124,11 @@
   border: #2257a7 !important;
  /* margin-left: 283px;*/
   width:200px;
-  height:35px;
+  height:30px;
   border-radius: 10px;
   float: right;
   margin-right: 10px;
+  font-size: 14px;
 }
 .buttonChangementsDis{
   background-color: grey !important;
@@ -121,10 +136,11 @@
   border: grey !important;
  /* margin-left: 283px;*/
   width:200px;
-  height:35px;
+  height:30px;
   border-radius: 10px;
   float: right;
   margin-right: 10px;
+  font-size: 14px;
 }
 .buttonDocument {
     background-color: #2257a7 !important;
@@ -132,8 +148,9 @@
     border: #2257a7 !important;
    /* margin-left: 283px;*/
     width:160px;
-    height:35px;
+    height:30px;
     border-radius: 10px;
+    font-size: 14px;
 }
 .buttonDocumentDis{
   background-color: grey !important;
@@ -141,8 +158,9 @@
   border: grey !important;
  /* margin-left: 283px;*/
   width:160px;
-  height:35px;
+  height:30px;
   border-radius: 10px;
+  font-size: 14px;
 }
 .buttonRejet {
     background-color: #f5250a !important;
@@ -150,8 +168,9 @@
     border:#f5250a !important;
    /* margin-left: 283px;*/
     width:185px;
-    height:35px;
+    height:30px;
     border-radius: 10px;
+    font-size: 14px;
 
 }
 .buttonSignRejet{
@@ -160,8 +179,9 @@
     border:#ff6004 !important;
    /* margin-left: 283px;*/
     width:160px;
-    height:35px;
+    height:30px;
     border-radius: 10px;
+    font-size: 14px;
 
 }
 .buttonDemarrer{
@@ -170,11 +190,10 @@
     border: #2257a7 !important;
    /* margin-left: 283px;*/
      width:175px;
-    height:35px;
+    height:30px;
     border-radius: 10px;
     margin-right:20px;
-
-
+    font-size: 14px;
 }
 .buttonFermer{
     background-color: #2257a7 !important;
@@ -182,9 +201,10 @@
     border: #2257a7 !important;
    /* margin-left: 283px;*/
     width:150px;
-    height:35px;
+    height:30px;
     border-radius: 10px;
-}
+    font-size: 14px;
+  }
 
 
 .inputDateDelibere{
@@ -319,7 +339,7 @@ input:disabled
 }
 .inputDesc{
   border:none;
-  /* resize: none; */
+   resize: none;
   border:none;
   background-color: white;
   width: 100%;
@@ -329,7 +349,7 @@ input:disabled
 .matFormFieldCustom{
   width: 100%;
   display: relative;
-  bottom:10px;
+  bottom:7px;
   right: 22px;
 }
 ::ng-deep .mat-form-field-underline {
@@ -349,7 +369,7 @@ input:disabled
     max-width: 22%;
   }
 }
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1680px) {
   .chDescr{
     text-align: center;
     max-width: 24%;
@@ -430,11 +450,11 @@ input:disabled
     border: #2257a7 !important;
    /* margin-left: 283px;*/
     width:150px;
-    height:30px;
+    height:22px;
     border-radius: 10px;
     float: right;
     margin-right: 10px;
-    font-size: 12px;
+    font-size: 11px;
   }
   .buttonChangementsDis{
     background-color: grey !important;
@@ -442,11 +462,11 @@ input:disabled
     border: grey !important;
    /* margin-left: 283px;*/
     width:150px;
-    height:30px;
+    height:22px;
     border-radius: 10px;
     float: right;
     margin-right: 10px;
-    font-size: 12px;
+    font-size: 11px;
   }
   .buttonDocument {
       background-color: #2257a7 !important;
@@ -454,9 +474,9 @@ input:disabled
       border: #2257a7 !important;
      /* margin-left: 283px;*/
       width:140px;
-      height:30px;
+      height:22px;
       border-radius: 10px;
-      font-size: 12px;
+      font-size: 11px;
   }
   .buttonDocumentDis{
     background-color: grey !important;
@@ -464,9 +484,9 @@ input:disabled
     border: grey !important;
    /* margin-left: 283px;*/
     width:140px;
-    height:30px;
+    height:22px;
     border-radius: 10px;
-    font-size: 12px;
+    font-size: 11px;
   }
   .buttonRejet {
       background-color: #f5250a !important;
@@ -474,9 +494,9 @@ input:disabled
       border:#f5250a !important;
      /* margin-left: 283px;*/
       width:155px;
-      height:30px;
+      height:22px;
       border-radius: 10px;
-      font-size: 12px;
+      font-size: 11px;
 
   }
   .buttonSignRejet{
@@ -485,9 +505,9 @@ input:disabled
       border:#ff6004 !important;
      /* margin-left: 283px;*/
       width:155px;
-      height:30px;
+      height:22px;
       border-radius: 10px;
-      font-size: 12px;
+      font-size: 11px;
 
   }
   .buttonDemarrer{
@@ -496,10 +516,10 @@ input:disabled
       border: #2257a7 !important;
      /* margin-left: 283px;*/
        width:135px;
-      height:30px;
+      height:22px;
       border-radius: 10px;
       margin-right:20px;
-      font-size: 12px;
+      font-size: 11px;
 
 
   }
@@ -509,19 +529,20 @@ input:disabled
       border: #2257a7 !important;
      /* margin-left: 283px;*/
       width:110px;
-      height:30px;
+      height:22px;
       border-radius: 10px;
-      font-size: 12px;
+      font-size: 11px;
   }
+
 }
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1300px) {
   .numUtiCol{
     /* max-width: 8%; */
     padding-right: 5px;
     padding-left: 5px;
     white-space: normal;
     text-align: center;
-    max-width: 9%;
+    max-width: 10%;
 }
 .numImpCol{
     /* max-width: 8%; */
@@ -585,7 +606,7 @@ input:disabled
   border: #2257a7 !important;
  /* margin-left: 283px;*/
   width:120px;
-  height:25px;
+  height:22px;
   border-radius: 10px;
   float: right;
   margin-right: 10px;
@@ -597,7 +618,7 @@ input:disabled
   border: grey !important;
  /* margin-left: 283px;*/
   width:120px;
-  height:25px;
+  height:22px;
   border-radius: 10px;
   float: right;
   margin-right: 10px;
@@ -609,7 +630,7 @@ input:disabled
     border: #2257a7 !important;
    /* margin-left: 283px;*/
     width:125px;
-    height:25px;
+    height:22px;
     border-radius: 10px;
     font-size: 10px;
 }
@@ -619,7 +640,7 @@ input:disabled
   border: grey !important;
  /* margin-left: 283px;*/
   width:125px;
-  height:25px;
+  height:22px;
   border-radius: 10px;
   font-size: 10px;
 }
@@ -629,7 +650,7 @@ input:disabled
     border:#f5250a !important;
    /* margin-left: 283px;*/
     width:145px;
-    height:25px;
+    height:22px;
     border-radius: 10px;
     font-size: 10px;
 
@@ -640,7 +661,7 @@ input:disabled
     border:#ff6004 !important;
    /* margin-left: 283px;*/
     width:145px;
-    height:25px;
+    height:22px;
     border-radius: 10px;
     font-size: 10px;
 
@@ -651,7 +672,7 @@ input:disabled
     border: #2257a7 !important;
    /* margin-left: 283px;*/
      width:105px;
-    height:25px;
+    height:22px;
     border-radius: 10px;
     margin-right:20px;
     font-size: 10px;
@@ -664,7 +685,7 @@ input:disabled
     border: #2257a7 !important;
    /* margin-left: 283px;*/
     width:80px;
-    height:25px;
+    height:22px;
     border-radius: 10px;
     font-size: 10px;
 }

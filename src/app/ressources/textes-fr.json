@@ -61,7 +61,8 @@
         {"cle": "commun.typeDecisionIn" , "valeur": "Décision incidente"},
         {"cle": "commun.typeDecisionMotifs" , "valeur": "Motifs"},
         {"cle": "commun.impPar" , "valeur": "Importé par"},
-        {"cle": "commun.descObli" , "valeur": "Le champ description est obligatoire."},
+        {"cle": "commun.descObli" , "valeur": "Le champ Description est obligatoire."},
+        {"cle": "commun.desTropLong" , "valeur": "Le champ Description ne doit pas dépasser les 125 caractères."},
         {"cle": "erreur.erreurImportation" , "valeur": "Un problème est survenu, impossible d’exécuter l’opération demandée. Veuillez communiquer avec le support informatique ou créer une nouvelle requête dans Octopus pour TNDM. "},
         { "cle": "erreurDate01", "valeur": " Veuillez spécifier une date de début égale ou inférieure à la date de fin."},
         { "cle": "0002", "valeur": " Un autre message pour faire des tests."}
