@@ -84,7 +84,17 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     redacteur4: new FormControl({value: false, disabled: true})
   }, { validator: [validDatePlusUnAn]});
 
-
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(evt: KeyboardEvent) {
+    const valeurTarget = evt.target as Element;
+    if (
+      evt.which === 8 &&
+      (
+        valeurTarget.nodeName !== 'INPUT' && valeurTarget.nodeName !== 'SELECT' && valeurTarget.nodeName !== 'TEXTAREA' )
+    ) {
+      evt.preventDefault();
+    }
+  }
 
   constructor(public facadeService: FacadeService,
               public dialog: MatDialog,
@@ -95,9 +105,12 @@ export class InfoDecisionAdjointeComponent implements OnInit {
               private spinner: NgxSpinnerService,
               private toastr: ToastrService) { }
 
-  ngOnInit(): void {
+
+
+   ngOnInit(): void {
     this.pdfClique = false;
-    //this.spinner.show();
+
+    this.spinner.show();
     this.numDecSelectionner = null;
     this.numDecSelectionner = this.facadeService.numDecisionTemp;
 
@@ -106,6 +119,9 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     if (this.numDecSelectionner === undefined){
       this.router.navigateByUrl('/');
     }
+
+    window.scrollTo(0, 0);
+
     this.facadeService.ObtenirInfosDecision(this.numDecSelectionner)
     .subscribe((s) => {
         console.log('Valeur du resultat' , s);
@@ -151,55 +167,17 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         for (let i = 0; i < s.signataires.length; i++){
           console.log('Dans la boucle for');
           this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
-
-
-
-
          }
-/*
-ajoutJuges(s: any){
-  for (let i = 0; i < this.facadeService.listeDecision.signataires.length; i++) {
-    this.formulaire.controls['nomJuge' + i].setValue( s.signataires[i].nomRessource);
-
-    this.formulaire.controls['redacteur' + i].setValue(s.signataires[i].redacteur);
-    this.formulaire.controls['ordreSignataire' + i].setValue(s.signataires[i].ordre);
-
-
-*/
-
-
          // Remplir les valeurs de départ
         this.valDepDescription = this.facadeService.listeDecision.description;
         this.valDepDateDelibere = this.facadeService.listeDecision.dateFinDelibere;
         this.valDepPriorite = this.facadeService.listeDecision.priorite;
-
-
-
         console.log('Valeur du formulaire' , this.formulaire);
-
-        const liveVeuillezPatienter = document.getElementById('test');
-        console.log('By id' , liveVeuillezPatienter);
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 2000);
     });
-
-    // this.facadeService.ObtenirInfosDecision(5)
-    // .subscribe((r) => {
-    //   console.log('Valeur du r' , r);
-    //   this.facadeService.listeDecision  = r;
-    //   console.log('Liste décisions services facade:' , this.facadeService.listeDecision);
-    //  // console.log('liste decision [0]' , this.facadeService.listeDecision.toString().description);
-    //   console.log('Valeur de départ:' , this.valDepDescription , this.valDepDateDelibere, this.valDepPriorite );
-    //   // Assigner FormControl
-    //   // this.formulaire.get('description').setValue(this.valDepDescription);
-    //   // this.formulaire.get('dateDelibere').setValue(this.valDepDateDelibere);
-    //   // this.formulaire.get('priorite').setValue(this.valDepPriorite);
-    //   // this.formulaire.get('numero').setValue(this.facadeService.listeDecision[0].identifiant);
-    //   // this.formulaire.get('importePar').setValue(this.facadeService.listeDecision[0].codeReseauDepot);
-    //   this.spinner.hide();
-
-    // });
-
-   // console.log('Statut dans la liste de décision' , this.facadeService.listeDecision.statut);
-
  // TODO mail
     this.email = 'proulxguill@gmail.com';
     this.emailSubject = 'TNDM - rejet de décision';

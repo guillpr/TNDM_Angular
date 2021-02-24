@@ -91,7 +91,8 @@
    border: solid #ecebeb ;
    height: 50px;
    width: 600px;
-   padding:10px;
+   padding-left:10px;
+  padding-right: 10px;
 }
 .dateInput{
     background-color:#ecebeb;
@@ -331,7 +332,7 @@ text-align: center;
 .matFormFieldCustom{
   width: 250px;
   display: relative;
-  bottom:18px;
+  bottom:10px;
   /*right: 22px;*/
 }
 ::ng-deep .mat-form-field-underline {
@@ -341,7 +342,8 @@ text-align: center;
   display: none;
 }
 #inputNormal{
-  padding:10px;
+  padding-left:10px;
+  padding-right:10px;
   height: 50px;
   width: 120px
 }
@@ -451,9 +453,28 @@ margin-top: 20px;
     font-weight: bold;
     text-align: right;
     margin-top: 0.5%;
-    margin-right: -0.7%;
+    /* margin-right: -0.3%; */
     position: relative;
     bottom: 7px;
+}
+#inputNormal{
+  padding-left:10px;
+  padding-right:10px;
+  height: 50px;
+  width: 100px
+}
+.colSignature{
+  margin-left: 0.8%;
+}
+.nomDescription{
+  font-weight: bold;
+  text-align: right;
+  margin-top: 0.8%;
+  margin-right: 0.3%;
+  /* position: relative;
+  top:10px;
+  margin-left: 6.9%;
+  margin-right: 4%; */
 }
 .nomFichier{
   font-weight: bold;
@@ -500,7 +521,7 @@ margin-top: 20px;
 .matFormFieldCustom{
   width: 250px;
   display: relative;
-  /* bottom:12px; */
+   /* bottom:10px; */
   /*right: 22px;*/
 }
 .buttonQuitter {
@@ -575,7 +596,8 @@ text-align: center;
   border: solid #ecebeb ;
   height: 30px;
   width: 440px;
-  padding:10px;
+  padding-left:10px;
+  padding-right: 10px;
 }
 .nomFichier{
   font-weight: bold;
@@ -625,7 +647,7 @@ text-align: center;
   color:gray;
   height: 30px;
   outline: none;
-  width: 120px;
+  width: 100px;
   position: relative;
     bottom: 8px;
     right: 2px;
@@ -635,12 +657,12 @@ text-align: center;
   background-color:#ecebeb;
   border-radius:10px;
   border: solid #ecebeb ;
-  height: 20px!important;
+  height: 30px!important;
   width: 200px;
 }
 .nomPriorite{
 
-  margin-left: -0.5%;
+  margin-left: -0.1%;
   font-weight: bold;
     text-align: right;
     position: relative;
@@ -671,3 +693,34 @@ text-align: center;
 
 }
 }
+@media screen and (max-width: 1160px) {
+  .nomDateDelibere{
+    font-weight: bold;
+    text-align: right;
+    margin-top: 0.5%;
+     margin-right: -0.4%;
+    position: relative;
+    bottom: 7px;
+}
+.nomDescription{
+  font-weight: bold;
+  text-align: right;
+  margin-top: 0.8%;
+  margin-right: -0.01%;
+}
+}
+
+  /* apply CSS to the select tag of
+         .dropdown-container div*/
+
+         .dropdown-container select {
+          /* for Firefox */
+          -moz-appearance: none;
+          /* for Safari, Chrome, Opera */
+          -webkit-appearance: none;
+        }
+
+        /* for IE10 */
+        .dropdown-container select::-ms-expand {
+          display: none;
+        }

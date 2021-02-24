@@ -191,9 +191,16 @@ input[type=radio]:checked:before {
 }
 .my-class{
     color: white;
-    font-size: 16px;
+    font-size: 10px;
     background: #2257a7 ;
     padding:10px;
+  }
+  .my-classTT{
+    color: white;
+    font-size: 10px;
+    background: #2257a7 ;
+    padding:10px;
+    width: auto;
   }
   .padDD{
       margin-top: 15px;;
@@ -305,7 +312,7 @@ input[type=radio]:checked:before {
 }
 .inputBorderRouge{
     text-align: center;
-    width: 250px;
+    width: 125px;
     background-color: #f3f5fb;
     border-radius: 5px;
     border: solid 2px red;
@@ -469,8 +476,8 @@ left: 25px;
        .disInBl{
         display: inline-block;
         margin-top:6px;
-        margin-right: 5px;
-        margin-left: -10px;
+        margin-right: 0px;
+        margin-left: -20px;
     }
 }
 @media  screen and (max-width: 1900px){
@@ -538,15 +545,22 @@ left: 25px;
   margin-left: -20px;
 
 }
+.messageErreurAcc{
+  color:red;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size:10px;
+}
 }
 @media  screen and (max-width: 1500px){
     .col-xxl-2 {
       flex: 0 0 25%;
-      max-width: 21%;
+      max-width: 12.5%;
   }
   .divVide{
     display: inline-block;
-    width: 20.3%;
+    width: 28.6%;
   }
   .texteTitreNormalMarR20{
     font-size: 16px;
@@ -558,7 +572,7 @@ left: 25px;
    }
 }
 @media  screen and (max-width: 1400px){
-  .col-xxl-2 {
+  /* .col-xxl-2 {
     flex: 0 0 25%;
     max-width: 10%;
 }
@@ -579,7 +593,8 @@ left: 25px;
     margin-right: 2.6%;
     /* text-align: right;
     margin-right: 20px; */
-   }
+    /*
+   } */
    .hrClass{
     border: solid 3px #2257a7;
     opacity: 0.3;
@@ -623,6 +638,13 @@ left: 25px;
 }
  @media screen and (max-width: 1300px) {
 
+  .messageErreurAcc{
+    color:red;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size:9px;
+  }
     .disInBl{
         display: inline-block;
         margin-top:6px;
@@ -695,14 +717,20 @@ left: 25px;
       margin-top: 6px;
   }
   }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
     .col-xxl-2 {
         flex: 0 0 25%;
-        max-width: 14.5%;
+        max-width: 10%;
     }
+    .disInBl{
+      display: inline-block;
+      margin-top:6px;
+      margin-right: -10px;
+      margin-left: 20px;
+  }
     .divVide{
         display: inline-block;
-        width: 20.6%;
+        width: 29.2%;
       }
     .texteTitreNormalMarR20{
         font-size: 11px;
@@ -827,18 +855,39 @@ left: 25px;
 }
 .divVideButt{
     display:inline-block;
-    width: 23.5%;
+    width: 32%;
   }
   .divInBlockButton{
     display: inline-block;
     margin-right: 20px;
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1160px) {
+  .divVide{
+    display: inline-block;
+    width: 28.9%;
+  }
+  .col-xxl-2 {
+    flex: 0 0 25%;
+    max-width: 11%;
+}
+
+}
+@media screen and (max-width: 1100px) {
     .divVide{
         display: inline-block;
         width: 28.4%;
       }
+      .col-xxl-2 {
+        flex: 0 0 25%;
+        max-width: 13%;
+    }
+      .disInBl{
+        display: inline-block;
+        margin-top:6px;
+        margin-right: -10px;
+        margin-left: 15px;
+    }
     .texteTitreNormalMarR20{
         font-size: 11px;
         color:black;

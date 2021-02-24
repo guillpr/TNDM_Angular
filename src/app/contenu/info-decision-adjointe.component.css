@@ -4,10 +4,11 @@
     display: block;
     height: auto;
 }
-.my-class{
+.my-classTT{
   color: white;
-  font-size: 16px;
+  font-size: 12px;
   background: #2257a7 ;
+
   padding:10px;
 }
 
@@ -260,11 +261,17 @@ margin-top: 20px;
 .descError{
   color: red;
   font-weight: bold;
-  max-width: 30%;
+  max-width: 35.5%;
+  font-size: 12px;
+}
+.descErrorDate{
+  color: red;
+  font-weight: bold;
+  max-width: 60%;
   font-size: 12px;
 }
 .maxW15{
-  max-width: 13.5%;
+  max-width: 8.5%;
 }
 /* textarea:disabled{
   color:violet;
@@ -390,6 +397,21 @@ input:disabled
   .chDescr{
     text-align: center;
     max-width: 25%;
+  }
+  .descError{
+    color: red;
+    font-weight: bold;
+    max-width: 36%;
+    font-size: 9px;
+  }
+  .descErrorDate{
+    color: red;
+    font-weight: bold;
+    max-width: 78%;
+    font-size: 9px;
+  }
+  .maxW15{
+    max-width: 11.5%;
   }
   .dateDeliCol{
     /* max-width: 12%; */
@@ -536,6 +558,13 @@ input:disabled
 
 }
 @media screen and (max-width: 1300px) {
+  .matFormFieldCustom{
+    width: 100%;
+    display: relative;
+    bottom:6px;
+    right: 22px;
+  }
+
   .numUtiCol{
     /* max-width: 8%; */
     padding-right: 5px;
@@ -550,7 +579,7 @@ input:disabled
     padding-left: 5px;
     white-space: normal;
     text-align: center;
-    max-width: 9%;
+    max-width: 11%;
 }
 .numUniCol{
   /* max-width: 10%; */

@@ -16,7 +16,7 @@ export class TextareaAutoresizeDirective implements OnInit{
   ngOnInit() {
     console.log('Dans la directive texte area');
     if (this.elementRef.nativeElement.scrollHeight) {
-      setTimeout(() => this.resize());
+      setTimeout(() =>{this.resize()},200 );
     }
   }
   resize() {

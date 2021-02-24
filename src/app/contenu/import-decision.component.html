@@ -7,7 +7,7 @@
         <div class="titreImport">
             <app-texte cle="import.Titre"></app-texte>
         </div>
-        <div *ngIf="fichiers.length>0 &&  this.facadeService.listeDecisionImp && !this.facadeService.listeDecisionImp.erreur" class="chObRouge">* Champ obligatoire</div>
+        <div *ngIf="fichiers.length>0 &&  this.facadeService.listeDecisionImp && !this.facadeService.listeDecisionImp.erreur" class="chObRouge">* champ obligatoire</div>
       </div>
 
          <hr />
@@ -44,7 +44,6 @@
 
         <div *ngIf="this.facadeService.listeDecisionImp">
 
-          <div *ngIf="this.facadeService.listeDecisionImp.erreur" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
 
             <div  class="row" *ngIf="fichiers.length>0 &&  this.facadeService.listeDecisionImp">
                 <div class="col-2 nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
@@ -60,6 +59,8 @@
                 </div>
 
             </div>
+            <div *ngIf="this.facadeService.listeDecisionImp.erreur" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
+
              <!--Erreur Extension-->
          <div *ngIf="messageErreurExtension"  class="row">
             <div class="col-2"></div>
@@ -119,7 +120,7 @@
   </div>
   <div class="col-2 fondGris" >
       <div >
-          <div>
+          <div  [className]= "this.facadeService.listeDecisionImp.signataires.length === 1 ? 'dropdown-container' : ''">
           <select    class="dlNormalJuge" id="inputGroupSelect05" formControlName="ordreSignataire{{i}}"  [attr.disabled]="this.facadeService.listeDecisionImp.signataires.length === 1 ? 'disabled' : null">
                <option  selected value="1">Signataire 1</option>
                <option  value="2">Signataire 2</option>

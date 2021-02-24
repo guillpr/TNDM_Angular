@@ -11,8 +11,18 @@ export class TooltipListPipePipe implements PipeTransform {
     let list = '';
     console.log(lines);
 
-    for(let i=0;i <lines.length;i++){
-       list += lines[i].noDossierTAQ + '\n';
+    for (let i = 0; i < lines.length; i++){
+      if (lines[i].requerant === ''){
+        list +=   lines[i].noDossierTAQ  + '\n';
+      }
+      else{
+        list +=   lines[i].noDossierTAQ + ' - ' + lines[i].requerant + '\n';
+      }
+      if (i === 3)
+       {
+        list +=  'et autres ';
+        return list;
+       }
      }
     console.log(list);
 

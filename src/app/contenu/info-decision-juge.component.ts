@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { BoiteDialogueComponent } from '../commun/boite-dialogue.component';
 import { FacadeService } from '../services/facade.service';
 import { TextesService } from '../services/textes.service';
-import { Router } from '@angular/router';
+import { Router , ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-info-decision-juge',
@@ -25,15 +25,19 @@ export class InfoDecisionJugeComponent implements OnInit {
   constructor(public facadeService: FacadeService,
               public dialog: MatDialog,
               public router: Router,
-              public textesService: TextesService) { }
+              public textesService: TextesService,
+              private activatedroute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.couleurPrio = true;
-    this.numDecSelectionner = this.facadeService.numDecisionTemp;
+    //this.numDecSelectionner = this.facadeService.numDecisionTemp;
 
-    if(this.numDecSelectionner === undefined){
-      this.router.navigateByUrl('/');
-    }
+    // if(this.numDecSelectionner === undefined){
+    //   this.router.navigateByUrl('/');
+    // }
+    let num = '';
+    num= this.activatedroute.snapshot.paramMap.get('id');
+    this.numDecSelectionner = Number(num);
 
     this.facadeService.ObtenirInfosDecision(this.numDecSelectionner)
     .subscribe((s) => {
@@ -77,7 +81,8 @@ export class InfoDecisionJugeComponent implements OnInit {
     }
   }
   fermerPage(){
-    this.router.navigateByUrl('/');
+   // this.router.navigateByUrl('/');
+   window.close();
   }
   rejeterDecision(){
         const donnees = {

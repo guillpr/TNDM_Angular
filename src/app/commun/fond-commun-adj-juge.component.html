@@ -50,7 +50,7 @@
                               </select>
                             </div>
                         </div>
-                        <div class="col-6"></div>
+                        <div class="col"></div>
                       </div>
                        <!--Fin Section 2e proposition MA-->
 
@@ -249,7 +249,7 @@
                     <div class="divVideButt"></div>
 
                     <div class="divInBlockButton" >
-                        <button ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
+                        <button  [attr.disabled]="this.formulaire.controls.rechercheDateDu.errors || this.formulaire.controls.rechercheDateAu.errors  ? 'disabled' : null" ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button>
                     </div>
@@ -343,14 +343,20 @@
                       <!--Début rangée 2-->
                       <tr *ngFor="let r of this.facadeService.tableauDecision;let i = index;" class="tableauPrincipalABoucler" >
                       <td  class="noDecCssTd"  >
-                        <div class="numeroDec cent" (click)="SelectionDecision(this.facadeService.tableauDecision[i].idDocument,i)" *ngIf="r.identifiant"> {{r.identifiant}}</div>
+                        <div [className]="this.facadeService.indicateurJuge ==true&&r.codeReseauSignataire == this.facadeService.recherche.codeReseauDemandeur ?  'numeroDec cent' : this.facadeService.indicateurJuge == false ? 'numeroDec cent' : ' cent'   "   (click)="SelectionDecision(this.facadeService.tableauDecision[i].idDocument,i)" *ngIf="r.identifiant"> {{r.identifiant}}</div>
                         <div class="cent"  *ngIf="!r.identifiant">-</div>
                         </td>
                       <td class="noTaqEtRequeran cent">{{r.dossiersTAQ[0].noDossierTAQ}}-{{r.dossiersTAQ[0].requerant}}</td>
-                      <td class="noDossier cent" >
-                        <span  [matTooltip]="this.facadeService.tableauDecision[i].dossiersTAQ | tooltipListPipe" >
+                      <td  class="noDossier cent" >
+                        <div *ngIf="r.dossiersTAQ.length > 1"
+                            matTooltipClass="my-classTT"
+                             matTooltipPosition="above"
+                             [matTooltip]="this.facadeService.tableauDecision[i].dossiersTAQ | tooltipListPipe" >
                             {{r.dossiersTAQ.length}}
-                        </span>
+                        </div>
+                        <div *ngIf="r.dossiersTAQ.length === 1" >
+                          {{r.dossiersTAQ.length}}
+                      </div>
 
 
                       <!-- <div *ngFor="let doss of this.facadeService.tableauDecision[i].dossiersTAQ;let in = index;" matTooltip="{{doss.noDossierTAQ}}">
@@ -367,7 +373,7 @@
                              <div *ngFor="let r of  this.facadeService.tableauDecision[i].signataires">
                                 {{r.nomRessource}}
                                 <img *ngIf="(r.dateSignature | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')" class="imgSign" mat-raised-button
-                                matTooltip="Décision signé le  {{r.dateSignature | date: 'yyyy-MM-dd'}}"
+                                matTooltip="Décision signée le  {{r.dateSignature | date: 'yyyy-MM-dd'}}"
                                 aria-label="L'image affiche la date de signature de la décision"
                                 matTooltipPosition="above" src="assets/images/crochetVert.png"
                                 matTooltipClass="my-class"

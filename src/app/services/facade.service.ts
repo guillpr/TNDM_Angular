@@ -107,7 +107,7 @@ export class FacadeService {
   }
  //   Obtenir Juges du service facade
  public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{
-  return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil );
+  return this.http.get<JugesAdjointes[]>(this.jugesAdjointesURL + '?CodeReseau=' + codeUtil , this.httpOptions );
 }
 // Obtenir informations d'un décision par ID
 public ObtenirInfosDecision(idDocument: number): Observable<Decision>{

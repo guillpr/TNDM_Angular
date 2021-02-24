@@ -110,6 +110,7 @@ onKeyDown(evt: KeyboardEvent) {
 
 
   ngOnInit() {
+    window.scrollTo(0, 0);
 
     this.facadeService.recherche = new Recherche();
 
@@ -627,7 +628,12 @@ lancerRechercheTri(){
 }
 historiqueJuge(numDocument: number , index: number){
   this.facadeService.numDecisionTemp = numDocument;
-  this.router.navigateByUrl('/infoJuge');
+  const url = this.router.serializeUrl(
+    this.router.createUrlTree(['/infoJuge' , numDocument ])
+  );
+  window.open(url, '_blank' , 'width=800,height=500');
+
+ // this.router.navigateByUrl('/infoJuge');
 // infoJuge
 }
 

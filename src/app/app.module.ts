@@ -108,7 +108,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     RouterModule.forRoot([
       {path: '', component: AdjointeComponent },
       {path: 'infoAdjointe', component: InfoDecisionAdjointeComponent},
-      {path: 'infoJuge', component: InfoDecisionJugeComponent },
+      {path: 'infoJuge/:id', component: InfoDecisionJugeComponent },
       {path: 'importDecision', component: ImportDecisionComponent , canDeactivate: [CanDeactivateGuard] },
       {path: 'gestionPreferences', component: GestionPreferencesComponent },
       {path: 'accesRefuse', component: AccesRefuseComponent }

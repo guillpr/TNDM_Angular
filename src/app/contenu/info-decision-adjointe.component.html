@@ -1,12 +1,12 @@
 <app-banniere></app-banniere>
-<ngx-spinner bdColor = "rgba(140,137,137,0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
-<form [formGroup]="formulaire">
+<ngx-spinner bdColor = "rgba(140,137,137,0.9)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Chargement... </p></ngx-spinner>
+<form [formGroup]="formulaire" >
 
 
+    <div id="test"></div>
 
+<div class="divFond" >
 
-<div *ngIf="this.facadeService.listeDecision" class="divFond" >
-  <div id="test"></div>
     <div  class="divCentre">
 
         <!-- Début zone décision -->
@@ -42,8 +42,9 @@
             <div class="col col-xl-1 numUniCol"><input class="inputNo"  formControlName="numero"></div>
                 <div  class="col col-xl-3 chDescr">
                     <textarea
-
+                    cols="auto"
                     appTextareaAutoresize
+                    style="overflow:hidden"
                     id="descriptionID"
                     [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null"
                      (change)="afficheBouton()"
@@ -56,7 +57,7 @@
                   <div class="col col-xl-1 numImpCol"
                    matTooltip="{{this.facadeService.listeDecision.nomRessourceDepot}}"
                    matTooltipPosition="above"
-                   matTooltipClass="my-class">
+                   matTooltipClass="my-classTT">
                     <input class="noBorder center"  formControlName="importePar" >
                   </div>
                   <div class="col col-xl-1 dateImpCol">
@@ -107,27 +108,33 @@
                     </div>
             </div>
 
-            <div  class="row">
+            <div  class="row" *ngIf="this.facadeService.listeDecision">
                 <div class="col-2 maxW15"></div>
-                <div class="col-5 descError"><span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors && this.facadeService.listeDecision&&this.formulaire.controls.description.errors.required" >
+                <div class="col-5 descError"><span *ngIf="this.facadeService.listeDecision
+                  &&this.formulaire.controls.description.errors
+                  &&this.formulaire.controls.description.errors.required
+                  &&this.formulaire.controls.description.touched" >
                   <app-texte cle="commun.descObli"></app-texte>
                  </span>
-                 <span *ngIf="this.facadeService.listeDecision&&this.formulaire.controls.description.errors && this.facadeService.listeDecision&&this.formulaire.controls.description.errors.maxlength" >
+                 <span *ngIf="this.facadeService.listeDecision
+                 &&this.formulaire.controls.description.errors
+                 && this.facadeService.listeDecision&&this.formulaire.controls.description.errors.maxlength
+                 " >
                     <app-texte cle="commun.desTropLong"></app-texte>
                    </span>
                 </div>
 
-                <div class="col-2">
+                <div class="col-5">
                     <!--Erreur date-->
-        <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDatePlusUnAn">
-            <div class="messageErreurAcc">
+        <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDatePlusUnAn&&this.formulaire.controls.dateDelibere.touched">
+            <div class="descErrorDate">
                 La date de fin de délibéré ne peut être supérieure à un an de la date du jour.
             </div>
             </div>
 
             <!--Erreur date deux ans-->
-            <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDateMoinsDeuxAn">
-                <div class="messageErreurAcc">
+            <div  *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDateMoinsDeuxAn&&this.formulaire.controls.dateDelibere.touched">
+                <div class="descErrorDate">
                     La date de fin de délibéré ne peut être antérieure à 2 ans de la date du jour.
                 </div>
                 </div>
@@ -136,7 +143,7 @@
 
              <!--Erreur date plus d'un an-->
              <div  *ngIf="formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty  || formulaire.get('dateDelibere').invalid && formulaire.get('dateDelibere').dirty">
-                <div class="messageErreurAcc">
+                <div class="descErrorDate">
                   Veuillez spécifier une date (début et fin) valide (AAAA-MM-JJ).
                 </div>
                 </div>
@@ -319,7 +326,7 @@
                 <div class="col-2 center"
                  matTooltip="{{hist.nomRessource}}"
                 matTooltipPosition="above"
-                matTooltipClass="my-class">
+                matTooltipClass="my-classTT">
                    {{hist.codeReseau}}
                 </div>
             </div>
@@ -374,4 +381,5 @@
 
        <!--Fin zone bouton juge-->
 </div>
+
 </form>
