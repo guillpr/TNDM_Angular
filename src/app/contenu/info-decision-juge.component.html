@@ -1,4 +1,4 @@
-<app-banniere></app-banniere>
+<!-- <app-banniere></app-banniere> -->
 <div class="divFond">
     <div class="divCentre">
         <!--Début zone décision-->
@@ -135,23 +135,23 @@
          <!--Début zone historique de décision-->
          <div class="enteteBleu">
             <app-texte class="titreEntete" cle="commun.histDecision"></app-texte>
-            <span id="boiteDossAssoOuverte" *ngIf="!boiteHistorique" class="arrowDown" (click)="ouvertureBoiteHistorique()">
-                <i class="fas fa-angle-down fa-3x"></i>
+            <span id="boiteDossAssoOuverte" *ngIf="!boiteHistorique">
+
             </span>
-            <span id="boiteDossAssoFerme" *ngIf="boiteHistorique" class="arrowDown" (click)="fermetureBoiteHistorique()">
-                <i class="fas fa-angle-up fa-3x"></i>
+            <span id="boiteDossAssoFerme" *ngIf="boiteHistorique" >
+
             </span>
         </div>
 
         <div [className]="!boiteHistorique ? 'testDossAsso' : 'testDossAssoExpand' " class="testDecision">
             <div class="row bold">
-                <div class="col-2">
+                <div class="col-3">
                    Statut
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     Date
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     Utilisateur
                 </div>
             </div>
@@ -159,16 +159,17 @@
 
             <div *ngIf="this.facadeService.listeDecision">
             <div *ngFor="let hist of this.facadeService.listeDecision.historiqueStatuts" class="row">
-                <div class="col-2">
+                <div class="col-3">
                   {{hist.statut}}
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                   {{hist.dateStatut | date:'yyyy-MM-dd'}}
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     {{hist.codeReseau}}
                 </div>
             </div>
+
           </div>
         </div>
        <!--Fin zone historique de décision-->

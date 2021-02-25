@@ -191,6 +191,40 @@
 
                         </div>
 
+                        <!--Message erreur plus d'un an-->
+
+
+
+                        <div   *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDatePlusUnAn" class="row mb-2 mt-1">
+                            <div class="col-sm-0 col-lg-2"></div>
+                            <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR"> </div>
+                            <div class="col messageErreurAcc">
+
+                                Veuillez réduire la période pour le champ « Date importation » (moins d’un an).
+                            </div>
+
+                             <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
+
+                            </div>
+                            <!--Fin message d'erreur plus d'un an-->
+
+                            <!--Message Date du plus grand que date au-->
+
+                            <div   *ngIf="this.formulaire.errors && this.formulaire.errors.erreurDateDuPlusGrand" class="row mb-2 mt-1">
+                                <div class="col-sm-0 col-lg-2"></div>
+                                <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR"> </div>
+                                <div class="col messageErreurAcc">
+
+                                    Veuillez spécifier une date de début égale ou inférieure à la date de fin.
+                                </div>
+
+                                 <!-- <app-app-message [cle]='noMessageDateInvalide'   id="erreurFichierInvalide"></app-app-message> -->
+
+                                </div>
+
+                                <!--Fin date du plus grand que date au-->
+
+
                   <div *ngIf="ErreurDate" class="row mb-2 mt-1">
                     <div class="col-sm-0 col-lg-2"></div>
                     <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR"> </div>
@@ -249,7 +283,7 @@
                     <div class="divVideButt"></div>
 
                     <div class="divInBlockButton" >
-                        <button  [attr.disabled]="this.formulaire.controls.rechercheDateDu.errors || this.formulaire.controls.rechercheDateAu.errors  ? 'disabled' : null" ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
+                        <button  [attr.disabled]="this.formulaire.controls.rechercheDateDu.errors || this.formulaire.controls.rechercheDateAu.errors || this.formulaire.errors  ? 'disabled' : null" ID="ButtonRechercher" class="btn btn-primary buttonRechercher" (click)="RechercherDecision()">
                             <app-texte cle="commun.boutonRechercher"></app-texte>
                         </button>
                     </div>
@@ -383,11 +417,10 @@
 
 
 
-
                            </td>
-                          <td [className]="r.dureeRestante < 5 && (r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd') ? 'texteDurRestanteRouge cent' : 'cent'" >
-                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')">  {{r.dureeRestante}}</div>
-                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') < (0001-01-01 | date: 'yyyy-MM-dd')">-</div>
+                          <td [className]="r.dureeRestante < 5 && (r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')  && (r.statut != 'Rejeté' && r.statut != 'Accepté') ? 'texteDurRestanteRouge cent' : 'cent'" >
+                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd') && (r.statut != 'Rejeté' && r.statut != 'Accepté')">  {{r.dureeRestante}}</div>
+                            <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') < (0001-01-01 | date: 'yyyy-MM-dd') || r.statut == 'Rejeté' || r.statut == 'Accepté'">-</div>
 
                            </td>
                            <td class="bgWhite" >

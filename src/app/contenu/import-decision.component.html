@@ -40,7 +40,11 @@
           </div>
 
 
-
+  <!--Erreur Extension-->
+  <div *ngIf="messageErreurExtension"  class="row">
+      <div class="col-2"></div>
+      <div class="col-4 red ml-3">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
+    </div>
 
         <div *ngIf="this.facadeService.listeDecisionImp">
 
@@ -61,11 +65,7 @@
             </div>
             <div *ngIf="this.facadeService.listeDecisionImp.erreur" class="erreurImport"><app-texte cle="erreur.erreurImportation"></app-texte></div>
 
-             <!--Erreur Extension-->
-         <div *ngIf="messageErreurExtension"  class="row">
-            <div class="col-2"></div>
-            <div class="col-4 red ml-3">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div>
-          </div>
+
           <!--Fin Erreur Extension-->
 
             <!-- <div *ngIf="messageErreurExtension" class="red">Mauvaise extension , seulement les fichiers .doc et .docx sont admis.</div> -->
@@ -141,7 +141,7 @@
 </div>
 <div class="row">
   <div class="col-6"></div>
-  <div class="col messageErreurAcc" *ngIf="this.formulaire.errors && formulaire.errors.erreurOrdre">Veuillez spécifier un ordre de signature différent pour les signataires.</div>
+  <div class="col messageErreurAcc" *ngIf="this.formulaire.errors && this.formulaire.errors.erreurOrdre">Veuillez spécifier un ordre de signature différent pour les signataires.</div>
 </div>
 
 

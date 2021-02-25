@@ -1,6 +1,6 @@
 import { ViewChild, Input, HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, FormArray, AbstractControl, ValidatorFn } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { Decision } from '../entitees/decision';
 import { FacadeService } from '../services/facade.service';
@@ -14,7 +14,36 @@ import { TextesService } from '../services/textes.service';
 import { Recherche } from '../entitees/recherche';
 import { NgxSpinnerService } from 'ngx-spinner';
 import moment from 'moment';
+import { environment } from 'src/environments/environment.preprod';
 
+const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
+  const dateMomentConvAu = moment(ctrl.get('rechercheDateDu').value).format('YYYY-MM-DD');
+  const dateMomentConvDu = moment(ctrl.get('rechercheDateAu').value).format('YYYY-MM-DD');
+  const dateDuJour = new Date();
+  const momentNewDateAu = new Date(dateMomentConvAu);
+  const momentNewDateDu = new Date(dateMomentConvDu);
+console.log('AU' , momentNewDateAu);
+console.log('DU' , momentNewDateDu);
+  const diffDate = momentNewDateDu.getTime() - momentNewDateAu.getTime() ;
+ // const diffDate = momentNewDateAu.getTime() - dateDuJour.getTime();
+
+  const diffEnJour = diffDate / (1000 * 3600 * 24);
+  console.log('DIFF DATE ' , diffEnJour);
+
+  if (diffEnJour > 365) {
+
+      return { erreurDatePlusUnAn: true };
+    }
+  if (diffEnJour < -731) {
+
+      return { erreurDateMoinsDeuxAn: true };
+    }
+  if(momentNewDateAu.getTime() >  momentNewDateDu.getTime()){
+      return {erreurDateDuPlusGrand: true}
+    }
+
+  return null;
+  };
 
 
 
@@ -79,8 +108,29 @@ export class FondCommunAdjJugeComponent implements OnInit {
     rechercheDateAu: ['' , this.validDate],
     nomJuge: new FormControl('Toutes mes décisions')
 
-  });
+  }, { validator: [validDatePlusUnAn]}
+  );
 
+
+  /*
+   // Formulaire
+  formulaire = this.fb.group({
+    description: ['', [Validators.required , Validators.maxLength(125)], ],
+    dateDelibere:['' , this.validDate],
+    priorite: new FormControl(''),
+    numero: new FormControl({value: '', disabled: true}),
+    importePar: new FormControl({value: '', disabled: true}),
+    dateImportation: new FormControl({value: '', disabled: true}),
+    dureeRestante: new FormControl({value: '', disabled: true}),
+    statut: new FormControl({value: '', disabled: true}),
+    redacteur0: new FormControl({value: false, disabled: true}),
+    redacteur1: new FormControl({value: false, disabled: true}),
+    redacteur2: new FormControl({value: false, disabled: true}),
+    redacteur3: new FormControl({value: false, disabled: true}),
+    redacteur4: new FormControl({value: false, disabled: true})
+  }, { validator: [validDatePlusUnAn]});
+
+  */
 
 searchValue: string;
 searchValue2: string;
@@ -629,9 +679,9 @@ lancerRechercheTri(){
 historiqueJuge(numDocument: number , index: number){
   this.facadeService.numDecisionTemp = numDocument;
   const url = this.router.serializeUrl(
-    this.router.createUrlTree(['/infoJuge' , numDocument ])
+    this.router.createUrlTree([ this.facadeService.dossierEnv + '/infoJuge' , numDocument ])
   );
-  window.open(url, '_blank' , 'width=800,height=500');
+  window.open(url, '_blank' );
 
  // this.router.navigateByUrl('/infoJuge');
 // infoJuge

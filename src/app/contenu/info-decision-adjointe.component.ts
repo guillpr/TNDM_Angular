@@ -46,6 +46,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   prioSelected = '';
   couleurPrio = false;
   changementDate = false;
+  inputAvecBordure = false;
 
   pdfClique = false;
 
@@ -176,7 +177,7 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         setTimeout(() => {
           /** spinner ends after 5 seconds */
           this.spinner.hide();
-        }, 2000);
+        }, 1000);
     });
  // TODO mail
     this.email = 'proulxguill@gmail.com';
@@ -352,8 +353,13 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     console.log('Fermer');
     this.router.navigateByUrl('/');
   }
-  afficheBouton(){
-    this.boutonSauvegardeModif = true;
+  afficheBordure(){
+    console.log('Affiche bordure');
+   // this.boutonSauvegardeModif = true;
+    this.inputAvecBordure = true;
+  }
+  masqueBordure(){
+    this.inputAvecBordure = false;
   }
   sauvegarderChangements(){
     console.log('Sauvegarder changement valeur du formulaire:' , this.formulaire);
@@ -367,6 +373,8 @@ export class InfoDecisionAdjointeComponent implements OnInit {
       console.log('Le résultat Put décision' ,  resJ);
     });
     this.boutonSauvegardeModif = false;
+    this.router.navigateByUrl('/');
+
   }
   retournerValeurDate(dateMoment: any){
     const dateMomentAConvertir = new Date(dateMoment);

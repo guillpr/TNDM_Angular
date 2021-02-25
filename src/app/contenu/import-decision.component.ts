@@ -255,6 +255,7 @@ onKeyDown(evt: KeyboardEvent) {
   // Méthode pour Fichiers
   suppressionFichier(){
     this.messageSuppression = true;
+
     this.messageErreurFichier2();
   }
 
@@ -283,6 +284,7 @@ messageErreurFichier2(){
     if (this.facadeService.reponseSuppressionFichier){
       console.log('SI suppresion fichier');
       this.methodeSuppressionFichier();
+      this.formulaire.reset();
       this.dialog.closeAll();
     }
     else{

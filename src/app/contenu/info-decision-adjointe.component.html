@@ -47,9 +47,11 @@
                     style="overflow:hidden"
                     id="descriptionID"
                     [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null"
-                     (change)="afficheBouton()"
+                     (click)="afficheBordure()"
+                     (focusout)="masqueBordure()"
                       formControlName="description"
                       spellcheck="false"
+                      [className]="inputAvecBordure ? 'inputDescBord': 'inputDesc'"
                        class="inputDesc"
                         ></textarea>
 
@@ -74,7 +76,6 @@
 
                         <input
                         [disabled]="this.facadeService.listeDecision.statut === 'Rejeté'"
-                        (dateChange)="afficheBouton()"
                          class="inputNormal center"
                          matInput
                          [matDatepicker]="picker"
@@ -92,9 +93,13 @@
 
 
               <div class="col col-xl-2 dureeRest">
-                  <input class="noBorder center"  formControlName="dureeRestante"></div>
+                <div *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté' && this.facadeService.listeDecision.statut !== 'Accepté'">
+                  <input class="noBorder center"  formControlName="dureeRestante">
+                </div>
+                <div class="center" *ngIf="this.facadeService.listeDecision.statut === 'Rejeté' || this.facadeService.listeDecision.statut === 'Accepté'">-</div>
+                </div>
                 <div class="col col-xl-1 numUtiCol">
-                       <select  [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null" formControlName="priorite" (change)="afficheBouton()"  [className]="this.formulaire.get('priorite').value ==='Urgente' ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
+                       <select  [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null" formControlName="priorite"   [className]="this.formulaire.get('priorite').value ==='Urgente' ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
                          <option  selected value="Urgente">Urgente</option>
                          <option  value="Normale">Normale</option>
 
@@ -152,7 +157,7 @@
 
         <!--Fin erreur date-->
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                   <button
                   [attr.disabled]="!formulaire.valid ? 'disabled' : null"
                    *ngIf="boutonSauvegardeModif"
@@ -160,7 +165,7 @@
                     [className]="formulaire.valid ? 'buttonChangements' : 'buttonChangementsDis'"
                      class="buttonChangements">
                      Enregistrer
-                    </button></div>
+                    </button></div> -->
               </div>
         </div>
 
@@ -352,7 +357,11 @@
             <button *ngIf="this.facadeService.listeDecision.statut === 'Prêt pour signature'" class="buttonDemarrer" [attr.disabled]="!pdfClique || !formulaire.valid  ? 'disabled' : null"  [className]="pdfClique && formulaire.valid ? 'buttonDocument' : 'buttonDocumentDis'" (click)="demarrerSignature()">Démarrer la signature</button>
         </div>
         <div class="col-1">
-            <button class="buttonFermer" (click)="fermer()">Fermer</button>
+            <button
+            [attr.disabled]="!formulaire.valid ? 'disabled' : null"
+            [className]="formulaire.valid ? 'buttonFermer' : 'buttonFermerDis'"
+             class="buttonFermer"
+              (click)="sauvegarderChangements()">Fermer</button>
         </div>
 
     </div>

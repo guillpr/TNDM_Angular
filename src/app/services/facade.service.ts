@@ -1,3 +1,4 @@
+
 import { JugesAdjointes } from './../entitees/jugesAdjointes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -70,6 +71,8 @@ export class FacadeService {
   private DecisionURL = environment.apiBaseUrlFacade + 'v1/Decision';
 
   private demarrerSignatureURL = environment.apiBaseUrlFacade + 'v1/Decision/DemarrerSignature';
+
+ public dossierEnv = environment.dossierPresentation;
 
 
 
