@@ -38,7 +38,7 @@
 
 
                        <!--Section 2e proposition MA-->
-                       <div *ngIf="!this.facadeService.indicateurJuge" class="row mb-2 mt-2">
+                       <div *ngIf="!this.facadeService.indicateurJuge" class="row rowPad">
                         <div class="col-sm-0 col-lg-2"></div>
                         <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">Adjointes/Juge</div>
                           <div class="col">
@@ -74,7 +74,7 @@
 
                       <!--Début Sections-->
 
-                      <div *ngIf="!this.facadeService.indicateurJuge" class="row mb-2">
+                      <div *ngIf="!this.facadeService.indicateurJuge" class="row rowPad">
                         <div class="col-sm-0 col-lg-2"></div>
                         <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                          <app-texte cle="commun.RechercheSection"></app-texte>
@@ -103,7 +103,7 @@
                         <div class="col-2 colMod14"> <input class="cbStyle" type="checkbox" > Tous mes groupes</div>
                       </div> -->
                        <!--Fin  Section première proposition Myriam-->
-                    <div class="row mb-2 mt-2">
+                    <div class="row rowPad">
                       <div class="col-sm-0 col-lg-2"></div>
                       <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                         <app-texte  cle="commun.RechercheNumDec"></app-texte>
@@ -117,7 +117,7 @@
                            aria-describedby="TextBoxRechNumDec">
                         </div>
                     </div>
-                     <div class="row mb-1" >
+                     <div class="row rowPadDosTaq" >
                        <div class="col-sm-0 col-lg-2"></div>
                        <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                          <app-texte  cle="commun.RechercheNumDoss"></app-texte>
@@ -263,7 +263,7 @@
                         </div>
                     </div>
                     -->
-                     <div class="row mb-2">
+                     <div class="row rowPadPrio">
                        <div class="col-sm-0 col-lg-2"></div>
                        <div class="col-2 col-sm-2 col-md-4 col-lg-2 taR">
                         <app-texte cle="commun.RecherchePrio"></app-texte>
@@ -377,7 +377,12 @@
                       <!--Début rangée 2-->
                       <tr *ngFor="let r of this.facadeService.tableauDecision;let i = index;" class="tableauPrincipalABoucler" >
                       <td  class="noDecCssTd"  >
-                        <div [className]="this.facadeService.indicateurJuge ==true&&r.codeReseauSignataire == this.facadeService.recherche.codeReseauDemandeur ?  'numeroDec cent' : this.facadeService.indicateurJuge == false ? 'numeroDec cent' : ' cent'   "   (click)="SelectionDecision(this.facadeService.tableauDecision[i].idDocument,i)" *ngIf="r.identifiant"> {{r.identifiant}}</div>
+                        <div [className]="this.facadeService.indicateurJuge ==true
+                        &&r.codeReseauSignataire == this.facadeService.recherche.codeReseauDemandeur || this.facadeService.tableauDecision[i].statut === 'Accepté'
+                         ?  'numeroDec cent' : this.facadeService.indicateurJuge == false
+                          ? 'numeroDec cent' : ' cent'   "
+                          (click)="SelectionDecision(this.facadeService.tableauDecision[i].idDocument,i)"
+                           *ngIf="r.identifiant"> {{r.identifiant}}</div>
                         <div class="cent"  *ngIf="!r.identifiant">-</div>
                         </td>
                       <td class="noTaqEtRequeran cent">{{r.dossiersTAQ[0].noDossierTAQ}}-{{r.dossiersTAQ[0].requerant}}</td>

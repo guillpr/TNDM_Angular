@@ -15,6 +15,8 @@ import { Recherche } from '../entitees/recherche';
 import { NgxSpinnerService } from 'ngx-spinner';
 import moment from 'moment';
 import { environment } from 'src/environments/environment.preprod';
+import { MatDialog } from '@angular/material/dialog';
+import { BoiteDialogueJugeComponent } from '../contenu/boite-dialogue-juge.component';
 
 const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
   const dateMomentConvAu = moment(ctrl.get('rechercheDateDu').value).format('YYYY-MM-DD');
@@ -22,8 +24,6 @@ const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
   const dateDuJour = new Date();
   const momentNewDateAu = new Date(dateMomentConvAu);
   const momentNewDateDu = new Date(dateMomentConvDu);
-console.log('AU' , momentNewDateAu);
-console.log('DU' , momentNewDateDu);
   const diffDate = momentNewDateDu.getTime() - momentNewDateAu.getTime() ;
  // const diffDate = momentNewDateAu.getTime() - dateDuJour.getTime();
 
@@ -153,6 +153,7 @@ onKeyDown(evt: KeyboardEvent) {
               public router: Router,
               public datepipe: DatePipe,
               public textesService: TextesService,
+              public dialog: MatDialog,
               private spinner: NgxSpinnerService,
               public fb: FormBuilder) { }
 
@@ -224,33 +225,9 @@ onKeyDown(evt: KeyboardEvent) {
       console.log('Valeur de listeDecision' , this.facadeService.listeDecision);
 
       console.log('Liste de recherche: ' , this.facadeService.recherche);
-
-
-      // Méthode avec Trie
-      // this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
-      // .subscribe((rechercheR) => {
-      //   console.log('Resultat de rechercheR' , rechercheR);
-      // });
-
-
-    // Nouvelle méthode trié
-
-     // this.facadeService.ObtenirRechercheDecision()
-    //  .subscribe((rech) => {
-    //    this.facadeService.tableauDecision = rech;
-    //    console.log('Juges: ' , this.facadeService.tableauDecision[0].signataires)
-    //    console.log('Tableau de décision:' , this.facadeService.tableauDecision);
-    //    console.log('ID document:' , this.facadeService.tableauDecision[0].idDocument)
-    //    console.log('Résultat de la recherche: ', rech);
-    //  },
-    //  (err) => {console.log('Une erreur est survenue lors de l\'appel des données de la recherche')}
-    //  );
-
-
       this.facadeService.obtenirDecisionListTrie(this.facadeService.recherche)
     .subscribe((resR) => {
       this.facadeService.tableauDecision = resR;
-
       console.log('Liste dossiers:' , this.facadeService.tableauDecision[0].dossiersTAQ[0].noDossierTAQ);
       this.spinner.hide();
       console.log('Résultat recherche trié: ' , resR);
@@ -627,6 +604,11 @@ public SelectionDecision(numDocument: number , index: number){
   console.log('URL voute:' , urlVoute);
   window.open(urlVoute, '_blank');
  }
+ if(this.facadeService.tableauDecision[index].statut === 'Accepté'){
+  const urlVoute = this.facadeService.tableauDecision[index].uRLDecisionPDFFinale;
+  console.log('URL voute:' , urlVoute);
+  window.open(urlVoute, '_blank');
+ }
 
   }
 
@@ -678,10 +660,44 @@ lancerRechercheTri(){
 }
 historiqueJuge(numDocument: number , index: number){
   this.facadeService.numDecisionTemp = numDocument;
-  const url = this.router.serializeUrl(
-    this.router.createUrlTree([ this.facadeService.dossierEnv + '/infoJuge' , numDocument ])
-  );
-  window.open(url, '_blank' );
+  // const url = this.router.serializeUrl(
+  //   this.router.createUrlTree([ this.facadeService.dossierEnv + '/infoJuge' , numDocument ])
+  // );
+  // window.open(url, '_blank' );
+
+
+
+
+  const donnees = {
+    texte: '',
+    titre: '',
+    texteBoutonOui: this.textesService.obtenirTexte('commun.oui'),
+    texteBoutonNon: this.textesService.obtenirTexte('commun.non'),
+    afficherBoutonOui: true,
+    reponse: '',
+    dataKey: numDocument
+
+  };
+  const dialog = this.dialog.open(BoiteDialogueJugeComponent, { width: '700px', height:'auto',
+ data: donnees,
+ ariaLabelledBy: 'titre-dialog',
+ ariaDescribedBy: 'contenu-dialogue'});
+  dialog.afterClosed().subscribe(() => {
+    if (this.facadeService.reponseSuppressionFichier){
+      console.log('SI suppresion fichier');
+
+      this.formulaire.reset();
+      this.dialog.closeAll();
+    }
+    else{
+      this.dialog.closeAll();
+    }
+ });
+  return dialog;
+
+
+
+
 
  // this.router.navigateByUrl('/infoJuge');
 // infoJuge
