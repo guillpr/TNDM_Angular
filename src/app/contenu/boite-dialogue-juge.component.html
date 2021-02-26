@@ -1,0 +1,43 @@
+
+<div mat-dialog-actions *ngIf="this.facadeService.listeDecision">
+    <div class="enteteBleu">
+        <app-texte class="titreEntete" cle="commun.histDecision"></app-texte>
+        </div>
+ <div class="row bold">
+    <div class="col-3">
+       Statut
+    </div>
+    <div class="col-3 center">
+        Date
+    </div>
+    <div class="col-3 center">
+        Utilisateur
+    </div>
+</div>
+
+
+
+<div *ngFor="let hist of this.facadeService.listeDecision.historiqueStatuts" class="row complete">
+    <div class="col-3">
+      {{hist.statut}}
+    </div>
+    <div class="col-3 center">
+      {{hist.dateStatut | date:'yyyy-MM-dd'}}
+    </div>
+    <div class="col-3 center">
+        {{hist.codeReseau}}
+    </div>
+
+
+</div>
+
+<div class="boutonFermerDiv">
+
+    <button class="buttonFermer"  (click)="onNoClick()">Fermer</button>
+</div>
+
+
+
+  <!-- <button class="btn btn-link buttAnuMod" mat-button (click)="onNoClick()" cdkFocusInitial>Fermer</button> -->
+
+</div>

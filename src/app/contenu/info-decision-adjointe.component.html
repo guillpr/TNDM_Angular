@@ -46,7 +46,8 @@
                     appTextareaAutoresize
                     style="overflow:hidden"
                     id="descriptionID"
-                    [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null"
+                    [attr.disabled]="(this.facadeService.listeDecision.statut === 'Rejeté' || this.facadeService.listeDecision.statut === 'Accepté')
+                     ? 'disabled' : null"
                      (click)="afficheBordure()"
                      (focusout)="masqueBordure()"
                       formControlName="description"
@@ -75,7 +76,7 @@
                     <mat-form-field class="matFormFieldCustom"  (click)="picker.open()" >
 
                         <input
-                        [disabled]="this.facadeService.listeDecision.statut === 'Rejeté'"
+                        [disabled]="(this.facadeService.listeDecision.statut === 'Rejeté' || this.facadeService.listeDecision.statut === 'Accepté')"
                          class="inputNormal center"
                          matInput
                          [matDatepicker]="picker"
@@ -93,13 +94,22 @@
 
 
               <div class="col col-xl-2 dureeRest">
-                <div *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté' && this.facadeService.listeDecision.statut !== 'Accepté'">
+                <div *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'
+                && this.facadeService.listeDecision.statut !== 'Accepté'
+                &&(this.facadeService.listeDecision.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')">
                   <input class="noBorder center"  formControlName="dureeRestante">
                 </div>
-                <div class="center" *ngIf="this.facadeService.listeDecision.statut === 'Rejeté' || this.facadeService.listeDecision.statut === 'Accepté'">-</div>
+                <div class="center" *ngIf="this.facadeService.listeDecision.statut === 'Rejeté'
+                || this.facadeService.listeDecision.statut === 'Accepté'
+                ||(this.facadeService.listeDecision.dateFinDelibere | date: 'yyyy-MM-dd') < (0001-01-01 | date: 'yyyy-MM-dd')">-</div>
                 </div>
                 <div class="col col-xl-1 numUtiCol">
-                       <select  [attr.disabled]="this.facadeService.listeDecision.statut === 'Rejeté' ? 'disabled' : null" formControlName="priorite"   [className]="this.formulaire.get('priorite').value ==='Urgente' ? 'dlNormalYellow' : ''" class="dlNormalYellow"  id="inputGroupSelectPrio" >
+                       <select  [attr.disabled]="(this.facadeService.listeDecision.statut === 'Rejeté'|| this.facadeService.listeDecision.statut === 'Accepté')
+                        ? 'disabled' : null"
+                        formControlName="priorite"
+                        [className]="this.formulaire.get('priorite').value ==='Urgente' ? 'dlNormalYellow' : ''"
+                        class="dlNormalYellow"
+                        id="inputGroupSelectPrio" >
                          <option  selected value="Urgente">Urgente</option>
                          <option  value="Normale">Normale</option>
 
@@ -343,18 +353,29 @@
       <div *ngIf="!this.facadeService.indicateurJuge">
     <div class="row" >
         <div class="col-2" >
-            <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'" (click)="rejeterDecision()" class="buttonRejet">Rejeter la décision/motifs</button>
+            <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'
+                         && this.facadeService.listeDecision.statut !=='Accepté'"
+                         (click)="rejeterDecision()" class="buttonRejet">Rejeter la décision/motifs</button>
         </div>
         <div class="col-2 maxW12">
-            <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'" class="buttonDocument" (click)="voirDocumentWord()">Voir Word</button>
+            <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'
+                           && this.facadeService.listeDecision.statut !=='Accepté'"
+                           class="buttonDocument"
+                           (click)="voirDocumentWord()">Voir Word</button>
         </div>
         <div class="col-2">
-            <button *ngIf="this.facadeService.listeDecision.statut !=='Rejeté'" class="buttonDocument"  (click)="voirDocumentPdf()">Voir PDF</button>
+            <button *ngIf="(this.facadeService.listeDecision.statut !=='Rejeté' && this.facadeService.listeDecision.statut !=='Accepté' )"
+             class="buttonDocument"
+             (click)="voirDocumentPdf()">Voir PDF</button>
         </div>
         <div class="col-3 col3Adj"></div>
 
         <div class="col-2 maxW14">
-            <button *ngIf="this.facadeService.listeDecision.statut === 'Prêt pour signature'" class="buttonDemarrer" [attr.disabled]="!pdfClique || !formulaire.valid  ? 'disabled' : null"  [className]="pdfClique && formulaire.valid ? 'buttonDocument' : 'buttonDocumentDis'" (click)="demarrerSignature()">Démarrer la signature</button>
+            <button *ngIf="this.facadeService.listeDecision.statut === 'Prêt pour signature'"
+             class="buttonDemarrer" [attr.disabled]="!pdfClique || !formulaire.valid  ? 'disabled' : null"
+             [className]="pdfClique && formulaire.valid ? 'buttonDocument' : 'buttonDocumentDis'"
+             (click)="demarrerSignature()">Démarrer la signature</button>
+             <button *ngIf="this.facadeService.listeDecision.statut ==='Accepté'" class="buttonDocument"  (click)="voirDocumentPdfFinal()">Voir PDF</button>
         </div>
         <div class="col-1">
             <button

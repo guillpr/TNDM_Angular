@@ -1,0 +1,149 @@
+.divFond {
+  width: 100%;
+ /* background-color:  #93daea26;*/
+  display: block;
+  height: auto;
+}
+.divCentre{
+  width: 100%;
+  background-color: white;
+  display: block;
+  margin: auto;
+  height: auto;
+  padding-bottom: 40px;
+  font-size: 14px;
+}
+.center{
+  text-align: center;
+}
+.enteteBleu{
+  width:100%;
+  background-color: rgb(126, 162, 219);
+  height: 50px;
+  display: flex;
+
+}
+.titreEntete{
+  font-weight: 600;
+  margin-top: 15px;
+  margin-left: 10px;
+  color:black;
+}
+.arrowDown{
+  margin-left: auto;
+  margin-top: 3px;
+  padding-right: 20px;
+}
+.testDecision{
+  margin-top: 10px;
+  height: 50px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+.testDecisionExpand{
+  margin-top: 10px;
+  height: auto;
+  font-weight: 500;
+  margin-bottom: 30px;
+  font-size:12px;
+}
+.testDossAsso{
+  margin-top: 10px;
+  height: 100px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  overflow: hidden;
+  font-size:12px;
+}
+.testDossAssoExpand{
+  margin-top: 10px;
+  height: auto;
+  font-weight: 500;
+  margin-bottom: 30px;
+  font-size:12px;
+}
+.bold{
+  margin-top: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.over{
+  overflow-y: auto;
+}
+.dateDeliCol{
+  max-width: 12%;
+}
+.numUniCol{
+  max-width: 10%;
+}
+.numUtiCol{
+  max-width: 8%;
+}
+.yellow{
+  background-color: yellow;
+}
+.dlNormalYellow{
+  background-color: yellow;
+
+}
+.dlNormalGreen{
+  background-color: lime;
+
+}
+.buttonDocument {
+  background-color: #2257a7 !important;
+  color: white;
+  border: #2257a7 !important;
+ /* margin-left: 283px;*/
+  width:150px;
+  height:35px;
+  border-radius: 10px;
+}
+.buttonRejet {
+  background-color: #f5250a !important;
+  color: white;
+  border:#f5250a !important;
+ /* margin-left: 283px;*/
+  width:160px;
+  height:35px;
+  border-radius: 10px;
+  margin:0 20px 0 20px
+}
+.buttonDemarrer{
+  background-color: #2257a7 !important;
+  color: white;
+  border: #2257a7 !important;
+ /* margin-left: 283px;*/
+  width:150px;
+  height:35px;
+  border-radius: 10px;
+  margin-right:20px;
+
+
+}
+.buttonFermer{
+  background-color: #2257a7 !important;
+  color: white;
+  border: #2257a7 !important;
+ /* margin-left: 283px;*/
+  width:100px;
+  height:25px;
+  border-radius: 10px;
+  font-size: 12px;
+  outline: none;
+}
+.boutonFermerDiv{
+  margin-top:20px;
+  margin-bottom: 20px;
+}
+.messageErreurAcc{
+color:red;
+font-weight: bold;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+.complete{
+  width: 100%;
+}

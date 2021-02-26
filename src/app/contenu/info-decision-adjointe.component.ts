@@ -305,6 +305,15 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     this.pdfClique = true;
 
   }
+  voirDocumentPdfFinal(){
+    console.log('Voir document pdf final');
+    const urlVoute = this.facadeService.listeDecision.uRLDecisionPDFFinale;
+    console.log('URL voute:' , urlVoute);
+
+    window.open(urlVoute, '_blank' , 'height=' + screen.height + ',width=' + screen.width + ',resizable=yes,top=0,left=0');
+    this.pdfClique = true;
+
+  }
   verifSiSauvegarde(){
     if (this.formulaire.get('description').value !== this.valDepDescription ||
      this.formulaire.get('dateDelibere').value !== this.valDepDateDelibere ||
