@@ -23,6 +23,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .cont90{
     max-width: 100%;
     overflow: auto;
+    padding-bottom: 20px;
 
 }
 .divCentre{
@@ -52,6 +53,7 @@ body
     max-width: 100%;
     overflow: auto;
     font-size: 10px;
+    padding-bottom: 20px;
 
 }
 .divCentre{
@@ -81,6 +83,7 @@ body
     max-width: 100%;
     overflow: auto;
     font-size: 7px;
+    padding-bottom: 20px;
 
 }
 }

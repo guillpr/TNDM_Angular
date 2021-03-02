@@ -27,11 +27,11 @@
             </div>
           </div> -->
           <div class="row"  *ngIf="!this.facadeService.listeDecisionImp">
-            <div class="col-2 nomFichier"> <app-texte cle="import.NomFichier"></app-texte></div>
+            <div class="col-2 nomFichier" > <app-texte cle="import.NomFichier"></app-texte></div>
             <div class="col-6 containerFichierJoint" [class.ErrorBorder]="messageErreurExtension" appDnd (fileDropped)="onFileDropped($event)">
                 <app-texte class="glisDep" cle="fj.GlisserDeposer"></app-texte>
                 <app-texte class="glisDep" cle="fj.Ou"></app-texte>
-                <input type="file" #fileDropRef (change)="fileBrowseHandler($event.target.files)" hidden  formControlName="nomFichier">
+                <input  type="file" #fileDropRef (change)="fileBrowseHandler($event.target.files)" hidden  formControlName="nomFichier">
                 <button class="boutonParcourir" (click)='fileDropRef.click()'>
                 <app-texte cle="fj.Parcourir"></app-texte>
                </button>

@@ -678,7 +678,7 @@ historiqueJuge(numDocument: number , index: number){
     dataKey: numDocument
 
   };
-  const dialog = this.dialog.open(BoiteDialogueJugeComponent, { width: '700px', height:'auto',
+  const dialog = this.dialog.open(BoiteDialogueJugeComponent, { width: '750px', height:'auto',
  data: donnees,
  ariaLabelledBy: 'titre-dialog',
  ariaDescribedBy: 'contenu-dialogue'});

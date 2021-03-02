@@ -343,9 +343,8 @@ input:disabled
   padding-left: 5px;
   text-align: center;
 }
-.dureeRest{
-  max-width: 10%;
-}
+
+
 .statutCss{
   max-width: 12%;
 }
@@ -387,6 +386,12 @@ input:disabled
   margin-left: 0;
   margin-right: 0;
 }
+.dureeRest{
+  max-width: 10%;
+}
+
+
+
 
 @media screen and (max-width: 1800px) {
   .chDescr{
@@ -583,9 +588,18 @@ input:disabled
     border-radius: 10px;
     font-size: 11px;
 }
+.statutCss{
+  max-width: 13%;
+}
 
 }
-@media screen and (max-width: 1300px) {
+/* @media screen and (max-width: 1300px)
+ {
+  .statutCss{
+    max-width: 11%;
+  }
+} */
+@media screen and (max-width: 1200px) {
   .matFormFieldCustom{
     width: 100%;
     display: relative;
@@ -756,7 +770,10 @@ input:disabled
   border-radius: 10px;
   font-size: 10px;
 }
+
 }
+
+
 @media screen and (max-width: 800px) {
   .numUtiCol{
     /* max-width: 8%; */
@@ -770,6 +787,9 @@ input:disabled
   max-width: 14%;
 }
 }
+
+
+
 
 
 

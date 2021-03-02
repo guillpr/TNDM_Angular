@@ -446,7 +446,7 @@
                 </table>
 
                 </div>
-                <div class="aligButton"><button ID="ButtonImporter" class="btn btn-primary buttonImpor" routerLink="/importDecision" >
+                <div *ngIf="!this.facadeService.indicateurJuge" class="aligButton"><button ID="ButtonImporter" class="btn btn-primary buttonImpor" routerLink="/importDecision" >
                   <app-texte cle="commun.boutonImporterNouvDec"></app-texte>
               </button>
           </div>
