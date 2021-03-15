@@ -97,7 +97,7 @@
                 <div *ngIf="this.facadeService.listeDecision.statut !== 'Rejeté'
                 && this.facadeService.listeDecision.statut !== 'Accepté'
                 &&(this.facadeService.listeDecision.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')">
-                  <input class="noBorder center"  formControlName="dureeRestante">
+                  <input [className]="this.facadeService.listeDecision.dureeRestante <= 5 ? 'noBorderR center': 'noBorder center'"   formControlName="dureeRestante">
                 </div>
                 <div class="center" *ngIf="this.facadeService.listeDecision.statut === 'Rejeté'
                 || this.facadeService.listeDecision.statut === 'Accepté'
@@ -375,7 +375,10 @@
              class="buttonDemarrer" [attr.disabled]="!pdfClique || !formulaire.valid  ? 'disabled' : null"
              [className]="pdfClique && formulaire.valid ? 'buttonDocument' : 'buttonDocumentDis'"
              (click)="demarrerSignature()">Démarrer la signature</button>
-             <button *ngIf="this.facadeService.listeDecision.statut ==='Accepté'" class="buttonDocument"  (click)="voirDocumentPdfFinal()">Voir PDF</button>
+             <button *ngIf="this.facadeService.listeDecision.statut ==='Accepté'"
+              [className]=" this.facadeService.listeDecision.urlDecisionPDFFinale !==null ? 'buttonDocument':'buttonDocumentDis'"
+              [attr.disabled]="this.facadeService.listeDecision.urlDecisionPDFFinale==null ? 'disabled': null"
+              (click)="voirDocumentPdfFinal()">Voir PDF</button>
         </div>
         <div class="col-1">
             <button

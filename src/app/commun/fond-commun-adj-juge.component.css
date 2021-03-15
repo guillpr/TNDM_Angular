@@ -418,7 +418,24 @@ left: 25px;
     flex: 0 0 25%;
     max-width: 16%;
 }
-@media  screen and (max-width: 2400px){
+@media  screen and (max-width: 2800px){
+  .divVide{
+    display: inline-block;
+    width: 30.7%;
+  }
+  .col-xxl-2 {
+    flex: 0 0 25%;
+    max-width: 6%;
+}
+.disInBl {
+  display: inline-block;
+  margin-top: 6px;
+  margin-right: -5px;
+  margin-left: 5px;
+}
+
+}
+@media  screen and (max-width: 2500px){
   .buttonImpor{
     background-color: #2257a7 !important;
     color: white;
@@ -431,12 +448,9 @@ left: 25px;
 }
     .divVide{
         display: inline-block;
-        width: 22.1%;
+        width: 30.5%;
       }
-      .col-xxl-2 {
-        flex: 0 0 25%;
-        max-width: 14.5%;
-    }
+
     .texteTitreNormalMarR20{
         font-size: 16px;
         color:black;
@@ -447,33 +461,59 @@ left: 25px;
        }
 }
 @media  screen and (max-width: 2400px){
-    .divVide{
+  .disInBl {
+    display: inline-block;
+    margin-top: 6px;
+    margin-right: -5px;
+    margin-left: 10px;
+  }
+    /* .divVide{
         display: inline-block;
         width: 21.9%;
-      }
-      .col-xxl-2 {
+      } */
+      /* .col-xxl-2 {
         flex: 0 0 25%;
         max-width: 14.5%;
-    }
+    } */
 }
 @media  screen and (max-width: 2300px){
-    .divVide{
+  .disInBl {
+    display: inline-block;
+    margin-top: 6px;
+    margin-right: -5px;
+    margin-left: 15px;
+  }
+    /* .divVide{
         display: inline-block;
         width: 21.9%;
       }
       .col-xxl-2 {
         flex: 0 0 25%;
         max-width: 14.5%;
-    }
+    } */
 }
 @media  screen and (max-width: 2200px){
-    .divVide{
-        display: inline-block;
-        width: 21.7%;
-      }
+
+  .disInBl {
+    display: inline-block;
+    margin-top: 6px;
+    margin-right: -5px;
+    margin-left: 25px;
+  }
+}
+@media  screen and (max-width: 2100px){
+  .divVide{
+    display: inline-block;
+    width: 30.2%;
+  }
+  .disInBl {
+    display: inline-block;
+    margin-top: 6px;
+    margin-right: -5px;
+    margin-left: 30px;
+  }
 
 }
-
 
 
 @media  screen and (max-width: 2000px){
@@ -496,11 +536,11 @@ left: 25px;
        .disInBl{
         display: inline-block;
         margin-top:6px;
-        margin-right: 0px;
-        margin-left: -20px;
+        margin-right: -5px;
+        margin-left: -30px;
     }
 }
-@media  screen and (max-width: 1900px){
+/* @media  screen and (max-width: 1900px){
     .divVide{
         display: inline-block;
         width: 21.3%;
@@ -509,32 +549,38 @@ left: 25px;
         flex: 0 0 25%;
         max-width: 17.5%;
     }
-}
-@media  screen and (max-width: 1800px){
-    .col-xxl-2 {
+} */
+ @media  screen and (max-width: 1800px){
+    /* .col-xxl-2 {
       flex: 0 0 25%;
       max-width: 19%;
   }
   .divVide{
     display: inline-block;
     width: 21.1%;
-  }
+  } */
   .disInBl{
     display: inline-block;
     margin-top:6px;
-    margin-right: 25px;
+    margin-right: 0px;
+    margin-left: -15px;
+}
+}
+ @media  screen and (max-width: 1700px){
+  .disInBl{
+    display: inline-block;
+    margin-top:6px;
+    margin-right: 0px;
     margin-left: -10px;
 }
-}
-@media  screen and (max-width: 1700px){
-    .col-xxl-2 {
+    /* .col-xxl-2 {
       flex: 0 0 25%;
       max-width: 21%;
   }
   .divVide{
     display: inline-block;
     width: 20.95%;
-  }
+  } */
 
 }
 @media  screen and (max-width: 1680px){
@@ -940,7 +986,7 @@ left: 25px;
 }
     .divVide{
         display: inline-block;
-        width: 28.4%;
+        width: 28.3%;
       }
       .col-xxl-2 {
         flex: 0 0 25%;
@@ -948,7 +994,7 @@ left: 25px;
     }
       .disInBl{
         display: inline-block;
-        margin-top:6px;
+        margin-top:3px;
         margin-right: -10px;
         margin-left: 15px;
     }
@@ -956,13 +1002,13 @@ left: 25px;
         font-size: 11px;
         color:black;
         display: inline-block;
-        margin-right: 2.8%;
+        margin-right: 3.2%;
         /* text-align: right;
         margin-right: 20px; */
        }
        .divVideButt{
         display:inline-block;
-        width: 31.8%;
+        width: 31.6%;
       }
       .divInBlockButton{
         display: inline-block;

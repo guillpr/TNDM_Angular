@@ -307,10 +307,10 @@ export class InfoDecisionAdjointeComponent implements OnInit {
   }
   voirDocumentPdfFinal(){
     console.log('Voir document pdf final');
-    const urlVoute = this.facadeService.listeDecision.uRLDecisionPDFFinale;
-    console.log('URL voute:' , urlVoute);
+    const urlVouteFinal = this.facadeService.listeDecision.urlDecisionPDFFinale;
+    console.log('URL voute:' , urlVouteFinal);
 
-    window.open(urlVoute, '_blank' , 'height=' + screen.height + ',width=' + screen.width + ',resizable=yes,top=0,left=0');
+    window.open(urlVouteFinal, '_blank' , 'height=' + screen.height + ',width=' + screen.width + ',resizable=yes,top=0,left=0');
     this.pdfClique = true;
 
   }

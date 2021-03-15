@@ -21,9 +21,13 @@ import { BoiteDialogueJugeComponent } from '../contenu/boite-dialogue-juge.compo
 const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
   const dateMomentConvAu = moment(ctrl.get('rechercheDateDu').value).format('YYYY-MM-DD');
   const dateMomentConvDu = moment(ctrl.get('rechercheDateAu').value).format('YYYY-MM-DD');
+  console.log('Date au:' , dateMomentConvAu);
+  console.log('Date du:' , dateMomentConvDu);
   const dateDuJour = new Date();
   const momentNewDateAu = new Date(dateMomentConvAu);
   const momentNewDateDu = new Date(dateMomentConvDu);
+  console.log('Moment date au get time' ,  momentNewDateAu.getTime());
+  console.log('Moment date du get time' ,  momentNewDateDu.getTime());
   const diffDate = momentNewDateDu.getTime() - momentNewDateAu.getTime() ;
  // const diffDate = momentNewDateAu.getTime() - dateDuJour.getTime();
 
@@ -34,10 +38,12 @@ const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
 
       return { erreurDatePlusUnAn: true };
     }
-  if (diffEnJour < -731) {
 
-      return { erreurDateMoinsDeuxAn: true };
-    }
+  // if (diffEnJour < -731 && momentNewDateDu.getTime() >  momentNewDateAu.getTime()) {
+  //   console.log('erreur moins de deux an');
+  //     return { erreurDateMoinsDeuxAn: true };
+  //   }
+
   if(momentNewDateAu.getTime() >  momentNewDateDu.getTime()){
       return {erreurDateDuPlusGrand: true}
     }
@@ -64,6 +70,8 @@ export class FondCommunAdjJugeComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @Input() public noMessageDateInvalide: string;
+
+  regexPattern = '^[0-9\.\-\/]+$';
 
 
 
@@ -604,8 +612,9 @@ public SelectionDecision(numDocument: number , index: number){
   console.log('URL voute:' , urlVoute);
   window.open(urlVoute, '_blank');
  }
- if(this.facadeService.tableauDecision[index].statut === 'Accepté'){
-  const urlVoute = this.facadeService.tableauDecision[index].uRLDecisionPDFFinale;
+ if(this.facadeService.tableauDecision[index].statut === 'Accepté'
+ && this.facadeService.tableauDecision[index].urlDecisionPDFFinale !== null){
+  const urlVoute = this.facadeService.tableauDecision[index].urlDecisionPDFFinale;
   console.log('URL voute:' , urlVoute);
   window.open(urlVoute, '_blank');
  }

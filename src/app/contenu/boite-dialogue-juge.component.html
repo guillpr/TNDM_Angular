@@ -24,7 +24,11 @@
     <div class="col-3 center">
       {{hist.dateStatut | date:'yyyy-MM-dd'}}
     </div>
-    <div class="col-3 center">
+    <div class="col-3 center"
+    matTooltip="{{hist.nomRessource}}"
+    matTooltipPosition="above"
+    matTooltipClass="my-classTT">
+
         {{hist.codeReseau}}
     </div>
 

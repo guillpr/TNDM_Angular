@@ -106,7 +106,7 @@ export class FacadeService {
   // Obtenir Code Usager du service de facade
   public obtenirCodeUsagerAD(): Observable<Usager>{
     console.log('dans obtenir code usager ad service de facade front-end');
-    return this.http.get<Usager>(this.FacadeUrlAd);
+    return this.http.get<Usager>(this.FacadeUrlAd , this.httpOptions);
   }
  //   Obtenir Juges du service facade
  public ObtenirJugesAdjointes(codeUtil: string): Observable<JugesAdjointes[]>{

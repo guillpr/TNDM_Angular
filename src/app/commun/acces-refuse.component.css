@@ -1,0 +1,40 @@
+.texteAccRef{
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+
+}
+.contenant{
+  position:relative;
+}
+
+
+.containerP{
+  display:flex;
+}
+.element{
+  margin:auto;
+}
+
+/* just aesthetics */
+.containerP{
+  width:100%;
+  height: 110vh;
+  /* border: 3px solid steelblue; */
+  margin: auto;
+}
+
+.element{
+  /* background: tomato; */
+  width: 100%; height: 50vh;
+}
+
+/* body{
+  height: 100vh;
+  display:flex;
+  background: azure;
+} */
+
+
+
+

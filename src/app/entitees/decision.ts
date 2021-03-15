@@ -26,7 +26,7 @@ export class Decision{
      public urlDecisionWord: string;
      public urlDecisionPDF: string;
      public urlVoute: string;
-     public uRLDecisionPDFFinale: string;
+     public urlDecisionPDFFinale: string;
      public historiqueStatuts: HistoriqueStatut[];
 
 

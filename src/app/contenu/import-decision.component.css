@@ -712,11 +712,25 @@ text-align: center;
     position: relative;
     bottom: 7px;
 }
+.erreurImport{
+  width: 100%;
+  /* text-align: center; */
+  margin-top: 10px;
+  font-size: 8px;
+  color: red;
+  font-weight: bold;
+  margin-left: 17%;
+}
 .nomDescription{
   font-weight: bold;
   text-align: right;
   margin-top: 0.8%;
   margin-right: -0.01%;
+}
+.red{
+  font-size: 10px;
+  font-weight: bold;
+  color:red;
 }
 }
 

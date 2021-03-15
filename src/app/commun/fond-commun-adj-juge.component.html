@@ -142,6 +142,8 @@
 
                         [className]="ErreurDate&&this.formulaire.controls.rechercheDateDu.errors ? 'inputBorderRouge' : 'inputNormal'"
                         matInput
+                        min="2000-01-01"
+                        max="9999-12-31"
                         [matDatepicker]="picker"
                        formControlName="rechercheDateDu">
                        <mat-datepicker #picker></mat-datepicker>
@@ -152,6 +154,8 @@
                     <div class="col-3">
                       <mat-form-field class="matFormFieldCustom"   (click)="picker2.open()"  >
                       <input
+                      min="2000-01-01"
+                      max="9999-12-31"
                       [className]="ErreurDate&&this.formulaire.controls.rechercheDateAu.errors ? 'inputBorderRouge' : 'inputNormal'"
                        matInput
                        [matDatepicker]="picker2"
@@ -378,14 +382,14 @@
                       <tr *ngFor="let r of this.facadeService.tableauDecision;let i = index;" class="tableauPrincipalABoucler" >
                       <td  class="noDecCssTd"  >
                         <div [className]="this.facadeService.indicateurJuge ==true
-                        &&r.codeReseauSignataire == this.facadeService.recherche.codeReseauDemandeur || this.facadeService.tableauDecision[i].statut === 'Accepté'
+                        &&r.codeReseauSignataire == this.facadeService.recherche.codeReseauDemandeur || this.facadeService.tableauDecision[i].statut === 'Accepté' && this.facadeService.tableauDecision[i].urlDecisionPDFFinale !==null
                          ?  'numeroDec cent' : this.facadeService.indicateurJuge == false
                           ? 'numeroDec cent' : ' cent'   "
                           (click)="SelectionDecision(this.facadeService.tableauDecision[i].idDocument,i)"
                            *ngIf="r.identifiant"> {{r.identifiant}}</div>
                         <div class="cent"  *ngIf="!r.identifiant">-</div>
                         </td>
-                      <td class="noTaqEtRequeran cent">{{r.dossiersTAQ[0].noDossierTAQ}}-{{r.dossiersTAQ[0].requerant}}</td>
+                      <td class="noTaqEtRequeran">{{r.dossiersTAQ[0].noDossierTAQ}}-{{r.dossiersTAQ[0].requerant}}</td>
                       <td  class="noDossier cent" >
                         <div *ngIf="r.dossiersTAQ.length > 1"
                             matTooltipClass="my-classTT"
@@ -423,7 +427,7 @@
 
 
                            </td>
-                          <td [className]="r.dureeRestante < 5 && (r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')  && (r.statut != 'Rejeté' && r.statut != 'Accepté') ? 'texteDurRestanteRouge cent' : 'cent'" >
+                          <td [className]="r.dureeRestante <= 5 && (r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd')  && (r.statut != 'Rejeté' && r.statut != 'Accepté') ? 'texteDurRestanteRouge cent' : 'cent'" >
                             <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') > (0001-01-01 | date: 'yyyy-MM-dd') && (r.statut != 'Rejeté' && r.statut != 'Accepté')">  {{r.dureeRestante}}</div>
                             <div *ngIf="(r.dateFinDelibere | date: 'yyyy-MM-dd') < (0001-01-01 | date: 'yyyy-MM-dd') || r.statut == 'Rejeté' || r.statut == 'Accepté'">-</div>
 
