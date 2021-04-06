@@ -15,6 +15,7 @@ const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
   const dateDuJour = new Date();
   const momentNewDate = new Date(dateMomentConv);
   const diffDate = momentNewDate.getTime() - dateDuJour.getTime();
+  const codeReseauUtil = '';
 
   const diffEnJour = diffDate / (1000 * 3600 * 24);
 
@@ -38,6 +39,7 @@ const validDatePlusUnAn: ValidatorFn = (ctrl: AbstractControl) => {
 export class InfoDecisionAdjointeComponent implements OnInit {
   @ViewChild('someVar') el: ElementRef;
   numDecSelectionner: number;
+  codeReseauUtil: string;
 
   boiteDecisionOuverte = false;
   boiteDossAss = true;
@@ -109,6 +111,13 @@ export class InfoDecisionAdjointeComponent implements OnInit {
 
 
    ngOnInit(): void {
+
+    this.facadeService.obtenirCodeUsagerAD()
+    .subscribe(res => {
+      console.log('Résutat code reseau ' , res);
+      this.codeReseauUtil = res.codeReseau;
+    });
+
     this.pdfClique = false;
 
     this.spinner.show();
@@ -238,6 +247,9 @@ export class InfoDecisionAdjointeComponent implements OnInit {
     }
   }
   rejeterDecision(){
+
+
+    console.log('Code réseau utilisateur' , this.codeReseauUtil);
     console.log('Numéro de la décsion sélectionné dans rejet:' , this.numDecSelectionner);
     console.log('Importé par:' , this.formulaire.controls.importePar.value);
     const donnees = {
@@ -257,17 +269,26 @@ export class InfoDecisionAdjointeComponent implements OnInit {
         console.log('SI suppresion décision');
         console.log('Numéro de la décsion sélectionné dans rejet dans le after close:' , this.numDecSelectionner);
         console.log('Importé par dans le after close:' , this.formulaire.controls.importePar.value);
-        this.facadeService.rejetDecision(this.numDecSelectionner, this.formulaire.controls.importePar.value)
+        this.spinner.show();
+        this.facadeService.rejetDecision(this.numDecSelectionner, this.codeReseauUtil)
         .subscribe((s) => {
           console.log('Rejet de décision effectué avec success');
+          this.spinner.hide();
           this.router.navigateByUrl('/');
+
+
         },
         (erreur) => {console.log('Erreur lors du rejet de la décision'); }
 
         );
+
+        console.log('Fermeture de la fenetre oui');
+
         this.dialog.closeAll();
+
       }
       else{
+        console.log('Fermeture de la fenetre non');
         this.dialog.closeAll();
       }
    });
